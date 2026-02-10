@@ -4339,6 +4339,37 @@ mod clip_path_tests {
     }
 }
 
+#[cfg(test)]
+mod layer_at_rule_tests {
+    use super::{Config, validate_css_text};
+
+    #[test]
+    fn layer_statement_is_accepted() {
+        let css = r#"
+@layer base, components, utilities;
+
+#mydiv { color: red; }
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
+    fn layer_block_is_accepted() {
+        let css = r#"
+@layer base {
+    #mydiv { color: red; }
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+}
+
 macro_rules! css_properties_file {
     ($file:literal) => {
         include_str!(concat!(
@@ -6979,6 +7010,7 @@ mod tests {
         assert!(!contains_unknown_at_rule(
             "@media screen { p { color: red } }"
         ));
+        assert!(!contains_unknown_at_rule("@layer base { p { color: red } }"));
         assert!(!contains_unknown_at_rule(
             "@font-feature-values Fira Code { @character-variant { alt-a: 1; } }"
         ));
@@ -7007,6 +7039,8 @@ mod tests {
         assert!(is_known_at_rule_name("MEDIA"));
         assert!(is_known_at_rule_name("media"));
         assert!(is_known_at_rule_name("import"));
+        assert!(is_known_at_rule_name("layer"));
+        assert!(is_known_at_rule_name("LAYER"));
         assert!(is_known_at_rule_name("font-face"));
         assert!(is_known_at_rule_name("font-feature-values"));
         assert!(is_known_at_rule_name("FONT-FEATURE-VALUES"));
