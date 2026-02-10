@@ -16,6 +16,7 @@ It writes into:
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import shutil
 import sys
@@ -40,6 +41,88 @@ def repo_root() -> Path:
         if (p / "Cargo.toml").exists() and (p / "crates").exists():
             return p
     raise RuntimeError(f"could not find repo root from {here}")
+
+def local_additions_path(root: Path) -> Path:
+    return root / "data" / "css_properties" / "local_additions.json"
+
+
+def load_local_additions(root: Path) -> dict[str, list[str]]:
+    """
+    Load optional local additions that should be applied after refreshing upstream files.
+
+    This keeps repo-specific compatibility tweaks from getting clobbered when the upstream
+    property lists are re-vendored.
+    """
+
+    p = local_additions_path(root)
+    if not p.exists():
+        return {}
+
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+    except Exception as e:
+        raise RuntimeError(f"failed to parse {p}: {e}") from e
+
+    if not isinstance(data, dict):
+        raise RuntimeError(f"{p} must be a JSON object mapping filenames to arrays of properties")
+
+    out: dict[str, list[str]] = {}
+    for filename, props in data.items():
+        if not isinstance(filename, str) or not filename:
+            raise RuntimeError(f"{p} keys must be non-empty strings (got {filename!r})")
+        if not isinstance(props, list) or not all(isinstance(x, str) and x for x in props):
+            raise RuntimeError(
+                f"{p}[{filename!r}] must be an array of non-empty strings (property names)"
+            )
+        out[filename] = props
+    return out
+
+
+def ensure_properties_present(path: Path, props: list[str]) -> int:
+    existing: set[str] = set()
+    text = path.read_text(encoding="utf-8", errors="replace")
+    for raw in text.splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        if ":" not in line:
+            continue
+        name, _ = line.split(":", 1)
+        name = name.strip().lower()
+        if name:
+            existing.add(name)
+
+    missing = [p for p in props if p.strip().lower() not in existing]
+    if not missing:
+        return 0
+
+    with path.open("a", encoding="utf-8") as f:
+        if text and not text.endswith("\n"):
+            f.write("\n")
+        f.write("\n# Local additions (css_inspector)\n")
+        for name in missing:
+            f.write(f"{name.strip()}:\n")
+    return len(missing)
+
+
+def apply_local_additions(root: Path, out_dir: Path) -> None:
+    additions = load_local_additions(root)
+    if not additions:
+        return
+
+    total = 0
+    for filename, props in additions.items():
+        p = out_dir / filename
+        if not p.exists():
+            print(
+                f"warn: local_additions.json refers to missing file {p}",
+                file=sys.stderr,
+            )
+            continue
+        total += ensure_properties_present(p, props)
+
+    if total:
+        print(f"info: applied {total} local property additions", file=sys.stderr)
 
 
 def parse_gitsubtree_css_validator_defaults(root: Path) -> tuple[str | None, str | None]:
@@ -234,6 +317,7 @@ def main() -> int:
             download_from_upstream(raw_base, ref, out_dir)
 
     validate_out_dir(out_dir)
+    apply_local_additions(root, out_dir)
     print(f"ok: wrote {len(EXPECTED_FILES)} files into {out_dir}")
     return 0
 

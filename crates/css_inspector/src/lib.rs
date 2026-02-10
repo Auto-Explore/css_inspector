@@ -4197,6 +4197,44 @@ mod known_properties_for_config_tests {
     }
 }
 
+#[cfg(test)]
+mod svg_attribute_property_tests {
+    use super::{Config, validate_css_text};
+
+    #[test]
+    fn svg_attributes_are_accepted_as_properties_in_svg_profiles() {
+        let css = r#"
+rect {   x:  1px;
+         y:  2px;
+         rx: 3px;
+         ry: 4px;
+}
+
+circle { r:  5px;
+         cx: 6px;
+         cy: 7px;
+}
+
+path {   d:  path("M 1 2 z");
+}
+"#;
+
+        for profile in ["svg", "css3svg"] {
+            let config = Config {
+                profile: Some(profile.to_string()),
+                ..Config::default()
+            };
+            let report = validate_css_text(css, &config).unwrap();
+            assert_eq!(report.errors, 0, "profile={profile} report={report:?}");
+            assert_eq!(report.warnings, 0, "profile={profile} report={report:?}");
+            assert!(
+                report.messages.is_empty(),
+                "profile={profile} report={report:?}"
+            );
+        }
+    }
+}
+
 macro_rules! css_properties_file {
     ($file:literal) => {
         include_str!(concat!(

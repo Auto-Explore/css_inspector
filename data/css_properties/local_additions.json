@@ -1,0 +1,4 @@
+{
+  "SVGProperties.properties": ["x", "y", "rx", "ry", "r", "cx", "cy", "d"],
+  "CSS3SVGProperties.properties": ["x", "y", "rx", "ry", "r", "cx", "cy", "d"]
+}
