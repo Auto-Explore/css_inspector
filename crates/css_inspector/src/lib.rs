@@ -1592,11 +1592,13 @@ fn ends_with_stray_backslash(css: &str) -> bool {
 }
 
 fn is_known_at_rule_name(name: &str) -> bool {
-    const KNOWN: [&str; 9] = [
+    const KNOWN: [&str; 11] = [
         "import",
         "media",
         "page",
         "font-face",
+        "font-feature-values",
+        "character-variant",
         "charset",
         "namespace",
         "supports",
@@ -4232,6 +4234,28 @@ path {   d:  path("M 1 2 z");
                 "profile={profile} report={report:?}"
             );
         }
+    }
+}
+
+#[cfg(test)]
+mod font_feature_values_tests {
+    use super::{Config, validate_css_text};
+
+    #[test]
+    fn font_feature_values_at_rule_is_accepted() {
+        let css = r#"
+@font-feature-values Fira Code {
+    @character-variant {
+        alt-a: 1;
+        alt-g: 2;
+        alt-i-1: 3;
+    }
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
     }
 }
 
@@ -6875,6 +6899,9 @@ mod tests {
         assert!(!contains_unknown_at_rule(
             "@media screen { p { color: red } }"
         ));
+        assert!(!contains_unknown_at_rule(
+            "@font-feature-values Fira Code { @character-variant { alt-a: 1; } }"
+        ));
         assert!(!contains_unknown_at_rule("a{content:\"@three-dee\"}"));
         assert!(contains_unknown_at_rule("@three-dee { x: y }"));
     }
@@ -6898,6 +6925,10 @@ mod tests {
         assert!(is_known_at_rule_name("media"));
         assert!(is_known_at_rule_name("import"));
         assert!(is_known_at_rule_name("font-face"));
+        assert!(is_known_at_rule_name("font-feature-values"));
+        assert!(is_known_at_rule_name("FONT-FEATURE-VALUES"));
+        assert!(is_known_at_rule_name("character-variant"));
+        assert!(is_known_at_rule_name("CHARACTER-VARIANT"));
         assert!(!is_known_at_rule_name("three-dee"));
     }
 
