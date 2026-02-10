@@ -1,12 +1,12 @@
-# css_inspector (Rust)
+# CSS Inspector
 
-Rust-based CSS validator (work in progress).
+Rust-based CSS validator.
 
-This workspace currently focuses on porting the existing CSS validator “autotest”
-suite from `test_results/*.html` into a machine-readable
-manifest and a Rust harness that can run/compare results.
+Project goal: prioritize validation findings by severity, so the highest severity is reserved for issues that are likely to break real-world behavior as opposed to being strictly spec compliant.
 
-## What it validates (today)
+This project is written in Rust to integrate easily with the existing Rust ecosystem.
+
+## What it validates
 
 This validator is intentionally conservative and mostly “suite-driven”: it implements
 the checks needed to match the upstream W3C autotest fixtures, not a full CSS parser.
