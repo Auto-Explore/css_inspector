@@ -4307,6 +4307,24 @@ mod scrollbar_gutter_tests {
     }
 }
 
+#[cfg(test)]
+mod clip_path_tests {
+    use super::{Config, validate_css_text};
+
+    #[test]
+    fn clip_path_path_function_is_accepted() {
+        let css = r#"
+#mydiv {
+    clip-path: path('M 0 200 L 0,75 A 5,5 0,0,1 150,75 L 200 200 z');
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+}
+
 macro_rules! css_properties_file {
     ($file:literal) => {
         include_str!(concat!(
