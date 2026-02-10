@@ -1,0 +1,11 @@
+[package]
+name = "css_inspector_cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+css_inspector = { path = "../css_inspector" }
+css_inspector_suite = { path = "../css_inspector_suite" }
+serde_json.workspace = true
+
