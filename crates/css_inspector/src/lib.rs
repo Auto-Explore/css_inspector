@@ -4289,6 +4289,24 @@ p {
     }
 }
 
+#[cfg(test)]
+mod scrollbar_gutter_tests {
+    use super::{Config, validate_css_text};
+
+    #[test]
+    fn scrollbar_gutter_auto_is_accepted() {
+        let css = r#"
+#mydiv {
+    scrollbar-gutter: auto;
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+}
+
 macro_rules! css_properties_file {
     ($file:literal) => {
         include_str!(concat!(
