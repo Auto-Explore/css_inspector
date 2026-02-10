@@ -1592,13 +1592,14 @@ fn ends_with_stray_backslash(css: &str) -> bool {
 }
 
 fn is_known_at_rule_name(name: &str) -> bool {
-    const KNOWN: [&str; 11] = [
+    const KNOWN: [&str; 12] = [
         "import",
         "media",
         "page",
         "font-face",
         "font-feature-values",
         "character-variant",
+        "container",
         "charset",
         "namespace",
         "supports",
@@ -4259,6 +4260,35 @@ mod font_feature_values_tests {
     }
 }
 
+#[cfg(test)]
+mod container_query_tests {
+    use super::{Config, validate_css_text};
+
+    #[test]
+    fn container_queries_are_accepted() {
+        let css = r#"
+.container {
+  container-name: test-container;
+  container-type: inline-size;
+}
+
+p {
+  font-size: 1rem;
+}
+
+@container test-container (max-width: 300px) {
+  p {
+    font-size: .5rem;
+  }
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+}
+
 macro_rules! css_properties_file {
     ($file:literal) => {
         include_str!(concat!(
@@ -6902,6 +6932,9 @@ mod tests {
         assert!(!contains_unknown_at_rule(
             "@font-feature-values Fira Code { @character-variant { alt-a: 1; } }"
         ));
+        assert!(!contains_unknown_at_rule(
+            "@container test (max-width: 300px) { p { color: red } }"
+        ));
         assert!(!contains_unknown_at_rule("a{content:\"@three-dee\"}"));
         assert!(contains_unknown_at_rule("@three-dee { x: y }"));
     }
@@ -6929,6 +6962,8 @@ mod tests {
         assert!(is_known_at_rule_name("FONT-FEATURE-VALUES"));
         assert!(is_known_at_rule_name("character-variant"));
         assert!(is_known_at_rule_name("CHARACTER-VARIANT"));
+        assert!(is_known_at_rule_name("container"));
+        assert!(is_known_at_rule_name("CONTAINER"));
         assert!(!is_known_at_rule_name("three-dee"));
     }
 

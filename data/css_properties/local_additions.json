@@ -1,4 +1,5 @@
 {
+  "CSS3Properties.properties": ["container-name", "container-type"],
   "SVGProperties.properties": ["x", "y", "rx", "ry", "r", "cx", "cy", "d"],
   "CSS3SVGProperties.properties": ["x", "y", "rx", "ry", "r", "cx", "cy", "d"]
 }
