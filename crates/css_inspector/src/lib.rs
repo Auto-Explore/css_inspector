@@ -3543,6 +3543,7 @@ fn is_single_valued_property(prop: &str) -> bool {
             | "border-width"
             | "border-spacing"
             | "clip"
+            | "clip-path"
             | "content"
             | "counter-increment"
             | "counter-reset"
@@ -4316,6 +4317,19 @@ mod clip_path_tests {
         let css = r#"
 #mydiv {
     clip-path: path('M 0 200 L 0,75 A 5,5 0,0,1 150,75 L 200 200 z');
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
+    fn clip_path_margin_box_polygon_is_accepted() {
+        let css = r#"
+#mydiv {
+    clip-path: margin-box polygon(20% 0%, 100% 50%, 80% 100%, 0% 50%);
 }
 "#;
         let report = validate_css_text(css, &Config::default()).unwrap();
