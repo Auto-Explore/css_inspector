@@ -2288,14 +2288,15 @@ fn iter_rule_blocks<'a>(css: &'a str) -> impl Iterator<Item = RuleBlock<'a>> + '
                 }
                 b'{' => {
                     let prelude = css[prelude_start..i].trim();
+                    let in_decl_context = stack.iter().any(|f| f.decl.is_some());
                     let decl = if prelude.starts_with('@') {
-                        matches!(
+                        let is_decl_list = matches!(
                             at_rule_name(prelude),
                             Some(name)
                                 if name.eq_ignore_ascii_case("font-face")
                                     || name.eq_ignore_ascii_case("page")
-                        )
-                        .then_some(DeclBlock {
+                        ) || in_decl_context;
+                        is_decl_list.then_some(DeclBlock {
                             kind: RuleBlockKind::AtRuleDeclList,
                             body_start: i + 1,
                         })
@@ -2959,6 +2960,7 @@ fn validate_declarations(
     in_font_face_at_rule: bool,
     report: &mut Report,
 ) {
+    let decl_block = strip_nested_rule_blocks_in_declaration_list(block);
     let mut v = DeclValidator {
         known_properties,
         warning_level,
@@ -2973,8 +2975,75 @@ fn validate_declarations(
         unknown_reported: HashSet::new(),
     };
 
-    for raw in block.split(';') {
+    for raw in decl_block.as_ref().split(';') {
         v.validate_raw_declaration(raw);
+    }
+}
+
+fn strip_nested_rule_blocks_in_declaration_list<'a>(block: &'a str) -> Cow<'a, str> {
+    let bytes = block.as_bytes();
+    let mut out: Option<Vec<u8>> = None;
+
+    let mut i = 0usize;
+    let mut stmt_start = 0usize;
+    let mut in_string: Option<u8> = None;
+    let mut escape = false;
+
+    while i < bytes.len() {
+        let b = bytes[i];
+        if step_string_state(b, &mut in_string, &mut escape) {
+            i += 1;
+            continue;
+        }
+
+        match b {
+            b';' => {
+                stmt_start = i + 1;
+                i += 1;
+            }
+            b'{' => {
+                let mut depth = 1usize;
+                let mut j = i + 1;
+                while j < bytes.len() {
+                    let bj = bytes[j];
+                    if step_string_state(bj, &mut in_string, &mut escape) {
+                        j += 1;
+                        continue;
+                    }
+                    match bj {
+                        b'{' => depth += 1,
+                        b'}' => {
+                            depth = depth.saturating_sub(1);
+                            if depth == 0 {
+                                break;
+                            }
+                        }
+                        _ => {}
+                    }
+                    j += 1;
+                }
+
+                if depth != 0 || j >= bytes.len() {
+                    break;
+                }
+
+                let out = out.get_or_insert_with(|| bytes.to_vec());
+                for b in &mut out[stmt_start..=j] {
+                    *b = b' ';
+                }
+
+                i = j + 1;
+                stmt_start = i;
+            }
+            _ => {
+                i += 1;
+            }
+        }
+    }
+
+    match out {
+        Some(out) => Cow::Owned(String::from_utf8(out).expect("valid utf-8")),
+        None => Cow::Borrowed(block),
     }
 }
 
@@ -3034,6 +3103,8 @@ impl DeclValidator<'_> {
 
     fn validate_property_declaration(&mut self, prop: &str, value_raw: &str) {
         let errors_before = self.report.errors;
+        let is_font_face_desc = self.ctx.in_font_face_at_rule && is_font_face_descriptor(prop);
+        let is_page_desc = self.ctx.in_page_at_rule && is_page_descriptor(prop);
 
         if prop.is_empty() {
             push_error(self.report, "Missing property name in declaration.");
@@ -3044,7 +3115,7 @@ impl DeclValidator<'_> {
             return;
         }
         if !prop.starts_with("--") && !self.known_properties.contains(prop) {
-            if self.ctx.in_font_face_at_rule && is_font_face_descriptor(prop) {
+            if is_font_face_desc || is_page_desc {
                 // Allowed descriptor within @font-face.
             } else {
                 // Keep error counts closer to the upstream validator by reporting each unknown
@@ -3185,6 +3256,8 @@ impl DeclValidator<'_> {
         if self.report.errors == errors_before
             && tokens.len() > 1
             && is_single_valued_property(prop)
+            && !is_font_face_desc
+            && !is_page_desc
         {
             push_error(self.report, format!("Invalid value for property “{prop}”."));
         }
@@ -3316,6 +3389,10 @@ fn is_font_face_descriptor(prop: &str) -> bool {
             | "font-feature-settings"
             | "font-display"
     )
+}
+
+fn is_page_descriptor(prop: &str) -> bool {
+    matches!(prop, "size" | "marks" | "bleed")
 }
 
 fn find_embedded_declaration_start(value: &str) -> Option<usize> {
@@ -4037,10 +4114,18 @@ fn parse_properties_file_into(s: &'static str, set: &mut KnownProperties) {
         if line.is_empty() || line.starts_with('#') {
             continue;
         }
-        let Some((name, _)) = line.split_once(':') else {
-            continue;
+        let name = if let Some((name, _)) = line.split_once(':') {
+            name.trim()
+        } else {
+            let mut parts = line.split_whitespace();
+            let Some(first) = parts.next() else {
+                continue;
+            };
+            if parts.next().is_none() {
+                continue;
+            }
+            first
         };
-        let name = name.trim();
         if !name.is_empty() {
             set.insert(ascii_lowercase_cow(name));
         }
@@ -4361,6 +4446,162 @@ mod layer_at_rule_tests {
         let css = r#"
 @layer base {
     #mydiv { color: red; }
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+}
+
+#[cfg(test)]
+mod nested_at_rule_tests {
+    use super::{Config, validate_css_text};
+
+    #[test]
+    fn media_with_nested_page_rule_is_accepted() {
+        let css = r#"
+@media print {
+    @page { size: a4 }
+    body { background: none }
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
+    fn nested_media_queries_inside_style_rule_are_accepted() {
+        let css = r#"
+.foo {
+    display: grid;
+    @media (orientation: landscape) {
+        grid-auto-flow: column;
+        @media (width >= 1024px) {
+            max-inline-size: 1024px;
+        }
+    }
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
+    fn declarations_inside_nested_at_rules_are_validated() {
+        let css = r#"
+.foo {
+    @media (orientation: landscape) {
+        no-such-prop: 1;
+    }
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 1, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert_eq!(report.messages.len(), 1, "{report:?}");
+        assert_eq!(report.messages[0].message, "Unknown property “no-such-prop”.");
+    }
+
+    #[test]
+    fn nested_layers_inside_style_rule_are_accepted() {
+        let css = r#"
+.foo {
+    @layer base {
+        block-size: 100%;
+        @layer support {
+            & .bar {
+                min-block-size: 100%;
+            }
+        }
+    }
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
+    fn layer_blocks_with_dot_names_are_accepted() {
+        let css = r#"
+@layer base {
+    .foo {
+        block-size: 100%;
+    }
+}
+@layer base.support {
+    .foo .bar {
+        min-block-size: 100%;
+    }
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
+    fn five_levels_of_nested_at_rules_reports_error_from_deepest_level() {
+        let css = r#"
+.foo {
+    display: grid;
+    @media (orientation: landscape) {
+        grid-auto-flow: column;
+        @supports (display: grid) {
+            block-size: 100%;
+            @container sidebar (min-width: 10px) {
+                min-block-size: 0;
+                @layer base {
+                    max-inline-size: 100%;
+                    @media (width >= 1024px) {
+                        no-such-prop: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 1, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert_eq!(report.messages.len(), 1, "{report:?}");
+        assert_eq!(report.messages[0].message, "Unknown property “no-such-prop”.");
+    }
+
+    #[test]
+    fn six_levels_of_nested_at_rules_with_complex_valid_css_are_accepted() {
+        let css = r#"
+.foo, .bar {
+    padding: 1rem 2rem;
+    @layer base {
+        --gap: 1rem;
+        display: grid;
+        gap: var(--gap);
+        @media (orientation: landscape) {
+            grid-auto-flow: column;
+            @supports (display: grid) {
+                @container main (min-width: 10px) {
+                    @layer support {
+                        @media (width >= 1024px) {
+                            & .baz:is(.qux, [data-x="y"]):hover {
+                                max-inline-size: calc(1024px - 2rem);
+                                min-block-size: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 "#;
         let report = validate_css_text(css, &Config::default()).unwrap();
