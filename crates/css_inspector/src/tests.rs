@@ -554,6 +554,15 @@
     }
 
     #[test]
+    fn url_functions_allow_unknown_protocol_schemes() {
+        let css = r#".foo { background: url("foo://example.com/image.svg"); }"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
     fn css_wide_keyword_helpers_are_case_insensitive_and_accept_slash_forms() {
         assert!(is_css_wide_keyword(" InHeRiT "));
         assert!(is_css_wide_keyword("revert-layer"));
