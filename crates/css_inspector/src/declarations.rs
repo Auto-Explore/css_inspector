@@ -308,6 +308,9 @@ impl DeclValidator<'_> {
             "cursor" => validate_cursor(tokens.as_slice(), self.report),
             "content" => validate_content(tokens.as_slice(), self.report),
             "quotes" => validate_quotes(tokens.as_slice(), self.report),
+            "grid-template-columns" | "grid-template-rows" => {
+                validate_grid_template_tracks(value, prop, self.report)
+            }
             "counter-increment" => {
                 validate_counter_list(tokens.as_slice(), "counter-increment", self.report)
             }
@@ -449,6 +452,385 @@ fn is_overflow_clip_margin_lengthish_token(t: &str) -> bool {
         || starts_with_ascii_ci(t, "clamp(")
         || starts_with_ascii_ci(t, "var(")
         || starts_with_ascii_ci(t, "env(")
+}
+
+fn validate_grid_template_tracks(value: &str, prop: &str, report: &mut Report) {
+    let v = value.trim();
+    if v.is_empty() || !grid_template_value_balanced(v) {
+        push_error(report, format!("Invalid value for property “{prop}”."));
+        return;
+    }
+
+    let bytes = v.as_bytes();
+    let mut i = 0usize;
+    let mut token_count = 0usize;
+    let mut keyword_only = false;
+    let mut subgrid_mode = false;
+
+    while i < bytes.len() {
+        while i < bytes.len() && bytes[i].is_ascii_whitespace() {
+            i += 1;
+        }
+        if i >= bytes.len() {
+            break;
+        }
+
+        if keyword_only {
+            push_error(report, format!("Invalid value for property “{prop}”."));
+            return;
+        }
+
+        let b = bytes[i];
+        if matches!(b, b',' | b']' | b')') {
+            push_error(report, format!("Invalid value for property “{prop}”."));
+            return;
+        }
+
+        if b == b'[' {
+            let start = i;
+            i += 1;
+            let mut depth: i32 = 1;
+            let mut in_string: Option<u8> = None;
+            let mut escape = false;
+
+            while i < bytes.len() {
+                let bi = bytes[i];
+                if step_string_state(bi, &mut in_string, &mut escape) {
+                    i += 1;
+                    continue;
+                }
+                match bi {
+                    b'[' => depth += 1,
+                    b']' => {
+                        depth -= 1;
+                        if depth == 0 {
+                            i += 1;
+                            break;
+                        }
+                    }
+                    _ => {}
+                }
+                i += 1;
+            }
+
+            if depth != 0 || in_string.is_some() {
+                push_error(report, format!("Invalid value for property “{prop}”."));
+                return;
+            }
+
+            let tok = &v[start..i];
+            if !is_valid_grid_line_name_list(tok) {
+                push_error(report, format!("Invalid value for property “{prop}”."));
+                return;
+            }
+
+            token_count += 1;
+            continue;
+        }
+
+        let start = i;
+        let mut paren_depth: i32 = 0;
+        let mut in_string: Option<u8> = None;
+        let mut escape = false;
+
+        while i < bytes.len() {
+            let bi = bytes[i];
+            if step_string_state(bi, &mut in_string, &mut escape) {
+                i += 1;
+                continue;
+            }
+            match bi {
+                b'(' => paren_depth += 1,
+                b')' => {
+                    if paren_depth == 0 {
+                        break;
+                    }
+                    paren_depth -= 1;
+                }
+                b'[' if paren_depth == 0 => break,
+                b',' if paren_depth == 0 => {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                }
+                b if b.is_ascii_whitespace() && paren_depth == 0 => break,
+                _ => {}
+            }
+            i += 1;
+        }
+
+        if paren_depth != 0 || in_string.is_some() {
+            push_error(report, format!("Invalid value for property “{prop}”."));
+            return;
+        }
+
+        let tok = v[start..i].trim();
+        if tok.is_empty() {
+            continue;
+        }
+
+        if subgrid_mode {
+            // In `subgrid` mode, only `[line-names]` are allowed after the `subgrid` keyword.
+            push_error(report, format!("Invalid value for property “{prop}”."));
+            return;
+        }
+
+        if tok.eq_ignore_ascii_case("none") || tok.eq_ignore_ascii_case("masonry") {
+            if token_count != 0 {
+                push_error(report, format!("Invalid value for property “{prop}”."));
+                return;
+            }
+            keyword_only = true;
+            token_count += 1;
+            continue;
+        }
+
+        if tok.eq_ignore_ascii_case("subgrid") {
+            if token_count != 0 {
+                push_error(report, format!("Invalid value for property “{prop}”."));
+                return;
+            }
+            subgrid_mode = true;
+            token_count += 1;
+            continue;
+        }
+
+        if tok.eq_ignore_ascii_case("auto")
+            || tok.eq_ignore_ascii_case("min-content")
+            || tok.eq_ignore_ascii_case("max-content")
+        {
+            token_count += 1;
+            continue;
+        }
+
+        if is_grid_track_breadth_token(tok) {
+            token_count += 1;
+            continue;
+        }
+
+        if let Some((name, args)) = split_function_token(tok) {
+            if name.eq_ignore_ascii_case("repeat") {
+                let Some((count, tracks)) = split_on_single_top_level_comma(args) else {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                };
+                let count = count.trim();
+                let tracks = tracks.trim();
+                if count.is_empty() || tracks.is_empty() {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                }
+                let count_ok = count.eq_ignore_ascii_case("auto-fill")
+                    || count.eq_ignore_ascii_case("auto-fit")
+                    || count.parse::<usize>().is_ok_and(|n| n > 0);
+                if !count_ok {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                }
+                token_count += 1;
+                continue;
+            }
+
+            if name.eq_ignore_ascii_case("minmax") {
+                let Some((a, b)) = split_on_single_top_level_comma(args) else {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                };
+                if a.trim().is_empty() || b.trim().is_empty() {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                }
+                token_count += 1;
+                continue;
+            }
+
+            if name.eq_ignore_ascii_case("fit-content") {
+                if args.trim().is_empty() || args_has_top_level_comma(args) {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                }
+                token_count += 1;
+                continue;
+            }
+
+            // Be permissive with math/custom-property functions commonly used in track sizing.
+            if name.eq_ignore_ascii_case("calc")
+                || name.eq_ignore_ascii_case("min")
+                || name.eq_ignore_ascii_case("max")
+                || name.eq_ignore_ascii_case("clamp")
+                || name.eq_ignore_ascii_case("var")
+                || name.eq_ignore_ascii_case("env")
+            {
+                if args.trim().is_empty() {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                }
+                token_count += 1;
+                continue;
+            }
+        }
+
+        push_error(report, format!("Invalid value for property “{prop}”."));
+        return;
+    }
+
+    if token_count == 0 {
+        push_error(report, format!("Invalid value for property “{prop}”."));
+    }
+}
+
+fn grid_template_value_balanced(s: &str) -> bool {
+    let bytes = s.as_bytes();
+    let mut paren_depth: i32 = 0;
+    let mut bracket_depth: i32 = 0;
+    let mut in_string: Option<u8> = None;
+    let mut escape = false;
+
+    for &b in bytes {
+        if step_string_state(b, &mut in_string, &mut escape) {
+            continue;
+        }
+        match b {
+            b'(' => paren_depth += 1,
+            b')' => {
+                paren_depth -= 1;
+                if paren_depth < 0 {
+                    return false;
+                }
+            }
+            b'[' => bracket_depth += 1,
+            b']' => {
+                bracket_depth -= 1;
+                if bracket_depth < 0 {
+                    return false;
+                }
+            }
+            _ => {}
+        }
+    }
+
+    in_string.is_none() && paren_depth == 0 && bracket_depth == 0
+}
+
+fn split_function_token(token: &str) -> Option<(&str, &str)> {
+    let token = token.trim();
+    if !token.ends_with(')') {
+        return None;
+    }
+    let open = token.find('(')?;
+    let (name, rest) = token.split_at(open);
+    let name = name.trim();
+    if name.is_empty() {
+        return None;
+    }
+    let args = &rest[1..rest.len() - 1];
+    Some((name, args))
+}
+
+fn split_on_single_top_level_comma(args: &str) -> Option<(&str, &str)> {
+    let bytes = args.as_bytes();
+    let mut i = 0usize;
+    let mut paren_depth: i32 = 0;
+    let mut bracket_depth: i32 = 0;
+    let mut in_string: Option<u8> = None;
+    let mut escape = false;
+    let mut comma: Option<usize> = None;
+
+    while i < bytes.len() {
+        let b = bytes[i];
+        if step_string_state(b, &mut in_string, &mut escape) {
+            i += 1;
+            continue;
+        }
+
+        match b {
+            b'(' => paren_depth += 1,
+            b')' => paren_depth = paren_depth.saturating_sub(1),
+            b'[' => bracket_depth += 1,
+            b']' => bracket_depth = bracket_depth.saturating_sub(1),
+            b',' if paren_depth == 0 && bracket_depth == 0 => {
+                if comma.is_some() {
+                    return None;
+                }
+                comma = Some(i);
+            }
+            _ => {}
+        }
+        i += 1;
+    }
+
+    let pos = comma?;
+    Some((&args[..pos], &args[pos + 1..]))
+}
+
+fn args_has_top_level_comma(args: &str) -> bool {
+    let bytes = args.as_bytes();
+    let mut i = 0usize;
+    let mut paren_depth: i32 = 0;
+    let mut bracket_depth: i32 = 0;
+    let mut in_string: Option<u8> = None;
+    let mut escape = false;
+
+    while i < bytes.len() {
+        let b = bytes[i];
+        if step_string_state(b, &mut in_string, &mut escape) {
+            i += 1;
+            continue;
+        }
+
+        match b {
+            b'(' => paren_depth += 1,
+            b')' => paren_depth = paren_depth.saturating_sub(1),
+            b'[' => bracket_depth += 1,
+            b']' => bracket_depth = bracket_depth.saturating_sub(1),
+            b',' if paren_depth == 0 && bracket_depth == 0 => return true,
+            _ => {}
+        }
+        i += 1;
+    }
+
+    false
+}
+
+fn is_valid_grid_line_name_list(tok: &str) -> bool {
+    let t = tok.trim();
+    let Some(inner) = t.strip_prefix('[').and_then(|s| s.strip_suffix(']')) else {
+        return false;
+    };
+    let inner = inner.trim();
+    if inner.is_empty() {
+        return false;
+    }
+    inner.split_whitespace().all(|name| {
+        let bytes = name.as_bytes();
+        let Some(&first) = bytes.first() else {
+            return false;
+        };
+        if !(first.is_ascii_alphabetic() || first == b'-' || first == b'_') {
+            return false;
+        }
+        bytes.iter().all(|&b| is_property_ident_char(b))
+    })
+}
+
+fn is_grid_track_breadth_token(tok: &str) -> bool {
+    let t = tok.trim();
+    let (n, unit) = split_number_and_unit(t);
+    let Some(n) = n else {
+        return false;
+    };
+    if !n.is_finite() {
+        return false;
+    }
+
+    if unit.is_empty() {
+        return n == 0.0;
+    }
+    if unit == "%" {
+        return true;
+    }
+
+    // `fr` values and lengths use ASCII alphabetic units.
+    unit.as_bytes().iter().all(|b| b.is_ascii_alphabetic())
 }
 
 #[cfg(test)]
@@ -611,6 +993,112 @@ mod declaration_validation_tests {
                 "css={css:?} report={report:?}"
             );
         }
+    }
+
+    #[test]
+    fn grid_template_rows_and_columns_accept_modern_track_syntax_examples() {
+        let css = r#"
+/* Keyword value */
+grid-template-rows: none;
+
+/* <track-list> values */
+grid-template-rows: 100px 1fr;
+grid-template-rows: [line-name] 100px;
+grid-template-rows: [line-name1] 100px [line-name2 line-name3];
+grid-template-rows: minmax(100px, 1fr);
+grid-template-rows: fit-content(40%);
+grid-template-rows: repeat(3, 200px);
+grid-template-rows: subgrid;
+grid-template-rows: masonry;
+
+/* <auto-track-list> values */
+grid-template-rows: 200px repeat(auto-fill, 100px) 300px;
+grid-template-rows:
+  minmax(100px, max-content)
+  repeat(auto-fill, 200px) 20%;
+grid-template-rows:
+  [line-name1] 100px [line-name2]
+  repeat(auto-fit, [line-name3 line-name4] 300px)
+  100px;
+grid-template-rows:
+  [line-name1 line-name2] 100px
+  repeat(auto-fit, [line-name1] 300px) [line-name3];
+
+/* Global values */
+grid-template-rows: inherit;
+grid-template-rows: initial;
+grid-template-rows: revert;
+grid-template-rows: revert-layer;
+grid-template-rows: unset;
+
+/* Keyword value */
+grid-template-columns: none;
+
+/* <track-list> values */
+grid-template-columns: 100px 1fr;
+grid-template-columns: [line-name] 100px;
+grid-template-columns: [line-name1] 100px [line-name2 line-name3];
+grid-template-columns: minmax(100px, 1fr);
+grid-template-columns: fit-content(40%);
+grid-template-columns: repeat(3, 200px);
+grid-template-columns: subgrid;
+grid-template-columns: masonry;
+
+/* <auto-track-list> values */
+grid-template-columns: 200px repeat(auto-fill, 100px) 300px;
+grid-template-columns:
+  minmax(100px, max-content)
+  repeat(auto-fill, 200px) 20%;
+grid-template-columns:
+  [line-name1] 100px [line-name2]
+  repeat(auto-fit, [line-name3 line-name4] 300px)
+  100px;
+grid-template-columns:
+  [line-name1 line-name2] 100px
+  repeat(auto-fit, [line-name1] 300px) [line-name3];
+
+/* Global values */
+grid-template-columns: inherit;
+grid-template-columns: initial;
+grid-template-columns: revert;
+grid-template-columns: revert-layer;
+grid-template-columns: unset;
+"#;
+
+        let report = validate_css_declarations_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
+    fn grid_template_rows_and_columns_reject_invalid_syntax() {
+        let css = r#"
+grid-template-rows: repeat(3 200px);
+grid-template-columns: minmax(100px 1fr);
+grid-template-rows: 100px, 1fr;
+grid-template-columns: fit-content();
+grid-template-rows: foo;
+grid-template-columns: [] 100px;
+"#;
+
+        let report = validate_css_declarations_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 6, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(
+            report
+                .messages
+                .iter()
+                .any(|m| m.message == "Invalid value for property “grid-template-rows”."),
+            "{report:?}"
+        );
+        assert!(
+            report
+                .messages
+                .iter()
+                .any(|m| m.message == "Invalid value for property “grid-template-columns”."),
+            "{report:?}"
+        );
     }
 }
 
@@ -883,6 +1371,8 @@ fn is_single_valued_property(prop: &str) -> bool {
             | "font"
             | "font-family"
             | "grid-template"
+            | "grid-template-columns"
+            | "grid-template-rows"
             | "list-style"
             | "margin"
             | "outline"
