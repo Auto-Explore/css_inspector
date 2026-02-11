@@ -258,3 +258,28 @@ mod unclosed_comment_entrypoint_tests {
         assert_eq!(report.messages[0].message, "Unclosed comment.");
     }
 }
+
+#[cfg(test)]
+mod syntax_error_regression_tests {
+    use crate::{Config, validate_css_text};
+
+    #[test]
+    fn reports_errors_for_stray_garbage_between_rules() {
+        let css = r#"b {text-decoration: underline solid black;}
+/* .disabled-attribute{display: block;} */   %
+!
+)
+/* .another > .disabled > .attribute {box-shadow: 10px 10px 20px RGBA(255,255,255,0);border: 1px solid hsla(0,0%,100%,.2) !important;} */
+
+span.greentext {color: green;} "#;
+
+        let report = validate_css_text(css, &Config::default()).unwrap();
+
+        assert!(!report.valid(), "{report:?}");
+        assert!(report.errors > 0, "{report:?}");
+        assert!(
+            report.messages.iter().any(|m| m.message == "Invalid selector."),
+            "{report:?}"
+        );
+    }
+}
