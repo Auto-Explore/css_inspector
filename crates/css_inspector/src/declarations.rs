@@ -263,6 +263,7 @@ impl DeclValidator<'_> {
             }
             "background" => validate_background(tokens.as_slice(), self.css1_escapes, self.report),
             "background-image" => validate_background_image(tokens.as_slice(), self.report),
+            "aspect-ratio" => validate_aspect_ratio(value, self.report),
             "zoom" => validate_zoom(tokens.as_slice(), self.report),
             "background-repeat" => {
                 validate_single_token(tokens.as_slice(), "background-repeat", self.report)
@@ -367,18 +368,77 @@ fn validate_zoom(tokens: &[&str], report: &mut Report) {
     }
 
     if let Some(num) = t.strip_suffix('%') {
-        if let Ok(v) = num.trim().parse::<f64>() {
-            if v.is_finite() && v >= 0.0 {
+        if let Some(v) = parse_css_number(num) {
+            if v >= 0.0 {
                 return;
             }
         }
-    } else if let Ok(v) = t.parse::<f64>() {
-        if v.is_finite() && v >= 0.0 {
+    } else if let Some(v) = parse_css_number(t) {
+        if v >= 0.0 {
             return;
         }
     }
 
     push_error(report, "Invalid value for property “zoom”.");
+}
+
+fn validate_aspect_ratio(value: &str, report: &mut Report) {
+    let v = value.trim();
+    if v.is_empty() {
+        push_error(report, "Invalid value for property “aspect-ratio”.");
+        return;
+    }
+
+    #[inline]
+    fn skip_ws(bytes: &[u8], mut i: usize) -> usize {
+        while i < bytes.len() && bytes[i].is_ascii_whitespace() {
+            i += 1;
+        }
+        i
+    }
+
+    fn parse_positive_number_at(s: &str, bytes: &[u8], start: usize) -> Option<(f64, usize)> {
+        let start = skip_ws(bytes, start);
+        let end = start + scan_css_number_end(bytes.get(start..)?)?;
+        let n = s[start..end].parse::<f64>().ok()?;
+        (n.is_finite() && n > 0.0).then_some((n, end))
+    }
+
+    fn parse_ratio(s: &str) -> Option<()> {
+        let bytes = s.as_bytes();
+        let (_, mut i) = parse_positive_number_at(s, bytes, 0)?;
+        i = skip_ws(bytes, i);
+        if i == bytes.len() {
+            return Some(());
+        }
+        if bytes[i] != b'/' {
+            return None;
+        }
+        let (_, mut i) = parse_positive_number_at(s, bytes, i + 1)?;
+        i = skip_ws(bytes, i);
+        (i == bytes.len()).then_some(())
+    }
+
+    if starts_with_ascii_ci(v, "auto") {
+        let after = &v[4..];
+        if after.is_empty() {
+            return;
+        }
+        if after
+            .as_bytes()
+            .first()
+            .is_some_and(|b| b.is_ascii_whitespace())
+            && parse_ratio(after).is_some()
+        {
+            return;
+        }
+    }
+
+    if parse_ratio(v).is_some() {
+        return;
+    }
+
+    push_error(report, "Invalid value for property “aspect-ratio”.");
 }
 
 fn validate_overflow_clip_margin(tokens: &[&str], report: &mut Report) {
@@ -1100,6 +1160,43 @@ grid-template-columns: [] 100px;
             "{report:?}"
         );
     }
+
+    #[test]
+    fn aspect_ratio_accepts_number_and_ratio_values() {
+        let report = validate_css_declarations_text("aspect-ratio:1;", &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+
+        let report = validate_css_declarations_text(
+            "aspect-ratio:1.5;aspect-ratio: 3000 / 3000;aspect-ratio:3e3/3e3;",
+            &Config::default(),
+        )
+        .unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
+    fn aspect_ratio_rejects_invalid_css_number_syntax() {
+        for css in [
+            "aspect-ratio:12.;",
+            "aspect-ratio:+-12.2;",
+            "aspect-ratio:12.1.1;",
+        ] {
+            let report = validate_css_declarations_text(css, &Config::default()).unwrap();
+            assert_eq!(report.errors, 1, "css={css:?} report={report:?}");
+            assert_eq!(report.warnings, 0, "css={css:?} report={report:?}");
+            assert!(
+                report
+                    .messages
+                    .iter()
+                    .any(|m| m.message == "Invalid value for property “aspect-ratio”."),
+                "css={css:?} report={report:?}"
+            );
+        }
+    }
 }
 
 #[cfg(test)]
@@ -1370,6 +1467,7 @@ fn is_single_valued_property(prop: &str) -> bool {
             | "box-shadow"
             | "font"
             | "font-family"
+            | "aspect-ratio"
             | "grid-template"
             | "grid-template-columns"
             | "grid-template-rows"
@@ -2170,7 +2268,7 @@ fn is_time_token(t: &str) -> bool {
             if num.trim().is_empty() {
                 return false;
             }
-            return num.trim().parse::<f64>().is_ok();
+            return parse_css_number(num).is_some();
         }
     }
     false
@@ -2277,7 +2375,7 @@ fn is_angle_token(t: &str) -> bool {
             if num.trim().is_empty() {
                 return false;
             }
-            return num.trim().parse::<f64>().is_ok();
+            return parse_css_number(num).is_some();
         }
     }
     false
@@ -2438,7 +2536,7 @@ fn is_any_percentage_token(t: &str) -> bool {
     let Some(num) = t.trim().strip_suffix('%') else {
         return false;
     };
-    num.trim().parse::<f64>().is_ok()
+    parse_css_number(num).is_some()
 }
 
 fn is_quoted_string_token(t: &str) -> bool {
@@ -2686,7 +2784,7 @@ fn is_line_height_token(t: &str) -> bool {
     tl == "normal"
         || is_length_token(tl)
         || is_any_percentage_token(tl)
-        || tl.parse::<f64>().is_ok()
+        || parse_css_number(tl).is_some()
 }
 
 fn is_hex_color(s: &str) -> bool {
@@ -3056,10 +3154,7 @@ fn is_percentage_0_100(s: &str) -> bool {
     let Some(num) = s.strip_suffix('%') else {
         return false;
     };
-    let Ok(v) = num.trim().parse::<f64>() else {
-        return false;
-    };
-    (0.0..=100.0).contains(&v)
+    parse_css_number(num).is_some_and(|v| (0.0..=100.0).contains(&v))
 }
 
 #[cfg(test)]
@@ -3137,15 +3232,9 @@ fn is_integer_0_255(s: &str) -> bool {
 fn is_alpha_value(s: &str) -> bool {
     let t = s.trim();
     if let Some(pct) = t.strip_suffix('%') {
-        let Ok(v) = pct.trim().parse::<f64>() else {
-            return false;
-        };
-        return (0.0..=100.0).contains(&v);
+        return parse_css_number(pct).is_some_and(|v| (0.0..=100.0).contains(&v));
     }
-    let Ok(v) = t.parse::<f64>() else {
-        return false;
-    };
-    (0.0..=1.0).contains(&v)
+    parse_css_number(t).is_some_and(|v| (0.0..=1.0).contains(&v))
 }
 
 fn validate_border_shorthand(tokens: &[&str], css1_escapes: bool, report: &mut Report) {
@@ -3240,24 +3329,83 @@ fn is_length_token(t: &str) -> bool {
     num.is_some() && matches!(unit, "px" | "pt" | "pc" | "cm" | "mm" | "in" | "em" | "rem")
 }
 
+fn scan_css_number_end(bytes: &[u8]) -> Option<usize> {
+    // CSS <number> grammar subset (per requested test cases):
+    //   [+|-]? (
+    //       [0-9]+ ('.' [0-9]+)?
+    //     | '.' [0-9]+
+    //   ) ([eE] [+|-]? [0-9]+)?
+    //
+    // Notably invalid:
+    // - "12." (no digits after '.')
+    // - "+-12.2" (multiple leading signs)
+    // - "12.1.1" (extra characters remain)
+    let mut i = 0usize;
+    if matches!(bytes.first(), Some(b'+' | b'-')) {
+        i += 1;
+    }
+
+    let mut saw_digit = false;
+    while i < bytes.len() && bytes[i].is_ascii_digit() {
+        saw_digit = true;
+        i += 1;
+    }
+
+    if i < bytes.len() && bytes[i] == b'.' {
+        i += 1;
+        let frac_start = i;
+        while i < bytes.len() && bytes[i].is_ascii_digit() {
+            i += 1;
+        }
+        if i == frac_start {
+            return None;
+        }
+    } else if !saw_digit {
+        return None;
+    }
+
+    if i < bytes.len() && matches!(bytes[i], b'e' | b'E') {
+        // Only treat `e`/`E` as an exponent marker if it’s followed by an exponent with at least
+        // one digit; otherwise it belongs to the unit/identifier part (e.g. `1em`).
+        let mut j = i + 1;
+        if j < bytes.len() && matches!(bytes[j], b'+' | b'-') {
+            j += 1;
+        }
+        let exp_start = j;
+        while j < bytes.len() && bytes[j].is_ascii_digit() {
+            j += 1;
+        }
+        if j != exp_start {
+            i = j;
+        }
+    }
+
+    Some(i)
+}
+
+fn parse_css_number(token: &str) -> Option<f64> {
+    let t = token.trim();
+    if t.is_empty() {
+        return None;
+    }
+    let end = scan_css_number_end(t.as_bytes())?;
+    if end != t.len() {
+        return None;
+    }
+    let v = t.parse::<f64>().ok()?;
+    v.is_finite().then_some(v)
+}
+
 fn split_number_and_unit(s: &str) -> (Option<f64>, &str) {
     let s = s.trim();
-    let bytes = s.as_bytes();
-    if bytes.is_empty() {
+    if s.is_empty() {
         return (None, "");
     }
-    let mut idx = 0usize;
-    if matches!(bytes[0], b'+' | b'-') {
-        idx = 1;
-    }
-    while idx < bytes.len() && (bytes[idx].is_ascii_digit() || bytes[idx] == b'.') {
-        idx += 1;
-    }
-    if idx == 0 {
+    let Some(end) = scan_css_number_end(s.as_bytes()) else {
         return (None, "");
-    }
-    let (n, u) = s.split_at(idx);
-    let num = n.parse::<f64>().ok();
+    };
+    let (n, u) = s.split_at(end);
+    let num = n.parse::<f64>().ok().filter(|v| v.is_finite());
     (num, u)
 }
 
@@ -3276,8 +3424,8 @@ mod split_number_and_unit_tests {
         assert_eq!(u, " px");
 
         let (n, u) = split_number_and_unit("1e2px");
-        assert_eq!(n, Some(1.0));
-        assert_eq!(u, "e2px");
+        assert_eq!(n, Some(100.0));
+        assert_eq!(u, "px");
 
         let (n, u) = split_number_and_unit("1π");
         assert_eq!(n, Some(1.0));
@@ -3289,20 +3437,54 @@ mod split_number_and_unit_tests {
         assert_eq!(split_number_and_unit(""), (None, ""));
         assert_eq!(split_number_and_unit("px"), (None, ""));
         assert_eq!(split_number_and_unit("π1"), (None, ""));
+        assert_eq!(split_number_and_unit(".px"), (None, ""));
+        assert_eq!(split_number_and_unit("+"), (None, ""));
+        assert_eq!(split_number_and_unit("-."), (None, ""));
     }
 
     #[test]
-    fn keeps_unit_even_when_number_parse_fails() {
-        assert_eq!(split_number_and_unit(".px"), (None, "px"));
-        assert_eq!(split_number_and_unit("+"), (None, ""));
-        assert_eq!(split_number_and_unit("+ 1"), (None, " 1"));
+    fn keeps_unit_even_when_number_is_not_finite() {
+        assert_eq!(split_number_and_unit("1e999px"), (None, "px"));
     }
 
     #[test]
     fn handles_optional_sign_and_decimal_points() {
         assert_eq!(split_number_and_unit("-1.5em"), (Some(-1.5), "em"));
         assert_eq!(split_number_and_unit("+.5rem"), (Some(0.5), "rem"));
-        assert_eq!(split_number_and_unit("-.px"), (None, "px"));
+        assert_eq!(split_number_and_unit("-.px"), (None, ""));
+    }
+}
+
+#[cfg(test)]
+mod css_number_tests {
+    use super::parse_css_number;
+
+    fn assert_close(a: f64, b: f64) {
+        let diff = (a - b).abs();
+        assert!(
+            diff <= 1e-12 || diff <= (a.abs().max(b.abs()) * 1e-12),
+            "a={a} b={b} diff={diff}"
+        );
+    }
+
+    #[test]
+    fn accepts_valid_css_numbers() {
+        assert_close(parse_css_number("12").unwrap(), 12.0);
+        assert_close(parse_css_number("4.01").unwrap(), 4.01);
+        assert_close(parse_css_number("-456.8").unwrap(), -456.8);
+        assert_close(parse_css_number("0.0").unwrap(), 0.0);
+        assert_close(parse_css_number("+0.0").unwrap(), 0.0);
+        assert_close(parse_css_number("-0.0").unwrap(), 0.0);
+        assert_close(parse_css_number(".60").unwrap(), 0.60);
+        assert_close(parse_css_number("10e3").unwrap(), 10e3);
+        assert_close(parse_css_number("-3.4e-2").unwrap(), -3.4e-2);
+    }
+
+    #[test]
+    fn rejects_invalid_css_numbers() {
+        for s in ["12.", "+-12.2", "12.1.1"] {
+            assert!(parse_css_number(s).is_none(), "{s}");
+        }
     }
 }
 
