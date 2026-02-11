@@ -601,6 +601,27 @@ fn reports_stray_declarations_and_unbalanced_braces() {
 }
 
 #[test]
+fn reports_unbalanced_braces_for_unclosed_rule_with_nested_rule() {
+    let css = r#"/* /shatatel_razmetki/static/src/css/styles.css */
+.somestyle1 {
+
+.somestyle2 {
+}"#;
+
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert!(!report.valid(), "{report:?}");
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(
+        report
+            .messages
+            .iter()
+            .any(|m| m.message == "Unbalanced braces."),
+        "{report:?}"
+    );
+}
+
+#[test]
 fn strip_css_comments_inserts_whitespace_for_comments_at_boundaries() {
     let (out, ok) = strip_css_comments("/*x*/a/*y*/b");
     assert!(ok);
