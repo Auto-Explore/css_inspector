@@ -729,6 +729,7 @@ fn is_single_valued_property(prop: &str) -> bool {
             | "cursor"
             | "font"
             | "font-family"
+            | "grid-template"
             | "list-style"
             | "margin"
             | "outline"

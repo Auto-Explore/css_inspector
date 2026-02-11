@@ -1,4 +1,3 @@
-
 use super::{
     AttrConstraint, AttrOp, Config, Fetcher, RuleBlockKind, StdFetcher, ascii_lowercase_cow,
     at_rule_name, border_side_component_flags, constraints_pair_conflict, contains_ascii_ci,

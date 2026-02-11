@@ -288,6 +288,21 @@ p {
         assert_eq!(report.warnings, 0, "{report:?}");
         assert!(report.messages.is_empty(), "{report:?}");
     }
+
+    #[test]
+    fn container_query_range_syntax_with_grid_template_is_accepted() {
+        let css = r#"
+@container my-layout (inline-size > 45em) {
+  .media-object {
+    grid-template: 'img content' auto / auto 1fr;
+  }
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
 }
 
 #[cfg(test)]
