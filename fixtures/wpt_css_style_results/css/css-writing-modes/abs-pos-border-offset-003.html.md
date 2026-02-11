@@ -1,0 +1,68 @@
+# css/css-writing-modes/abs-pos-border-offset-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/abs-pos-border-offset-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+.htb {
+  writing-mode: horizontal-tb;
+}
+.vrl {
+  writing-mode: vertical-rl;
+}
+.vlr {
+  writing-mode: vertical-lr;
+}
+.srl {
+  writing-mode: sideways-rl;
+}
+.slr {
+  writing-mode: sideways-lr;
+}
+.ltr {
+  direction: ltr;
+}
+.rtl {
+  direction: rtl;
+}
+
+.container {
+  position: relative;
+  width: 80px;
+  height: 100px;
+  background-color: green;
+  margin-bottom: 10px;
+}
+
+.parent {
+  border: solid transparent;
+  border-width: 10px 15px 20px 25px;
+}
+
+.sibling {
+  width: 10px;
+  height: 20px;
+}
+
+.item {
+  position: absolute;
+  width: 30px;
+  height: 35px;
+  background-color: blue;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

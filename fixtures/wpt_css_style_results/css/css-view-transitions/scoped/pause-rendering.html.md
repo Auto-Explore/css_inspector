@@ -1,0 +1,57 @@
+# css/css-view-transitions/scoped/pause-rendering.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/scoped/pause-rendering.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+#scope { view-transition-name: none; }
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) { animation-play-state: paused; }
+#tr { view-transition-name: foo; }
+
+* { box-sizing: border-box; }
+div { position: relative; z-index: 0; contain: strict;
+      display: inline-block; background: green;
+      left: 30px; top: 30px; width: 120px; height: 120px; }
+#scope { background: #eee;
+         left: 40px; top: 40px; width: 490px; height: 190px; }
+#tr { background: orange; left: 60px; }
+p { position: absolute; left: 100px; top: 5px; font-size: 30px; }
+
+#bad { background: red; left: 90px; visibility: hidden; }
+
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

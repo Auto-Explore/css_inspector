@@ -1,0 +1,80 @@
+# css/css-gaps/grid/grid-gap-decorations-036-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/grid/grid-gap-decorations-036-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    body {
+        margin: 0px;
+    }
+    .grid-container {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: 100px 100px 100px;
+        grid-template-rows: 100px 100px 100px;
+        width: 130px;
+        height: 130px;
+        overflow: hidden;
+        background: pink;
+    }
+    .item {
+        background: gray;
+    }
+    .row-gap {
+        position: absolute;
+        width: 320px;
+        height: 0px;
+        border-bottom: solid 5px gold;
+    }
+    .row-gap1 {
+        top: 102.5px;
+    }
+    .row-gap2 {
+        top: 212.5px;
+    }
+    .col-gap {
+        position: absolute;
+        top: 0px;
+        width: 0px;
+        height: 320px;
+        border-left: solid 5px blue;
+    }
+    .col-gap1 {
+        left: 102.5px;
+    }
+    .col-gap2 {
+        left: 212.5px;
+    }
+    .container {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 130px;
+        height: 130px;
+        overflow: hidden;
+    }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

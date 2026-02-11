@@ -1,0 +1,64 @@
+# css/selectors/invalidation/is.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/selectors/invalidation/is.html"
+}
+```
+
+## style[0]
+
+```css
+
+      .b {
+        color: yellow;
+      }
+      /*Simple selector arguments */
+      .a :is(.b, .c) {
+        color: red;
+      }
+      /*Compound selector arguments */
+      .a :is(.c#d, .e) {
+        color: green;
+      }
+      /* Complex selector arguments */
+      .a .g>.b {
+        color: black;
+      }
+      .a :is(.e+.f, .g>.b, .h) {
+        color: blue;
+      }
+      .g>.b {
+        color: black;
+      }
+      .a .h {
+        color: black;
+      }
+      /* Nested */
+      .a+.c>.e {
+        color: black;
+      }
+      .c>.a+.e {
+        color: black;
+      }
+      .a+:is(.b+.f, :is(.c>.e, .g)) {
+        color: red;
+      }
+      .c>.e {
+        color: black;
+      }
+      /* Non-Subject Compound */
+      .a:is(.b *) .c{
+        color: blue;
+      }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

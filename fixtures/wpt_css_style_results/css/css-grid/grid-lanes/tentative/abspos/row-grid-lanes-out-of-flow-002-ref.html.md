@@ -1,0 +1,98 @@
+# css/css-grid/grid-lanes/tentative/abspos/row-grid-lanes-out-of-flow-002-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/abspos/row-grid-lanes-out-of-flow-002-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .container {
+        width: 150px;
+        height: 300px;
+        border: 2px solid black;
+        margin: 20px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-rows: repeat(4, 60px);
+        grid-template-columns: auto;
+        border: 1px solid blue;
+        padding: 10px;
+        gap: 5px;
+        position: relative;
+    }
+
+    .item {
+        background: lightblue;
+        padding: 5px;
+        width: 40px;
+    }
+
+    .wrapper {
+        background: lightgreen;
+        padding: 5px;
+        width: 30px;
+        height: 30px;
+        border: 1px dashed green;
+    }
+
+    .absolute {
+        position: absolute;
+        grid-row: 1 / 2;
+        background: red;
+        left: 20px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .static-pos-with-grid-row {
+        position: absolute;
+        background: yellow;
+        grid-row: 2 / 3;
+        width: 10px;
+        height: 10px;
+    }
+
+    .static-pos {
+        position: absolute;
+        background: orange;
+        width: 10px;
+        height: 10px;
+    }
+  
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,33 @@
+# css/css-writing-modes/reference/available-size-020-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/reference/available-size-020-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+/* Set up orthogonal flows */
+html    { word-break: break-all; font: 15px/1 sans-serif; writing-mode: vertical-lr; }
+article { margin-left: 0.5em; }
+aside   { width: 2em; overflow: hidden; color: blue; writing-mode: vertical-rl;
+          margin: 2em 0 4em; padding: 2em 0; border: solid 4px silver; }
+/* References */
+html, body, article, div { height: 100%; }
+.fixed aside { height: calc(50% - 10em - 8px); }
+.full  aside { height: calc(100% - 10em - 8px); }
+.tall  aside { height: calc(120vh - 10em - 8px); }
+html { overflow: hidden; /* avoid scrollbar variance */ }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

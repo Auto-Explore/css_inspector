@@ -1,0 +1,80 @@
+# css/css-grid/grid-lanes/tentative/items/column-minimum-contribution-baseline-shim-vertical-rl.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/items/column-minimum-contribution-baseline-shim-vertical-rl.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid-lanes {
+  display: grid-lanes;
+  position: relative;
+  font-size: 0;
+  height: 0;
+  width: 0;
+  margin-bottom: 125px;
+  justify-items: baseline;
+}
+.item1, .item2 {
+  writing-mode: vertical-rl;
+}
+.item1 {
+  padding-left: 25px;
+  background: yellow;
+}
+.item2 {
+  padding-right: 25px;
+  background: magenta;
+}
+.item1::before, .item2::before {
+  content: '';
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  vertical-align: top;
+}
+.item2::before {
+  vertical-align: bottom;
+}
+.area {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  background: cyan;
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

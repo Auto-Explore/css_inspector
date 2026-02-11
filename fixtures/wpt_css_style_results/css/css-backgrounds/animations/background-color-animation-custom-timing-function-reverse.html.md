@@ -1,0 +1,62 @@
+# css/css-backgrounds/animations/background-color-animation-custom-timing-function-reverse.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/animations/background-color-animation-custom-timing-function-reverse.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @keyframes bgcolor {
+    0% {
+      background-color: rgb(90, 90, 90);
+    }
+
+    25% {
+      background-color: rgb(89, 89, 89);
+    }
+
+    50% {
+      background-color: rgb(90, 90, 90);
+    }
+
+    75% {
+      background-color: rgb(80, 80, 80);
+      animation-timing-function: cubic-bezier(0, -9, 1, -9);
+      /* Test that the correct keyframe's timing function is being used. */
+    }
+
+    100% {
+      background-color: rgb(90, 90, 90);
+    }
+  }
+
+  .background {
+    width: 200px;
+    height: 200px;
+    animation: bgcolor 10000000s -8717082s
+      /* halfway between the second to last and last keyframes.*/
+    ;
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

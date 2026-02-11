@@ -1,0 +1,62 @@
+# css/css-overflow/scroll-markers/column-scroll-marker-dynamic-style-update.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/scroll-markers/column-scroll-marker-dynamic-style-update.html"
+}
+```
+
+## style[0]
+
+```css
+
+#scroller {
+  overflow: hidden;
+  scroll-marker-group: before;
+  columns: 1;
+  gap: 0;
+  height: 100px;
+  width: 100px;
+}
+  #scroller::scroll-marker-group {
+    display: flex;
+    width: 100px;
+    height: 100px;
+    background: red;
+  }
+  #scroller::column::scroll-marker {
+    width: 20px;
+    height: 100px;
+    content: "";
+  }
+  #scroller.extra::column::scroll-marker {
+    display: flex;
+    background: green;
+  }
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Unknown property “scroll-marker-group”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

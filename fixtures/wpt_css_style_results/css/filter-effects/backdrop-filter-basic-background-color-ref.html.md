@@ -1,0 +1,46 @@
+# css/filter-effects/backdrop-filter-basic-background-color-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/filter-effects/backdrop-filter-basic-background-color-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+.colorbox {
+    position: absolute;
+    background: green;
+    width: 100px;
+    height: 100px;
+    left: 10px;
+    top: 100px;
+}
+.box2outside {
+    background: #000088;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 60px;
+    top: 150px;
+}
+.box2inside {
+    background: #773bff;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 60px;
+    top: 150px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

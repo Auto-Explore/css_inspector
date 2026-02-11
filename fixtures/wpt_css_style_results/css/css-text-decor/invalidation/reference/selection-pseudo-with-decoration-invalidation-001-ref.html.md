@@ -1,0 +1,45 @@
+# css/css-text-decor/invalidation/reference/selection-pseudo-with-decoration-invalidation-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text-decor/invalidation/reference/selection-pseudo-with-decoration-invalidation-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    div {
+        display: block;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        will-change: transform;
+    }
+
+    ::selection {
+        background: yellow;
+        color: currentColor;
+    }
+
+    .decorated {
+        text-decoration-line: underline overline;
+        text-decoration-style: wavy;
+        text-decoration-color: green;
+        text-decoration-thickness: 5px;
+    }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “text-decoration-line”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,68 @@
+# css/css-shapes/shape-outside/supported-shapes/inset/shape-outside-inset-030.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shapes/shape-outside/supported-shapes/inset/shape-outside-inset-030.html"
+}
+```
+
+## style[0]
+
+```css
+
+        #container {
+            position: relative;
+            margin-left: 25px;
+        }
+        #red {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+        #test-container {
+            width: 200px;
+            height: 200px;
+            font: 25px/1 Ahem;
+            color: green;
+            text-align: right;
+            padding: 50px;
+            position: absolute;
+            top: -50px;
+            left: -50px;
+        }
+        #test-shape {
+            float: right;
+            width: 200px;
+            height: 200px;
+            shape-margin: 10px;
+            shape-outside: inset(60px 10px 60px 110px round 70px 0px 0px 10px / 10px 0px 0px 20px);
+        }
+        #static-shape {
+            position: absolute;
+            left: 100px;
+            width: 100px;
+            height: 100px;
+            top: 50px;
+            background-color: green;
+        }
+    
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown property “shape-margin”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “shape-outside”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

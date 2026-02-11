@@ -1,0 +1,48 @@
+# css/css-grid/placement/grid-placement-using-named-grid-lines-009.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/placement/grid-placement-using-named-grid-lines-009.html"
+}
+```
+
+## style[0]
+
+```css
+
+.wrapper {
+  grid-template-areas: "area";
+}
+.grid {
+  display: grid;
+  width: 100px;
+  height: 100px;
+  grid-auto-columns: 0px 100%;
+  grid-auto-rows: 0px 100%;
+  grid-template-columns: inherit;
+  grid-template-rows: inherit;
+  background: red;
+}
+.item {
+  grid-area: area;
+  background: green;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-auto-columns”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-auto-rows”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

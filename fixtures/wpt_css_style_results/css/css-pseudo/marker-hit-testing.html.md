@@ -1,0 +1,49 @@
+# css/css-pseudo/marker-hit-testing.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-pseudo/marker-hit-testing.html"
+}
+```
+
+## style[0]
+
+```css
+
+ol {
+  display: inline-block;
+  padding-left: 100px;
+}
+li {
+  font: 50px/100px Ahem;
+  width: 50px;
+}
+.inside {
+  list-style-position: inside;
+}
+.image {
+  list-style-image: url("/images/green-100x50.png");
+}
+.string {
+  list-style-type: "X";
+}
+.marker::marker {
+  content: "X";
+}
+.nested {
+  display: block;
+}
+.nested::before {
+  content: '';
+  display: list-item;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,58 @@
+# css/css-gaps/grid/grid-gap-decorations-026.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/grid/grid-gap-decorations-026.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0px;
+    color: green;
+  }
+  .grid-container {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 100px 100px 100px;
+    height: 320px;
+
+    column-rule-color: currentColor;
+    column-rule-style: solid;
+    column-rule-width: 5px;
+
+    row-rule-color: currentColor;
+    row-rule-style: solid;
+    row-rule-width: 5px;
+
+  }
+  .item {
+    background: gray;
+    opacity: 0.5;
+  }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown property “row-rule-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule-style”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule-width”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

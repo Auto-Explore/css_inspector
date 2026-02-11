@@ -1,0 +1,81 @@
+# css/css-variables/vars-font-shorthand-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-variables/vars-font-shorthand-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+div {
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    background: red;
+    text-align: center;
+    color: green;
+    overflow: hidden;
+}
+
+div#d1 {
+    --foo: Ahem;
+    font-family: var(--foo);
+    font-size: 150px;
+    line-height: 1;
+}
+
+div#d2 {
+    --foo: 0 Ahem;
+    font: var(--foo);
+    font-size: 150px;
+    line-height: 150px;
+}
+
+div#d3 {
+    --foo: Ahem, sans-serif;
+    font: 150px/1 var(--foo);
+}
+
+div#d4 {
+    --foo: Ahem;
+    font: 150px/1 var(--foo), sans-serif;
+}
+
+div#d5 {
+    --foo: 1 Ahem;
+    font: 150px/var(--foo);
+}
+
+div#d6 {
+    --foo: 150px/1 Ahem;
+    font: var(--foo);
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “font”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

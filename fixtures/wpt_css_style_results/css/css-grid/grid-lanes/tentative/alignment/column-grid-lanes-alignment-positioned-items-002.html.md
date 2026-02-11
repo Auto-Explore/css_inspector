@@ -1,0 +1,157 @@
+# css/css-grid/grid-lanes/tentative/alignment/column-grid-lanes-alignment-positioned-items-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/alignment/column-grid-lanes-alignment-positioned-items-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+    html,body {
+      color:black; background-color:white; font:8px/1 monospace; padding:0; margin:0;
+    }
+
+    .grid-lanes {
+      position: relative;
+      display: grid-lanes;
+      grid-template-columns: 80px 80px 80px;
+      width: 290px;
+      height: 150px;
+      gap: 10px;
+      padding: 10px;
+      border: 2px solid black;
+      margin: 10px;
+    }
+
+    .grid-lanes > div {
+      position: absolute;
+      border: 1px solid #333;
+      width: 120px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .safe-start {
+      grid-column: 1 / 2;
+      align-self: safe start;
+      background: lightcoral;
+    }
+
+    .unsafe-start {
+      grid-column: 2 / 3;
+      align-self: unsafe start;
+      background: lightblue;
+    }
+
+    .safe-end {
+      grid-column: 3 / 4;
+      align-self: safe end;
+      background: lightgreen;
+    }
+
+    .unsafe-end {
+      grid-column: 1 / 2;
+      align-self: unsafe end;
+      background: lightyellow;
+    }
+
+    .safe-center {
+      grid-column: 2 / 3;
+      align-self: safe center;
+      background: plum;
+    }
+
+    .unsafe-center {
+      grid-column: 3 / 4;
+      align-self: unsafe center;
+      background: orange;
+    }
+  
+```
+
+```json
+{
+  "errors": 18,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-self”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-self”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-self”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-self”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-self”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-self”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

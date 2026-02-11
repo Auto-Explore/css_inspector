@@ -1,0 +1,39 @@
+# css/css-images/gradient/gradient-eval-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-images/gradient/gradient-eval-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+   :root {
+       --start: lab(60% -50 50);  /* rgb(20.71% 64.94% 17.04%) */
+       --end: lab(60% 50 -50);    /* rgb(76.52% 42.74% 91.9%) */
+       --t: 0.5;
+       --big: 131070000px;
+   }
+   .test {
+       width: 100px;
+       height: 100px;
+       background: linear-gradient(in lab, var(--start) calc(var(--big) * (0 - var(--t))), var(--end) calc(var(--big) * (1 - var(--t))));
+   }
+ 
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

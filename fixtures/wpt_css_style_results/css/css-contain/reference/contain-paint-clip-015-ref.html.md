@@ -1,0 +1,30 @@
+# css/css-contain/reference/contain-paint-clip-015-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-contain/reference/contain-paint-clip-015-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div
+    {
+      background-color: green;
+      border-radius: 50%;
+      height: 100px;
+      width: 100px;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

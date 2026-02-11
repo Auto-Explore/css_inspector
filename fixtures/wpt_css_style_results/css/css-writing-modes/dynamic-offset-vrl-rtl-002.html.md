@@ -1,0 +1,48 @@
+# css/css-writing-modes/dynamic-offset-vrl-rtl-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/dynamic-offset-vrl-rtl-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+html {
+  writing-mode: vertical-rl;
+  direction: rtl;
+  overflow: hidden;
+}
+
+#container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 200px;
+  background: yellow;
+}
+
+#abspos {
+  position: absolute;
+  bottom: 80px;
+  left: 70px;
+  top: 80px; /* ignored */
+  width: 10px;
+  height: 10px;
+  background: fuchsia;
+}
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

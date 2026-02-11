@@ -1,0 +1,78 @@
+# css/css-grid/grid-items/grid-item-percentage-sizes-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-items/grid-item-percentage-sizes-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+html,body {
+  color:black; background-color:white; font:16px/1 monospace; padding:0; margin:0;
+}
+
+.grid {
+  display: inline-grid;
+  height: 10px;
+  width: 10px;
+  grid: 1px auto 2px 3px / 3px auto 4px 2px;
+  border: solid 1px;
+  margin: 0 20px 20px 0;
+  place-items: start;
+}
+.item {
+  background: cyan;
+  grid-area: 2/2/span 2/span 2;
+}
+.content {
+  height: 30px;
+  width: 30px;
+}
+.min {
+  min-height: 100%;
+  min-width: 100%;
+}
+.max {
+  max-height: 100%;
+  max-width: 100%;
+}
+.size {
+  height: 100%;
+  width: 100%;
+}
+
+.hl  .item { writing-mode: horizontal-tb; direction:ltr; }
+.hr  .item { writing-mode: horizontal-tb; direction:rtl; }
+.vrl .item { writing-mode: vertical-rl; direction:ltr; }
+.vrr .item { writing-mode: vertical-rl; direction:rtl; }
+.vll .item { writing-mode: vertical-lr; direction:ltr; }
+.vlr .item { writing-mode: vertical-lr; direction:rtl; }
+.sll .item { writing-mode: sideways-lr; direction:ltr; }
+.slr .item { writing-mode: sideways-lr; direction:rtl; }
+
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-area”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

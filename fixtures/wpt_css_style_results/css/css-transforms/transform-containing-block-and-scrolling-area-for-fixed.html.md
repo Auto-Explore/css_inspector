@@ -1,0 +1,53 @@
+# css/css-transforms/transform-containing-block-and-scrolling-area-for-fixed.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/transform-containing-block-and-scrolling-area-for-fixed.html"
+}
+```
+
+## style[0]
+
+```css
+
+  html, body { margin: 0; padding: 0 }
+  #transformed {
+    transform: translateX(10px) translateY(10px);
+    width: 200px;
+    height: 200px;
+    background: grey;
+    overflow: hidden;
+  }
+
+  #fixed {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    top: 50px;
+    left: 50px;
+    background: green;
+  }
+
+  #spacer {
+    height: 10000px;
+    width: 10000px;
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “transform”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

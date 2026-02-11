@@ -1,0 +1,44 @@
+# css/css-page/page-size-010-print-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/page-size-010-print-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @page {
+    margin: 96px;
+  }
+  @page letter {
+    size: 816px 1056px;
+  }
+  @page letter-landscape {
+    size: 1056px 816px;
+  }
+  @page legal {
+    size: 816px 1344px;
+  }
+  @page legal-landscape {
+    size: 1344px 816px;
+  }
+  @page ledger {
+    size: 1056px 1632px;
+  }
+  @page ledger-landscape {
+    size: 1632px 1056px;
+  }
+  body { margin: 0; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

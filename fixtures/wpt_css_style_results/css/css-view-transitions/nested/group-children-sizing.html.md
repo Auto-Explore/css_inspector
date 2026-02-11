@@ -1,0 +1,81 @@
+# css/css-view-transitions/nested/group-children-sizing.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/nested/group-children-sizing.html"
+}
+```
+
+## style[0]
+
+```css
+
+#clipper {
+  view-transition-group: contain;
+  view-transition-name: clipper;
+
+  height: 200px;
+  width: 200px;
+}
+
+.item {
+  view-transition-name: match-element;
+  background: blue;
+  position: relative;
+  top: -25px;
+  left: -10px;
+
+  height: 50px;
+  width: 250px;
+  margin: 1px;
+  border: 1px solid black;
+}
+
+.item.popout {
+  view-transition-group: root;
+}
+
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-play-state: paused;
+}
+
+::view-transition-group-children(clipper) {
+  overflow: clip;
+}
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-group”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-group”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,53 @@
+# css/css-fonts/font-size-adjust-013-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-size-adjust-013-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+        @font-face {
+            font-family: 'primary-font-ahem-ex-500';
+            src: url('./resources/ahem-ex-500.otf');
+        }
+        @font-face {
+            font-family: 'secondary-font-ahem-ex-250';
+            src: url('./resources/ahem-ex-250.otf');
+        }
+        .test {
+            font-family: 'primary-font-ahem-ex-500', 'secondary-font-ahem-ex-250';
+            font-size: 100px;
+            color: peru;
+            height: 200px;
+            margin-top: -20px;
+            margin-bottom: -80px;
+            line-height: 1;
+        }
+        .tall-inline-block {
+            display: inline-block;
+            height: 100px;
+        }
+        .description {
+            font-family: serif;
+            font-size: 16px;
+        }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,47 @@
+# css/css-backgrounds/background-size-cover-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/background-size-cover-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+body { margin: 0 }
+div {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-origin: content-box;
+  background-image: url(/images/green-100x50.png);
+}
+#test1 {
+  height: 0;
+  width: 100px;
+  padding-bottom: 100px;
+}
+
+#test2 {
+  height: 100px;
+  width: 0;
+  padding-right: 100px;
+}
+#test3 {
+  height: 0;
+  width: 0;
+  padding-right: 100px;
+  padding-bottom: 100px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

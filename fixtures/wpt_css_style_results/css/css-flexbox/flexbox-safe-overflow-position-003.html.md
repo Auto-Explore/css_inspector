@@ -1,0 +1,59 @@
+# css/css-flexbox/flexbox-safe-overflow-position-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flexbox-safe-overflow-position-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #reference-overlapped-red {
+    position: absolute;
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    z-index: -1;
+  }
+
+  .flex {
+    display: flex;
+    flex-flow: row-reverse;
+    width: 90px;
+    height: 90px;
+    align-content: safe flex-start;
+    justify-content: safe flex-start;
+  }
+
+  .item {
+    flex: 0 0 100px;
+    width: 100px;
+    height: 100px;
+    background: green;
+  }
+
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “align-content”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “justify-content”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “flex”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,66 @@
+# css/selectors/featureless-004.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/selectors/featureless-004.html"
+}
+```
+
+## style[0]
+
+```css
+
+        div {
+          width: 100px;
+          height: 10px;
+        }
+        .red { background-color: red; }
+        .green { background-color: green; }
+
+        :is(:host, aside) .t1 {
+          background-color: green;
+        }
+        :not(:not(:host)) .t2 {
+          background-color: green;
+        }
+
+
+        :not(aside) .t3 {
+          background-color: red;
+        }
+        :not(.foo:host) .t4 {
+          background-color: red;
+        }
+        :not(:host > .foo) .t5 {
+          background-color: red;
+        }
+        :is(:not(body) > :host) .t6 {
+          background-color: red;
+        }
+        :is(:host:not(body)) .t7 {
+          background-color: red;
+        }
+        :host:not(body) {
+          .t8 {
+            background-color: red;
+          }
+        }
+        :host:has(#foo) {
+          .t9 {
+            background-color: red;
+          }
+        }
+        :is(:host.host) .t10 {
+          background-color: red;
+        }
+      
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

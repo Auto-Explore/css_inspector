@@ -1,0 +1,103 @@
+# css/css-pseudo/highlight-cascade/highlight-currentcolor-computed.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-pseudo/highlight-cascade/highlight-currentcolor-computed.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div {
+    background-color: green;
+    color: lime;
+  }
+  .wrapper::selection {
+    color: cyan;
+    background-color: blue;
+  }
+  .wrapper::target-text {
+    color: cyan;
+    background-color: blue;
+  }
+  .wrapper::spelling-error {
+    color: cyan;
+    background-color: blue;
+  }
+  .wrapper::grammar-error {
+    color: cyan;
+    background-color: blue;
+  }
+  .wrapper::highlight(foo) {
+    color: cyan;
+    background-color: blue;
+  }
+  .target::selection {
+    color: currentcolor;
+    background-color: currentcolor;
+  }
+  .target::target-text {
+    color: currentcolor;
+    background-color: currentcolor;
+  }
+  .target::search-text {
+    color: currentcolor;
+    background-color: currentcolor;
+  }
+  .target::search-text:current {
+    color: red;
+    background-color: red;
+  }
+  .target::spelling-error {
+    color: currentcolor;
+    background-color: currentcolor;
+  }
+  .target::grammar-error {
+    color: currentcolor;
+    background-color: currentcolor;
+  }
+  .target::highlight(foo) {
+    color: currentcolor;
+    background-color: currentcolor;
+  }
+```
+
+```json
+{
+  "errors": 7,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

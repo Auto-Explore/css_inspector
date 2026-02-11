@@ -1,0 +1,72 @@
+# css/css-flexbox/flexible-order.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flexible-order.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+.box {
+	margin:0 auto;
+	background:#CCC;
+	border-radius:5px;
+	width:600px;
+	display:flex;
+	flex-flow:row;
+}
+
+.box div {
+	text-align:center;
+}
+
+.box .red {
+	order:-2;
+	flex:0 1 auto;
+	width:200px;
+	background:#F00;
+}
+.box .blue {
+	order:-4;
+	flex:0 1 auto;
+	width:200px;
+	background:#00F;
+}
+.box .black {
+	order:-1;
+	flex:0 1 auto;
+	width:200px;
+	background:#000;
+	color:#FFF;
+}
+
+
+
+
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “flex”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “flex”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “flex”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

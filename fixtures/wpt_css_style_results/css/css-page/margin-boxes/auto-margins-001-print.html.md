@@ -1,0 +1,142 @@
+# css/css-page/margin-boxes/auto-margins-001-print.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/margin-boxes/auto-margins-001-print.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @page {
+    margin: 100px;
+    size: 500px 400px;
+    border: solid;
+    @top-left-corner {
+      border: solid;
+      width: 25px;
+      height: 25px;
+      margin: auto;
+      content: "";
+    }
+    @top-left {
+      border: solid;
+      width: 25px;
+      height: 25px;
+      margin: auto;
+      content: "";
+    }
+    @top-center {
+      border: solid;
+      height: 25px;
+      margin: auto;
+      content: "";
+    }
+    @top-right {
+      border: solid;
+      width: 25px;
+      height: 25px;
+      margin: auto;
+      content: "";
+    }
+    @top-right-corner {
+      border: solid;
+      width: 25px;
+      height: 25px;
+      margin: auto;
+      content: "";
+    }
+    @right-top {
+      border: solid;
+      width: 25px;
+      height: 25px;
+      margin: auto;
+      content: "";
+    }
+    @right-middle {
+      border: solid;
+      width: 25px;
+      margin: auto;
+      content: "";
+    }
+    @right-bottom {
+      border: solid;
+      width: 25px;
+      height: 25px;
+      margin: auto;
+      content: "";
+    }
+    @bottom-right-corner {
+      border: solid;
+      width: 25px;
+      height: 25px;
+      margin: auto;
+      content: "";
+    }
+    @bottom-right {
+      border: solid;
+      width: 25px;
+      height: 25px;
+      margin: auto;
+      content: "";
+    }
+    @bottom-center {
+      border: solid;
+      width: 25px;
+      height: 25px;
+      margin: auto;
+      content: "";
+    }
+    @bottom-left {
+      border: solid;
+      width: 25px;
+      height: 25px;
+      margin: auto;
+      content: "";
+    }
+    @bottom-left-corner {
+      border: solid;
+      width: 25px;
+      height: 25px;
+      margin: auto;
+      content: "";
+    }
+    @left-bottom {
+      border: solid;
+      width: 25px;
+      height: 25px;
+      margin: auto;
+      content: "";
+    }
+    @left-middle {
+      border: solid;
+      width: 25px;
+      height: 25px;
+      margin: auto;
+      content: "";
+    }
+    @left-top {
+      border: solid;
+      width: 25px;
+      height: 25px;
+      margin: auto;
+      content: "";
+    }
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

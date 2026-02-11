@@ -1,0 +1,75 @@
+# css/css-conditional/container-queries/scroll-state/scroll-state-query-with-var.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-conditional/container-queries/scroll-state/scroll-state-query-with-var.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @property --registered {
+    syntax: "none|top|left|bottom|right";
+    inherits: false;
+    initial-value: none;
+  }
+  @property --registered-number {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 0;
+  }
+  #container {
+    container-type: scroll-state;
+    overflow: auto;
+    width: 200px;
+    height: 200px;
+    --unregistered: right;
+    --unregistered-number: 13;
+    --registered: right;
+    --registered-number: 13;
+  }
+  #target {
+    width: 400px; /* Make sure we overflow to the right */
+    height: 10px;
+    --match-unknown: no;
+    --match-unknown-fallback: no;
+    --match-unregistered: no;
+    --match-unregistered-number: no;
+    --match-registered: no;
+    --match-registered-number: no;
+  }
+  @container scroll-state(scrollable: var(--unknown)) {
+    #target { --match-unknown: yes; }
+  }
+  @container (scrollable: var(--unknown, right)) {
+    #target { --match-unknown-fallback: yes; }
+  }
+  @container (scrollable: var(--unregistered)) {
+    #target { --match-unregistered: yes; }
+  }
+  @container (scrollable: var(--unregistered-number)) {
+    #target { --match-unregistered-number: yes; }
+  }
+  @container (scrollable: var(--registered)) {
+    #target { --match-registered: yes; }
+  }
+  @container (scrollable: var(--registered-number)) {
+    #target { --match-registered-number: yes; }
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

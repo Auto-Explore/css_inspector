@@ -1,0 +1,62 @@
+# css/css-overflow/overflow-padding.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/overflow-padding.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container {
+  --size: 100px;
+  --padding-size: 30px;
+  --too-big-size: calc(var(--size) - var(--padding-size) + 1px);
+  --just-right-size: calc(var(--size) - var(--padding-size));
+  overflow:auto;
+  width: var(--size);
+  height: var(--size);
+  padding-right: var(--padding-size);
+  padding-bottom: var(--padding-size);
+  background: #DDD;
+  box-sizing: border-box;
+  display: inline-block;
+}
+.big {
+  width: var(--too-big-size);
+  height: var(--too-big-size);
+  background: green;
+}
+.small {
+  width: var(--just-right-size);
+  height: var(--just-right-size);
+  background: yellow;
+}
+.bigfont {
+  font-size: var(--too-big-size);
+  font-family: Ahem;
+  line-height: 1;
+  color:green;
+}
+.smallfont {
+  font-size: var(--just-right-size);
+  font-family: Ahem;
+  line-height: 1;
+  color:yellow;
+}
+.red {
+  background:red;
+}
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

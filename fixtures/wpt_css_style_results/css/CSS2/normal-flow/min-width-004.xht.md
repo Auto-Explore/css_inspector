@@ -1,0 +1,30 @@
+# css/CSS2/normal-flow/min-width-004.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/normal-flow/min-width-004.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div
+            {
+                background: red;
+                height: 1in;
+                min-width: -0px;
+                width: 0;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

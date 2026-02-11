@@ -1,0 +1,42 @@
+# css/css-highlight-api/painting/custom-highlight-painting-004-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-highlight-api/painting/custom-highlight-painting-004-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .foo {
+    color:blue;
+    background-color:yellow;
+  }
+  .bar {
+    background-color:orange;
+  }
+  .bar-over-foo {
+    color:blue;
+    background-color:orange;
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,44 @@
+# css/css-writing-modes/available-size-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/available-size-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+body > div {
+  font-family: monospace; /* to be able to reliably measure things in ch*/
+  font-size: 20px;
+  max-height: 8ch; /* **max**-height does not give the element a definite block size */
+  color: transparent;
+  position: relative; /* to act as a container of #green */
+}
+
+div > div > div { writing-mode: vertical-rl; }
+
+span {
+  background: white;
+  display: inline-block; /* This should not change it's size or position, but makes the size of the background predictable*/
+}
+
+#green {
+  position: absolute;
+  background: green;
+  left: 0;
+  writing-mode: vertical-rl;
+  z-index: -1;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

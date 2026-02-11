@@ -1,0 +1,48 @@
+# css/css-ui/cursor-auto-004-manual.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-ui/cursor-auto-004-manual.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  width: 100px;
+  height: 100px;
+}
+#test {
+  cursor: url("support/cursors/fail.png"), help;
+  cursor: auto;
+  border: solid blue;
+}
+#ref {
+  cursor: default;
+  border: solid orange;
+}
+:root {
+  cursor: help; /* give the root element a different cursor so that
+  it is easy to tell if something changes when hovering the target.*/
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “cursor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

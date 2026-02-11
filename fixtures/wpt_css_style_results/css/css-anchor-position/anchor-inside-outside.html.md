@@ -1,0 +1,61 @@
+# css/css-anchor-position/anchor-inside-outside.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-inside-outside.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #cb {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    border: 1px solid black;
+  }
+  #anchor {
+    position: absolute;
+    top: 250px;
+    left: 150px;
+    background-color: skyblue;
+    width: 50px;
+    height: 50px;
+    anchor-name: --a;
+  }
+  .target {
+    position: absolute;
+    position-anchor: --a;
+    background-color: tomato;
+    width: 10px;
+    height: 10px;
+  }
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,70 @@
+# css/css-text/white-space/text-wrap-balance-line-clamp-007.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/white-space/text-wrap-balance-line-clamp-007.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+    border: solid;
+    font-family: monospace;
+    font-size: 4rem;
+    line-height: 1rem;
+    margin: 1ch;
+    width: calc(15.1ch / 4); /* fits 15.1 characters at the span's font-size */
+}
+div span {
+  font-size: 1rem;
+}
+.test {
+    border-color: blue;
+
+    text-wrap-style: balance;
+    line-clamp: 2;
+    /* This code is unnecessary in any browser that supports the unprefixed version of line-clamp,
+        but neither does it have any detrimental effect,
+        and it broadens the test to browsers that only support the prefixed version */
+
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.test p {
+  margin: 0;
+}
+.ref {
+    border-color: orange;
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Unknown property “line-clamp”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “-webkit-line-clamp”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “-webkit-box-orient”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

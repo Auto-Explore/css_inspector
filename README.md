@@ -61,6 +61,35 @@ Update them with:
 
 `cargo test -p css_inspector_suite`
 
+## Web Platform Tests (WPT) style blocks
+
+This repo can optionally validate all `<style>` blocks under `fixtures/wpt/css/**` and persist
+the results to per-test Markdown files (including extracted style text) committed to git alongside
+the WPT submodule revision.
+
+Setup:
+
+- `mkdir -p fixtures`
+- `git submodule add --name wpt --depth 1 https://github.com/web-platform-tests/wpt.git fixtures/wpt`
+- `git config -f .gitmodules submodule.wpt.shallow true`
+- `git submodule update --init --recursive --depth 1`
+
+Generate (or regenerate) the results tree:
+
+- `cargo run -p css_inspector_cli -- wpt-style --write`
+
+Check current validator output against the committed results:
+
+- `cargo run -p css_inspector_cli -- wpt-style --strict`
+
+Results are written under `fixtures/wpt_css_style_results/`:
+
+- `fixtures/wpt_css_style_results/_meta.md` ties the tree to a WPT commit + validator config.
+- `fixtures/wpt_css_style_results/<wpt-rel-path>.md` stores each file’s `<style>` blocks and reports (as fenced `css` + `json` blocks).
+
+When updating the WPT submodule revision, regenerate the results tree and commit both changes
+together so the results stay in sync with WPT.
+
 
 
 # Prior work

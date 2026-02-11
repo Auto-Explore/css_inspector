@@ -1,0 +1,29 @@
+# css/css-transforms/crashtests/w-crossing-zero-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/crashtests/w-crossing-zero-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+#outer {
+  transform-style: preserve-3d;
+}
+#inner {
+  transform: matrix3d(4,947066.75,3,-57.374,1860.6956175,97,2291.191,-8.1785,9,46.047,5.02880,7.198084,2,8,2009,3.2);
+  border: medium solid;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

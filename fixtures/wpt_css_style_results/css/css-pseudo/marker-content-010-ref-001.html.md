@@ -1,0 +1,30 @@
+# css/css-pseudo/marker-content-010-ref-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-pseudo/marker-content-010-ref-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+html,body {
+  color:black; background-color:white; font:16px/1 monospace; padding:0; margin:0;
+}
+body { margin-left: 40px; }
+.h m { display:inline-block; width:0; height:0; position:relative; left: -3ch; font-size: 16px; line-height:0; }
+.big { font-size:xx-large; }
+.big-marker m { font-size:xx-large; }
+li { display: block; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,88 @@
+# css/css-view-transitions/scoped/display-change-during-transition.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/scoped/display-change-during-transition.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .tr {
+      view-transition-name: demo;
+    }
+    ::view-transition {
+      pointer-events: none;
+    }
+    ::view-transition-group(demo) {
+      /* freeze animation at midpoint */
+      animation-duration: 10000s;
+      animation-delay: -5000s;
+      animation-timing-function: cubic-bezier(0, 1, 1, 0);
+      display: block;
+      outline: 5px solid red;
+    }
+    ::view-transition-image-pair(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      /* No cross-fade */
+      animation: unset;
+    }
+    .box {
+      position: absolute;
+      z-index: 0;
+      will-change: transform;
+      contain: strict;
+    }
+    #scope {
+      position: absolute;
+      background: #eee;
+      left: 40px;
+      top: 40px;
+      width: 490px;
+      height: 190px;
+    }
+    .part {
+      left: 30px;
+      top: 30px;
+      width: 120px;
+      height: 120px;
+      background-color: purple;
+    }
+    .part.state2 {
+      transform: translateX(300px);
+    }
+  
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “pointer-events”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

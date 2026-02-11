@@ -1,0 +1,49 @@
+# css/css-gaps/grid/grid-gap-decorations-042.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/grid/grid-gap-decorations-042.html"
+}
+```
+
+## style[0]
+
+```css
+
+    body {
+        margin: 0px;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+
+        width: 400px;
+        height: 400px;
+
+        column-rule: 5px solid blue;
+        row-rule: 5px solid red;
+    }
+    .grid-item {
+        background-color: gray;
+        opacity: 0.5;
+        border: 1px solid #000;
+    }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “column-rule”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

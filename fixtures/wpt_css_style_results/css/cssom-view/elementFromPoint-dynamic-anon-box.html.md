@@ -1,0 +1,45 @@
+# css/cssom-view/elementFromPoint-dynamic-anon-box.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/cssom-view/elementFromPoint-dynamic-anon-box.html"
+}
+```
+
+## style[0]
+
+```css
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+/*
+  Create a hidden scrollbox that occupies the whole viewport, then give it
+  visibility: hidden dynamically. The link previously under the scrollbox
+  should be clickable.
+ */
+.scrollable {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.scrollable .inner {
+  display: table-cell;
+  width: 100vw;
+  height: 100vh;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

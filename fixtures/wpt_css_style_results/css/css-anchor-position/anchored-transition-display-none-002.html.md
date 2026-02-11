@@ -1,0 +1,74 @@
+# css/css-anchor-position/anchored-transition-display-none-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchored-transition-display-none-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #containing-block {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    outline: 1px black solid;
+  }
+
+  #anchor {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 100px;
+    left: 0px;
+    background: cyan;
+    anchor-name: --anchor;
+  }
+
+  .anchored {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    transition: display 99999s allow-discrete;
+  }
+
+  #anchored-anchor-function {
+    top: anchor(--anchor bottom);
+    left: anchor(--anchor right);
+    background: green;
+  }
+
+  #anchored-position-area {
+    position-anchor: --anchor;
+    position-area: top right;
+    background: blue;
+  }
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-area”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,34 @@
+# css/css-color/t421-rgb-hex3-expand-b.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-color/t421-rgb-hex3-expand-b.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+		table { border-spacing: 0; padding: 0; border: none; }
+		td { border: none; padding: 0; width: 1.2em; height: 1.2em; }
+		]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

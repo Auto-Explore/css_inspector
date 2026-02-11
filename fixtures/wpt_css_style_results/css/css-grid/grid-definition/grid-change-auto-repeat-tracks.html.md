@@ -1,0 +1,58 @@
+# css/css-grid/grid-definition/grid-change-auto-repeat-tracks.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-definition/grid-change-auto-repeat-tracks.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+  grid-auto-rows: 25px;
+  grid-auto-columns: 25px;
+  margin-bottom: 10px;
+}
+.fixedWidth {
+  width: 50px;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(auto-fill, 25px);
+}
+.fixedHeight {
+  width: 100px;
+  height: 50px;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(auto-fill, 25px);
+}
+#i1-1, #i2-1 {
+  grid-row: auto;
+  grid-column: 1;
+  background-color: orange;
+}
+#i1-2, #i2-2 {
+  grid-row: 1;
+  grid-column: auto;
+  background-color: green;
+}
+#i1-3, #i2-3 {
+  grid-row: auto;
+  grid-column: auto;
+  background-color: blue;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

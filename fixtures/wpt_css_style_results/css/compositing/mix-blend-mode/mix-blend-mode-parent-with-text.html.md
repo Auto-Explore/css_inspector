@@ -1,0 +1,48 @@
+# css/compositing/mix-blend-mode/mix-blend-mode-parent-with-text.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/compositing/mix-blend-mode/mix-blend-mode-parent-with-text.html"
+}
+```
+
+## style[0]
+
+```css
+
+            .parent {
+                position: absolute;
+                z-index: 1;
+                width: 100px;
+                height: 100px;
+            }
+            .blender {
+                background: #FF0;
+                width: 100px;
+                height: 100px;
+                margin-top: -60px;
+                mix-blend-mode: difference;
+            }
+            .text {
+                height: 60px;
+                color: #F00;
+            }
+            body {
+                background: lightgray;
+            }
+        
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

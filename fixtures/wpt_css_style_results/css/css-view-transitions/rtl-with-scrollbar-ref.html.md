@@ -1,0 +1,56 @@
+# css/css-view-transitions/rtl-with-scrollbar-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/rtl-with-scrollbar-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #target {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: 100px;
+    height: 200px;
+    background: dodgerblue;
+  }
+
+  #inroot {
+    position: absolute;
+    top: 300px;
+    left: 200px;
+    width: 100px;
+    height: 200px;
+    background: rebeccapurple;
+  }
+
+  body {
+    margin: 0px;
+    padding: 0px;
+    /* add overflow for scrollbar */
+    height: 200vh;
+  }
+  
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

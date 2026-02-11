@@ -1,0 +1,63 @@
+# css/css-shapes/spec-examples/reference/shape-outside-006-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shapes/spec-examples/reference/shape-outside-006-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+        #container {
+          position: absolute;
+          top: 70px;
+          width: 250px;
+          height: 105px;
+          border: 1px solid black;
+        }
+        .bar {
+            position: absolute;
+            height: 20px;
+            background-color: green;
+        }
+        #line-1 {
+            top: 10px;
+            left: 65px;
+            width: 160px;
+        }
+        #line-2 {
+            top: 40px;
+            left: 80px;
+            width: 140px;
+        }
+        #line-3 {
+            top: 70px;
+            left: 95px;
+            width: 120px;
+        }
+        #triangle {
+            position: absolute;
+            top: 70px;
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            clip-path: polygon(50px 0px, 100px 100px, 0px 100px);
+        }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

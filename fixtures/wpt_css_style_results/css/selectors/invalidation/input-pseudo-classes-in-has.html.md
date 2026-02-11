@@ -1,0 +1,62 @@
+# css/selectors/invalidation/input-pseudo-classes-in-has.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/selectors/invalidation/input-pseudo-classes-in-has.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .ancestor:has(#checkme:checked) { color: green }
+  .ancestor:has(#checkme:indeterminate) { color: yellowgreen }
+  .ancestor:has(#checkme:disabled) { color: blue }
+  .ancestor:has(#textinput:read-only) { color: skyblue }
+  .ancestor:has(#textinput:placeholder-shown) { color: navy }
+  .ancestor:has(#radioinput:default) { color: lightblue }
+  .ancestor:has(#textinput:valid) { color: lightgreen }
+  .ancestor:has(#numberinput:out-of-range) { color: darkgreen }
+  .ancestor:has(#numberinput:required) { color: pink }
+  .ancestor:has(#progress:indeterminate) { color: orange }
+  .ancestor:has(#checkboxinput:default) { color: purple; }
+```
+
+```json
+{
+  "errors": 7,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

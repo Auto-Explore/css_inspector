@@ -1,0 +1,55 @@
+# css/css-multicol/multicol-span-all-children-height-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-multicol/multicol-span-all-children-height-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+  article {
+    column-count: 2;
+    width: 400px;
+    height: 200px;
+    background-color: lightgreen;
+    border: 5px solid purple;
+  }
+  div.block1 {
+    background-color: yellow;
+    /* This overflows the column container, so one extra column is created. */
+    height: 300%;
+  }
+  div.spanner {
+    column-span: all;
+    height: 25%;
+    background-color: lightblue;
+  }
+  div.block2 {
+    background-color: yellow;
+    /* No height left for this block. According to the breaking rules, the
+       column container creates 1px column boxes for it. */
+    height: 100%;
+  }
+  
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

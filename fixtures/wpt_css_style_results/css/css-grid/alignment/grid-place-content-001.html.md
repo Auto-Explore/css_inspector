@@ -1,0 +1,70 @@
+# css/css-grid/alignment/grid-place-content-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-place-content-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+  display: inline-grid;
+  position: relative;
+  vertical-align: top;
+  border: 10px solid black;
+  margin: 5px;
+  font: 40px/1 Ahem;
+  color: cyan;
+}
+.small {
+  padding: 40px;
+}
+.big {
+  padding: 0px;
+}
+.content-box.small {
+  width: 0px;
+  height: 0px;
+}
+.content-box.big {
+  width: 80px;
+  height: 80px;
+}
+.border-box {
+  box-sizing: border-box;
+  width: 100px;
+  height: 100px;
+}
+.start {
+  place-content: start;
+}
+.center {
+  place-content: center;
+}
+.end {
+  place-content: end;
+}
+.space-between {
+  place-content: space-between;
+}
+.space-around {
+  place-content: space-around;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,63 @@
+# css/css-grid/alignment/grid-self-baseline-not-applied-if-sizing-cyclic-dependency-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-self-baseline-not-applied-if-sizing-cyclic-dependency-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.inline-grid {
+  position: relative;
+  border: solid;
+  text-orientation: sideways;
+  font: 15px/1 Ahem;
+}
+
+.columns { grid-template-columns: 100px 100px; }
+.rows { grid-template-rows: 100px 100px; }
+
+.min-content-columns { grid-template-columns: min-content; }
+.max-content-columns { grid-template-columns: max-content; }
+.fit-content-columns { grid-template-columns: fit-content; }
+.min-content-rows { grid-template-rows: min-content; }
+.max-content-rows { grid-template-rows: max-content; }
+.fit-content-rows { grid-template-rows: fit-content; }
+
+.flex-columns     { grid-template-columns: 1fr; }
+.max-flex-columns { grid-template-columns: minmax(0px, 1fr); }
+.flex-rows        { grid-template-rows: 1fr; }
+.max-flex-rows    { grid-template-rows: minmax(0px, 1fr); }
+.auto-rows        { grid-template-rows: auto 100px; }
+
+.height25  { height: 25px; }
+.height50  { height: 50px; }
+.height200 { height: 200px; }
+.width25   { width: 25px; }
+.width50   { width: 50px; }
+.width200  { width: 200px; }
+
+.height200Percent { height: 200%; }
+.width200Percent  { width: 200%; }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-template-columns”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-template-rows”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

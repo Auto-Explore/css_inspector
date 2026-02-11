@@ -1,0 +1,49 @@
+# css/css-overflow/line-clamp/block-ellipsis-032.tentative.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/line-clamp/block-ellipsis-032.tentative.html"
+}
+```
+
+## style[0]
+
+```css
+
+.clamp {
+  line-clamp: 1;
+  border: 1px solid black;
+  font-family: monospace;
+  margin-bottom: 1em;
+  /* The non-hanging text in the first line is 22 to 26ch, plus 1ch for the ellipsis. The hanging whitespace is extra 8ch */
+  width: 29ch;
+}
+.right {
+    text-align: right;
+}
+.justified {
+    text-align: justify;
+}
+.green {
+    color: green;
+    font-weight: bold;
+}
+.hangs {
+    white-space: pre-wrap;
+    background-color: red;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “line-clamp”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

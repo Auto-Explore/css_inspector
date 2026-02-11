@@ -1,0 +1,42 @@
+# css/css-contain/contain-paint-size-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-contain/contain-paint-size-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  table
+    {
+      table-layout: fixed;
+      width: 206px;
+    }
+
+  caption
+    {
+      background-color: red;
+      border: green solid 1em;
+      color: red;
+      contain: paint size;
+      font-size: 20px;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “contain”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

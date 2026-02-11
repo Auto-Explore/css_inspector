@@ -1,0 +1,81 @@
+# css/css-flexbox/abspos/position-absolute-012.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/abspos/position-absolute-012.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+.abspos {
+  height: 50px;
+  width: 50px;
+  background: lightblue;
+  position: absolute;
+  flex: none;
+}
+
+.grid {
+  display: grid;
+  position: relative;
+}
+
+.title {
+    margin-top: 1em;
+}
+
+.flexbox {
+    display: flex;
+    background-color: #aaa;
+    height: 100px;
+    width: 100px;
+}
+
+.horizontal-tb {
+    writing-mode: horizontal-tb;
+}
+.vertical-rl {
+    writing-mode: vertical-rl;
+}
+.vertical-lr {
+    writing-mode: vertical-lr;
+}
+
+.rtl {
+    direction: rtl;
+}
+.ltr {
+    direction: ltr;
+}
+
+.align-items-flex-start {
+    align-items: flex-start;
+}
+.align-items-flex-end {
+    align-items: flex-end;
+}
+.justify-content-flex-start {
+    justify-content: flex-start;
+}
+.justify-content-flex-end {
+    justify-content: flex-end;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

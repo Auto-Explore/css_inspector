@@ -1,0 +1,44 @@
+# css/css-flexbox/flex-aspect-ratio-img-column-008.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flex-aspect-ratio-img-column-008.html"
+}
+```
+
+## style[0]
+
+```css
+
+#reference-overlapped-red {
+    position: absolute;
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    z-index: -1;
+}
+
+.flex {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 200px;
+  writing-mode: vertical-lr;
+}
+
+img {
+  padding-left: 5%;
+  min-width: 40px;
+  min-height: 0; /* Disable min-size: auto. */
+  margin-left: -10px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

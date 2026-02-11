@@ -1,0 +1,30 @@
+# css/CSS2/backgrounds/background-048.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/backgrounds/background-048.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div
+            {
+                background: url("support/blue15x15.png") bottom repeat-x;
+                border: 3px solid black;
+                height: 200px;
+                width: 200px;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

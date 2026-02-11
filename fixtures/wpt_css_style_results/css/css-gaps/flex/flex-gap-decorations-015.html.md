@@ -1,0 +1,76 @@
+# css/css-gaps/flex/flex-gap-decorations-015.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/flex/flex-gap-decorations-015.html"
+}
+```
+
+## style[0]
+
+```css
+
+    body {
+        margin: 0px;
+    }
+
+    #flexbox {
+        border: 2px solid rgb(96 139 168);
+        display: flex;
+        column-gap: 20px;
+        row-gap: 10px;
+        width: 120px;
+        height: 170px;
+        flex-wrap: wrap;
+        flex-direction: column;
+        column-rule-style: solid;
+        column-rule-color: red;
+        column-rule-width: 20px;
+        row-rule-style: solid;
+        row-rule-color: blue;
+        row-rule-width: 10px;
+        rule-overlap: column-over-row;
+    }
+
+    .items {
+        background-color: rgb(96 139 168 / 0.2);
+        flex-shrink: 1;
+        width: 50px;
+        height: 50px;
+    }
+
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule-style”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule-width”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “rule-overlap”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

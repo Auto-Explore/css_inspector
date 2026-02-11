@@ -1,0 +1,82 @@
+# css/css-backgrounds/border-image-repeat-round-stretch-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/border-image-repeat-round-stretch-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div
+    {
+      border: red solid 64px;
+      border-image-repeat: round stretch;
+      /*
+      "
+      The first keyword applies to the horizontal scaling and
+      tiling of the top, middle and bottom parts, the second to
+      the vertical scaling and tiling of the left, middle and right parts
+      "
+      https://www.w3.org/TR/css-backgrounds-3/#border-image-repeat
+      */
+      border-image-slice: 64 fill; /* the center will be black */
+      border-image-source: url("support/4bicolor-squares.png");
+      display: inline-block;
+      image-rendering: pixelated; /* attempt to overcome antialias fuzziness */
+      margin-right: 1em;
+   }
+
+  div#first-subtest
+    {
+      height: 192px;
+      width: 96px;
+      /*
+      96px divided by 64px == 1.5 which is rounded up to 2.
+      So, the image should be 96px divided by 2 == 48px
+      wide. That means that the top and bottom bicolor
+      (yellow and purple) images should be 48px wide,
+      therefore rescaled down, from sliced 64px to 48px.
+
+      The left and right sides should be stretched from
+      sliced 64px to 192px (3 times).
+      */
+    }
+
+  div#second-subtest
+    {
+      height: 128px;
+      width: 80px;
+      /*
+      80px divided by 64px == 1.25 which is rounded down to 1.
+      So, each image should be 80px divided by 1 == 80px
+      wide. That means that the top and bottom bicolor
+      (yellow and purple) images should be 80px wide
+      therefore rescaled up, from sliced 64px to 80px.
+
+      The left and right sides should be stretched from
+      sliced 64px to 128px (2 times).
+      */
+    }
+  
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “border-image-repeat”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-image-slice”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

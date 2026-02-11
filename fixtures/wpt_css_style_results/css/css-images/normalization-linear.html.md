@@ -1,0 +1,27 @@
+# css/css-images/normalization-linear.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-images/normalization-linear.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #gradient {
+    width: 100px;
+    height: 100px;
+    background-image: linear-gradient(green -50%, blue -50%);
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

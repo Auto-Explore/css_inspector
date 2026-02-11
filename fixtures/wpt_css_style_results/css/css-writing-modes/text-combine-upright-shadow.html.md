@@ -1,0 +1,33 @@
+# css/css-writing-modes/text-combine-upright-shadow.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/text-combine-upright-shadow.html"
+}
+```
+
+## style[0]
+
+```css
+
+    div {
+        text-shadow: 4px 10px 0px red;
+        font: 50px/1 Ahem;
+        writing-mode: vertical-rl;
+    }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “text-shadow”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,37 @@
+# css/css-fonts/system-ui-ur-vs-ar.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/system-ui-ur-vs-ar.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+  font-family: noto-naskh;
+  src: url(/fonts/noto/NotoNaskhArabic-regular.woff2),
+       url(/fonts/noto/NotoNaskhArabic-regular.ttf);
+  size-adjust: 50%; /* cause mismatch even if system-ui maps to Noto Naskh */
+}
+p {
+  font-family: Ahem, system-ui, noto-naskh, serif;
+  font-size: 4em;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “size-adjust”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

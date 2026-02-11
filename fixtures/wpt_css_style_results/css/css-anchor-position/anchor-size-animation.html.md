@@ -1,0 +1,86 @@
+# css/css-anchor-position/anchor-size-animation.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-size-animation.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #cb {
+    border: 1px solid black;
+    width: 400px;
+    height: 400px;
+    position: relative;
+  }
+  #anchor1, #anchor2 {
+    width: 100px;
+    height: 100px;
+    background: tomato;
+  }
+  #anchor1 {
+    background: coral;
+    anchor-name: --a1;
+  }
+  #anchor2 {
+    background: seagreen;
+    anchor-name: --a2;
+    width: 200px;
+  }
+  #anchored {
+    width: 50px;
+    height: 50px;
+    background: skyblue;
+    animation: --anim 9999s steps(2, start);
+    position: absolute;
+  }
+  @keyframes --anim {
+    from { width: anchor-size(--a1 width); }
+    to { width: anchor-size(--a2 width); }
+  }
+```
+
+```json
+{
+  "errors": 8,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,56 @@
+# css/css-grid/alignment/grid-item-aspect-ratio-justify-self-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-item-aspect-ratio-justify-self-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .group { margin-bottom: 20px;}
+  .group.orthog .item { writing-mode: vertical-rl }
+  .grid {
+      height: 32px;
+      width: 24px;
+      display: inline-grid;
+      border: 2px solid black;
+      vertical-align: top;
+      background: cyan;
+  }
+
+  .item {
+      display: table;
+      height: 100%;
+      background: fuchsia;
+      box-sizing: border-box;
+      aspect-ratio: 1/2;
+  }
+  .center     { justify-self: center; }
+  .start      { justify-self: start; }
+  .end        { justify-self: end; }
+  .self-start { justify-self: self-start; }
+  .self-end   { justify-self: self-end; }
+  .flex-start { justify-self: flex-start; }
+  .flex-end   { justify-self: flex-end; }
+  .left       { justify-self: left; }
+  .right      { justify-self: right; }
+  .normal     { justify-self: normal; }
+  .stretch    { justify-self: stretch; }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

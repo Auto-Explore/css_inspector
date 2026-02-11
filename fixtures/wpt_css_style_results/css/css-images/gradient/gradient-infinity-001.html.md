@@ -1,0 +1,68 @@
+# css/css-images/gradient/gradient-infinity-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-images/gradient/gradient-infinity-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.box > div {
+  width: 100px;
+  height: 100px;
+  border: solid 1px black;
+}
+.test1 {
+  background: linear-gradient(to right in srgb, lime 100px, red calc(1px / 0));
+}
+.test2 {
+  background: linear-gradient(to right in srgb, lime 100px, red calc(Infinity * 1px));
+}
+.test3 {
+  background: linear-gradient(to left in srgb, lime 100px, red calc(Infinity * 1px));
+}
+.test4 {
+  background: linear-gradient(to top in srgb, lime 100px, red calc(1px / 0));
+}
+.test5 {
+  background: linear-gradient(to bottom in srgb, lime 100px, red calc(Infinity * 1px));
+}
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

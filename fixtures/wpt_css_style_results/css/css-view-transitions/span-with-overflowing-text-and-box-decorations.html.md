@@ -1,0 +1,103 @@
+# css/css-view-transitions/span-with-overflowing-text-and-box-decorations.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/span-with-overflowing-text-and-box-decorations.html"
+}
+```
+
+## style[0]
+
+```css
+
+:root {
+  font: 20px/1 Ahem;
+}
+
+span {
+  text-shadow: red -2px -5px;
+  border: 2px solid black;
+  box-shadow: 3px 3px red, -1em 0 .4em olive;
+  view-transition-name: target;
+}
+
+.hidden {
+  view-transition-name: hidden;
+}
+
+html::view-transition-group(hidden) { animation-duration: 300s; }
+html::view-transition-image-pair(hidden) { animation: unset; opacity: 0; }
+html::view-transition-group(root) { visibility: hidden; }
+
+html::view-transition-group(target) {
+  animation: unset;
+}
+
+html::view-transition-old(target) {
+  animation: unset;
+  opacity: 0;
+}
+
+html::view-transition-new(target) {
+  animation: unset;
+  opacity: 1;
+}
+
+html::view-transition {
+  background: pink;
+}
+```
+
+```json
+{
+  "errors": 11,
+  "messages": [
+    {
+      "message": "Invalid value for property “text-shadow”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

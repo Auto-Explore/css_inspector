@@ -1,0 +1,56 @@
+# css/css-anchor-position/position-area-align-justify.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/position-area-align-justify.html"
+}
+```
+
+## style[0]
+
+```css
+
+  /* A 300x300 container with a 100x100 centered anchor */
+  #container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+  }
+  #anchor {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: 100px;
+    height: 100px;
+    anchor-name: --anchor;
+  }
+  #anchored {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    inset: 10px 15px 20px 25px;
+    position-anchor: --anchor;
+  }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “inset”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

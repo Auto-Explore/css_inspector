@@ -1,0 +1,52 @@
+# css/css-grid/alignment/grid-align-content-distribution.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-align-content-distribution.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+.grid {
+    grid-auto-columns: 20px;
+    grid-auto-rows: 40px;
+    position: relative;
+    width: 200px;
+    height: 300px;
+}
+
+.stretchedGrid {
+    grid-auto-rows: auto;
+}
+
+.fourthRowFirstColumn {
+    background-color: deepskyblue;
+    grid-column: 1;
+    grid-row: 4;
+}
+
+.fourthRowSecondColumn {
+    background-color: maroon;
+    grid-column: 2;
+  	grid-row: 4;
+}
+
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

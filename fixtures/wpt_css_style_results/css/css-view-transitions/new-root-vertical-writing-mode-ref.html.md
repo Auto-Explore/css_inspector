@@ -1,0 +1,38 @@
+# css/css-view-transitions/new-root-vertical-writing-mode-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/new-root-vertical-writing-mode-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+html { writing-mode: vertical-lr; }
+.shared {
+  margin: 2px;
+  width: 90px;
+  height: 50px;
+  background: green;
+  contain: paint;
+}
+#two {
+  background: lightblue;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

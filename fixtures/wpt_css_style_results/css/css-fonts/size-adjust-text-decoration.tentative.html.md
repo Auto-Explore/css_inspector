@@ -1,0 +1,41 @@
+# css/css-fonts/size-adjust-text-decoration.tentative.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/size-adjust-text-decoration.tentative.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+  font-family: custom-font;
+  src: local(Ahem), url(/fonts/Ahem.ttf);
+  size-adjust: 50%;
+}
+
+.target {
+  margin: 20px;
+  font-size: 20px;
+  font-family: custom-font, sans-serif;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-color: black;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “size-adjust”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

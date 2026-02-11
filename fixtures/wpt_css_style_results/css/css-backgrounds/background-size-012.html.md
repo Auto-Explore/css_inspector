@@ -1,0 +1,42 @@
+# css/css-backgrounds/background-size-012.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/background-size-012.html"
+}
+```
+
+## style[0]
+
+```css
+
+        #ref-overlapped-red {
+            background-color: red;
+            height: 60px;
+            width: 60px;
+        }
+        #test-overlapping-green {
+            background-image: url(support/60x60-green.png);
+            background-repeat: no-repeat;
+            background-size: auto auto;
+            bottom: 60px;
+            height: 100px;
+            position: relative;
+            width: 200px;
+        }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

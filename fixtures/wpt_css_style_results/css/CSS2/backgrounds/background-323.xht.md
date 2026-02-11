@@ -1,0 +1,35 @@
+# css/CSS2/backgrounds/background-323.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/backgrounds/background-323.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            #div1
+            {
+                height: 200px;
+                width: 200px;
+                overflow: scroll;
+            }
+            div div
+            {
+                background: bottom scroll url("support/cat.png") repeat-x green;
+                width: 400px;
+                height: 400px;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

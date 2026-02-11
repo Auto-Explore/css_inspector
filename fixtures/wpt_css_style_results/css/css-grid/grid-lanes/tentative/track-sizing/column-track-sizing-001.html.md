@@ -1,0 +1,35 @@
+# css/css-grid/grid-lanes/tentative/track-sizing/column-track-sizing-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/track-sizing/column-track-sizing-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid-lanes {
+    display: grid-lanes;
+    flow-tolerance: 0;
+    grid-template-columns: 5% repeat(3, 10px 15%) repeat(1, 15px 5px 20px);
+    grid-template-rows: 100px 100px;
+    width: 500px;
+    gap: 10px;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “flow-tolerance”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

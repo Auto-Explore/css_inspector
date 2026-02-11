@@ -1,0 +1,44 @@
+# css/css-multicol/multicol-clip-scrolled-content-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-multicol/multicol-clip-scrolled-content-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+#columns {
+  column-width: 350px;
+}
+.spacer {
+  height: 200px;
+  width: 10px;
+}
+#outer {
+  border: 1px solid black;
+  overflow: scroll;
+  height: 300px;
+  width: 300px;
+}
+.inner {
+  overflow: scroll;
+}
+.clipped_target {
+  overflow: scroll;
+  background: red;
+  width: 50px;
+  height: 50px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

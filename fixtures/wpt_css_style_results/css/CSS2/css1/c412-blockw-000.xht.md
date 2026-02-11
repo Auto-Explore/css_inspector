@@ -1,0 +1,47 @@
+# css/CSS2/css1/c412-blockw-000.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/css1/c412-blockw-000.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+   .test { font: 10px/1 Ahem; margin: 1em; border: solid 1em; width: 100px; background: red no-repeat; color: green; }
+   .test p, .test div { margin-top: 0; margin-bottom: 0; }
+   .test.a { background-image: url(support/css1test412b-a.png); }
+   .test.b { background-image: url(support/css1test412b-b.png); }
+   .test.b p { background-color: green; }
+   p.one {margin-left: 10px;}
+   div.two {margin-left: 10px;}
+   p.three {margin-left: 0; width: 50%; margin-right: auto;}
+   p.four {margin-left: auto; width: 50%; margin-right: auto;}
+   p.five {margin-left: auto; width: 50%; margin-right: 0;}
+   p.six {margin-left: auto; width: auto; margin-right: 0;}
+   p.seven {margin-left: 0; width: auto; margin-right: auto;}
+   p.eight {margin-left: auto; width: auto; margin-right: auto;}
+   p.nine {padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0; width: 50%;}
+   p.ten {margin-left: auto; width: 100%; margin-right: auto;}
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

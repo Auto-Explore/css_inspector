@@ -1,0 +1,40 @@
+# css/css-gaps/grid/grid-gap-decorations-033.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/grid/grid-gap-decorations-033.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0px;
+    overflow: hidden;
+  }
+
+  .grid-container {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, 50px);
+    grid-template-rows: repeat(6, 50px);
+    width: 50px;
+    height: 50px;
+
+    column-rule-color: blue;
+    column-rule-style: solid;
+    column-rule-width: 10px;
+  }
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

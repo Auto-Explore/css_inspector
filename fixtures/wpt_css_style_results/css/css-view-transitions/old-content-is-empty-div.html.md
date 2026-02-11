@@ -1,0 +1,86 @@
+# css/css-view-transitions/old-content-is-empty-div.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/old-content-is-empty-div.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  contain: paint;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 50px;
+}
+#empty {
+  left: 50px;
+}
+#target {
+  left: 200px;
+  background: green;
+}
+#hidden {
+  background: red;
+}
+
+html::view-transition-group(hidden) { animation-duration: 300s; }
+html::view-transition-image-pair(hidden) { animation: unset; opacity: 0; }
+
+/* The effect of the following should be position at the outgoing element
+   but contents of the new element.
+*/
+html::view-transition-group(shared) { animation-delay: 100s; }
+html::view-transition-new(shared) { animation: unset; opacity: 1; }
+html::view-transition-old(shared) { animation: unset; opacity: 1; }
+
+html::view-transition-group(root) { animation: unset; opacity: 0; }
+html::view-transition { background: lightpink; }
+
+```
+
+```json
+{
+  "errors": 8,
+  "messages": [
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

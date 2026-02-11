@@ -1,0 +1,80 @@
+# css/css-transforms/3dtransform-and-filter-no-perspective-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/3dtransform-and-filter-no-perspective-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+body {
+  margin: 0;
+}
+
+div {
+  height: 500px;
+  width: 750px;
+  overflow: hidden;
+  position: relative;
+}
+
+span {
+  background: blue;
+  display: inline-block;
+  top: 0;
+  left: 200px;
+  position: absolute;
+  width: 293px;
+  height: 174px;
+  transform-origin: 0px -400px 0px;
+  margin-top: 300px;
+  transform: rotateZ(-20deg) rotateX(55deg);
+  filter: drop-shadow(0px 60px 40px rgba(0,0,0,0));
+}
+
+svg.cover {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 220px;
+}
+
+/*
+
+The device-to-local transform here is:
+left              margin-top        transform-origin   transform                      -transform-origin
+translateX(200px) translateY(300px) translateY(-400px) rotateZ(-20deg) rotateX(55deg) translateY(400px)
+which is equivalent to:
+matrix3d(0.939693, -0.34202, 0, 0, 0.196175, 0.538986, 0.819152, 0, -0.280166, -0.769751, 0.573576, 0, 278.47, 115.594, 327.661, 1)
+
+*/
+
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “transform-origin”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “transform”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “filter”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

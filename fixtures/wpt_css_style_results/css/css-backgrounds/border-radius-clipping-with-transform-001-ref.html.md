@@ -1,0 +1,61 @@
+# css/css-backgrounds/border-radius-clipping-with-transform-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/border-radius-clipping-with-transform-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+#outer {
+  border: 10px solid #000;
+  border-radius: 60px;
+  width: 200px;
+  height: 200px;
+  background: blue;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+#coverinner, #coverouter {
+  position: absolute;
+  border: 4px solid fuchsia;
+  filter: grayscale(30%);
+}
+
+#coverinner {
+  width: 196px;
+  height: 196px;
+  top: 18px;
+  left: 18px;
+  border-radius: 52px;
+}
+
+#coverouter {
+  width: 216px;
+  height: 216px;
+  top: 8px;
+  left: 8px;
+  border-radius: 62px;
+}
+
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “filter”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

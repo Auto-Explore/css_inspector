@@ -1,0 +1,43 @@
+# css/cssom-view/elementsFromPoint-iframes.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/cssom-view/elementsFromPoint-iframes.html"
+}
+```
+
+## style[0]
+
+```css
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+body {
+    height: 500px;
+}
+#iframe {
+    width: 200px;
+    height: 200px;
+}
+#scrollableIframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(50px, 50px);
+    width: 150px;
+    height: 150px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

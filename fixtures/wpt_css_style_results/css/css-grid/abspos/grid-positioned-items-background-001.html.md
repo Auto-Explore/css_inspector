@@ -1,0 +1,69 @@
+# css/css-grid/abspos/grid-positioned-items-background-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/abspos/grid-positioned-items-background-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+.grid {
+  grid-template-columns: 100px 200px;
+  grid-template-rows: 50px 150px;
+  width: 500px;
+  height: 300px;
+  border: 5px solid black;
+  margin: 30px;
+  padding: 15px;
+  /* Ensures that the grid container is the containing block of the absolutely positioned grid children. */
+  position: relative;
+  background-color: transparent;
+}
+
+.container {
+  position: relative;
+  float: left;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.grid > div {
+  background-color: green;
+}
+
+.lengthSize {
+  width: 50px;
+  height: 20px;
+}
+
+.percentageSize {
+  width: 50%;
+  height: 20%;
+}
+
+.offsetsSize {
+  left: 25px;
+  right: 30px;
+  top: 35px;
+  bottom: 40px;
+}
+
+.red {
+  background-color: red;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

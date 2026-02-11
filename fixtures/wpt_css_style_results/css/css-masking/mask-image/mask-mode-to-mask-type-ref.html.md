@@ -1,0 +1,66 @@
+# css/css-masking/mask-image/mask-mode-to-mask-type-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-masking/mask-image/mask-mode-to-mask-type-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+      div {
+        background-color: blue;
+        position: absolute;
+        margin: 0px;
+        padding: 0px;
+        width: 100px;
+        height: 100px;
+        top: 10px;
+      }
+
+      div.match-luminance {
+        left: 10px;
+        background-image: url(support/blue-luminance-100x100.svg);
+      }
+
+      div.match-alpha {
+        left: 120px;
+        background-image: url(support/blue-100x100.svg);
+      }
+
+      div.luminance-luminance {
+        top: 120px;
+        left: 10px;
+        background-image: url(support/blue-luminance-100x100.svg);
+      }
+
+      div.luminance-alpha {
+        top: 120px;
+        left: 120px;
+        background-image: url(support/blue-luminance-100x100.svg);
+      }
+
+      div.alpha-luminance {
+        top: 230px;
+        left: 10px;
+        background-image: url(support/blue-100x100.svg);
+      }
+
+      div.alpha-alpha {
+        top: 230px;
+        left: 120px;
+        background-image: url(support/blue-100x100.svg);
+      }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

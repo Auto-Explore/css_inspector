@@ -1,0 +1,58 @@
+# css/motion/animation/reftests/offset-path-path-interpolation-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/motion/animation/reftests/offset-path-path-interpolation-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+      @keyframes anim {
+        from { offset-path: path("m 100 100 l 100 100"); }
+        to   { offset-path: path("m 100 200 l 100 -100"); }
+      }
+      #target {
+        position: absolute;
+        left: 300px;
+        top: 0px;
+        width: 300px;
+        height: 200px;
+        background-color: lime;
+        transform-origin: 0px 0px;
+        animation: anim 10s -5s paused linear;
+      }
+    
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “offset-path”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “offset-path”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “transform-origin”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

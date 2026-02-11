@@ -1,0 +1,41 @@
+# css/css-fonts/font-size-adjust-units-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-size-adjust-units-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div {
+    margin: 10px;
+    font: 100px/1 Ahem;
+    font-size-adjust: 0.8;  /* this matches Ahem's ex-height metric */
+    background: orange;
+    width: 2ch;
+    height: 1ex;
+  }
+  #test1 {
+    background: blue;
+  }
+  #test2 {
+    background: blue;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

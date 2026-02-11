@@ -1,0 +1,55 @@
+# css/CSS2/margin-padding-clear/margin-009.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/margin-padding-clear/margin-009.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            #wrapper
+            {
+                position: relative;
+            }
+            #div1, #div2
+            {
+                border: 10px solid green;
+            }
+            #div1, #reference
+            {
+                position: absolute;
+            }
+            #div1
+            {
+                left: 0;
+                margin: 2.54cm 0.25in 144pt 12.7mm;
+                top: 0;
+            }
+            #div2
+            {
+                height: 1in;
+                margin: inherit;
+                width: 3in;
+            }
+            #reference
+            {
+                border: 10px solid red;
+                height: 404px;
+                left: 0.5in;
+                top: 1in;
+                width: 380px;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

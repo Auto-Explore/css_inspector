@@ -1,0 +1,56 @@
+# css/css-grid/grid-lanes/tentative/grid-lanes-not-inhibited-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/grid-lanes-not-inhibited-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+grid {
+  vertical-align: top;
+  display: inline-grid-lanes;
+  grid-template-columns: 60px 60px;
+  border: 2px solid black;
+}
+.overflowSet {
+  overflow: hidden;
+}
+.containSet {
+  contain: layout;
+}
+item {
+  width: 60px;
+  height: 30px;
+  background: cyan;
+}
+.tall {
+    /* This item is taller than the others, which lets us know if grid-lanes
+       layout is being applied or not. If we're using grid-lanes, then the second
+       and third items will stack in the same column.  If not, then the third
+       item will automatically fill in below this tall item. */
+    height: 60px;
+    background: tan;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

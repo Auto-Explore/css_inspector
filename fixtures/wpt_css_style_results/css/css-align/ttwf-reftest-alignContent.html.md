@@ -1,0 +1,50 @@
+# css/css-align/ttwf-reftest-alignContent.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-align/ttwf-reftest-alignContent.html"
+}
+```
+
+## style[0]
+
+```css
+
+        #main{
+            display:flex;
+            flex-flow:row wrap;
+            align-content:space-around;
+            position:relative;
+            width:70px;
+            height:170px;
+            border:1px solid #c3c3c3;
+        }
+        #main .sample{
+            position:absolute;
+            left:0;
+            top:50%;
+            z-index:-1;
+            margin:-35px 0 0;
+        }
+        #main > span{
+            display:inline-block;
+            width:70px;
+            height:70px;
+            vertical-align:middle;
+        }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “flex-flow”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

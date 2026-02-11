@@ -1,0 +1,84 @@
+# css/css-grid/alignment/grid-self-alignment-baseline-with-grid-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-self-alignment-baseline-with-grid-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+html,body {
+  color:black; background-color:white; font:16px/1 Ahem; padding:0; margin:0;
+}
+
+.grid {
+  display: grid;
+  grid: 20px repeat(4, auto) 30px / 30px repeat(4, auto) 20px;
+  place-content: start;
+  place-items: baseline start;
+  border: 1px solid;
+  text-decoration: underline blue;
+}
+
+.inner-grid {
+  display: grid;
+  grid: auto auto / auto;
+  background: lightgrey;
+  grid-column: 2;
+  grid-row: 3;
+  min-width: 10px;
+  min-height: 0;
+  border: 0 solid lightblue;
+  border-top-width: 10px;
+  border-bottom-width: 40px;
+  place-content: inherit;
+  place-items: inherit;
+  padding-bottom: 20px;
+}
+
+x {
+  min-width: 40px;
+  min-height: 10px;
+  font-size: 10em;
+  background: silver;
+}
+
+  
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “place-items”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “text-decoration”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,45 @@
+# css/css-fonts/alternates-order-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/alternates-order-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+  font-family: libertine;
+  src: url(support/fonts/LinLibertine_Re-4.7.5.woff) format("woff");
+}
+body {
+  font-family: libertine, sans-serif;
+  font-size: 800%;
+  line-height: 1.2em;
+}
+
+div { margin: 0 20px; }
+span {
+  font-feature-settings: "ss05"; /* crossed W */
+}
+
+/* tests that should NOT use the feature, due to case-sensitivity of font-feature-values names */
+#test2, #test3 { font-feature-settings: "ss05" off; }
+
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “font-feature-settings”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

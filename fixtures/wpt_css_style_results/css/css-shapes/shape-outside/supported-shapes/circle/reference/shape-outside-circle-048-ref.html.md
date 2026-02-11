@@ -1,0 +1,63 @@
+# css/css-shapes/shape-outside/supported-shapes/circle/reference/shape-outside-circle-048-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shapes/shape-outside/supported-shapes/circle/reference/shape-outside-circle-048-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    writing-mode: vertical-rl;
+    position: absolute;
+    inline-size: 200px;
+    line-height: 0;
+  }
+
+  .shape {
+    float: left;
+    /* Omit shape-outside */
+    clip-path: circle(50% at left 40px top 40px) border-box;
+    box-sizing: content-box;
+    block-size: 40px;
+    inline-size: 40px;
+    padding: 20px;
+    border: 20px solid lightgreen;
+    margin-inline-start: 20px;
+    margin-inline-start: 20px;
+    margin-block-end: 28px;
+    background-color: orange;
+  }
+
+  .box {
+    position: absolute;
+    inline-size: 60px;
+    background-color: blue;
+  }
+
+  .long {
+    inline-size: 200px;
+  }
+  
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

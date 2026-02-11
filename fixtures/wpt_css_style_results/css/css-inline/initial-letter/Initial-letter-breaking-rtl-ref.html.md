@@ -1,0 +1,57 @@
+# css/css-inline/initial-letter/Initial-letter-breaking-rtl-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-inline/initial-letter/Initial-letter-breaking-rtl-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .sample {
+        direction: rtl;
+        font-family: Ahem;
+        font-size: 20px;
+        line-height: 24px;
+        width: 230px;
+    }
+
+    .float {
+        background: cyan;
+        clear: none;
+        float: right;
+        height: 50px;
+        width: 50px;
+    }
+
+    .mc {
+        columns: 2;
+        direction: rtl;
+        height: 500px;
+        writing-mode: horizontal-tb;
+    }
+
+    .fake-initial-letter {
+        background: lime;
+        float: right;
+        height: 80px;
+        margin-top: 2px;
+        width: 80px;
+    }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

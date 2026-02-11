@@ -1,0 +1,90 @@
+# css/css-conditional/container-queries/query-content-box.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-conditional/container-queries/query-content-box.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    container-type: size;
+    border: 10px solid black;
+    padding: 40px;
+    margin: 20px;
+  }
+
+  #container1 {
+    box-sizing: content-box;
+    width: 100px;
+    height: 100px;
+  }
+
+  #container2 {
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+  }
+
+  #container3 {
+    box-sizing: content-box;
+    width: 100px;
+    height: 100px;
+    overflow: scroll;
+  }
+
+  #container4 {
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    overflow: scroll;
+  }
+
+  #container5 {
+    box-sizing: content-box;
+    width: 100px;
+    height: 100px;
+    overflow-x: scroll;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+  }
+
+  #container6 {
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    overflow-x: scroll;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+  }
+
+  @container ((width = 100px) and (height = 100px)) {
+    .target {
+      background-color: green;
+      height: 100%;
+    }
+  }
+  @container ((width < 100px) and (height < 100px)) {
+    .target {
+      background-color: blue;
+      height: 100%;
+    }
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,78 @@
+# css/css-flexbox/flex-factor-less-than-one.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flex-factor-less-than-one.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+}
+
+.child-flex-grow-0-75 {
+  background-color: lime;
+  flex-grow: 0.75;
+}
+
+.child-flex-grow-0-5 {
+  background-color: green;
+  flex-grow: 0.5;
+}
+
+.child-flex-grow-0-25 {
+  background-color: red;
+  flex-grow: 0.25;
+}
+
+.child-flex-shrink-0-5 {
+  background-color: green;
+  flex-shrink: 0.5;
+  width: 200px;
+  height: 200px;
+}
+
+.child-flex-shrink-0-25 {
+  background-color: red;
+  flex-shrink: 0.25;
+  width: 200px;
+  height: 200px;
+}
+
+.basis-0 {
+  flex-basis: 0;
+}
+
+.basis {
+  flex-basis: 30px;
+}
+
+.basis-big {
+  flex-basis: 100px;
+}
+
+.vertical {
+  writing-mode: vertical-rl;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

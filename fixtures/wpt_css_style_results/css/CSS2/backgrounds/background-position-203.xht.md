@@ -1,0 +1,103 @@
+# css/CSS2/backgrounds/background-position-203.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/backgrounds/background-position-203.xht"
+}
+```
+
+## style[0]
+
+```css
+
+   .case { float: left; border: solid; margin: 0.2em; background: #FFFFCC; } /* 150 x 100 */
+   .test { padding: 16px; background: red; }
+   .negative .test { background: url(support/ring.png) no-repeat; }
+   .control { width: 118px; height: 68px; }
+
+   .a .control, .b .control, .c .control, .d .control, .e .control, .f .control { background: url(support/diamond.png) no-repeat 100% 100%; }
+   .case.a .test { background: url(support/ring.png) no-repeat right bottom; }
+   .case.b .test { background: url(support/ring.png) no-repeat bottom right; }
+   .case.c .test { background: url(support/ring.png) no-repeat 100% bottom; }
+   .case.d .test { background: url(support/ring.png) no-repeat right 100%; }
+   .case.e .test { background: url(support/ring.png) no-repeat 100% 58px; }
+   .case.f .test { background: url(support/ring.png) no-repeat 108px 100%; }
+
+   .g .control, .h .control, .i .control, .j .control, .k .control, .l .control, .m .control { background: url(support/diamond.png) no-repeat 54px 28px; }
+   .case.g .test { background: url(support/ring.png) no-repeat center center; }
+   .case.h .test { background: url(support/ring.png) no-repeat 50% 50%; }
+   .case.i .test { background: url(support/ring.png) no-repeat center 50%; }
+   .case.j .test { background: url(support/ring.png) no-repeat 50% center; }
+   .case.k .test { background: url(support/ring.png) no-repeat 50%; }
+   .case.l .test { background: url(support/ring.png) no-repeat center; }
+   .case.m .test { background: url(support/ring.png) no-repeat 54px; }
+
+   .n .control, .o .control { background: url(support/diamond.png) no-repeat 54px 56px; }
+   .case.n .test { background: url(support/ring.png) no-repeat bottom center; }
+   .case.o .test { background: url(support/ring.png) no-repeat center bottom; }
+
+   .p .control, .q .control { background: url(support/diamond.png) no-repeat 108px 28px; }
+   .case.p .test { background: url(support/ring.png) no-repeat right center; }
+   .case.q .test { background: url(support/ring.png) no-repeat center right; }
+
+   .r .control { background: url(support/diamond.png) no-repeat top right; }
+   .case.r0 .test { background: url(support/ring.png) no-repeat right top; }
+   .case.r1 .test { background: url(support/ring.png) no-repeat right 0; }
+   .case.r2 .test { background: url(support/ring.png) no-repeat right 0px; }
+   .case.r3 .test { background: url(support/ring.png) no-repeat right 0%; }
+   .case.r4 .test { background: url(support/ring.png) no-repeat 100% top; }
+   .case.r5 .test { background: url(support/ring.png) no-repeat 100% 0; }
+   .case.r6 .test { background: url(support/ring.png) no-repeat 100% 0px; }
+   .case.r7 .test { background: url(support/ring.png) no-repeat 100% 0%; }
+   .case.r8 .test { background: url(support/ring.png) no-repeat 108px top; }
+   .case.r9 .test { background: url(support/ring.png) no-repeat 108px 0; }
+   .case.r10 .test { background: url(support/ring.png) no-repeat 108px 0px; }
+   .case.r11 .test { background: url(support/ring.png) no-repeat 108px 0%; }
+
+   .negative .control { background: url(support/diamond.png) no-repeat 0% 0%; }
+   .case.t1 .test { background: red right bottom bottom; }
+   .case.t2 .test { background: red bottom right bottom; }
+   .case.t3 .test { background: red bottom 100%; }
+   .case.t4 .test { background: red 100% right; }
+   .case.t5 .test { background: red bottom 8px; }
+   .case.t6 .test { background: red 23px right; }
+   .case.t7 .test { background: red center 50% center; }
+   .case.t8 .test { background: red 50% 50% 50%; }
+   .case.t9 .test { background: red center 50% 50%; }
+   .case.t10 .test { background: red 50%, center; }
+   .case.t11 .test { background: red bottom 54px; }
+   .case.t12 .test { background: red 50 50%; }
+   .case.t13 .test { background: red bottom 100; }
+   .case.t14 .test { background: red rightbottom; }
+   .case.t15 .test { background: red 0 right; }
+   .case.t16 .test { background: red 0px right; }
+   .case.t17 .test { background: red 0% right; }
+   .case.t18 .test { background: red top 100%; }
+   .case.t19 .test { background: red top 108px; }
+   .case.t20 .test { background: red top top; }
+   .case.t21 .test { background: red left right; }
+   .case.t22 .test { background: red left left; }
+  
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

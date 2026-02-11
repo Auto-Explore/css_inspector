@@ -1,0 +1,32 @@
+# css/css-values/negative-calc-to-non-negative-integer-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-values/negative-calc-to-non-negative-integer-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+@counter-style foo {
+  system: additive;
+  additive-symbols: 1 'I', 0 'X';
+  range: infinite infinite;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

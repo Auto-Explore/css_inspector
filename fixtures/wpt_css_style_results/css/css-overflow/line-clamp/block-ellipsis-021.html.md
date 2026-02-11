@@ -1,0 +1,50 @@
+# css/css-overflow/line-clamp/block-ellipsis-021.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/line-clamp/block-ellipsis-021.html"
+}
+```
+
+## style[0]
+
+```css
+
+.relative {
+  position: relative;
+  font: 25px/25px Ahem;
+}
+.bg, .clamp {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.bg {
+  height: 100px;
+  width: 100px;
+  color: red;
+  background-color: green;
+}
+.clamp {
+  line-clamp: 3;
+  color: green;
+  max-width: 100px;
+}
+.child::first-letter, .red {
+  color: red;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “line-clamp”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

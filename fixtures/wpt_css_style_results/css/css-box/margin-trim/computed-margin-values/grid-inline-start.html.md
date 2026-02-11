@@ -1,0 +1,77 @@
+# css/css-box/margin-trim/computed-margin-values/grid-inline-start.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-box/margin-trim/computed-margin-values/grid-inline-start.html"
+}
+```
+
+## style[0]
+
+```css
+
+grid {
+    display: grid;
+    width: min-content;
+    outline: 1px solid black;
+    grid-template-columns: repeat(2, auto);
+    margin-trim: inline-start;
+}
+item {
+    display: block;
+    width: 50px;
+    height: 50px;
+}
+.locked-position {
+    grid-row: 3;
+    grid-column: 1;
+    margin-inline-start: -30px;
+}
+item:nth-child(1) {
+    background-color: green;
+    margin-inline-start: 30px;
+}
+item:nth-child(2) {
+    background-color: blue;
+    margin-inline-start: 10px;
+}
+item:nth-child(3) {
+    background-color: orchid;
+    margin-inline-start: 10%;
+}
+item:nth-child(4) {
+    background-color: maroon;
+}
+item:nth-child(5) {
+    background-color: salmon;
+    width: auto;
+    grid-column: span 2;
+    margin-inline-start: 10px;
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Unknown property “margin-trim”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

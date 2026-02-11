@@ -1,0 +1,51 @@
+# css/css-masking/clip-path/animations/clip-path-animation-inherit.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-masking/clip-path/animations/clip-path-animation-inherit.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    animation: clippath 20s steps(2, jump-end) -9.999s;
+  }
+
+  body {
+    clip-path: circle(50% at 0 0);
+  }
+
+  @keyframes clippath {
+    0% {
+      clip-path: circle(20px at 20px 20px);
+    }
+
+    100% {
+      clip-path: inherit;
+    }
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

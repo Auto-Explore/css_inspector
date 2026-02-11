@@ -1,0 +1,46 @@
+# css/css-position/static-position/vrl-rtl-rtl.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-position/static-position/vrl-rtl-rtl.html"
+}
+```
+
+## style[0]
+
+```css
+
+body { writing-mode: vertical-rl; }
+.container {
+  position: relative;
+  background: green;
+  color: green;
+  font: 16px/1 Ahem;
+  border: solid black 3px;
+  height: 400px;
+  margin: 0 16px;
+  padding: 2px;
+}
+.red { color: red; }
+.cb {
+  position: relative;
+  inset-block-start: 2px;
+  inset-inline-start: 2px;
+}
+.rtl { direction: rtl; }
+.ltr { direction: ltr; }
+.inline { display: inline; }
+.abs { position: absolute; }
+
+.indent { text-indent: 20px; }
+* { text-indent: initial; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

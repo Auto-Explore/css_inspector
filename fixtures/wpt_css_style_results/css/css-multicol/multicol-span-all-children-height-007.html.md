@@ -1,0 +1,66 @@
+# css/css-multicol/multicol-span-all-children-height-007.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-multicol/multicol-span-all-children-height-007.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .outer {
+    column-count: 2;
+    column-rule: 6px solid black;
+    width: 400px;
+    height: 110px;
+  }
+  .inner {
+    column-count: 2;
+    column-rule: 3px solid green;
+    height: 270px;
+    background-color: lightgreen;
+    border: 10px solid purple;
+  }
+  .block1 {
+    background-color: yellow;
+    height: 200px;
+  }
+  .spanner {
+    column-span: all;
+    height: 50px;
+    background-color: lightblue;
+  }
+  .block2 {
+    background-color: yellow;
+    height: 240px;
+  }
+  
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “column-rule”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “column-rule”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

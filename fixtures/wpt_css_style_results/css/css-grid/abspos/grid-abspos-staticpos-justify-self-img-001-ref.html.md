@@ -1,0 +1,54 @@
+# css/css-grid/abspos/grid-abspos-staticpos-justify-self-img-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/abspos/grid-abspos-staticpos-justify-self-img-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .container {
+      display: block;
+      padding: 2px 1px;
+      border: 1px solid black;
+      background: yellow;
+      margin-bottom: 5px;
+      margin-right: 5px;
+      float: left; /* For testing in "rows" of containers */
+    }
+    br { clear: both }
+
+    .big > .container {
+      width: 40px;
+      height: 22px;
+    }
+    .small > .container {
+      width: 2px;
+      height: 4px;
+      margin-bottom: 20px; /* to reduce overlap between overflowing images */
+    }
+
+    .container > * {
+      margin-top: 3px;
+      display: block;
+    }
+    .big   .alignStart  { margin-left:  2px; }
+    .big   .alignCenter { margin-left: 13px; }
+    .big   .alignEnd    { margin-left: 24px; }
+    .small .alignStart  { margin-left:  0px; }
+    .small .alignCenter { margin-left: -3px; }
+    .small .alignEnd    { margin-left: -6px; }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,56 @@
+# css/filter-effects/remove-filter-repaint.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/filter-effects/remove-filter-repaint.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100px;
+      width: 100px;
+      background-color: silver;
+    }
+    .overlay {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      width: 400px;
+      height: 100px;
+      background: gray;
+      box-shadow: 0 0 4px black;
+    }
+    .play {
+      font-size: 36pt;
+      background-color: navy;
+      color: white;
+    }
+    .play.changed {
+      filter: drop-shadow(black 0 0 5px);
+    }
+    .composited {
+      will-change: transform;
+    }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “filter”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

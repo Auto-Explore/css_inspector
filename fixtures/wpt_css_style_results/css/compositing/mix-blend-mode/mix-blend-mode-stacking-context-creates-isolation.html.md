@@ -1,0 +1,44 @@
+# css/compositing/mix-blend-mode/mix-blend-mode-stacking-context-creates-isolation.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/compositing/mix-blend-mode/mix-blend-mode-stacking-context-creates-isolation.html"
+}
+```
+
+## style[0]
+
+```css
+
+            .container{
+                margin: 30px;
+                width: 130px;
+                height: 130px;
+                float: left;
+                background: yellow;/*rgb(255,255,0);*/
+            }
+            .simple{
+                background: lime;/* rgb(0,255,0);*/
+                width: 100px;
+                height: 100px;
+                position: fixed;
+            }
+            .mixed {
+                background: red;/*rgb(255,0,0);*/
+                margin-top: 20px;
+                margin-left: 20px;
+                width: 100px;
+                height: 100px;
+                mix-blend-mode: multiply;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

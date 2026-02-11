@@ -1,0 +1,50 @@
+# css/css-text-decor/text-decoration-thickness-scroll-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text-decor/text-decoration-thickness-scroll-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+        #box{
+            font: 20px/1 Ahem;
+            border: black solid;
+            overflow-y: auto;
+            height: 5em;
+            width: 7em;
+            background-color: red;
+        }
+        /*
+         * Testing to make sure that increasing the width of
+         * of the text decoration does not create scrollable
+         * overflow
+         */
+        #text{
+            position: relative;
+            bottom: 1em;
+            color: transparent;
+            text-decoration: green underline;
+            text-decoration-skip-ink: none;
+            text-decoration-thickness: 8em;
+            text-underline-position: from-font;
+        }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “text-decoration”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

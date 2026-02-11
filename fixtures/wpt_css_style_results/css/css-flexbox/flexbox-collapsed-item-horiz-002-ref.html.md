@@ -1,0 +1,57 @@
+# css/css-flexbox/flexbox-collapsed-item-horiz-002-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flexbox-collapsed-item-horiz-002-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .flexContainer {
+      display: flex;
+      flex-wrap: wrap;
+
+      /* These let us show where each flex line begins (and hence, how tall
+         the flex lines end up) */
+      align-content: flex-start;
+      align-items: flex-start;
+
+      width: 30px;
+      background: yellow;
+      border: 1px dotted black;
+      float: left;
+      margin: 5px;
+    }
+    .collapsedItem {
+      width: 0;
+      height: 25px;
+    }
+    .halfWidthItem {
+      width: 15px;
+      height: 15px;
+      background: teal;
+    }
+    .fullWidthItem {
+      width: 30px;
+      height: 20px;
+      background: purple;
+    }
+    .veryTallItem {
+      width: 15px;
+      height: 40px;
+      background: olive;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

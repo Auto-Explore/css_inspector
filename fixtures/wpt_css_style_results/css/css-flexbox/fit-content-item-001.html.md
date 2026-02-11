@@ -1,0 +1,47 @@
+# css/css-flexbox/fit-content-item-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/fit-content-item-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+x-flexbox {
+  display: flex;
+  flex-direction: column;
+}
+
+x-item {
+  display: block;
+  background: red;
+  /* Override default alignment of "stretch" because items don't shrink to fit
+     when they are stretched. */
+  align-self: start;
+}
+
+#mainSizeDependsOnCrossSize {
+  padding-bottom: 50%;
+  background: green;
+}
+
+#widthSetter {
+  width: 100px;
+  height: 50px;
+  background: green;
+}
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,44 @@
+# css/css-tables/box-shadow-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-tables/box-shadow-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+table {
+  border-collapse: collapse;
+}
+
+/* Make the green box-shadow start at the inner edge of the border to cover up all the red.
+   Chrome's bug made the box-shadow start further toward the center. */
+td {
+  border: 20px solid green;
+  box-shadow: inset 60px 0px green;
+  /* The properties after the blank line aren't the focus of the test. */
+
+  background: red;
+  line-height: 0px;
+  padding: 0px;
+}
+
+td > span {
+  display: inline-block; /* chrome only hits this bug when the td children are inline */
+
+  height: 60px;
+  width: 60px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

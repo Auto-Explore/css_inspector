@@ -1,0 +1,73 @@
+# css/css-images/object-position-svg-002e.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-images/object-position-svg-002e.html"
+}
+```
+
+## style[0]
+
+```css
+
+      embed {
+        background: lightgray;
+        margin-right: 2px;
+        object-fit: contain;
+        float: left;
+        width: 20px;
+        height: 20px;
+      }
+
+      .op_x-7  { object-position: -7%  50% }
+      .op_x13  { object-position: 13%  50% }
+      .op_x23  { object-position: 23%  50% }
+      .op_x50  { object-position: 50%  50% }
+      .op_x75  { object-position: 75%  50% }
+      .op_x88  { object-position: 88%  50% }
+      .op_x111 { object-position: 111% 50% }
+
+    
+```
+
+```json
+{
+  "errors": 8,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “object-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “object-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “object-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “object-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “object-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “object-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “object-position”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

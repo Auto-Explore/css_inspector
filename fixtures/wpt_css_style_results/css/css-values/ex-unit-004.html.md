@@ -1,0 +1,40 @@
+# css/css-values/ex-unit-004.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-values/ex-unit-004.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+  font-family: ExTestNoSpace;
+  src: url(resources/ExTest-NoSpace.woff);
+  unicode-range: U+0021-00FF;
+}
+div {
+  height: 10px;
+  background-color: blue;
+  margin-top: 10px;
+  font-size: 80px;
+  width: 10ex;
+}
+.test {
+  font-family: ExTestNoSpace, Arial, sans-serif;
+}
+.ref {
+  font-family: Arial, sans-serif;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

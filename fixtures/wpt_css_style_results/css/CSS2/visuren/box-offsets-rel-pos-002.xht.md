@@ -1,0 +1,54 @@
+# css/CSS2/visuren/box-offsets-rel-pos-002.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/visuren/box-offsets-rel-pos-002.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  img
+  {
+  position: relative;
+  vertical-align: bottom;
+  /* so that images do not "sit" on the
+  baseline but at bottom of line box */
+  }
+
+  img.moves-toward-left {right: 100px;}
+
+  img.moves-toward-top {bottom: 100px;}
+
+  img.moves-toward-right {left: 100px;}
+
+  img.moves-toward-bottom {top: 100px;}
+
+  /*
+  In this testcase, 7 red 100px wide by 100px squares overlap
+  another red 100px wide by 100px square (placed in the center of
+  a 3 by 3 grid of squares) and then, at the end, one single
+  green 100px wide by 100px square overlaps all 8 other red boxes.
+  */
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

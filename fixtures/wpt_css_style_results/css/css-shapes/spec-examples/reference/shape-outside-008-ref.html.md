@@ -1,0 +1,91 @@
+# css/css-shapes/spec-examples/reference/shape-outside-008-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shapes/spec-examples/reference/shape-outside-008-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+        #container {
+          position: absolute;
+          top: 70px;
+          width: 262px;
+          height: 150px;
+          border: 1px solid black;
+        }
+        #failure-container {
+
+        }
+        #margin-line {
+            position: absolute;
+            top: 100px;
+            width: 263px;
+            border-bottom: 1px solid black;
+        }
+        .fail {
+            position: absolute;
+            height: 15px;
+            background-color: green;
+            z-index: -1;
+        }
+        #bar-1 {
+            top: 7px;
+            left: 2px;
+            width: 255px;
+        }
+        #bar-2 {
+            top: 37px;
+            left: 2px;
+            width: 255px;
+        }
+        #bar-3 {
+            top: 67px;
+            left: 22px;
+            width: 225px;
+        }
+        #bar-4 {
+            top: 97px;
+            left: 122px;
+            width: 135px;
+        }
+        #bar-5 {
+            top: 127px;
+            left: 152px;
+            width: 105px;
+        }
+       .triangle {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            clip-path: polygon(0% 50%, 50% 100%, 0 100%);;
+
+        }
+        #triangle-1 {
+            top: 90px;
+            margin-left: 2px;
+        }
+        #triangle-2 {
+            top: 120px;
+            margin-left: 102px;
+        }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,46 @@
+# css/css-fonts/font-variant-04.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-variant-04.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @font-face {
+    font-family: fwf;
+    src: url(support/fonts/FontWithFancyFeatures.otf);
+  }
+  .test {
+	  font-family: fwf;
+	  font-size: 2.4em;
+	  line-height: 1.1;
+    color: purple;
+  }
+  .inner {
+	  font-variant: none;
+  }
+  .outer {
+    font-feature-settings: "liga" on, "clig" on, "calt" on, "hlig" on, "dlig" on, "onum" on, "smcp" on, "jp90" on;
+  }
+  .child {
+    color: green;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “font-feature-settings”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

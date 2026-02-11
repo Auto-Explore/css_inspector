@@ -1,0 +1,89 @@
+# css/css-anchor-position/anchor-center-visibility-change.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-center-visibility-change.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container {
+  width: 100px;
+  height: 100px;
+  border: solid 3px;
+  position: relative;
+  margin: 50px;
+}
+
+.anchor {
+  anchor-name: --anchor;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  left: 40px;
+  top: 5px;
+  background: lime;
+}
+
+.target {
+  position-anchor: --anchor;
+  position: absolute;
+}
+
+.target-inner {
+  width: 30px;
+  height: 20px;
+}
+
+#target-1 {
+  justify-self: anchor-center;
+  background: cyan;
+  display: none;
+}
+
+#target-2 {
+  align-self: anchor-center;
+  background: blue;
+  visibility: hidden;
+}
+
+#target-3 {
+  align-self: anchor-center;
+  justify-self: anchor-center;
+  background: magenta;
+
+  /* Override default popover style */
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

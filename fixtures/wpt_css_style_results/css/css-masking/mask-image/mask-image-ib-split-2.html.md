@@ -1,0 +1,65 @@
+# css/css-masking/mask-image/mask-image-ib-split-2.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-masking/mask-image/mask-image-ib-split-2.html"
+}
+```
+
+## style[0]
+
+```css
+
+  columns {
+    display: block;
+    columns: 5;
+    column-fill: auto;
+    column-gap: 10px;
+    height: 30px;
+    background: pink;
+  }
+  div { background: grey; height: 50px; }
+  x {
+    background: grey;
+    mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAABqklEQVRYhdXZMa6DMAwAUCOxcQAEF0BIzgG6MTEiJcfhItys1yhrl/oP8AvFScP/BJJUYmlR8mo7BgKAgw9JHEiJkRQ+Pw8xksTBxRzHYBJfJPFFStDXYznvGjhJHHbB9sHdg6cI4tMJco2dxnQDJol3OxB7kuJGqi6ozTNq84xUXUzfYb8juveDSPH4imvzjAAS6zgAyYT/gpbi4RiJPTWQ/mtQAKAGUiP4r1gjsqvKPRG0jg+QUFeVh7Ak8e46isa5TNG11ay+/WDvIorGOQEShrW1r/lq8vnvTogkm7eBVJPFp/5kXTS7qjwb+Z5/W7OmqF6dcja/oQS2yMFHyhlWVwLrqJIS4zaaVyMXC+sC4/LjNu1tnnmDtnlmTD+DXlibDAqQaKG8Pv2l/fejWVQDr08pbt6hUtxYnfImXxfeoaouWPNnUI8L6Q3dLqi4oeGmPpbFFEt7Aoik4WuhwV5CI7opieM2b8aGf+M8Q+N4FAGI5OEOIKLH5Rkb/gbEgo1gS8eKDWmTzI6dwSFsOy7YCDZyV9jwt8YZOOSXDVpwyK9vrPATX4j9ALzDM3y+40zWAAAAAElFTkSuQmCC);
+  }
+  .end { mask-position:100% 100%; mask-repeat: no-repeat; }
+```
+
+```json
+{
+  "errors": 7,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Missing ':' in declaration.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-repeat”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

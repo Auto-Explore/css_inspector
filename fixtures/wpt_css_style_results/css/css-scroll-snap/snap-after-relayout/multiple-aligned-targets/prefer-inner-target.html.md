@@ -1,0 +1,111 @@
+# css/css-scroll-snap/snap-after-relayout/multiple-aligned-targets/prefer-inner-target.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-snap/snap-after-relayout/multiple-aligned-targets/prefer-inner-target.html"
+}
+```
+
+## style[0]
+
+```css
+
+      .scroller {
+        overflow: scroll;
+        position: relative;
+        height: 400px;
+        width: 400px;
+        border:solid 1px black;
+        scroll-snap-type: y mandatory;
+      }
+      .no-snap { scroll-snap-align: none }
+      .scroller div:focus {
+        border: solid 1px red;
+      }
+      .large-space {
+        height: 300vh;
+        width: 300vw;
+        position: absolute;
+      }
+      .target {
+        scroll-snap-align: start;
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        border: solid 1px black;
+      }
+      .top {
+        top: 0px;
+      }
+      .left {
+        left: 0px;
+      }
+      .right {
+        left: 200px;
+      }
+      .bottom {
+        top: 200px;
+      }
+      .inner {
+        text-align: right;
+      }
+      .inner1 {
+        height: 150px;
+        width: 150px;
+        top: 150px;
+        left: 100px;
+        background-color: blue;
+      }
+      .inner2 {
+        height: 100px;
+        width: 100px;
+        top: 150px;
+        left: 100px;
+        background-color: pink;
+      }
+      .inner3 {
+        height: 75px;
+        width: 75px;
+        top: 150px;
+        left: 100px;
+        background-color: green;
+      }
+      .inner4 {
+        height: 50px;
+        width: 50px;
+        top: 150px;
+        left: 100px;
+        background-color: grey;
+      }
+      .outer {
+        height: 200px;
+        width: 200px;
+        top: 150px;
+        left: 50px;
+        left: 50px;
+        background-color: yellow;
+      }
+    
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,87 @@
+# css/css-grid/grid-definition/fr-unit-with-percentage.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-definition/fr-unit-with-percentage.html"
+}
+```
+
+## style[0]
+
+```css
+
+    #container {
+      position:relative;
+      width:400px;
+      height:100px;
+    }
+
+    #grid {
+      display:grid;
+      grid-template-columns:1fr 75%;
+      grid-template-rows:1fr 70%;
+      width:100%;
+      height:100%;
+    }
+
+    #cell1 {
+      grid-column:1;
+      grid-row:1;
+    }
+
+    #cell2 {
+      grid-column:2;
+      grid-row:1;
+    }
+
+    #cell3 {
+      grid-column:1;
+      grid-row:2;
+      height:100%;
+    }
+
+    #cell4 {
+      grid-column:2;
+      grid-row:2;
+      background-color:green;
+      height:100%;
+    }
+
+    .error {
+      position:absolute;
+      top:0;
+      left:0;
+      height:100%;
+      width:100%;
+      z-index:-1;
+    }
+
+    #table {
+      width:100%;
+      height:100%;
+      border-collapse:collapse;
+    }
+
+    #table td {
+      padding:0;
+      vertical-align:top;
+    }
+
+    #table td:first-child {
+      width:100px;
+    }
+
+    #table tr:first-child td {
+      height:30px;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

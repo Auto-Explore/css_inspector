@@ -1,0 +1,169 @@
+# css/css-view-transitions/sibling-frames-transition.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/sibling-frames-transition.html"
+}
+```
+
+## style[0]
+
+```css
+
+#first {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50vw;
+  height: 50vh;
+  view-transition-name: first;
+}
+
+#second {
+  position: fixed;
+  top: 50vh;
+  left: 0;
+  width: 50vw;
+  height: 50vh;
+  view-transition-name: second;
+}
+
+/* The main frame is showing the old screenshot for the root*/
+::view-transition-group(root) {
+  animation-duration: 300s;
+}
+::view-transition-new(root) {
+  animation: unset;
+  opacity: 0;
+}
+::view-transition-old(root) {
+  animation: unset;
+  opacity: 1;
+}
+
+/* For the iframes, show the new screenshot */
+::view-transition-new(first), ::view-transition-new(second) {
+  animation: unset;
+  opacity: 1;
+}
+::view-transition-old(first), ::view-transition-old(second) {
+  animation: unset;
+  opacity: 0;
+}
+```
+
+```json
+{
+  "errors": 7,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[1]
+
+```css
+
+  /* The iframe is showing new live DOM */
+  ::view-transition-group(root) {
+    animation-duration: 300s;
+  }
+  ::view-transition-new(root) {
+    animation: unset;
+    opacity: 1;
+  }
+  ::view-transition-old(root) {
+    animation: unset;
+    opacity: 0;
+  }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[2]
+
+```css
+
+  /* The iframe is showing old DOM */
+  ::view-transition-group(root) {
+    animation-duration: 300s;
+  }
+  ::view-transition-new(root) {
+    animation: unset;
+    opacity: 0;
+  }
+  ::view-transition-old(root) {
+    animation: unset;
+    opacity: 1;
+  }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

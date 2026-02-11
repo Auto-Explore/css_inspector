@@ -1,0 +1,46 @@
+# css/css-contain/contain-paint-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-contain/contain-paint-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  width: 100px;
+  height: 100px;
+  background: blue;
+  padding: 50px;
+  border-radius: 100px;
+  contain: paint;
+}
+div::before {
+ content:"";
+ display: block;
+ background: green;
+ width: 100px;
+ height: 100px;
+}
+div::after {
+  content:"";
+  display: block;
+  background: red;
+  width: 50px;
+  height: 50px;
+  margin-top: 38px;
+  margin-left: -50px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

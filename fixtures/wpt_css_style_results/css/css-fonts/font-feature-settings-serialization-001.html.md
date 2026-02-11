@@ -1,0 +1,44 @@
+# css/css-fonts/font-feature-settings-serialization-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-feature-settings-serialization-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+    #test {
+        font-feature-settings: "vert" 1;
+    }
+    #test1 {
+        font-feature-settings: 'vert' 1;
+    }
+    #test2 {
+        font-feature-settings: "vert" off;
+    }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “font-feature-settings”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-feature-settings”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-feature-settings”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

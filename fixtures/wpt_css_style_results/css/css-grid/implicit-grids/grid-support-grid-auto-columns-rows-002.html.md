@@ -1,0 +1,88 @@
+# css/css-grid/implicit-grids/grid-support-grid-auto-columns-rows-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/implicit-grids/grid-support-grid-auto-columns-rows-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+    #grid {
+        display: grid;
+        grid-auto-columns: 25px 50px;
+        grid-auto-rows: 40px 30px;
+    }
+
+    #first-column-first-row {
+        grid-column: 1;
+        grid-row: 1;
+        background-color: purple;
+    }
+
+    #second-column-first-row {
+        grid-column: 2;
+        grid-row: 1;
+        background-color: orange;
+    }
+
+    #first-column-second-row {
+        grid-column: 1;
+        grid-row: 2;
+        background-color: green;
+    }
+
+    #second-column-second-row {
+        grid-column: 2;
+        grid-row: 2;
+        background-color: pink;
+    }
+
+    #first-and-second-column-third-row {
+        grid-column: 1 / span 2;
+        grid-row: 3;
+        background-color: silver;
+    }
+
+    #third-column-all-rows {
+        grid-column: 3;
+        grid-row: 1 / span 3;
+        background-color: blue;
+    }
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-auto-columns”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-auto-rows”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,35 @@
+# css/css-grid/grid-lanes/tentative/track-sizing/auto-repeat/row-auto-repeat-004.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/track-sizing/auto-repeat/row-auto-repeat-004.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid-lanes {
+    display: inline-grid-lanes;
+    background: green;
+    aspect-ratio: 1/1;
+    grid-lanes-direction: row;
+    grid-template-rows: repeat(auto-fill, 50px);
+    min-height: 60%;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “grid-lanes-direction”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,42 @@
+# css/css-box/margin-trim/block-container-replaced-block-start.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-box/margin-trim/block-container-replaced-block-start.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container {
+   width: min-content;
+   margin-trim: block-start;
+}
+.outer {
+    background-color: green;
+    width: 100px;
+    height: 40px;
+}
+.child {
+    display: block;
+    margin-top: 50px;
+    background-color: green;
+    padding-right: 40px;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “margin-trim”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

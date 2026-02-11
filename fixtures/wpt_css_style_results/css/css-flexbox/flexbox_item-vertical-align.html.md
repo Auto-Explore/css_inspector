@@ -1,0 +1,40 @@
+# css/css-flexbox/flexbox_item-vertical-align.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flexbox_item-vertical-align.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+	background: yellow;
+	border: 1px solid black;
+	width: 600px;
+
+	display: flex;
+}
+p {
+	background: #3366cc;
+	margin: 2em;
+	width: 2em;
+	height: 2em;
+}
+#one {vertical-align: bottom;}
+#two {vertical-align: top;}
+#three {vertical-align: middle;}
+#four {vertical-align: super;}
+#five {vertical-align: sub;}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

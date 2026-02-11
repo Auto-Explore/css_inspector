@@ -1,0 +1,36 @@
+# css/CSS2/visudet/inline-block-baseline-015.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/visudet/inline-block-baseline-015.html"
+}
+```
+
+## style[0]
+
+```css
+
+.wrapper {
+  width: 200px;
+  background: red;
+  line-height: 0;
+  font-size: 0;
+}
+.green {
+  width: 100px;
+  height: 200px;
+  background: green;
+}
+.inline-block {
+  display: inline-block;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,43 @@
+# css/css-multicol/fixed-in-multicol-with-transform-container.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-multicol/fixed-in-multicol-with-transform-container.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .multicol {
+    column-count: 2;
+    column-fill: auto;
+    column-gap: 0px;
+    height: 100px;
+    width: 100px;
+    margin-left: -350px;
+    margin-top: -200px;
+  }
+  .rel {
+    position: relative;
+  }
+  .abs {
+    position: absolute;
+  }
+  .fixed {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    background: green;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

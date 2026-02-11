@@ -1,0 +1,57 @@
+# css/css-anchor-position/anchor-position-writing-modes-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-position-writing-modes-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+.htb-ltr { writing-mode: horizontal-tb; direction: ltr; }
+.htb-rtl { writing-mode: horizontal-tb; direction: rtl; }
+.vlr-ltr { writing-mode: vertical-lr; direction: ltr; }
+.vlr-rtl { writing-mode: vertical-lr; direction: rtl; }
+.vrl-ltr { writing-mode: vertical-rl; direction: ltr; }
+.vrl-rtl { writing-mode: vertical-rl; direction: rtl; }
+.relpos {
+  position: relative;
+  outline: blue 1px solid;
+}
+.spacer {
+  width: 10px;
+  height: 10px;
+  background: yellow;
+}
+.anchor {
+  anchor-name: --a1;
+  margin: 5px;
+  width: 30px;
+  height: 30px;
+  background: orange;
+}
+.target {
+  position: absolute;
+  outline: 5px solid lime;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

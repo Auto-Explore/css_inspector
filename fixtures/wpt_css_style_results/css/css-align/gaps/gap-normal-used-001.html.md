@@ -1,0 +1,42 @@
+# css/css-align/gaps/gap-normal-used-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-align/gaps/gap-normal-used-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+#grid {
+  colum-gap: normal;
+  row-gap: normal;
+  display: grid;
+  grid-template-columns: 50px 50px;
+  grid-template-rows: 50px 50px;
+
+  position: absolute;
+}
+#grid * { background: green; }
+#red {
+  width: 100px;
+  height: 100px;
+  background: red;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “colum-gap”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

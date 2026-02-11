@@ -1,0 +1,71 @@
+# css/css-animations/flip-running-animation-via-variable.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-animations/flip-running-animation-via-variable.html"
+}
+```
+
+## style[0]
+
+```css
+
+@keyframes spin {
+  0%   { transform: scaleX(var(--scale)) rotate(0deg); }
+  100% { transform: scaleX(var(--scale)) rotate(180deg); }
+}
+
+html {
+  --scale:  1;
+}
+
+html.tweaked {
+  --scale:  -1;
+}
+
+#container {
+  display: inline-block;
+  margin-left:  150px;
+  padding:  0;
+  /* Force animation to be effectively frozen at 50% progress. */
+  animation: spin 1000000s cubic-bezier(0, 1, 1, 0)  -500000s;
+}
+
+#block-1 {
+  background: blue;
+  height: 200px;
+  width:  100px;
+}
+
+#block-2 {
+  background: green;
+  height: 100px;
+  width: 100px;
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “transform”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “transform”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

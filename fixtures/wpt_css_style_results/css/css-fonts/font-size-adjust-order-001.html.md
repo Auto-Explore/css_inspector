@@ -1,0 +1,45 @@
+# css/css-fonts/font-size-adjust-order-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-size-adjust-order-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div {
+    margin: 10px;
+    font: 20px monospace;
+    background: yellow;
+  }
+  #bg {
+    width: 12ch;
+    height: 2em;
+    background: red;
+    position: absolute;
+    z-index: -1;
+  }
+  #test1 {
+    /* Size the font by its ex-height; this will enlarge the glyphs
+       so the red background block is hidden. */
+    font-size-adjust: 1.0;
+    width: 10ch;
+  }
+  #test2 {
+    /* This should work exactly the same. */
+    width: 10ch;
+    font-size-adjust: 1.0;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

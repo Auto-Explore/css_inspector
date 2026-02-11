@@ -1,0 +1,59 @@
+# css/css-grid/alignment/grid-self-baseline-not-applied-if-sizing-cyclic-dependency-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-self-baseline-not-applied-if-sizing-cyclic-dependency-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+  position: relative;
+  display: inline-grid;
+  background: grey;
+  text-orientation: sideways;
+  font: 15px/1 Ahem;
+}
+.row { grid: minmax(0px, 1fr) / auto 50px 100px }
+.column { grid: auto 50px 100px / minmax(0px, 1fr); }
+.item1 {
+   font-size: 30px;
+   background: blue;
+}
+.item2 {
+  font-size: 20px;
+  background: red;
+}
+.item3 {
+  font-size: 80px;
+  background: green;
+}
+.height50 { height: 50px; }
+.relativeHeight { height: 50%; }
+.relativeWidth  { width: 50%; }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

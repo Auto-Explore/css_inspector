@@ -1,0 +1,37 @@
+# css/css-cascade/scope-implicit-003-print.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-cascade/scope-implicit-003-print.html"
+}
+```
+
+## style[0]
+
+```css
+
+    @scope {
+      .a {
+        fill: green;
+      }
+    }
+  
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “fill”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

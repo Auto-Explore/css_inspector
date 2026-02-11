@@ -1,0 +1,59 @@
+# css/css-anchor-position/anchor-position-borders-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-position-borders-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.cb {
+  position: relative;
+  border-bottom: 2px solid gray;
+}
+.not-positioned-cb {
+  transform: translate(0, 0);  /* Make it a containing block. */
+}
+.margins { margin: 5px 6px 7px 8px; }
+.borders { border-width: 5px 6px 7px 8px; border-style: solid; }
+.paddings { padding: 5px 6px 7px 8px; }
+.spacer {
+  height: 9px;
+}
+.anchor1 {
+  anchor-name: --a1;
+  margin-left: 50px;
+  width: 31px;
+  height: 31px;
+  background: blue;
+}
+.target {
+  position: absolute;
+  left: anchor(--a1 left);
+  right: anchor(--a1 right);
+  top: anchor(--a1 top);
+  bottom: anchor(--a1 bottom);
+  background: orange;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

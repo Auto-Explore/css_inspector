@@ -1,0 +1,46 @@
+# css/css-tables/min-height-table-2.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-tables/min-height-table-2.html"
+}
+```
+
+## style[0]
+
+```css
+
+:root { overflow: hidden; }
+
+td {
+  padding: 0;
+}
+
+table {
+  border-spacing: 0;
+  max-height: 40px; /* Just to make sure that min trumps max, like everywhere else */
+  min-height: 50%;
+  border: 1px solid black;
+  background: green;
+  padding: 5px;
+}
+
+.outer {
+  /* 300px from the ref, plus 12px for border + padding, which applies to the table wrapper box, not the grid box */
+  height: calc((300px + 12px) * 2);
+}
+
+.inner {
+  width: 300px;
+  height: 5px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

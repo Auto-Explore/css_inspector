@@ -1,0 +1,49 @@
+# css/css-break/out-of-flow-in-multicolumn-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-break/out-of-flow-in-multicolumn-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #multicol {
+      column-count: 2;
+      column-fill: auto;
+      column-gap: 16px;
+      column-rule:16px white solid;
+      width: 100px;
+      height: 40px;
+      background: gray;
+  }
+
+  .abs {
+      position: absolute;
+      top: 0px;
+      width: 100%;
+      height: 20px;
+      background: green;
+  }
+
+  .below-abs {
+    height: 20px;
+    background: red;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “column-rule”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

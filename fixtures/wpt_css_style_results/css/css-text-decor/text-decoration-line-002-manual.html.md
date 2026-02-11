@@ -1,0 +1,45 @@
+# css/css-text-decor/text-decoration-line-002-manual.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text-decor/text-decoration-line-002-manual.html"
+}
+```
+
+## style[0]
+
+```css
+
+#htmlsrc { margin: 2em; }
+#htmlsrc p {
+	font-size: 28px;
+	border-radius: 5px;
+	line-height: 1.5;
+	}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```
+
+## style[1]
+
+```css
+
+div span {
+text-decoration-line:overline;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,82 @@
+# css/css-view-transitions/new-content-inline-with-offset-from-containing-block-clipped.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/new-content-inline-with-offset-from-containing-block-clipped.html"
+}
+```
+
+## style[0]
+
+```css
+
+#box {
+  background: blue;
+  view-transition-name: target;
+}
+
+div {
+  padding-left: 8px;
+  padding-top: 8px;
+  background-color: green;
+}
+
+/* We're verifying what we capture, so just display the contents for 5 minutes.  */
+html::view-transition-group(*) { animation-duration: 300s; }
+html::view-transition-group(target) { background: green; }
+html::view-transition-new(*) { animation: unset; opacity: 1; }
+html::view-transition-old(*) { animation: unset; opacity: 0; }
+/* hide the root so we show transition background to ensure we're in a transition */
+html::view-transition-group(root) { animation: unset; opacity: 0; }
+html::view-transition { background: pink; }
+
+::view-transition-image-pair(target) {
+    overflow:clip;
+}
+```
+
+```json
+{
+  "errors": 9,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

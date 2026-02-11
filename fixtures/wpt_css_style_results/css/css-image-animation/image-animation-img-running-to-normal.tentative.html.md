@@ -1,0 +1,30 @@
+# css/css-image-animation/image-animation-img-running-to-normal.tentative.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-image-animation/image-animation-img-running-to-normal.tentative.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #img2 {
+    image-animation: running;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “image-animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

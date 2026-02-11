@@ -1,0 +1,97 @@
+# css/css-anchor-position/position-visibility-anchors-visible-chained-004.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/position-visibility-anchors-visible-chained-004.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #scroll-container {
+    overflow: hidden scroll;
+    scrollbar-width: none;
+    width: 300px;
+    height: 100px;
+  }
+
+  #anchor1 {
+    anchor-name: --a1;
+    width: 100px;
+    height: 100px;
+    background: orange;
+  }
+
+  #anchor2 {
+    anchor-name: --a2;
+    width: 100px;
+    height: 50px;
+    background: blue;
+  }
+
+  .spacer {
+    height: 100px;
+  }
+
+  .anchored {
+    position-visibility: anchors-visible;
+    position-area: bottom center;
+    width: 100px;
+    height: 50px;
+    background: green;
+    position: absolute;
+    inset: 0;
+  }
+
+  #chained {
+    position-anchor: --a1;
+  }
+
+  #target {
+    position-anchor: --a2;
+  }
+```
+
+```json
+{
+  "errors": 8,
+  "messages": [
+    {
+      "message": "Invalid value for property “overflow”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-visibility”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-area”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

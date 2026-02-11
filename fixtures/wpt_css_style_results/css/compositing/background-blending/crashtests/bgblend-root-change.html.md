@@ -1,0 +1,42 @@
+# css/compositing/background-blending/crashtests/bgblend-root-change.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/compositing/background-blending/crashtests/bgblend-root-change.html"
+}
+```
+
+## style[0]
+
+```css
+
+* {
+  position: sticky;
+  border-left: double 488200679.54Q hsla(-39 5% 68% / 7%) !important;
+  box-shadow: 172vmax 60991vmax 32in 106cm hsl(-57532411.87deg, 70%, 54%);
+  background-blend-mode: overlay;
+  background: url(data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=) local content-box space space 0em / 15438983.37cm auto;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Missing ':' in declaration.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

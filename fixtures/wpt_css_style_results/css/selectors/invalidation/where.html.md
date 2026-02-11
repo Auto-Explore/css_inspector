@@ -1,0 +1,51 @@
+# css/selectors/invalidation/where.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/selectors/invalidation/where.html"
+}
+```
+
+## style[0]
+
+```css
+
+      * {
+        color: black;
+      }
+      .b {
+        color: yellow;
+      }
+      /*Simple selector arguments */
+      :where(.b, .c) {
+        color: red;
+      }
+      /*Compound selector arguments */
+      .a~:where(.c#d, .e) {
+        color: green;
+      }
+      /* Complex selector arguments */
+      .h {
+        color: red;
+      }
+      :where(.a~.h, .a~.h+.f) {
+        color: yellow;
+      }
+      /* Nested */
+      :where(.a>:where(.g+.h, .b)~.i) {
+        color: blue;
+      }
+      :where(:is(.a~.h)) {
+        color: yellow;
+      }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

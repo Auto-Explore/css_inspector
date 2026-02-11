@@ -1,0 +1,56 @@
+# css/css-conditional/at-supports-selector-detecting-invalid-in-logical-combinations.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-conditional/at-supports-selector-detecting-invalid-in-logical-combinations.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div.invalid {
+    background-color: green;
+    height: 100px;
+    width: 100px;
+  }
+  div.valid {
+    background-color: red;
+    height: 100px;
+    width: 100px;
+  }
+  @supports selector(:is(.a)) {
+    div.is.valid { background: green };
+  }
+  @supports selector(:where(.a)) {
+    div.where.valid { background: green };
+  }
+  @supports selector(:has(.a)) {
+    div.has.valid { background: green };
+  }
+  @supports selector(:not(.a)) {
+    div.not.valid { background: green };
+  }
+  @supports selector(:is(:foo, .a)) {
+    div.is.invalid { background: red };
+  }
+  @supports selector(:where(:foo, .a)) {
+    div.where.invalid { background: red };
+  }
+  @supports selector(:has(:foo, .a)) {
+    div.has.invalid { background: red };
+  }
+  @supports selector(:not(:foo, .a)) {
+    div.not.invalid { background: red };
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

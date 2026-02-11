@@ -1,0 +1,57 @@
+# css/css-grid/grid-items/grid-items-minimum-width-vertical-rl-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-items/grid-items-minimum-width-vertical-rl-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+  width: 100px;
+  border: solid thick;
+  grid: minmax(auto, 0px) / 10px 10px;
+  writing-mode: vertical-rl;
+}
+
+.grid > div:nth-child(1) { background: cyan; }
+.grid > div:nth-child(2) { background: magenta; }
+
+.width60 { width: 60px; }
+.minWidth60 { min-width: 60px; }
+
+.marginLeft5 { margin-left: 5px; }
+.marginRight10 { margin-right: 10px; }
+
+.paddingLeft6 { padding-left: 6px; }
+.paddingRight3 { padding-right: 3px; }
+
+.borderLeft2, .borderRight4 { border: solid yellow 0px; }
+.borderLeft2 { border-left-width: 2px; }
+.borderRight4 { border-right-width: 4px; }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

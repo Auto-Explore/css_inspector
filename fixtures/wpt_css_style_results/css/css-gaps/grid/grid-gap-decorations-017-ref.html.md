@@ -1,0 +1,102 @@
+# css/css-gaps/grid/grid-gap-decorations-017-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/grid/grid-gap-decorations-017-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0px;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(6, 100px);
+    height: 650px;
+    width: 650px;
+  }
+
+  .row-gap {
+    height: 0px;
+    width: 650px;
+    position: absolute;
+
+  }
+
+  .row-gap1 {
+    border-bottom: 5px double red;
+    top: 102.5px;
+  }
+
+  .row-gap2 {
+    border-bottom: 5px solid red;
+    top: 212.5px;
+  }
+
+  .row-gap3 {
+    border-bottom: 5px dotted red;
+    top: 322.5px;
+  }
+
+  .row-gap4 {
+    border-bottom: 5px ridge red;
+    top: 432.5px;
+  }
+
+  .row-gap5 {
+    border-bottom: 5px ridge red;
+    top: 542.5px;
+  }
+
+  .col-gap {
+    width: 0px;
+    height: 650px;
+    position: absolute;
+    top: 0px;
+  }
+
+  .col-gap1 {
+    border-left: 5px solid blue;
+    left: 102.5px;
+  }
+
+  .col-gap2 {
+    border-left: 5px groove blue;
+    left: 212.5px;
+  }
+
+  .col-gap3 {
+    border-left: 5px double blue;
+    left: 322.5px;
+  }
+
+  .col-gap4 {
+    border-left: 5px dotted blue;
+    left: 432.5px;
+  }
+
+  .col-gap5 {
+    border-left: 5px dotted blue;
+    left: 542.5px;
+  }
+
+  .item {
+    background: gray;
+    opacity: 0.5;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

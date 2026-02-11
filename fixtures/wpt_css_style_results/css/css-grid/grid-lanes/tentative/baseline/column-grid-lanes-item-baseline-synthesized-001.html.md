@@ -1,0 +1,73 @@
+# css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-item-baseline-synthesized-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-item-baseline-synthesized-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .container { position: relative; }
+    .grid-lanes {
+      display: grid-lanes;
+      position: relative;
+      text-orientation: sideways;
+      grid-template-columns: 200px 100px;
+      font-family: Ahem;
+      line-height: 1;
+      background-color: grey;
+      justify-items: baseline;
+      width: 300px;
+    }
+    .bigFont  { font-size: 50px; }
+
+    .paddingLeft { padding-left: 25px; }
+    .paddingRight { padding-right: 25px; }
+
+    .firstItem {
+      background-color: blue;
+      grid-column: 1;
+      height: 100px;
+    }
+
+    .secondItem {
+      background-color: purple;
+      grid-column: 1;
+      height: 200px;
+    }
+
+    .thirdItem {
+      background-color: aqua;
+      grid-column: 2;
+      width: 25px;
+      height: 300px;
+    }
+
+    .verticalRL {
+      writing-mode: vertical-rl;
+    }
+    .verticalLR {
+      writing-mode: vertical-lr;
+    }
+    .horizontalTB {
+      writing-mode: horizontal-tb;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

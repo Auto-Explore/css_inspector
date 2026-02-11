@@ -1,0 +1,56 @@
+# css/css-text-decor/text-decoration-line-010.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text-decor/text-decoration-line-010.xht"
+}
+```
+
+## style[0]
+
+```css
+
+				@font-face
+				{
+					font-family: "mplus-1p-regular";
+					src: url("/fonts/mplus-1p-regular.woff") format("woff");
+					/* filesize: 803300 bytes (784.5 KBytes) */
+					/*
+					mplus-1p-regular.ttf can be downloaded at/from [TBD later]
+					*/
+				}
+				div
+				{
+					font-family: "mplus-1p-regular";
+					//font-size: 1.5em;
+					font-size: 1.0em;
+					line-height: 1.5;
+				}
+				#test
+				{
+					text-decoration-line: none;							// The property to be tested
+				}
+				#control
+				{
+					text-decoration: none;
+				}
+		
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid property name in declaration.",
+      "severity": "Error"
+    },
+    {
+      "message": "Missing ':' in declaration.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

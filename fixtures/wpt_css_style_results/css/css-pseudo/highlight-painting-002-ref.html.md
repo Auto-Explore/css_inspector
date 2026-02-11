@@ -1,0 +1,52 @@
+# css/css-pseudo/highlight-painting-002-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-pseudo/highlight-painting-002-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    :root {
+        writing-mode: vertical-rl;
+    }
+    p {
+        font-size: 7em;
+        text-shadow: 0.1250em 0.1250em #C0C000C0;
+        position: relative;
+        color: transparent;
+    }
+    p > span {
+        color: #E03838C0;
+        text-shadow: none;
+        position: absolute;
+    }
+    p > span > span {
+        color: #707070C0;
+        background: #38E038C0;
+        text-shadow: 0.2500em 0.2500em #3838E0C0;
+        /* force blue to paint over red */
+        position: relative;
+    }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “text-shadow”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “text-shadow”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

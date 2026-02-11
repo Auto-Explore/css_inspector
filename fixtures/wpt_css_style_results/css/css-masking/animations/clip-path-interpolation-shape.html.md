@@ -1,0 +1,43 @@
+# css/css-masking/animations/clip-path-interpolation-shape.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-masking/animations/clip-path-interpolation-shape.html"
+}
+```
+
+## style[0]
+
+```css
+
+html {
+  font-size: 16px;
+  font-family: Ahem;
+}
+
+.parent {
+  clip-path: shape(from -5px 5px, move to 5% 1px);
+  padding: 10px;
+}
+
+.target {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background-color: black;
+  clip-path: shape(from 5px 5px, line to 10px 10%);
+}
+
+.expected {
+  background-color: green;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

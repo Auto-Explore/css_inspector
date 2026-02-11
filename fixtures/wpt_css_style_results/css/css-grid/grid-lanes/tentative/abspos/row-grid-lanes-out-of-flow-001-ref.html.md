@@ -1,0 +1,109 @@
+# css/css-grid/grid-lanes/tentative/abspos/row-grid-lanes-out-of-flow-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/abspos/row-grid-lanes-out-of-flow-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .container {
+        width: 900px;
+        height: 600px;
+        border: 2px solid black;
+        margin: 20px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-rows: repeat(4, 8rem);
+        grid-template-columns: 800px;
+        align-content: center;
+        position: relative;
+        height: 32rem;
+        width: 800px;
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .abspos-first {
+        grid-row: span 2;
+        position: absolute;
+        top: 80px;
+        bottom: 30px;
+        left: 70px;
+        right: 440px;
+        background: blue;
+    }
+
+    .abspos-second {
+        grid-row: 4 / 5;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 100px;
+        height: 60px;
+        background: red;
+    }
+
+    .abspos-third {
+        grid-row: 4 / 5;
+        position: absolute;
+        width: 50px;
+        height: 60px;
+        background: yellow;
+        align-self: end;
+    }
+
+    .fixedpos {
+        position: fixed;
+        left: 50%;
+        bottom: 0;
+        width: 80px;
+        height: 40px;
+        background: green;
+    }
+
+    .static-span-two {
+        position: absolute;
+        width: 120px;
+        height: 30px;
+        background: lightcoral;
+        border: 2px solid red;
+        grid-row: span 2;
+    }
+  
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

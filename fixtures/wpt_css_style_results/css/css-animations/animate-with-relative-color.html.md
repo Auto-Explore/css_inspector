@@ -1,0 +1,54 @@
+# css/css-animations/animate-with-relative-color.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-animations/animate-with-relative-color.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @keyframes oklch {
+      0% { background: oklch(0% 0 0deg); }
+    100% { background: oklch(from oklch(0% 0 0deg) calc(l + 0.5) c h); }
+  }
+  @keyframes rgb {
+      0% { background: black; }
+    100% { background: rgb(from green r g 255); }
+  }
+  #target {
+    background: oklch(0% 0 0deg);
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-play-state: paused;
+    animation-fill-mode: forwards;
+    height: 100px;
+    width: 100px;
+  }
+  .oklch {
+    animation-name: oklch;
+  }
+  .rgb {
+    animation-name: rgb;
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

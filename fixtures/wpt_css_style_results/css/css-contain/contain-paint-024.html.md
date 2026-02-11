@@ -1,0 +1,46 @@
+# css/css-contain/contain-paint-024.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-contain/contain-paint-024.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div#correct-containing-block
+    {
+      background-color: red;
+      height: 100px;
+      position: relative;
+      width: 100px;
+    }
+
+  div#incorrect-containing-block
+    {
+      contain: paint;
+      display: inline;
+    }
+
+  div#abspos
+    {
+      background-color: green;
+      bottom: 0;
+      height: 100%;
+      position: absolute;
+      right: 0;
+      width: 100%;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

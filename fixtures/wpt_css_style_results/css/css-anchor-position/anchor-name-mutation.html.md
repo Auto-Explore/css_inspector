@@ -1,0 +1,104 @@
+# css/css-anchor-position/anchor-name-mutation.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-name-mutation.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .containing-block {
+        position: relative;
+        width: 300px;
+        height: 300px;
+
+        border: 1px black solid;
+    }
+
+    .cell {
+        width: 100px;
+        height: 100px;
+    }
+
+    #anchor-1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        background: green;
+    }
+
+    #anchor-2 {
+        position: absolute;
+        top: 100px;
+        left: 0;
+
+        background: blue;
+    }
+
+    .anchor {
+        anchor-name: --anchor;
+    }
+
+    #anchor-positioned {
+        background: orange;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .positioned-using-anchor-function-explicit-name {
+        position: absolute;
+        top: anchor(--anchor bottom) !important;
+        left: anchor(--anchor right) !important;
+    }
+
+    .positioned-using-anchor-function-implicit-name {
+        position: absolute;
+        position-anchor: --anchor;
+
+        top: anchor(bottom) !important;
+        left: anchor(right) !important;
+    }
+
+    .positioned-using-position-area {
+        position: absolute;
+        position-anchor: --anchor;
+
+        position-area: bottom right;
+    }
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-area”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

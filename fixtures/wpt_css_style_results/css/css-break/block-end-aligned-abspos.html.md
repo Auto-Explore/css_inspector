@@ -1,0 +1,26 @@
+# css/css-break/block-end-aligned-abspos.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-break/block-end-aligned-abspos.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body { overflow:scroll; } /* Auto scrollbars may hide bugs. */
+  #container { columns:2; height:200px; column-fill:auto; background:white; }
+  #abspos { position:absolute; width:50px; bottom:0; background:blue; }
+  #abspos > div { height:10px; background:white; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

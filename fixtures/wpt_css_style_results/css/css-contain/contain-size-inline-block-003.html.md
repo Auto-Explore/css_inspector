@@ -1,0 +1,46 @@
+# css/css-contain/contain-size-inline-block-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-contain/contain-size-inline-block-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .contain {
+    display: inline-block;
+    overflow: auto;
+    contain:size;
+    border: 2px solid green;
+  }
+  .innerContents {
+    color: transparent;
+    height: 100px;
+    width: 100px;
+  }
+  .minHeight {
+    min-height: 60px;
+  }
+  .height {
+    height: 60px;
+  }
+  .minWidth {
+    min-width: 60px;
+  }
+  .width {
+    width: 60px;
+  }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

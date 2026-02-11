@@ -1,0 +1,42 @@
+# css/css-grid/abspos/grid-positioned-items-implicit-grid-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/abspos/grid-positioned-items-implicit-grid-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+.grid {
+  width: 200px;
+  height: 200px;
+  border: 5px solid black;
+  margin: 30px;
+  padding: 15px;
+  /* Ensures that the grid container is the containing block of the absolutely positioned grid children. */
+  position: relative;
+}
+
+.grid-columns-rows {
+  grid-template-columns: 100px;
+  grid-template-rows: 50px;
+}
+
+.absolute {
+  position: absolute;
+}
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

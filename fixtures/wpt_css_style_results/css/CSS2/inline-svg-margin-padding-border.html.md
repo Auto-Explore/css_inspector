@@ -1,0 +1,52 @@
+# css/CSS2/inline-svg-margin-padding-border.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/inline-svg-margin-padding-border.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    margin: 10px;
+    padding: 10px;
+    border: 10px solid red;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+}
+
+#container div {
+    width: 60px;
+    height: 60px;
+    background: red;
+}
+
+svg {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    padding: 10px;
+    border: 10px solid green;
+}
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

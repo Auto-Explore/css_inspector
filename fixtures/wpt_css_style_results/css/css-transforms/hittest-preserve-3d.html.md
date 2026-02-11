@@ -1,0 +1,41 @@
+# css/css-transforms/hittest-preserve-3d.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/hittest-preserve-3d.html"
+}
+```
+
+## style[0]
+
+```css
+
+html, body { margin: 0; padding: 0; }
+#parent {
+  width: 300px;
+  height: 300px;
+  background-color: rgba(0, 0, 255, 0.5);
+  transform-style: preserve-3d;
+}
+#child1 {
+  width: 200px;
+  height: 100px;
+  background-color: red;
+  transform: translateZ(-10px);
+}
+#child2 {
+  width: 200px;
+  height: 100px;
+  background-color: green;
+  transform: translateZ(10px);
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,137 @@
+# css/css-masking/mask-image/mask-mode-to-mask-type.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-masking/mask-image/mask-mode-to-mask-type.html"
+}
+```
+
+## style[0]
+
+```css
+
+      div {
+        background-color: blue;
+        position: absolute;
+        margin: 0px;
+        padding: 0px;
+        width: 100px;
+        height: 100px;
+        top: 10px;
+      }
+
+      div.match-luminance {
+        left: 10px;
+        mask-mode: match-source;
+        mask-image: url("#svg-luminance");
+      }
+
+      div.match-alpha {
+        left: 120px;
+        mask-mode: match-source;
+        mask-image: url("#svg-alpha");
+      }
+
+      div.luminance-luminance {
+        top: 120px;
+        left: 10px;
+        mask-mode: luminance;
+        mask-image: url("#svg-luminance");
+      }
+
+      div.luminance-alpha {
+        top: 120px;
+        left: 120px;
+        mask-mode: luminance;
+        mask-image: url("#svg-alpha");
+      }
+
+      div.alpha-luminance {
+        top: 230px;
+        left: 10px;
+        mask-mode: alpha;
+        mask-image: url("#svg-luminance");
+      }
+
+      div.alpha-alpha {
+        top: 230px;
+        left: 120px;
+        mask-mode: alpha;
+        mask-image: url("#svg-alpha");
+      }
+
+      #svg-luminance {
+        mask-type: luminance;
+      }
+
+      #svg-alpha {
+        mask-type: alpha;
+      }
+    
+```
+
+```json
+{
+  "errors": 14,
+  "messages": [
+    {
+      "message": "Unknown property “mask-mode”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-mode”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-mode”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-mode”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-mode”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-mode”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-type”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-type”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,62 @@
+# css/css-backgrounds/box-shadow-table-border-collapse-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/box-shadow-table-border-collapse-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  table
+    {
+      border: red solid 29px;
+      border-collapse: collapse;
+      box-shadow: 20px 20px darkgray;
+      color: orange;
+      font-family: Ahem;
+      font-size: 50px;
+      line-height: 1;
+      table-layout: fixed;
+      width: 160px;
+    }
+
+  tr
+    {
+      border-color: blue;
+      border-style: solid;
+    }
+
+  tr#top-row
+    {
+
+      border-width: 30px 30px 0px;
+    }
+
+  tr#bottom-row
+    {
+      border-width: 0px 30px 30px;
+    }
+
+  td
+    {
+      padding: 0;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,65 @@
+# css/css-grid/abspos/descendant-static-position-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/abspos/descendant-static-position-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+  position: relative;
+  display: grid;
+  grid: 40px / 40px;
+  border: 2px solid;
+  border-top-width: 5px;
+  border-left-width: 3px;
+  width: 100px;
+  justify-content: end;
+  padding: 2px 4px 6px 1px;
+}
+.grid > div {
+  background: red;
+  background-clip: content-box;
+}
+.absolute {
+  position: absolute;
+  background: red;
+  grid-column: 1 / 2;
+}
+.content {
+  float: left;
+  width: 20px;
+  height: 40px;
+  background: green;
+}
+.content:nth-child(2) {
+  background: grey;
+}
+
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,50 @@
+# css/css-flexbox/abspos/flex-abspos-staticpos-align-self-safe-003-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/abspos/flex-abspos-staticpos-align-self-safe-003-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .flex {
+      display: flex;
+      height: 50px;
+      width: 50px;
+      border: 3px solid black;
+      vertical-align: top;
+      margin: 20px;
+      position: relative;
+    }
+    .child {
+      border: 2px dotted purple;
+      background: teal;
+      width: 25px;
+      height: 25px;
+      align-self: end;
+      position: absolute;
+      background: yellow;
+    }
+    .rowDir {
+      flex-direction: row;
+    }
+    .colDir {
+      flex-direction: column;
+    }
+    .vertRL {
+      writing-mode: vertical-rl;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

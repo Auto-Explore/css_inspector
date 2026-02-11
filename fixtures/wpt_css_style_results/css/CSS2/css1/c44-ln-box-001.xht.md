@@ -1,0 +1,37 @@
+# css/CSS2/css1/c44-ln-box-001.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/css1/c44-ln-box-001.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+   div { font: 10px/20px Ahem; color: white; background: red url(support/css1test44b.png) no-repeat;
+         width: 39em; padding: 0.5em 1em; border: 1em solid green; }
+   img.twoa, img.twob { width: 3em; height: 3em; padding: 0.5em; border-style: solid; border-width: 1em; margin: 1.5em; }
+   img.twoa { vertical-align: text-bottom; }
+   img.twob { vertical-align: text-top; }
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

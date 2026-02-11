@@ -1,0 +1,57 @@
+# css/css-tables/tentative/baseline-td.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-tables/tentative/baseline-td.html"
+}
+```
+
+## style[0]
+
+```css
+
+  table {
+    background: #AAA;
+    border-spacing: 8px 0px;
+  }
+  td {
+    padding: 0;
+    background: #BFB;
+  }
+  .ahem {
+    font: 25px/2 Ahem;
+  }
+  .ahem td, .ahem .display-cell {
+    font: 25px/2 Ahem;
+    color: rgba(0,120,0, 0.5);
+  }
+  .vgrad {
+    background: linear-gradient(180deg, #DDD 0%, #DDD 60%, #999 60%, #999 100%) !important;
+  }
+  .m {
+    display:inline-block;
+  }
+  .display-table {
+    display:table;
+    background: #AAA;
+    border-spacing: 8px 0px;
+  }
+  .display-cell {
+    display:table-cell;
+    padding: 0;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

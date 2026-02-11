@@ -1,0 +1,28 @@
+# css/css-text/shaping/reference/shaping-014-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/shaping/reference/shaping-014-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+    font-family: 'csstest_noto';
+    src: url('/fonts/noto/NotoNaskhArabic-regular.woff2') format('woff2');
+    }
+.test, .ref { border: 1px solid #02D7F6;  margin: 20px;  padding: 10px; width: 3em; font-size: 120px; font-family: "csstest_noto"; }
+.styled { text-decoration: underline; text-decoration-skip-ink: none; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

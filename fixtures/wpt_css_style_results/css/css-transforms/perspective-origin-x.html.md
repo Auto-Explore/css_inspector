@@ -1,0 +1,55 @@
+# css/css-transforms/perspective-origin-x.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/perspective-origin-x.html"
+}
+```
+
+## style[0]
+
+```css
+
+        .container {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top: 100px;
+            left: 100px;
+            perspective: 3px;
+            perspective-origin: 0px 50%;
+        }
+        .redSquare {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 150px;
+            height: 150px;
+            background: red;
+            transform: translateZ(0px);
+         }
+        .greenSquare {
+            position: absolute;
+            top: 25px;
+            left: 0px;
+            width: 100px;
+            height: 100px;
+            background: green;
+            transform: translateZ(1px);
+         }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “perspective-origin”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

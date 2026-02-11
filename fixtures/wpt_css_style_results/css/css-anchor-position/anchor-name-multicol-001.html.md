@@ -1,0 +1,66 @@
+# css/css-anchor-position/anchor-name-multicol-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-name-multicol-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.relpos {
+  position: relative;
+}
+.columns {
+  column-count: 2;
+  column-fill: auto;
+  column-gap: 10px;
+  column-width: 100px;
+  width: 210px;
+  height: 100px;
+}
+.spacer {
+  height: 10px;
+  background: pink;
+}
+.anchor1 {
+  anchor-name: --a1;
+  margin-left: 10px;
+  width: 40px;
+  height: 20px;
+  background: orange;
+}
+.target {
+  position: absolute;
+  left: anchor(--a1 left);
+  top: anchor(--a1 top);
+  width: anchor-size(--a1 width);
+  height: anchor-size(--a1 height);
+  background: lime;
+  opacity: .3;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

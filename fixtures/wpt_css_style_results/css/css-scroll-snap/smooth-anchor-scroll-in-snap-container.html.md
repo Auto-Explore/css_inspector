@@ -1,0 +1,55 @@
+# css/css-scroll-snap/smooth-anchor-scroll-in-snap-container.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-snap/smooth-anchor-scroll-in-snap-container.html"
+}
+```
+
+## style[0]
+
+```css
+
+      div {
+        scroll-behavior: smooth;
+      }
+      .scroller {
+        height: 200px;
+        width: 200px;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        border: solid 1px black;
+        background-color: yellow;
+        position: relative;
+      }
+      .snaparea {
+        height: 50px;
+        width: 50px;
+        scroll-snap-align: start;
+        background-color: green;
+      }
+      #target {
+        height: 50px;
+        width: 50px;
+        background-color: green;
+      }
+      .space {
+        height: 200vh;
+        width: 200vw;
+      }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

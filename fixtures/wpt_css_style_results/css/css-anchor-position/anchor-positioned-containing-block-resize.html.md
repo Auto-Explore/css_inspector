@@ -1,0 +1,59 @@
+# css/css-anchor-position/anchor-positioned-containing-block-resize.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-positioned-containing-block-resize.html"
+}
+```
+
+## style[0]
+
+```css
+
+.anchor, .anchored {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+}
+.anchor {
+    left: 300px;
+    top: 200px;
+    anchor-name: --a;
+    background: blue;
+}
+.anchored {
+    position-anchor: --a;
+    right: anchor(left);
+    bottom: anchor(top);
+    background: green;
+    content:'';
+}
+.container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    border: 2px solid red;
+}
+.resize {
+    width: 400px;
+    height: 400px;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

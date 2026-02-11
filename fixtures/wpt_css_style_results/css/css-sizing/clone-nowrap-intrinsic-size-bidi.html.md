@@ -1,0 +1,53 @@
+# css/css-sizing/clone-nowrap-intrinsic-size-bidi.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-sizing/clone-nowrap-intrinsic-size-bidi.html"
+}
+```
+
+## style[0]
+
+```css
+
+html,body {
+  color:black; background-color:white; font:10px/1 monospace; padding:0; margin:0;
+}
+
+div {
+  border: 5px solid blue;
+  white-space: nowrap;
+}
+.max > div {
+  width: max-content;
+}
+.min > div {
+  width: min-content;
+}
+
+span {
+  border: 2px solid gray;
+  padding: 0 10px 0 6px;
+  border-width: 0 8px 0 5px;
+  margin: 0 4px 0 3px;
+  background: yellow;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+f { margin-right: 30px; float: left; }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “-webkit-box-decoration-break”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

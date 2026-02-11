@@ -1,0 +1,45 @@
+# css/css-ui/cursor-autg-003-manual.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-ui/cursor-autg-003-manual.html"
+}
+```
+
+## style[0]
+
+```css
+
+a {
+  cursor: url("support/cursors/fail.png"), help; /* Override UA styles, regardless of specificity */
+  cursor: auto !important; /* Override UA styles, regardless of specificity */
+}
+#ref {
+  cursor: default;
+  width: 100px;
+  height: 100px;
+  border: solid orange;
+}
+:root {
+  cursor: help; /* give the root element a different cursor so that
+  it is easy to tell if something changes when hovering the target.*/
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “cursor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

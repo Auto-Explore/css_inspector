@@ -1,0 +1,104 @@
+# css/CSS2/lists/list-style-020.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/lists/list-style-020.xht"
+}
+```
+
+## style[0]
+
+```css
+
+    /* For better readability */
+    .li {
+      font-size: 1.5em;
+      color: blue;
+    }
+    span {
+      color: black;
+      font-size: 0.67em;
+      vertical-align: middle;
+      padding-left: 0.2em;
+    }
+
+    .li {
+      display: list-item;
+      list-style: disc;
+      margin: 0.2em 0 0.2em 4em;
+      border-left: solid thin orange;
+    }
+
+    .one   { list-style: none; color: red; }
+    .two   { list-style: none none; color: red; }
+    .three { list-style: none square; }
+    .four  { list-style: square none; }
+    .five  { list-style: url(support/diamond.png) none; }
+    .six   { list-style: none url(support/diamond.png); }
+    .seven { list-style: none url(support/swatch-red.png) none;
+             list-style: url(support/swatch-red.png) none none;
+             list-style: none none url(support/swatch-red.png);
+             list-style: none square none;
+             list-style: square none none;
+             list-style: none none square;
+             list-style: square url(support/swatch-red.png) none;
+             list-style: url(support/swatch-red.png) none square;
+             list-style: none square url(support/swatch-red.png);
+           }
+
+  
+```
+
+```json
+{
+  "errors": 11,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “list-style”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “list-style”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “list-style”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “list-style”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “list-style”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “list-style”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “list-style”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “list-style”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “list-style”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “list-style”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

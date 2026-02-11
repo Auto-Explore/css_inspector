@@ -1,0 +1,52 @@
+# css/CSS2/linebox/vertical-align-116.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/linebox/vertical-align-116.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div
+            {
+                font: 48px/1em Ahem;
+                position: relative;
+            }
+            #div3
+            {
+                border-top: 2px solid blue;
+                height: 48px;
+                position: absolute;
+                top: 86px;
+                width: 48px;
+                z-index: 1;
+            }
+            #span1
+            {
+                color: orange;
+                vertical-align: super;
+            }
+            #span2
+            {
+                color: white;
+                font: 96px/1em Ahem;
+            }
+        
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

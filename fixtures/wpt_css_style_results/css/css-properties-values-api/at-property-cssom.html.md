@@ -1,0 +1,84 @@
+# css/css-properties-values-api/at-property-cssom.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-properties-values-api/at-property-cssom.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @property --valid {
+    syntax: "<color> | none";
+    inherits: false;
+    initial-value: red;
+  }
+  @property --valid-reverse {
+    initial-value: 0px;
+    inherits: true;
+    syntax: "<length>";
+  }
+  @property --valid-universal {
+    syntax: "*";
+    inherits: false;
+  }
+  @property --valid-whitespace {
+    syntax: " <color># ";
+    inherits: false;
+    initial-value: red, blue;
+  }
+  @property --vALId {
+    syntax: "<color> | none";
+    inherits: false;
+    initial-value: red;
+  }
+  @property --no-descriptors {
+
+  }
+  @property --no-syntax {
+    inherits: false;
+    initial-value: red;
+  }
+  @property --no-inherits {
+    syntax: "<color> | none";
+    initial-value: red;
+  }
+  @property --no-initial-color-value {
+    syntax: "<color> | none";
+    inherits: false;
+  }
+  @property --no-initial-universal-value {
+    syntax: "*";
+    inherits: false;
+  }
+  @property --syntax-only {
+    syntax: "<color> | none";
+  }
+  @property --inherits-only {
+    inherits: true;
+  }
+  @property --initial-value-only {
+    initial-value: red;
+  }
+  /* U+0009 CHARACTER TABULATION */
+  @property --tab\9 tab {
+    syntax: "*";
+    inherits: true;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,44 @@
+# css/css-multicol/column-count-used-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-multicol/column-count-used-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+    position: absolute;
+}
+.bg {
+    background: red;
+    width: 100px;
+    height: 100px;
+}
+.test {
+    line-height: 50px;
+    width: 100px;
+    background: green;
+    columns: 2 20px;
+    column-gap: 0;
+    orphans: 1;
+    widows: 1;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “columns”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

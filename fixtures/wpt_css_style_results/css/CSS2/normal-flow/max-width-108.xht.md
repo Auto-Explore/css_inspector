@@ -1,0 +1,53 @@
+# css/CSS2/normal-flow/max-width-108.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/normal-flow/max-width-108.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  div
+  {
+  font: 200px/1 Ahem;
+  height: 200px;
+  max-width: 200px;
+  overflow: auto;
+  }
+
+  #test-red-overlapped
+  {
+  color: red;
+  float: left;
+  }
+
+  #control-green-overlapping
+  {
+  clear: left;
+  color: green;
+  position: relative;
+  top: -200px;
+  }
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

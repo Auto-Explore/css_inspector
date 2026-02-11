@@ -1,0 +1,48 @@
+# css/css-images/image-orientation/reference/image-orientation-img-object-fit-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-images/image-orientation/reference/image-orientation-img-object-fit-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    body {
+        overflow: hidden;
+        image-orientation: from-image;
+    }
+    img {
+        position: absolute;
+        vertical-align: top;
+    }
+    .cover {
+        object-fit: cover;
+        top: 10px;
+    }
+    .contain {
+        object-fit: contain;
+        top: 150px;
+    }
+    .wide {
+        width: 100px;
+        height: 50px;
+        left: 10px;
+    }
+    .tall {
+        width: 50px;
+        height: 100px;
+        left: 150px;
+    }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,40 @@
+# css/css-tables/tentative/table-width-redistribution-fixed-padding.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-tables/tentative/table-width-redistribution-fixed-padding.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    background: #EEE;
+  }
+  main table {
+    background: gray;
+    border-spacing: 8px 8px;
+    table-layout: fixed;
+  }
+  main td {
+    padding: 6px;
+    background: #BFB;
+    font-size: 10px;
+    box-sizing:content-box;
+  }
+  main td > div {
+    display: inline-block;
+    background: rgba(56,162,56,0.3);
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

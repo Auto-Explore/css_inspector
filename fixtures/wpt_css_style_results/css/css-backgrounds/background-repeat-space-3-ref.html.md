@@ -1,0 +1,79 @@
+# css/css-backgrounds/background-repeat-space-3-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/background-repeat-space-3-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+      .outer1
+      {
+        border: 1px solid black;
+        width: 106px;
+        height: 106px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .inner1
+      {
+        height: 32px;
+        width: 32px;
+        background-image: url(support/aqua-yellow-32x32.png);
+        margin-top: 40px;
+      }
+      .outer2
+      {
+        border: 1px solid black;
+        width: 106px;
+        height: 106px;
+        display: flex;
+        align-content: space-between;
+        flex-wrap: wrap;
+      }
+      .inner2
+      {
+        height: 32px;
+        width: 32px;
+        background-image: url(support/aqua-yellow-32x32.png);
+        margin-left: 40px;
+      }
+      .inner_gradient1
+      {
+        height: 32px;
+        width: 32px;
+        background-size: 32px 32px;
+        background-image: linear-gradient(to top left, red, green);
+        margin-top: 40px;
+      }
+      .inner_gradient2
+      {
+        height: 32px;
+        width: 32px;
+        background-size: 32px 32px;
+        background-image: linear-gradient(to top left, red, green);
+        margin-left: 40px;
+      }
+    
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

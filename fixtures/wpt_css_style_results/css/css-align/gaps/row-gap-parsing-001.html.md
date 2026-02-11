@@ -1,0 +1,43 @@
+# css/css-align/gaps/row-gap-parsing-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-align/gaps/row-gap-parsing-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .rowGapPx { row-gap: 12px; }
+  #rowGapEm { row-gap: 2em; font: 10px/1 Monospace; }
+  #rowGapVw { row-gap: 2vw; }
+  #rowGapPercent { row-gap: 15%; }
+  #rowGapCalc { row-gap: calc(10px + 4px); }
+  #rowGapCalcFixedPercent { row-gap: calc(5px + 10%); }
+  .rowGapInitial { row-gap: initial; }
+  .rowGapInherit { row-gap: inherit; }
+
+  #invalidRowGapNegative { row-gap: -10px; }
+  #invalidRowGapMaxContent { row-gap: max-content; }
+  #invalidRowGapNone { row-gap: none; }
+  #invalidRowGapMultiple { row-gap: 10px 1px; }
+  #invalidRowGapAngle { row-gap: 3rad; }
+  #invalidRowGapResolution { row-gap: 2dpi; }
+  #invalidRowGapTime { row-gap: 200ms; }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “row-gap”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,72 @@
+# css/css-view-transitions/auto-name-get-animations.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/auto-name-get-animations.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+:root {
+  view-transition-name: none;
+}
+
+div {
+  width: 100px;
+  height: 100px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+.item1 {
+  view-transition-name: auto;
+}
+
+.item2 {
+  view-transition-name: match-element;
+}
+
+main.switch .item1 {
+  order: 2;
+}
+
+.item1 {
+  background: green;
+}
+
+.item2 {
+  background: yellow;
+  position: relative;
+  left: 100px;
+}
+
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

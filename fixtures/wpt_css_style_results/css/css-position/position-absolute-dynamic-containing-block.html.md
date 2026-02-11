@@ -1,0 +1,59 @@
+# css/css-position/position-absolute-dynamic-containing-block.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-position/position-absolute-dynamic-containing-block.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+#outer {
+  width: 400px;
+  height: 300px;
+  outline: black solid 1px;
+}
+#intermediate {
+  width: 300px;
+  height: 200px;
+  outline: gray solid 1px;
+}
+#target {
+  background: green;
+}
+.abs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.abs-container {
+  position: relative;
+}
+.fixed-container {
+  will-change: transform;
+}
+div {
+  padding: 5px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

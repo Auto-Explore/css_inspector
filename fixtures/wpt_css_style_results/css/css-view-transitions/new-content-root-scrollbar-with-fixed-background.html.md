@@ -1,0 +1,82 @@
+# css/css-view-transitions/new-content-root-scrollbar-with-fixed-background.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/new-content-root-scrollbar-with-fixed-background.html"
+}
+```
+
+## style[0]
+
+```css
+
+#hide {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 10px;
+  height: 10px;
+  background: red;
+  contain: paint;
+  view-transition-name: hide;
+}
+#first {
+  width: 10px;
+  background: linear-gradient(green, blue);
+  height: 1000px;
+}
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+/* Set a no-op animation to screenshot the pseudo transition DOM. */
+html::view-transition-group(hide) {
+  animation-duration: 300s;
+  opacity: 0;
+}
+html::view-transition-new(*) {
+  animation: unset;
+  filter: invert(1);
+  height: 100%;
+}
+html::view-transition-old(*) {
+  animation: unset;
+  opacity: 0;
+  height: 100%;
+}
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “filter”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

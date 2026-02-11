@@ -1,0 +1,46 @@
+# css/css-grid/alignment/grid-align-justify-stretch-with-orthogonal-flows.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-align-justify-stretch-with-orthogonal-flows.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+.container {
+    position: relative;
+}
+.grid {
+    grid-template-columns: 100px 100px;
+    grid-template-rows: 150px 150px;
+    font: 10px/1 ahem;
+    margin-bottom: 20px;
+}
+.widthAndHeightSet {
+    width: 20px;
+    height: 40px;
+}
+.onlyWidthSet { width: 20px; }
+.onlyHeightSet { height: 40px; }
+.maxHeight { max-height: 160px; }
+.maxWidth { max-width: 90px; }
+.minWidth { min-width: 120px; }
+.minHeight { min-height: 220px; }
+.topAutoMargin { margin-top: auto; }
+.bottomAutoMargin { margin-bottom: auto; }
+.leftAutoMargin { margin-left: auto; }
+.rightAutoMargin { margin-right: auto; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

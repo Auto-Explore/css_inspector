@@ -1,0 +1,39 @@
+# css/CSS2/box-display/containing-block-020-ref.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/box-display/containing-block-020-ref.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  div
+  {
+  border: black solid medium;
+  height: 96px;
+  padding-top: 96px;
+  width: 192px;
+  }
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

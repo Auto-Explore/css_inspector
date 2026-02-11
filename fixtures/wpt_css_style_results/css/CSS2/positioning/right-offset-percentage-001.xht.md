@@ -1,0 +1,39 @@
+# css/CSS2/positioning/right-offset-percentage-001.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/positioning/right-offset-percentage-001.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            #div1
+            {
+                border: solid black;
+                height: 200px;
+                position: relative;
+                width: 100px;
+            }
+            div div
+            {
+                background: blue;
+                height: 50px;
+                margin-left: 50px;
+                position: absolute;
+                right: 50%;
+                width: 50px;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

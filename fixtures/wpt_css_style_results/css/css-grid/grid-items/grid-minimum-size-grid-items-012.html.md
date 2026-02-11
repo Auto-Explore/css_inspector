@@ -1,0 +1,50 @@
+# css/css-grid/grid-items/grid-minimum-size-grid-items-012.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-items/grid-minimum-size-grid-items-012.html"
+}
+```
+
+## style[0]
+
+```css
+
+#reference-overlapped-red {
+    position: absolute;
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    z-index: -1;
+}
+
+#constrained-grid {
+    display: grid;
+    width: 100px;
+    height: 100px;
+    grid: minmax(0px, auto) / minmax(0px, auto);
+}
+
+#test-grid-item-overlapping-green {
+    background-color: green;
+}
+
+#content-200x200 {
+    width: 200px;
+    height: 200px;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,46 @@
+# css/css-fonts/size-adjust.tentative.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/size-adjust.tentative.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+  font-family: custom-font;
+  src: local(Ahem), url(/fonts/Ahem.ttf);
+  size-adjust: 50%;
+  unicode-range: U+20, U+30-39; /* Digits and space */
+}
+
+.target {
+  font-size: 20px;
+  font-family: custom-font, sans-serif;
+}
+
+.square {
+  display: inline-block;
+  vertical-align: bottom;
+  background-color: black;
+  width: var(--l);
+  height: var(--l);
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “size-adjust”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

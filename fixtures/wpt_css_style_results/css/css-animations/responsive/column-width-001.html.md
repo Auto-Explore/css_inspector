@@ -1,0 +1,58 @@
+# css/css-animations/responsive/column-width-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-animations/responsive/column-width-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .paused {
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-delay: -2s;
+    animation-play-state: paused;
+  }
+  #container {
+    column-width: 40px;
+    font-size: 10px;
+  }
+  #first {
+    animation-name: first-anim;
+  }
+  #second {
+    animation-name: second-anim;
+  }
+  #third {
+    animation-name: third-anim;
+  }
+  @keyframes first-anim {
+    from { column-width: 3em; }
+    to { column-width: 5em; }
+  }
+  @keyframes second-anim {
+    from { column-width: 40px; }
+    to { column-width: calc(40px - 2em); }
+  }
+  @keyframes third-anim {
+    from { column-width: 20px; }
+    to { column-width: inherit; }
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

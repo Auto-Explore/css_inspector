@@ -1,0 +1,46 @@
+# css/css-view-transitions/old-content-captures-clip-path-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/old-content-captures-clip-path-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+.box {
+  color: red;
+  background: lightblue;
+  width: 100px;
+  height: 100px;
+  contain: paint;
+  position: absolute;
+  font-size: 30pt;
+}
+#e1 {
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  top: 20px;
+  left: 20px;
+}
+body { background: lightpink; }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

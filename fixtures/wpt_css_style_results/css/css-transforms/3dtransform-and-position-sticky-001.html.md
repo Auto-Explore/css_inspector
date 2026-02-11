@@ -1,0 +1,54 @@
+# css/css-transforms/3dtransform-and-position-sticky-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/3dtransform-and-position-sticky-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+div, img {
+  height: 100px;
+  width: 100px;
+}
+
+#outer {
+  transform-style: preserve-3d;
+  perspective: 300px;
+}
+
+#middle {
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+#inner1 {
+  background: aqua;
+  /* isn't really sticky because of the containing block established by transform and by transform-style */
+  position: sticky;
+  top: 0;
+  transform: translateZ(0);
+}
+
+#inner2 {
+  background: olive;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotateX(30deg);
+}
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

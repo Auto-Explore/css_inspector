@@ -1,0 +1,24 @@
+# css/css-text-decor/reference/text-decoration-thickness-non-inherit-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text-decor/reference/text-decoration-thickness-non-inherit-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+        span { text-decoration-line: underline; text-decoration-color: black; }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

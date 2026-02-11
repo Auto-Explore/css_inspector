@@ -1,0 +1,113 @@
+# css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-container-baseline-003b-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-container-baseline-003b-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .container {
+      display: flex;
+      align-items: last baseline;
+      gap: 20px;
+      border: 2px solid darkblue;
+      padding: 10px;
+      font: 16px/1 monospace;
+      width: 600px;
+      text-decoration: underline;
+    }
+
+    .multicolumn {
+      column-count: 2;
+      column-width: 100px;
+      column-gap: 10px;
+      border: 1px solid red;
+      background: #f0f0f0;
+      display: inline-block;
+    }
+
+    .multicolumn-item {
+      width: 100px;
+      border: 1px solid navy;
+      font-size: 14px;
+      display: flex;
+      align-items: flex-start;
+      break-inside: avoid;
+      margin-bottom: 10px;
+      text-decoration: underline;
+      padding: 4px;
+    }
+
+    .multicolumn-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .bottom {
+      align-items: flex-end;
+    }
+
+    .text-reference {
+      background: yellow;
+      padding: 8px;
+      text-decoration: underline;
+    }
+
+    .multicolumn-item:nth-child(1) {
+      height: 30px;
+      background: lightcoral;
+    }
+
+    .multicolumn-item:nth-child(2) {
+      height: 50px;
+      background: lightblue;
+    }
+
+    .multicolumn-item:nth-child(3) {
+      height: 80px;
+      background: lightgreen;
+    }
+
+    .multicolumn-item:nth-child(4) {
+      height: 90px;
+      background: lightpink;
+    }
+  
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Invalid value for property “align-items”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

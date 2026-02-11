@@ -1,0 +1,57 @@
+# css/css-view-transitions/backdrop-filter-captured.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/backdrop-filter-captured.html"
+}
+```
+
+## style[0]
+
+```css
+
+.box {
+  background: green;
+  width: 100px;
+  height: 100px;
+}
+#target {
+  view-transition-name: target;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  backdrop-filter: grayscale(1);
+}
+
+html::view-transition-group(*) { animation-duration: 300s; }
+html::view-transition-new(*) { animation: unset; opacity: 1; }
+html::view-transition-old(*) { animation: unset; opacity: 0; }
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

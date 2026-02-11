@@ -1,0 +1,52 @@
+# css/css-values/calc-rounding-002-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-values/calc-rounding-002-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+* {
+  box-sizing: border-box;
+}
+:root {
+  font-family: sans-serif;
+}
+.parent {
+  display: inline-flex;
+  --addon-size: 1rem;
+}
+.child {
+  min-width: 0;
+  display: inline-flex;
+}
+.overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.addon-child {
+  display: inline-flex;
+  width: var(--addon-size);
+}
+span {
+  outline: 1px dashed red;
+  outline-offset: -1px;
+}
+p > span > span {
+  padding: .5rem .25rem;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

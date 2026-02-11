@@ -1,0 +1,95 @@
+# css/css-anchor-position/auto-inset-margin-getComputedStyle.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/auto-inset-margin-getComputedStyle.html"
+}
+```
+
+## style[0]
+
+```css
+
+.abs-cb {
+  width: 60px;
+  height: 60px;
+  border: 5px solid;
+  position: relative;
+  anchor-scope: all;
+  display: inline-block;
+  /* Nudge static position against padding box. */
+  padding: 10px;
+}
+
+.anchor {
+  anchor-name: --a;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 20px;
+  height: 20px;
+  background: pink;
+}
+
+.positioned {
+  position: absolute;
+  background: purple;
+  width: 20px;
+  height: 20px;
+}
+
+.margin-auto > .positioned {
+  inset: 0;
+  margin: auto;
+}
+
+.inset-auto > .positioned {
+  inset: auto;
+}
+
+.pa {
+  position-area: bottom right;
+}
+
+.jac {
+  justify-self: anchor-center;
+}
+
+.aac {
+  align-self: anchor-center;
+}
+
+.valid-anchor > .positioned {
+  position-anchor: --a;
+}
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-scope”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-area”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

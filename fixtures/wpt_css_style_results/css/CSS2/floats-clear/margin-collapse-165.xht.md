@@ -1,0 +1,41 @@
+# css/CSS2/floats-clear/margin-collapse-165.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/floats-clear/margin-collapse-165.xht"
+}
+```
+
+## style[0]
+
+```css
+
+   td { padding: 0; background: red; }
+   .border { border: solid; width: 7em; }
+   .box { margin: 0; background: yellow; }
+   .float { margin: 0; width: 4em; height: 1.5em; background: aqua; float: right; }
+   .clear { margin: 2em 0 0 0; background: orange; clear: both; }
+   .control { border: solid; width: 7em; background: yellow; }
+   .control .a { margin: 0 0 0 auto; width: 4em; height: 1.5em; background: aqua; }
+   .control .b { height: 0.5em; }
+   .control .c { background: orange; }
+  
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

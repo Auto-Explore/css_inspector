@@ -1,0 +1,61 @@
+# css/css-shapes/shape-outside/shape-image/shape-image-025.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shapes/shape-outside/shape-image/shape-image-025.html"
+}
+```
+
+## style[0]
+
+```css
+
+        body { margin: 0; }
+        .container {
+          left: 10px;
+          width: 200px;
+          font: 50px/1 Ahem;
+          color: rgb(0,100,0);
+        }
+        #image {
+            float: left;
+            shape-outside: url("support/animated.gif");
+        }
+        .blue-line {
+            top: 50px;
+            left: 60px;
+            width: 2px;
+            height: 140px;
+            background-color: blue;
+        }
+        .square {
+            width: 50px;
+            height: 50px;
+        }
+        .green {
+            left: 10px;
+            background-color: rgb(0,100,0);
+        }
+        .failure {
+            left: 60px;
+            background-color: red;
+            z-index: -1;
+        }
+        .container, .blue-line, .square, .failure { position: absolute; }
+        .container, .square, .failure { top: 70px; }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “shape-outside”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

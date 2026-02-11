@@ -1,0 +1,58 @@
+# css/css-fonts/standard-font-family-7.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/standard-font-family-7.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+    font-family: "AppleSystemUISerif";
+    src: local("ui-serif");
+}
+@font-face {
+    font-family: "AppleSystemUIMonospaced";
+    src: local("ui-monospaced");
+}
+@font-face {
+    font-family: "AppleSystemUIRounded";
+    src: local("ui-rounded");
+}
+@font-face {
+    font-family: "AppleSystemUISansSerif";
+    src: local("ui-sans-serif");
+}
+@font-face {
+    font-family: "DotAppleSystemUIFontSerif";
+    src: local(".AppleSystemUIFontSerif");
+}
+@font-face {
+    font-family: "DotSFNSMono";
+    src: local(".SF NS Mono");
+}
+@font-face {
+    font-family: "DotSFUIMono";
+    src: local(".SF UI Mono");
+}
+@font-face {
+    font-family: "DotAppleSystemUIFontRounded";
+    src: local(".AppleSystemUIFontRounded");
+}
+@font-face {
+    font-family: "DotAppleSystemUIFont";
+    src: local(".AppleSystemUIFont");
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

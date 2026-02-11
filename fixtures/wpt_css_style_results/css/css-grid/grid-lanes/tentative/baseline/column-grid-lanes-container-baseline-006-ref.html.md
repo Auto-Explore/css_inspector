@@ -1,0 +1,116 @@
+# css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-container-baseline-006-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-container-baseline-006-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .container {
+      display: flex;
+      gap: 20px;
+      border: 2px solid blue;
+      padding: 10px;
+      font: 16px/1 Ahem;
+      width: 900px;
+      text-decoration: underline;
+      position: relative;
+    }
+
+    .reference-container {
+      margin-left: 116px;
+      width: 350px;
+      background: #f0f0f0;
+      height: 164px;
+      position: relative;
+    }
+
+    .reference-item {
+      background: lightblue;
+      padding: 6px;
+      font-size: 14px;
+      position: absolute;
+      box-sizing: border-box;
+      text-decoration: underline;
+    }
+
+    .text-reference {
+      background: yellow;
+      font-size: 10px;
+      width: 80px;
+      height: 10px;
+      padding: 8px;
+      position: absolute;
+      text-decoration: underline;
+    }
+
+    .reference-item:nth-child(1) {
+      height: 82px;
+      font-size: 20px;
+      background: salmon;
+      top: 0;
+      left: 0;
+      width: 170px;
+    }
+
+    .reference-item:nth-child(2) {
+      height: 72px;
+      background: plum;
+      top: 92px;
+      left: 90px;
+      width: 170px;
+    }
+
+    .reference-item:nth-child(3) {
+      height: 37px;
+      font-size: 10px;
+      background: peachpuff;
+      top: 0;
+      left: 180px;
+      width: 80px;
+    }
+
+    .reference-item:nth-child(4) {
+      height: 52px;
+      font-size: 20px;
+      background: turquoise;
+      top: 0;
+      left: 270px;
+      width: 80px;
+    }
+  
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

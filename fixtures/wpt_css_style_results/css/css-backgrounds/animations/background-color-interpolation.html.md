@@ -1,0 +1,37 @@
+# css/css-backgrounds/animations/background-color-interpolation.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/animations/background-color-interpolation.html"
+}
+```
+
+## style[0]
+
+```css
+
+.parent {
+  background-color: #eee;
+}
+.target {
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+  border: 2px solid black;
+  margin-right: 2px;
+  color: rgba(0, 0, 255, 0.5);
+  background-color: black;
+}
+.expected {
+  margin-right: 15px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

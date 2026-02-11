@@ -1,0 +1,58 @@
+# css/css-transforms/transform-transformed-tr-percent-height-child-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/transform-transformed-tr-percent-height-child-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+.table {
+  width: 100px;
+  height: 100px;
+  background-color: lightblue;
+}
+.tr {
+  height: 50px;
+  background-color: lightgrey;
+}
+.contblock {
+  transform: translateX(10px);
+  width: 200px;
+  height: 200px;
+  background-color: lightyellow;
+}
+.abspos {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 100%;
+  height: 100%;
+  background-color: blue;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

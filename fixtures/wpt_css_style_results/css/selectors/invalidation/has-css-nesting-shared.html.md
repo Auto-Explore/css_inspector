@@ -1,0 +1,68 @@
+# css/selectors/invalidation/has-css-nesting-shared.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/selectors/invalidation/has-css-nesting-shared.html"
+}
+```
+
+## style[0]
+
+```css
+
+div, main { color: grey }
+#outer1:has(.test) {
+  & #subject1_1 {
+    color: red;
+  }
+  & + #subject1_2 {
+    color: orangered;
+  }
+}
+
+#outer2:has(.test) {
+  & .ancestor {
+    & #subject2_1 {
+      color: green;
+    }
+    & + #subject2_2 {
+      color: lightgreen;
+    }
+  }
+}
+
+#outer3:is(:has(.test) .outer) {
+  & #subject3_1 {
+    color: blue;
+  }
+  & + #subject3_2 {
+    color: skyblue;
+  }
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

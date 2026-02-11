@@ -1,0 +1,34 @@
+# css/CSS2/floats-clear/margin-collapse-121.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/floats-clear/margin-collapse-121.xht"
+}
+```
+
+## style[0]
+
+```css
+
+   table, td { padding: 0; border-spacing: 0; }
+   .comparator { border-spacing: 1em; }
+   .test, .control { border: solid; background: red; }
+   .test .container { display: block; margin: 0; width: 8em; background: lime; }
+   .test .float { float: left; margin: 0; height: 4em; width: 4em; background: aqua; }
+   .test .clear { clear: left; display: block; border: 2em solid yellow; margin: 0; }
+   .control .square { height: 4em; width: 4em; }
+   .control .rectangle { height: 4em; width: 8em; }
+   .control .lime { background: lime; }
+   .control .aqua { background: aqua; }
+   .control .yellow { background: yellow; }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

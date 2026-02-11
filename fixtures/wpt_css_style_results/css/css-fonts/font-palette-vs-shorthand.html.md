@@ -1,0 +1,65 @@
+# css/css-fonts/font-palette-vs-shorthand.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-palette-vs-shorthand.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+    font-family: colr;
+    src: url("resources/COLR-palettes-test-font.ttf") format("truetype");
+}
+div {
+    margin: 10px;
+}
+#a {
+    font: 50px colr;
+    font-palette: dark;  /* should NOT cause the shorthand to be empty */
+}
+#b {
+    font-palette: dark;
+    font: 50px colr;  /* should NOT reset font-palette to normal */
+}
+#c {
+    font-palette: dark;
+    font-size: 50px;
+    font-family: colr;
+}
+#d {
+    font-palette: dark;
+    font-size: 50px;
+    font-family: colr;
+    font-palette: normal;
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Unknown property “font-palette”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “font-palette”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “font-palette”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “font-palette”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

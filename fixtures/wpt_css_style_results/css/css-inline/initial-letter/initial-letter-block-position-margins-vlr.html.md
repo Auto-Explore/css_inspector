@@ -1,0 +1,49 @@
+# css/css-inline/initial-letter/initial-letter-block-position-margins-vlr.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-inline/initial-letter/initial-letter-block-position-margins-vlr.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .sample {
+        border: solid 1px green;
+        font-family: Ahem;
+        font-size: 20px;
+        height: 230px;
+        line-height: 24px;
+        writing-mode: vertical-lr;
+    }
+
+    .initial-letter::first-letter {
+        initial-letter: 3 drop;
+        color: lime;
+        font-size: 100px;   /* should be ignored in rendering */
+        line-height: 50px;  /* should be ignored in rendering */
+    }
+
+    .initial-letter::first-letter {
+        margin-top: 10px;
+        margin-bottom: 30px;
+        margin-left: 15px;
+        margin-right: 45px;
+    }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “initial-letter”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

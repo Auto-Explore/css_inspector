@@ -1,0 +1,61 @@
+# css/css-flexbox/flexbox-paint-ordering-001-ref.xhtml
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flexbox-paint-ordering-001-ref.xhtml"
+}
+```
+
+## style[0]
+
+```css
+
+      .container {
+        width: 40px;
+        height: 14px;
+        border: 2px solid green;
+        margin-bottom: 2px;
+      }
+      .a {
+          width: 16px;
+          height: 10px;
+          background: blue;
+          min-width: 0;
+          border: 2px solid lightblue;
+      }
+      .b {
+          width: 16px;
+          height: 10px;
+          background: purple;
+          min-width: 0;
+          border: 2px solid slateblue;
+      }
+      .aKid {
+          margin-left: 10px;
+          margin-top: 2px;
+          width: 16px;
+          height: 6px;
+          background: yellow;
+          border: 1px solid black;
+      }
+      .a, .b { float: left; }
+    
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

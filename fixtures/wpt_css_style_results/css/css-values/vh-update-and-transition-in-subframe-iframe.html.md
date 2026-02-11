@@ -1,0 +1,67 @@
+# css/css-values/vh-update-and-transition-in-subframe-iframe.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-values/vh-update-and-transition-in-subframe-iframe.html"
+}
+```
+
+## style[0]
+
+```css
+
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		p {
+			clear: both;
+			margin: 10px 0;
+		}
+
+		/* The first test box has its vertical dimension is set to
+		   some `vh` units. */
+		#testBoxWithVhOnly {
+			background: #F00;
+			width: 60px; height: 20vh;
+			float: left;
+		}
+
+		/* The second test box, with fixed height. */
+		#testBoxNotGrownHorizontallyByJS {
+			background: #F0F;
+			width: 20vh;
+			height: 60px;
+			float: left;
+		}
+
+		/* The third box, changed by using CSS transition. */
+		#testBoxWithTransition {
+			background: #FF0;
+			width: 20vh;
+			height: 40px;
+			float: left;
+			transition-property: width, height;
+			transition-duration: 0.3s;
+			transition-delay: 0;
+		}
+
+		/* The reference box, growing in both directions (height
+		   by script, width by `vh` units. */
+		#referenceBoxGrownHorizontallyByJS {
+			background: #0F0;
+			width: 20vh;
+			height: 40px;
+			float: left;
+		}
+	
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,96 @@
+# css/css-anchor-position/position-try-container-query.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/position-try-container-query.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #relative {
+    background: maroon;
+    position: relative;
+    width: 195px;
+    height: 200px;
+  }
+  #target1 {
+    container-type: inline-size;
+    container-name: target1;
+    position-try-fallbacks: --fallback1;
+    background: green;
+    position: absolute;
+    top: 0px;
+    left: 999999px; /* force fallback */
+    width: 100px;
+    height: 100px;
+  }
+  @position-try --fallback1 {
+    top: 100px;
+    left: 0px;
+    width: 150px;
+  }
+  @container (width > 100px) {
+    #inner1 {
+      background-color: lime;
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  #target2 {
+    container-type: inline-size;
+    container-name: target2;
+    position-try-fallbacks: --fallback2, --fallback3;
+    background: orange;
+    position: absolute;
+    top: 0px;
+    left: 999999px; /* force fallback */
+    width: 100px;
+  }
+  @position-try --fallback2 {
+    top: 100px;
+    left: 0px;
+    width: 150px;
+  }
+  @position-try --fallback3 {
+    top: 0px;
+    left: 0px;
+    width: 150px;
+  }
+  @container target2 (width = 150px) {
+    #inner2 {
+      background-color: yellow;
+      width: 100px;
+      height: 150px;
+    }
+  }
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-try-fallbacks”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-try-fallbacks”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

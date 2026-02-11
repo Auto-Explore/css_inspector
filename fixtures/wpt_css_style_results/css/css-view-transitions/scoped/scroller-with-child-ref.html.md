@@ -1,0 +1,42 @@
+# css/css-view-transitions/scoped/scroller-with-child-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/scoped/scroller-with-child-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+body { margin: 20px; font: 18pt monospace; line-height: 30px; }
+#scope { overflow: auto; contain: layout; padding: 20px;
+  width: 200px; height: 100px; border: 20px solid #acf; }
+#part-hide { padding: 10px; visibility: hidden;
+  border: 4px solid orange; width: 150px; height: 180px;
+  margin: 20px 0 0 90px; }
+#part { position: absolute; top: 66px; will-change: transform;
+  background: #fac; padding: 10px; border: 4px solid orange;
+  width: 150px; height: 180px; margin: 20px 0 0 90px; }
+
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

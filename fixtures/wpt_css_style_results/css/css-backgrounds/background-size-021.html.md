@@ -1,0 +1,53 @@
+# css/css-backgrounds/background-size-021.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/background-size-021.html"
+}
+```
+
+## style[0]
+
+```css
+
+        #ref-overlapped-red {
+            background-color: red;
+            left: 30px;
+            height: 100px;
+            position: relative;
+            top: 30px;
+            width: 100px;
+        }
+        #test-overlapping-green {
+            background-image: url("support/40px-wide-20px-tall-green-rect.png");
+            background-origin: content-box;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            border: transparent dotted 5px;
+            bottom: 100px;
+            height: 100px;
+            padding: 25px;
+            position: relative;
+            width: 100px;
+
+            /*
+            Background positioning area is 100px wide by 100px tall.
+            So, the image should be scaled to 100px by 100px.
+            */
+        }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

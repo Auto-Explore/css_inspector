@@ -1,0 +1,149 @@
+# css/css-grid/grid-lanes/tentative/baseline/row-grid-lanes-item-baseline-005.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/baseline/row-grid-lanes-item-baseline-005.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .container {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .grid-lanes {
+      width: 200px;
+      border: solid 3px;
+      gap: 2px;
+      display: grid-lanes;
+      grid-lanes-direction: row;
+      grid-template-rows: repeat(2, 60px);
+      background-color: #f0f0f0;
+      border-color: slateblue;
+      align-items: baseline;
+      font: 16px/1 monospace;
+    }
+
+    .vertical-rl {
+      writing-mode: vertical-rl;
+    }
+
+    .vertical-lr {
+      writing-mode: vertical-lr;
+    }
+
+    .sideways-rl {
+      writing-mode: sideways-rl;
+    }
+
+    .sideways-lr {
+      writing-mode: sideways-lr;
+    }
+
+    .item {
+      height: 60px;
+      padding: 3px;
+      text-decoration: underline;
+    }
+
+    #item1 {
+      background-color: #8cffa0;
+      min-width: 20px;
+      grid-row: 1 / 2;
+      font-size: 12px;
+    }
+
+    #item2 {
+      background-color: #a0c8ff;
+      min-width: 30px;
+      grid-row: 1 / 2;
+      font-size: 16px;
+    }
+
+    #item3 {
+      background-color: #ffa08c;
+      min-width: 25px;
+      grid-row: 1 / 2;
+      font-size: 14px;
+    }
+
+    #item4 {
+      background-color: #ffff8c;
+      min-width: 35px;
+      grid-row: 1 / 2;
+      font-size: 10px;
+    }
+
+    #item5 {
+      background-color: #ff8cff;
+      min-width: 28px;
+      grid-row: 2 / 3;
+      font-size: 14px;
+    }
+
+    #item6 {
+      background-color: #8cffff;
+      min-width: 22px;
+      grid-row: 2 / 3;
+      font-size: 18px;
+    }
+
+    #item7 {
+      background-color: #ff8c8c;
+      min-width: 32px;
+      grid-row: 2 / 3;
+      font-size: 12px;
+    }
+  
+```
+
+```json
+{
+  "errors": 9,
+  "messages": [
+    {
+      "message": "Unknown property “grid-lanes-direction”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

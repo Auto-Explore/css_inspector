@@ -1,0 +1,46 @@
+# css/selectors/old-tests/css3-modsel-27a.xml
+
+```json
+{
+  "format_version": 3,
+  "file": "css/selectors/old-tests/css3-modsel-27a.xml"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+:root:first-child { background-color: red; }
+:root:last-child { background-color: red; }
+:root:only-child { background-color: red; }
+:root:nth-child(1) { background-color: red; }
+:root:nth-child(n) { background-color: red; }
+:root:nth-last-child(1) { background-color: red; }
+:root:nth-last-child(n) { background-color: red; }
+:root:first-of-type { background-color: red; }
+:root:last-of-type { background-color: red; }
+:root:only-of-type { background-color: red; }
+:root:nth-of-type(1) { background-color: red; }
+:root:nth-of-type(n) { background-color: red; }
+:root:nth-last-of-type(1) { background-color: red; }
+:root:nth-last-of-type(n) { background-color: red; }
+p { color: green; }]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

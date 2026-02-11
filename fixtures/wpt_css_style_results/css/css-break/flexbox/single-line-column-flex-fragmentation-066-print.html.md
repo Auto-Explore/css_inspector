@@ -1,0 +1,35 @@
+# css/css-break/flexbox/single-line-column-flex-fragmentation-066-print.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-break/flexbox/single-line-column-flex-fragmentation-066-print.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @page { size: 5in 3in; margin: 0.5in; }
+  body {
+    margin: 0;
+  }
+  .flexbox {
+    display: flex; /* This triggers the bug. */
+    flex-direction: column;
+    border: 0.25in solid black;
+  }
+  .text {
+    block-size: 0.25in;
+  }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

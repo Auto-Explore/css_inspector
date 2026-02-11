@@ -1,0 +1,51 @@
+# css/css-backgrounds/background-image-cors-no-reload.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/background-image-cors-no-reload.html"
+}
+```
+
+## style[0]
+
+```css
+
+:root {
+  --icon: url("/images/green.png?variable-cors-no-reload");
+}
+.item::before,
+.item::after {
+  display: block;
+  content: "";
+  height: 1.25rem;
+  width: 1.25rem;
+  transform: rotate(180deg);
+  background: var(--icon) 50%/2rem 2rem;
+}
+.item::after {
+  background: blue;
+  mask: var(--icon);
+}
+.item.toggled::after,
+.item.toggled::before {
+  color: blue;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

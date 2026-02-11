@@ -1,0 +1,79 @@
+# css/css-grid/grid-lanes/tentative/intrinsic-sizing/grid-lanes-intrinsic-sizing-rows-003-mix1-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/intrinsic-sizing/grid-lanes-intrinsic-sizing-rows-003-mix1-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+@import "support/grid-lanes-intrinsic-sizing-visual.css";
+
+grid {
+  display: inline-grid;
+  gap: 1px 2px;
+  grid-template-rows: 1fr 2fr min-content max-content;
+  grid-auto-flow: column;
+  border: 1px solid;
+  padding: 1px 0 2px 0;
+  vertical-align: top;
+  height: min-content;
+  font-family: Ahem;
+}
+
+item {
+  justify-self: start;
+  writing-mode: vertical-rl;
+  text-orientation: sideways;
+}
+.hidden {
+  visibility: hidden;
+  width: 0;
+}
+
+grid > item:nth-child(1) {
+  background-color: #89CFF0;
+}
+
+grid > item:nth-child(2) {
+  background-color: #FF6F61;
+}
+
+grid > item:nth-child(3) {
+  background-color: #FDF3E7;
+}
+
+grid > item:nth-child(4) {
+  background-color: #F4C542;
+}
+
+grid > item:nth-child(5) {
+  background-color: #333333;
+}
+
+grid > item:nth-child(6) {
+  background-color: #B2C8A5;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Imported style sheets are not checked.",
+      "severity": "Warning"
+    },
+    {
+      "message": "Invalid value for property “gap”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 1
+}
+```

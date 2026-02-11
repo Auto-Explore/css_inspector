@@ -1,0 +1,67 @@
+# css/css-gaps/grid/fragmentation/grid-gap-decorations-fragmentation-009-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/grid/fragmentation/grid-gap-decorations-fragmentation-009-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0px;
+  }
+  .multi-col {
+    position: relative;
+    height: 100px;
+    width: 320px;
+    columns: 3;
+    column-fill: auto;
+    column-gap: 10px;
+    background: lightgray;
+
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 90px 10px);
+    column-gap: 10px;
+  }
+  .grid-container>div {
+    background-color: skyblue;
+  }
+  .simulated-row-gap {
+    grid-column: 1/3;
+    background-color: lightgray !important;
+  }
+  .column-gap {
+    position: absolute;
+    background: blue;
+    height: 100px;
+    width: 6px;
+  }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

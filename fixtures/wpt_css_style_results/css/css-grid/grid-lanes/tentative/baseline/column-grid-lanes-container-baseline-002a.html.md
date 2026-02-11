@@ -1,0 +1,102 @@
+# css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-container-baseline-002a.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-container-baseline-002a.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .container {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      border: 2px solid darkblue;
+      padding: 10px;
+      font: 16px/1 monospace;
+      width: 600px;
+      text-decoration: underline;
+    }
+
+    .grid-lanes {
+      display: grid-lanes;
+      grid-template-columns: repeat(2, 100px);
+      gap: 10px;
+      border: 1px solid red;
+      background: #f0f0f0;
+    }
+
+    .grid-lanes-item {
+      border: 1px solid navy;
+      font-size: 14px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .top {
+      align-items: flex-start;
+    }
+
+    .text-reference {
+      background: yellow;
+      padding: 8px;
+    }
+
+    .grid-lanes-item:nth-child(1) {
+      height: 30px;
+      background: lightcoral;
+      padding: 4px;
+    }
+
+    .grid-lanes-item:nth-child(2) {
+      height: 80px;
+      background: lightgreen;
+      padding: 4px;
+    }
+
+    .grid-lanes-item:nth-child(3) {
+      height: 50px;
+      background: lightblue;
+      padding: 4px;
+    }
+
+    .grid-lanes-item:nth-child(4) {
+      height: 90px;
+      background: lightpink;
+      padding: 4px;
+    }
+  
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

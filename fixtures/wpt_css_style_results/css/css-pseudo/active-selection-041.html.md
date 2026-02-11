@@ -1,0 +1,49 @@
+# css/css-pseudo/active-selection-041.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-pseudo/active-selection-041.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div
+    {
+      font-size: 300%;
+    }
+
+  img
+    {
+      vertical-align: top;
+    }
+
+  /*
+  Chromium 80+ will highlight space
+  below and above content box while
+  Firefox 72+ only highlights the image itself.
+  Therefore this 'vertical-align: top' declaration
+  to work around this possible behavior.
+  */
+
+  img::selection
+    {
+      background-color: blue;
+      /*
+      equivalent to rgb(0, 0, 255) or rgb(0%, 0%, 100%)
+      or rgba(0, 0, 255, 1) or #0000FF
+      */
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

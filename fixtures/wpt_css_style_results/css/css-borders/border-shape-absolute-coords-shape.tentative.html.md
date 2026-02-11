@@ -1,0 +1,37 @@
+# css/css-borders/border-shape-absolute-coords-shape.tentative.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-borders/border-shape-absolute-coords-shape.tentative.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .bs-target {
+    position: absolute;
+    top: 200px;
+    left: 0px;
+    width: 190px;
+    height: 190px;
+    border-shape: shape(from 0% 0%, line to 100% 0%, line to 50% 100%, close);
+    border: 10px solid purple;
+    background: green;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “border-shape”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

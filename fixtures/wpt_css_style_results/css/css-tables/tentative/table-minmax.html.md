@@ -1,0 +1,48 @@
+# css/css-tables/tentative/table-minmax.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-tables/tentative/table-minmax.html"
+}
+```
+
+## style[0]
+
+```css
+
+  main table {
+    background: gray;
+    border-spacing: 10px 10px;
+    table-layout: auto;
+  }
+  main td {
+    background: #BFB;
+    font-size: 10px;
+    box-sizing: border-box;
+  }
+  main td > div {
+    display: inline-block;
+    background: rgba(56,162,56,0.3);
+    line-height: 2;
+  }
+  .container {
+    border: 5px solid orange;
+    margin-top: 8px;
+    box-sizing: border-box;
+    width: 600px;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

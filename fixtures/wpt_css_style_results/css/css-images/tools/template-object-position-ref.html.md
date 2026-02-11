@@ -1,0 +1,56 @@
+# css/css-images/tools/template-object-position-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-images/tools/template-object-position-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+      div {
+        background: lightgray;
+        margin-right: 2px;
+        background-image: url("REPLACEME_IMAGE_FILENAME");
+        background-size: contain;
+        background-repeat: no-repeat;
+        image-rendering: pixelated; /* for UAs that don't support crisp-edges */
+        image-rendering: crisp-edges;
+        float: left;
+        width: 20px;
+        height: 20px;
+      }
+
+      .op_x-7  { background-position:  -7% 50% }
+      .op_x13  { background-position:  13% 50% }
+      .op_x23  { background-position:  23% 50% }
+      .op_x50  { background-position:  50% 50% }
+      .op_x75  { background-position:  75% 50% }
+      .op_x88  { background-position:  88% 50% }
+      .op_x111 { background-position: 111% 50% }
+      .op_y-7  { background-position: 50%  -7% }
+      .op_y13  { background-position: 50%  13% }
+      .op_y23  { background-position: 50%  23% }
+      .op_y50  { background-position: 50%  50% }
+      .op_y75  { background-position: 50%  75% }
+      .op_y88  { background-position: 50%  88% }
+      .op_y111 { background-position: 50% 111% }
+
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

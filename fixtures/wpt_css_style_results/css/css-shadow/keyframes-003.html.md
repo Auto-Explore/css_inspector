@@ -1,0 +1,42 @@
+# css/css-shadow/keyframes-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shadow/keyframes-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+        @keyframes myanim {
+          from { background: red; }
+          to { background: green; }
+        }
+        :host {
+          width: 100px;
+          height: 100px;
+          background: blue;
+          animation: myanim 10s infinite;
+        }
+      
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

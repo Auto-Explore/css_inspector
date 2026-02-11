@@ -1,0 +1,61 @@
+# css/css-backgrounds/border-radius-clip-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/border-radius-clip-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body > div { float: left; }
+  .round
+    {
+      border: transparent double 20px;
+      border-radius: 50%;
+      padding: 10px;
+    }
+  #bg, #txt, #img-contain
+    {
+      overflow: hidden;
+      width: 80px;
+    }
+  #bg > div
+    {
+      margin: -10px;
+      background-image: url("support/100x100-green-with-red-corners.png");
+      height: 100px;
+      width: 100px;
+    }
+  #txt > div
+    {
+      margin: -10px;
+      color: green;
+      font: 50px/1 Ahem;
+    }
+
+  img
+    {
+      display: block;
+    }
+  #img-contain > img
+    {
+      margin: -10px;
+    }
+  #img-self
+    {
+      margin: -10px;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

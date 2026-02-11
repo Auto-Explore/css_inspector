@@ -1,0 +1,52 @@
+# css/css-text-decor/text-decoration-091a-manual.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text-decor/text-decoration-091a-manual.html"
+}
+```
+
+## style[0]
+
+```css
+
+#htmlsrc { margin: 2em; }
+#htmlsrc p {
+	font-size: 28px;
+	border-radius: 5px;
+	line-height: 1.5;
+	}
+.hint { color: brown; font-family: sans-serif; font-size: 90%; }
+.hint:before { content: '❗ '; }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[1]
+
+```css
+
+div span {
+text-decoration:overline;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

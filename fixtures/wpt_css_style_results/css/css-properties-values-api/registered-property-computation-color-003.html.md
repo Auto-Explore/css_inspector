@@ -1,0 +1,43 @@
+# css/css-properties-values-api/registered-property-computation-color-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-properties-values-api/registered-property-computation-color-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+@property --x {
+  inherits: true;
+  initial-value: black;
+  syntax: "<color>";
+}
+div {
+  color-scheme: dark;
+  --x: Canvas;
+  background-color: var(--x);
+  width: 100px;
+  height: 100px;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

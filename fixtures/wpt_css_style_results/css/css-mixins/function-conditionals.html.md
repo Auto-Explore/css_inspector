@@ -1,0 +1,750 @@
+# css/css-mixins/function-conditionals.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-mixins/function-conditionals.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #container {
+    container-type: size;
+    width: 100px;
+    height: 50px;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```
+
+## style[1]
+
+```css
+
+    @function --f() {
+      result: FAIL;
+      @supports (width: 100px) {
+        result: PASS;
+      }
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[2]
+
+```css
+
+    @function --f() {
+      result: PASS;
+      @supports (not (width: 100px)) {
+        result: FAIL;
+      }
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[3]
+
+```css
+
+    @function --f() {
+      result: FAIL;
+      @supports (not (width: red)) {
+        @supports (height: 100px) {
+          result: PASS;
+        }
+      }
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[4]
+
+```css
+
+    @function --f() {
+      result: FAIL-outer;
+      @supports (not (width: red)) {
+        result: PASS;
+        @supports (height: red) {
+          result: FAIL-inner;
+        }
+      }
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[5]
+
+```css
+
+    @function --f() {
+      @supports (width: 100px) {
+        result: FAIL;
+      }
+      result: PASS;
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[6]
+
+```css
+
+    @function --f(--x) {
+      --y: 2;
+      --z: 3;
+      @supports (width: 100px) {
+        --y: 20;
+      }
+      result: var(--x) var(--y) var(--z);
+    }
+    #target {
+      --actual: --f(1);
+      --expected: 1 20 3;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[7]
+
+```css
+
+    @function --f() {
+      result: FAIL;
+      @media (width > 0px) {
+        result: PASS;
+      }
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[8]
+
+```css
+
+    @function --f() {
+      result: PASS;
+      @media (not (width)) {
+        result: FAIL;
+      }
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[9]
+
+```css
+
+    @function --f() {
+      result: FAIL;
+      @media (width > 0px) {
+        @media (not (height: 99999999px)) {
+          result: PASS;
+        }
+        @media (width: 99999999px) {
+          result: FAIL;
+        }
+      }
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[10]
+
+```css
+
+    @function --f() {
+      result: PASS;
+      @media (not (width > 0px)) {
+        @media (not (height: 99999999px)) {
+          result: FAIL;
+        }
+        @media (width: 99999999px) {
+          result: FAIL;
+        }
+      }
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[11]
+
+```css
+
+    @function --f() {
+      --x: FAIL;
+      @media (width > 0px) {
+        --x: PASS;
+      }
+      result: var(--x);
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[12]
+
+```css
+
+    @function --f() {
+      --x: FAIL;
+      @media (width > 0px) {
+        @supports (color: green) {
+          --x: PASS;
+        }
+        @supports (not (color: green)) {
+          --x: FAIL;
+        }
+      }
+      result: var(--x);
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[13]
+
+```css
+
+    @function --f() {
+      --x: FAIL;
+      @supports (color: green) {
+        @media (width > 0px) {
+          --x: PASS;
+        }
+        @media (width = 99999999999px) {
+          --x: FAIL;
+        }
+      }
+      result: var(--x);
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[14]
+
+```css
+
+    @function --f() {
+      result: FAIL;
+      @container (width = 100px) {
+        result: PASS;
+      }
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[15]
+
+```css
+
+    @function --f() {
+      result: PASS;
+      @container (width = 110px) {
+        result: FAIL;
+      }
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[16]
+
+```css
+
+    @function --f() {
+      result: FAIL;
+      @container (width = 100px) {
+        @container (not (height = 75px)) {
+          result: PASS;
+        }
+        @container (height: 75px) {
+          result: FAIL;
+        }
+      }
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[17]
+
+```css
+
+    @function --f() {
+      result: PASS;
+      @container (width = 200px) {
+        @container (not (height = 75px)) {
+          result: FAIL;
+        }
+        @container (width: 75px) {
+          result: FAIL;
+        }
+      }
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[18]
+
+```css
+
+    @function --f() {
+      --x: FAIL;
+      @container (width = 100px) {
+        --x: PASS;
+      }
+      result: var(--x);
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[19]
+
+```css
+
+    @function --f() {
+      --x: FAIL;
+      @container (width = 100px) {
+        @supports (color: green) {
+          --x: PASS;
+        }
+        @supports (not (color: green)) {
+          --x: FAIL;
+        }
+      }
+      result: var(--x);
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[20]
+
+```css
+
+    @function --f() {
+      --x: FAIL;
+      @supports (color: green) {
+        @container (width = 100px) {
+          --x: PASS;
+        }
+        @container (width = 75px) {
+          --x: FAIL;
+        }
+      }
+      result: var(--x);
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[21]
+
+```css
+
+    @function --f() {
+      --x: FAIL;
+      @container (width = 100px) {
+        @media (width > 0px) {
+          @supports (color: red) {
+            --x: PASS;
+          }
+        }
+      }
+      result: var(--x);
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[22]
+
+```css
+
+    @function --f() {
+      --x: FAIL;
+      @supports (color: red) {
+        @media (width > 0px) {
+          @container (width = 100px) {
+            --x: PASS;
+          }
+        }
+      }
+      result: var(--x);
+    }
+    #target {
+      --actual: --f();
+      --expected: PASS;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

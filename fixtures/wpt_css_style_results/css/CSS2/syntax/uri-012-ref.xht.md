@@ -1,0 +1,26 @@
+# css/CSS2/syntax/uri-012-ref.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/syntax/uri-012-ref.xht"
+}
+```
+
+## style[0]
+
+```css
+
+p {
+  color: green;
+  border: solid green;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

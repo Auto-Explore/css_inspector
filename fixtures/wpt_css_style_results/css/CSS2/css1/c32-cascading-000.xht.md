@@ -1,0 +1,54 @@
+# css/CSS2/css1/c32-cascading-000.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/css1/c32-cascading-000.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+   body * { color: red; list-style: none; margin: 0; padding: 0; }
+   span { color: red; }
+   li span.a { color: red; }
+   li span.b { color: red; }
+   li span.c { color: red; }
+   li span.d { color: red; }
+   li span.e { color: red; }
+   li span.f { color: red; }
+   ul li span.a { color: green; }
+   ul li span.b { color: green; }
+   ul li li span.c { color: red; }
+   ul li li span.d { color: red; }
+   ul li li span.e { color: red; }
+   ul li li span.f { color: red; }
+   ul li li span.c { color: green; }
+   li.test1 span.d { color: green; }
+   ul li.test2 span.e { color: green; }
+   ul li.test3 span.f { color: red; }
+   ul li#test3 span.f { color: green; }
+   .test4 { color: red; }
+   .test4 { color: green; }
+   .c { color: green; }
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

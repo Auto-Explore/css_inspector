@@ -1,0 +1,68 @@
+# css/css-anchor-position/position-try-fallbacks-limit.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/position-try-fallbacks-limit.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+  }
+  .positioned {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    left: 10px; /* overflowing #container */
+  }
+
+  @position-try --bar {
+    left: 0; /* not overflowing #container */
+  }
+  #t1 {
+    /* If --foo is not found, we should still try --bar even if we limit the
+       number of applied position fallbacks to five because the --foo's are not
+       added to the `position fallbacks list` per spec. */
+    position-try-fallbacks: --foo, --foo, --foo, --foo, --foo, --foo, --foo, --bar;
+  }
+
+  /* --f1 .. --f4 all overflowing #container */
+  @position-try --f1 { left: 10px; }
+  @position-try --f2 { left: 10px; }
+  @position-try --f3 { left: 10px; }
+  @position-try --f4 { left: 10px; }
+  @position-try --f5 { left: 20px; width: 20px; /* not overflowing #container */ }
+  #t2 {
+    position-try-fallbacks: --f1, --f2, --f3, --f4, --f5;
+  }
+
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-try-fallbacks”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-try-fallbacks”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

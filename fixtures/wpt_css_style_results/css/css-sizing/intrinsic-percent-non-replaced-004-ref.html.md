@@ -1,0 +1,64 @@
+# css/css-sizing/intrinsic-percent-non-replaced-004-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-sizing/intrinsic-percent-non-replaced-004-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  /* establish context */
+  .container {
+    clear: both;
+    padding: 10px;
+    width: 0;
+  }
+
+  span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: blue;
+  }
+
+  /* visualize size contribution */
+  .container > div {
+    float: left;
+    border: solid orange 20px;
+    border-style: none solid;
+  }
+  .container > div > div {
+    border-right: solid 20px aqua;
+    writing-mode: vertical-rl;
+    width: 40px;
+    height: 20px;
+  }
+
+  /* controls for min-width */
+  /* content = 100% = 80px = 4ch + border */
+  /* choose sizes that are larger than content to see if how they take effect */
+  .container > div > .raw-percent {
+    width: 120px;
+  }
+  .container > div > .calc-percent,
+  .container > div > .no-percent {
+    width: 160px;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

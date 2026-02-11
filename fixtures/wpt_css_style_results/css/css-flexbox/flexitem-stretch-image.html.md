@@ -1,0 +1,35 @@
+# css/css-flexbox/flexitem-stretch-image.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flexitem-stretch-image.html"
+}
+```
+
+## style[0]
+
+```css
+
+.flexbox {
+    width: 600px;
+    display: flex;
+    background-color: #aaa;
+    position: relative;
+    min-height: 10px;
+}
+.flexbox > * {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    min-width: 0;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

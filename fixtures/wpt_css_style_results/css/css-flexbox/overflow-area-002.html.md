@@ -1,0 +1,71 @@
+# css/css-flexbox/overflow-area-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/overflow-area-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+.set {
+  clear: both;
+  margin: 1em;
+  direction: rtl;
+}
+
+.test, .ref {
+  display: flex;
+  overflow: scroll;
+  border: solid blue;
+  background: aqua;
+  margin: 0.5em;
+  float: left;
+}
+div {
+  flex: none;
+}
+
+.test {
+  padding: 10px;
+  width: 60px;
+  height: 60px;
+}
+.test > div {
+  margin: 20px;
+  border: 5px solid transparent;
+  padding: 5px;
+  width: 10px;
+  height: 10px;
+  background: teal;
+}
+
+.ref {
+  width: 80px;
+  height: 80px;
+  border-color: orange;
+}
+.ref > div {
+  border: 30px solid aqua;
+  width: 30px;
+  height: 30px;
+  background: teal;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “border-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

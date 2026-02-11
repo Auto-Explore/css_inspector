@@ -1,0 +1,44 @@
+# css/CSS2/margin-padding-clear/margin-collapse-111.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/margin-padding-clear/margin-collapse-111.xht"
+}
+```
+
+## style[0]
+
+```css
+
+   table { border-spacing: 0; font-size: 50px; border: solid 3px; background: orange; }
+   td { padding: 0; }
+   .a, .b { height: 1em; width: 1em; }
+   .a { background: yellow; }
+   .b { background: lime; }
+   .c { background: red; margin: 1em 0 1em; }
+   .t1 .a { margin: 1em 0 1em; }
+   .t1 .b { margin: 1em 0 1em; }
+   .t2 .a { margin: 1em 0 1em; }
+   .t2 .b { margin: 0em 0 1em; }
+   .t3 .a { margin: 1em 0 0em; }
+   .t3 .b { margin: 1em 0 1em; }
+   .t4 .a { margin: 1em 0 2em; }
+   .t4 .b { margin: -1em 0 1em; }
+   .t5 .a { margin: 1em 0 -1em; }
+   .t5 .b { margin: 2em 0 1em; }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

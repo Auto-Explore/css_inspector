@@ -1,0 +1,54 @@
+# css/css-scroll-snap/snap-after-relayout/resnap-on-overflowing-snap-area.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-snap/snap-after-relayout/resnap-on-overflowing-snap-area.html"
+}
+```
+
+## style[0]
+
+```css
+
+#scroller {
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  width: 100vw;
+  height: calc(100svh - 80px);
+}
+.child {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  width: 100%;
+  height: calc(100svh - 80px);
+  font-size: 30px;
+}
+.child:last-child {
+  background-image: linear-gradient(to right, black 1px, transparent 1px),
+                    linear-gradient(to bottom, black 1px, transparent 1px);
+  background-size: 64px 64px;
+  height: 200%;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

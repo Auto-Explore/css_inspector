@@ -1,0 +1,44 @@
+# css/css-tables/rowspan-cell-border-after-color.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-tables/rowspan-cell-border-after-color.html"
+}
+```
+
+## style[0]
+
+```css
+
+  table {
+    border-collapse: collapse;
+  }
+
+  td {
+    width: 100px;
+    height: 50px;
+    border: 1px solid black;
+  }
+
+  /* Different border colors for each row */
+  #test tr:nth-child(1) {
+    border-bottom: 5px solid blue;
+  }
+
+  #test tr:nth-child(2) {
+    border-bottom: 5px solid green;
+  }
+
+  #test tr:nth-child(3) {
+    border-bottom: 5px solid red;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

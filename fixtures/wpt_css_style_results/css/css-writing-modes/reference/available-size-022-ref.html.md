@@ -1,0 +1,35 @@
+# css/css-writing-modes/reference/available-size-022-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/reference/available-size-022-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+/* Set up */
+html    { word-break: break-all; font: 15px/1 sans-serif; writing-mode: vertical-lr; }
+article { margin-left: 0.5em; }
+aside   { writing-mode: vertical-rl; width: 2em; overflow: hidden; color: blue;
+          margin: 4em 0; padding: 2em 0; border: solid 4px silver; }
+/* Highlight truncated cases for visual verification */
+.clamp aside, em { border-color: blue; color: blue }
+
+/* References */
+.fixed aside { height: calc(50vh - 12em - 8px); }
+.full  aside { height: calc(100vh - 12em - 8px); }
+.clamp { height: 30vh; overflow: hidden; }
+html { overflow: hidden; /* avoid scrollbar variance */ }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

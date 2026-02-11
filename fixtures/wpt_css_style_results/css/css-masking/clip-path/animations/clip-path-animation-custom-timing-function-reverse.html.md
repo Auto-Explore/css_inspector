@@ -1,0 +1,65 @@
+# css/css-masking/clip-path/animations/clip-path-animation-custom-timing-function-reverse.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-masking/clip-path/animations/clip-path-animation-custom-timing-function-reverse.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @keyframes clippath {
+    0% {
+      clip-path: inset(45% 45%);
+    }
+
+    25% {
+      clip-path: inset(49% 49%);
+    }
+
+    50% {
+      clip-path: inset(45% 45%);
+    }
+
+    75% {
+      clip-path: inset(40% 40%);
+      animation-timing-function: cubic-bezier(0, -9, 1, -9);
+      /* Test that the correct keyframe's timing function is being used. */
+    }
+
+    100% {
+      clip-path: inset(45% 45%);
+    }
+  }
+
+  .green {
+    background-color: green;
+    width: 200px;
+    height: 200px;
+
+    animation: clippath 10000000s -8717082s
+      /* halfway between the second to last and last keyframes.*/
+    ;
+  }
+
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

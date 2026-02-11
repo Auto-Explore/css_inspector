@@ -1,0 +1,78 @@
+# css/css-anchor-position/anchor-center-fallback-transition-behavior.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-center-fallback-transition-behavior.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body { margin: 0; }
+  #cb {
+    position: relative;
+    width: 400px;
+    height: 100px;
+    border: 1px solid black;
+  }
+  #a1 {
+    anchor-name: --a1;
+    width: 100px;
+    height: 100px;
+    background: green;
+  }
+  #t1 {
+    position-anchor: --a1;
+    /* transition-behavior exercises bug in Chrome */
+    transition-behavior: allow-discrete;
+    position: absolute;
+    position-area: bottom;
+    position-try-fallbacks: --right;
+    width: 200px;
+    height: 100px;
+    background: cyan;
+  }
+  @position-try --right {
+    position-area: right;
+  }
+```
+
+```json
+{
+  "errors": 7,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “transition-behavior”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-area”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-try-fallbacks”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

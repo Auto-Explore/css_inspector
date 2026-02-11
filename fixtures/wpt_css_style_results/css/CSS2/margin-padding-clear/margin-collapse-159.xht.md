@@ -1,0 +1,45 @@
+# css/CSS2/margin-padding-clear/margin-collapse-159.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/margin-padding-clear/margin-collapse-159.xht"
+}
+```
+
+## style[0]
+
+```css
+
+   table { border-spacing: 0; font-size: 50px; border: solid; background: red; }
+   td { padding: 0; width: 1em; background: red; vertical-align: top; }
+
+   .a { background: orange; }
+   .a .container { height: 1em; background: red; }
+   .a .sized { height: 3em; margin: 0 0 1em 0; background: aqua; }
+   .a .after { height: 1em; margin: 0 0 1em 0; background: yellow; }
+
+   .b .a { border-top: solid aqua 1em; }
+   .b .b { border-top: solid yellow 1em; }
+   .b .c { border-top: solid aqua 1em; }
+   .b .d { border-top: solid orange 1em; }
+
+  
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

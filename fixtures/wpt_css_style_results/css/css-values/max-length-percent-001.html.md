@@ -1,0 +1,36 @@
+# css/css-values/max-length-percent-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-values/max-length-percent-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+html, body { margin: 0px; padding: 0px; }
+#parent { width: 400px; }
+#target {
+  width: max(100px, 25% + 100px, 150px + 10%);
+  height: 200px;
+  background: green;
+}
+#fail {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  z-index: -1;
+  background: red;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

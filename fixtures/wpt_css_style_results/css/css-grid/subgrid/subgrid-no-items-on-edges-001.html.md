@@ -1,0 +1,56 @@
+# css/css-grid/subgrid/subgrid-no-items-on-edges-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/subgrid/subgrid-no-items-on-edges-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.wrapper {
+  width: 100px;
+  height: 100px;
+  background: red;
+}
+.grid {
+  display: inline-grid;
+  grid: repeat(3, auto) / repeat(5, auto);
+  background: red;
+}
+.subgrid {
+  display: grid;
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+  grid-template: subgrid / subgrid;
+  background: green;
+  padding: 11px 7px 20px 13px;
+  border-width: 14px 18px 5px 12px;
+  border-style: solid;
+  border-color: green;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

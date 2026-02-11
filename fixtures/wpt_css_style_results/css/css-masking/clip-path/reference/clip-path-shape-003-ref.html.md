@@ -1,0 +1,28 @@
+# css/css-masking/clip-path/reference/clip-path-shape-003-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-masking/clip-path/reference/clip-path-shape-003-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #ref {
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    clip-path: path(nonzero, "M 10 10 Q 40 0 60 20 T 90 0 c 10 40 20 20 -20 60 s -10 70 -40 -10");
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

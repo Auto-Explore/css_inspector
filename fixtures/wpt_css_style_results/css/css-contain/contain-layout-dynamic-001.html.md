@@ -1,0 +1,86 @@
+# css/css-contain/contain-layout-dynamic-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-contain/contain-layout-dynamic-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  /* Selectors for contain */
+  #none .wrapper {
+      contain: none;
+  }
+  #layout .wrapper {
+      contain: layout;
+  }
+  #none_to_layout .wrapper {
+      contain: none;
+  }
+  #layout_to_none .wrapper {
+      contain: layout;
+  }
+
+  /* Selectors for testing absolute/fixed positioned elements */
+  #top_spacer {
+      height: 100px;
+      background: lightgray;
+  }
+  .absolute_pos {
+      position: absolute;
+      top: 42px;
+  }
+  .fixed_pos {
+      position: fixed;
+      top: 42px;
+  }
+
+  /* Selectors for testing baseline */
+  .flex {
+      display: inline-flex;
+      align-items: baseline;
+  }
+
+  /* Selectors for testing IFC (floats) */
+  .floatleft {
+      float: left;
+  }
+  .clearleft {
+      clear: left;
+  }
+
+  /* Selectors for testing IFC (margin collapsing) */
+  .blockmargin {
+      margin: 25px 0;
+  }
+  .wrapper.blockmargin {
+      background: lightgray;
+  }
+
+  .rect {
+      background: black;
+      width: 50px;
+      height: 100px;
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

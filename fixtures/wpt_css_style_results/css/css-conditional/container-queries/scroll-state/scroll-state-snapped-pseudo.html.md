@@ -1,0 +1,60 @@
+# css/css-conditional/container-queries/scroll-state/scroll-state-snapped-pseudo.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-conditional/container-queries/scroll-state/scroll-state-snapped-pseudo.html"
+}
+```
+
+## style[0]
+
+```css
+
+  :root {
+    scroll-snap-type: block proximity;
+  }
+  body {
+    margin: 0;
+  }
+  #filler-before {
+    height: 10px;
+  }
+  #filler-after {
+    height: 10000px;
+  }
+  #snapped {
+    position: relative;
+    top: 3000px; /* Should be enough to not snap for proximity */
+    container-type: scroll-state inline-size;
+    scroll-snap-align: start;
+    --before: no;
+    --after: no;
+    @container scroll-state(snapped) {
+      &::before {
+        --before: yes;
+        content: " ";
+      }
+      &::after {
+        --after: yes;
+      }
+    }
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “container-type”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

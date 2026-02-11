@@ -1,0 +1,51 @@
+# css/compositing/mix-blend-mode/reference/mix-blend-mode-overflowing-child-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/compositing/mix-blend-mode/reference/mix-blend-mode-overflowing-child-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+            body {
+                background: lightgray;
+            }
+            .container {
+                position: absolute;
+                z-index: 1;
+                width: 100px;
+                height: 100px;
+                background: #0F0;
+            }
+            .blender {
+                background: #0F0;
+                margin: 50px;
+                width: 100px;
+                height: 100px;
+            }
+            .intersection {
+                background: #000;
+                width: 50px;
+                height: 50px;
+                margin-top: -150px;
+                margin-left: 50px;
+            }
+        
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

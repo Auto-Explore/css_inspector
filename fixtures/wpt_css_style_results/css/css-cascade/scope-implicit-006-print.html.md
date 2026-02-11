@@ -1,0 +1,61 @@
+# css/css-cascade/scope-implicit-006-print.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-cascade/scope-implicit-006-print.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @scope {
+    .a {
+      width: 100px;
+      height: 100px;
+      background: green;
+    }
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[1]
+
+```css
+
+      @scope {
+        .a {
+          width: 100px;
+          height: 100px;
+          background: red;
+        }
+      }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

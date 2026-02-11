@@ -1,0 +1,38 @@
+# css/css-flexbox/dynamic-isize-change-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/dynamic-isize-change-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+#flexbox {
+  display: flex;
+  inline-size: 50px;
+  block-size: 100px;
+  background: red;
+}
+
+#flexbox > div {
+  box-sizing: border-box;
+
+  /* The following flex-basis and padding will give our flex item a content-box
+     inline-size of 25px, both before and after this test's dynamic change. */
+  flex-basis: 100%;
+  padding-right: calc(100% - 25px);
+  background: green;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,70 @@
+# css/css-scrollbars/scrollbar-width-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scrollbars/scrollbar-width-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+  /* Use scrollbar-gutter to reserve space for the scrollbar. */
+  .container {
+    scrollbar-gutter: stable;
+    writing-mode: horizontal-tb;
+    overflow: auto;
+    height: 200px;
+    width: 200px;
+    margin: 1px;
+    padding: 0px;
+    border: none;
+    background: deepskyblue;
+  }
+
+  .content {
+    height: 300px;
+    width: 300px;
+    background: lightsalmon;
+  }
+
+  /* writing directions */
+  .ltr {
+    direction: ltr;
+  }
+
+  .rtl {
+    direction: rtl;
+  }
+
+  .container.auto {
+    scrollbar-width: auto;
+  }
+
+  .container.thin {
+    scrollbar-width: thin;
+  }
+
+  .container.none {
+    scrollbar-width: none;
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

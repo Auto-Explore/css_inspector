@@ -1,0 +1,156 @@
+# css/css-variables/variable-reference-visited.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-variables/variable-reference-visited.html"
+}
+```
+
+## style[0]
+
+```css
+
+    :root { --color: green; }
+
+    div {
+        min-height: 10px;
+        margin-bottom: 10px;
+    }
+
+    .color {
+        color: var(--color);
+    }
+    .background_color {
+        background-color: var(--color);
+    }
+    .border_color_longhand{
+        border-style: solid;
+        border-width: medium;
+        border-left-color: var(--color);
+        border-top-color: var(--color);
+        border-right-color: var(--color);
+        border-bottom-color: var(--color);
+    }
+    .border_shorthand {
+        border: medium solid var(--color);
+    }
+    .border_color_longhand_logical {
+        border-style: solid;
+        border-width: medium;
+        border-inline-start-color: var(--color);
+        border-inline-end-color: var(--color);
+        border-block-start-color: var(--color);
+        border-block-end-color: var(--color);
+    }
+    .border_shorthand_logical {
+        border-inline: medium solid var(--color);
+        border-block: medium solid var(--color);
+    }
+    .outline_color_longhand {
+        outline-color: var(--color);
+        outline-style: solid;
+        outline-width: medium;
+    }
+    .outline_shorthand {
+        outline: medium solid var(--color);
+    }
+    .text_decoration_color_longhand {
+        text-decoration-line: underline;
+        text-decoration-style: solid;
+        text-decoration-color: var(--color);
+    }
+    .text_decoration_shorthand {
+        text-decoration: solid underline var(--color);
+    }
+    .column_rule_color_longhand {
+        columns: 2;
+        column-rule-width: medium;
+        column-rule-style: solid;
+        column-rule-color: var(--color);
+    }
+    .column_rule_shorthand {
+        columns: 2;
+        column-rule: medium solid var(--color);
+    }
+    .stroke {
+        stroke: var(--color);
+        fill: white;
+    }
+    .fill {
+        fill: var(--color);
+    }
+```
+
+```json
+{
+  "errors": 16,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-*-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-*-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-*-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-*-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-inline”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-block”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “outline-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “outline”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “text-decoration”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “column-rule”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “stroke”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “fill”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “fill”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

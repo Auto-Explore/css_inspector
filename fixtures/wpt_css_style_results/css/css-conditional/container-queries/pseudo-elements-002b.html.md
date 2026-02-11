@@ -1,0 +1,39 @@
+# css/css-conditional/container-queries/pseudo-elements-002b.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-conditional/container-queries/pseudo-elements-002b.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container { container-type: inline-size; }
+
+  @container (max-width: 300px) { #c5::first-letter { color: green } }
+  @container (max-width: 300px) { #c6::first-letter { color: green } }
+
+  @container (min-width: 400px) { #c7::first-letter { color: green } }
+  @container (min-width: 400px) { #c8::first-letter { color: green } }
+
+  @container (max-width: 300px) { #c9::first-line { color: green } }
+  @container (max-width: 300px) { #c10::first-line { color: green } }
+
+  @container (min-width: 400px) { #c11::first-line { color: green } }
+  @container (min-width: 400px) { #c12::first-line { color: green } }
+
+  #c13::first-line { color: red }
+  @container (min-width: 400px) { #c13::first-line { color: green } }
+  @container (min-width: 400px) { #c14::first-line { color: green } }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

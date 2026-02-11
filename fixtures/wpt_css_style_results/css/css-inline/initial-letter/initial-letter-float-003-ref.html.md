@@ -1,0 +1,51 @@
+# css/css-inline/initial-letter/initial-letter-float-003-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-inline/initial-letter/initial-letter-float-003-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .sample {
+        border: solid 1px green;
+        font-family: Ahem;
+        font-size: 20px;
+        line-height: 24px;
+        width: 230px;
+    }
+
+    .float {
+        background: cyan;
+        clear: left;
+        float: left;
+        height: 50px;
+        width: 50px;
+    }
+
+    .fake-initial-letter {
+        background: lime;
+        float: left;
+        height: 80px;
+        margin-right: 10px;
+        margin-top: -48px;
+        width: 80px;
+    }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

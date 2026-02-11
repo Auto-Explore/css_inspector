@@ -1,0 +1,95 @@
+# css/css-scroll-snap/snap-after-relayout/snap-to-different-targets.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-snap/snap-after-relayout/snap-to-different-targets.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  position: absolute;
+  margin: 0;
+}
+
+#scroller {
+  height: 500px;
+  width: 500px;
+  overflow: hidden;
+  scroll-snap-type: both mandatory;
+}
+
+#x-axis-target {
+  scroll-snap-align: none start;
+  background-color: blue;
+  width: 100px;
+  height: 100px;
+  top: 400px;
+  left: 200px;
+}
+
+#y-axis-target {
+  scroll-snap-align: start none;
+  background-color: green;
+  width: 100px;
+  height: 100px;
+  top: 200px;
+  left: 400px;
+}
+
+#far-x-axis-target {
+  scroll-snap-align: none start;
+  background-color: blue;
+  width: 100px;
+  height: 100px;
+  top: 1200px;
+  left: 300px;
+}
+
+#far-y-axis-target {
+  scroll-snap-align: start none;
+  background-color: green;
+  width: 100px;
+  height: 100px;
+  top: 300px;
+  left: 1200px;
+}
+
+.area {
+  width: 2000px;
+  height: 2000px;
+}
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-snap-align”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-snap-align”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-snap-align”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-snap-align”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

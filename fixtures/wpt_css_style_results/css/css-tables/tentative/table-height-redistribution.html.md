@@ -1,0 +1,59 @@
+# css/css-tables/tentative/table-height-redistribution.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-tables/tentative/table-height-redistribution.html"
+}
+```
+
+## style[0]
+
+```css
+
+  main table {
+    border-spacing: 0px;
+    background: rgba(255,0,0,0.3);
+    height: 100px;
+    width: 100px;
+  }
+  main td {
+    padding: 0;
+  }
+  main table tbody:nth-child(1) {
+    background: #CCC;
+  }
+  main table tbody:nth-child(2) {
+    background: #AAA;
+  }
+  main table tbody:nth-child(3) {
+    background: #999;
+  }
+  main table thead {
+    background: rgba(0,255,0,0.3);
+  }
+  main table tfoot {
+    background: rgba(255,255,0,0.3);
+  }
+
+  .debug {
+    width:100px;
+    height:1px;
+    position:relative;
+  }
+  .debug pre {
+    position:absolute;
+    font: 30px/30px monospace;
+    left: 120px;
+    top:-30px;
+  }
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

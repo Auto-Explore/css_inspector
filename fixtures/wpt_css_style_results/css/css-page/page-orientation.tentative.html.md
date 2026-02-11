@@ -1,0 +1,107 @@
+# css/css-page/page-orientation.tentative.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/page-orientation.tentative.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @page {
+      page-orientation: rotate-right;
+  }
+  @page :left {
+      page-orientation: rotate-left;
+  }
+  @page :right {
+      page-orientation: rotate-right;
+  }
+  @page :first {
+      page-orientation: rotate-left;
+  }
+  @page named1 {
+      page-orientation: upright;
+  }
+  @page named2 {
+      page-orientation: hotpink;
+  }
+  @page named3 {
+      page-orientation: rotate-right;
+  }
+  @page named4 {
+      page-orientation: rotate-right;
+      page-orientation: rotate-left;
+  }
+  @page named5 {
+      page-orientation: hotpink;
+      page-orientation: rotate-right;
+  }
+  @page named6 {
+      page-orientation: rotate-right;
+      page-orientation: inherit;
+      page-orientation: initial;
+      page-orientation: none;
+      page-orientation: hotpink;
+  }
+  h5 {
+      page-orientation: rotate-right;
+      display: block;
+  }
+```
+
+```json
+{
+  "errors": 11,
+  "messages": [
+    {
+      "message": "Unknown property “page-orientation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “page-orientation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “page-orientation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “page-orientation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “page-orientation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “page-orientation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “page-orientation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “page-orientation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “page-orientation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “page-orientation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “page-orientation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

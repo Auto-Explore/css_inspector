@@ -1,0 +1,81 @@
+# css/css-shapes/shape-outside/shape-image/shape-image-009.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shapes/shape-outside/shape-image/shape-image-009.html"
+}
+```
+
+## style[0]
+
+```css
+
+        body { margin: 0; }
+        #test, #image, #white, .blue, .failure {
+            position: absolute;
+            top: 70px;
+        }
+        #test, #image { left: 10px; }
+        #image { z-index: -2; }
+
+        #white {
+            left: 60px;
+            width: 10px;
+            height: 100px;
+            background-color: white;
+            z-index: -1;
+        }
+        #test {
+          font: 50px/1 Ahem;
+          width: 200px;
+          color: rgb(0,100,0);
+          z-index: 2;
+        }
+        #shape-image {
+            float: left;
+            width: 100px;
+            height: 100px;
+            shape-outside: url("support/left-half-rectangle-70.png");
+            shape-margin: 10px;
+            shape-image-threshold: 0.75;
+        }
+        .blue {
+            width: 2px;
+            height: 100px;
+            background-color: blue;
+            z-index: 3;
+        }
+        .left-line { left: 65px; }
+        .right-line { left: 125px; }
+
+        .failure {
+            left: 70px;
+            width: 50px;
+            height: 100px;
+            background-color: red;
+            z-index: 1;
+        }
+    
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown property “shape-outside”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “shape-margin”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “shape-image-threshold”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

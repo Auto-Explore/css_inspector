@@ -1,0 +1,32 @@
+# css/CSS2/text/text-decoration-066.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/text/text-decoration-066.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            #div1
+            {
+                text-decoration: underline;
+            }
+            div div
+            {
+                text-decoration: overline;
+                text-decoration: inherit;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

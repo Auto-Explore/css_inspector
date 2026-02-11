@@ -1,0 +1,77 @@
+# css/css-shapes/spec-examples/reference/shape-outside-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shapes/spec-examples/reference/shape-outside-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+        body {
+            margin-left: 0;
+        }
+        #container {
+            position: absolute;
+            top: 60px;
+            text-align: center;
+            font-family: Ahem;
+            font-size: 20px;
+            color: green;
+            line-height: 1em;
+        }
+        #level-1 {
+          width: 400px;
+          height: 80px;
+        }
+        #level-2 {
+          width: 200px;
+          height: 40px;
+          margin-left: 100px;
+        }
+        #level-3 {
+          width: 100px;
+          height: 40px;
+          margin-left: 150px;
+        }
+        #level-4 {
+          width: 50px;
+          height: 20px;
+          margin-left: 175px;
+        }
+        #level5 {
+            width: 400px;
+            height: 20px;
+        }
+        #left-triangle, #right-triangle {
+            position: absolute;
+            top: 60px;
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+        }
+        #left-triangle {
+            clip-path: polygon(0 0, 200px 200px, 0 200px);
+        }
+        #right-triangle {
+            left: 200px;
+            clip-path: polygon(200px 0, 200px 200px, 0 200px);
+        }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

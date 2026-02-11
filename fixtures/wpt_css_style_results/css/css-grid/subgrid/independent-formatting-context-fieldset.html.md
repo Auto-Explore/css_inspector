@@ -1,0 +1,67 @@
+# css/css-grid/subgrid/independent-formatting-context-fieldset.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/subgrid/independent-formatting-context-fieldset.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+html,body {
+  font:16px/1 monospace; padding:0; margin:0; line-height: 0;
+}
+
+fieldset, button {
+  /* Reset the default margin/border/padding, so that we can use our
+     simple regular-div mockup in reference case. (Note, it's important
+     that this come before the .grid {...} rule, so that we don't reset its
+     cosmetic margin-right/margin-bottom decls.) */
+  margin: 0;
+  border: 0;
+  padding: 0;
+  appearance: none;
+}
+.grid {
+  position: relative;
+  display: inline-grid;
+  grid-template-rows: 0px 100px;
+  width: 100px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  vertical-align: top;
+}
+
+.subgrid {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: 1 / 3;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}
+
+.second {
+  grid-row: 2;
+  background-color: green;
+}
+
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,33 @@
+# css/css-lists/implicit-and-explicit-list-item-counters.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-lists/implicit-and-explicit-list-item-counters.html"
+}
+```
+
+## style[0]
+
+```css
+
+ol.with-custom-markers {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ol.with-custom-markers li {
+  list-style: none;
+}
+ol.with-custom-markers > li::before {
+  content: counter(list-item) ". ";
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

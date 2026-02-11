@@ -1,0 +1,46 @@
+# css/css-flexbox/align-self-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/align-self-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #test {
+    background-color: red;
+    display: flex;
+    height: 100px;
+    width: 100px;
+  }
+  #test div {
+    align-self: center;
+    background-color: green;
+    height: 50px;
+    width: 25px;
+  }
+  #top {
+    background-color: green;
+    margin-top: -100px;
+    height: 25px;
+    width: 100px;
+  }
+  #bottom {
+    background-color: green;
+    height: 25px;
+    margin-top: 50px;
+    width: 100px;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,52 @@
+# css/css-contain/contain-paint-023.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-contain/contain-paint-023.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div#rel-pos-red
+    {
+      background-image: url("support/pattern-gg-gr-100x100.png");
+      color: green;
+      font-family: Ahem;
+      font-size: 50px;
+      height: 2em;
+      line-height: 1;
+      position: relative;
+      width: 2em;
+    }
+
+  div#containing-block
+    {
+      contain: paint;
+      display: inline-block;
+      height: 50%;
+      vertical-align: top;
+      width: 50%;
+    }
+
+  div#abspos
+    {
+      background-color: green;
+      height: 50px;
+      position: absolute;
+      left: 0px;
+      width: 50px;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

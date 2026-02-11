@@ -1,0 +1,178 @@
+# css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-item-baseline-004a.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-item-baseline-004a.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .grid-lanes {
+      width: 600px;
+      border: solid 5px;
+      gap: 3px;
+      display: grid-lanes;
+      grid-template-columns: repeat(4, 120px);
+      grid-lanes-pack: dense;
+      grid-auto-flow: dense;
+      background-color: #f0f0f0;
+      border-color: slateblue;
+      margin-bottom: 20px;
+      font: 16px/1 monospace;
+    }
+
+    .fb {
+      justify-items: first baseline;
+    }
+
+    .lb {
+      justify-items: last baseline;
+    }
+
+    .item {
+      height: 35px;
+      padding: 5px;
+      text-decoration: underline;
+      writing-mode: vertical-lr;
+    }
+
+    #item1 {
+      background-color: #8cffa0;
+      width: 50px;
+      grid-column: 1 / 2;
+      font-size: 16px;
+    }
+
+    #item2 {
+      background-color: #a0c8ff;
+      width: 60px;
+      grid-column: 1 / 2;
+      font-size: 20px;
+    }
+
+    #item3 {
+      background-color: #ffa08c;
+      width: 140px;
+      grid-column: 1 / 3;
+      font-size: 18px;
+    }
+
+    #item4 {
+      background-color: #ffff8c;
+      width: 55px;
+      grid-column: 1 / 2;
+      font-size: 14px;
+    }
+
+    #item5 {
+      background-color: #ff8cff;
+      width: 65px;
+      grid-column: 2 / 3;
+      font-size: 22px;
+    }
+
+    #item6 {
+      background-color: #8cffff;
+      width: 50px;
+      grid-column: 2 / 3;
+      font-size: 16px;
+    }
+
+    #item7 {
+      background-color: #ff8c8c;
+      width: 160px;
+      grid-column: 3 / 5;
+      font-size: 24px;
+    }
+
+    #item8 {
+      background-color: #c8ffa0;
+      width: 55px;
+      grid-column: 3 / 4;
+      font-size: 18px;
+    }
+
+    #item9 {
+      background-color: #a0a0ff;
+      width: 60px;
+      grid-column: 3 / 4;
+      font-size: 16px;
+    }
+
+    #item10 {
+      background-color: #ffc88c;
+      width: 50px;
+      grid-column: 4 / 5;
+      font-size: 20px;
+    }
+  
+```
+
+```json
+{
+  "errors": 14,
+  "messages": [
+    {
+      "message": "Unknown property “grid-lanes-pack”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “justify-items”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “justify-items”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

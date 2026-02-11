@@ -1,0 +1,65 @@
+# css/css-fonts/font-size-adjust-009-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-size-adjust-009-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @font-face {
+    font-family: test;
+    src: url(/fonts/noto/noto-sans-v8-latin-regular.woff);
+         /* this font has a cap-height of 1462/2048 units */
+  }
+  div {
+    clear: left;
+    float: left;
+    font: 56px/112px test;
+    color: orange;
+    background: orange;
+  }
+  #test1 {
+    color: green;
+    background: green;
+  }
+  #test2 {
+    color: blue;
+    background: blue;
+    font-size: 84px;
+  }
+  #test3 {
+    color: magenta;
+    background: magenta;
+    font-size: 42px;
+  }
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,63 @@
+# css/css-scroll-snap/scroll-target-snap-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-snap/scroll-target-snap-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    border: solid blue 4px;
+    height: 4em;
+    overflow: auto;
+    scroll-snap-type: block;
+
+    /* to make failing more obvious */
+    background: 0 1em / 100% 1em linear-gradient(red, red) repeat-x;
+    /* avoid anti-aliasing issues */
+    font: 20px/1 sans-serif;
+    scrollbar-width: none;
+  }
+  .container > div, a {
+    height: 1em;
+    display: block;
+    outline: none;
+  }
+  #target    { scroll-margin:    1em 0 0;
+               scroll-snap-align: center; } /* set up a snap position      */
+  #stripe    { background: green;         } /* color part of the snap area */
+  .fail      { color: red;                } /* make failing more obvious   */
+
+  /* Try to foil the UA */
+  .foilup { margin-bottom: -1em; scroll-snap-align: start; }
+  .foildn { margin-top:    -1em; scroll-snap-align: end;   }
+
+  /* emulate `scrollbar-width: none` for browsers that don't support it yet */
+  ::-webkit-scrollbar { display: none; }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-margin”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

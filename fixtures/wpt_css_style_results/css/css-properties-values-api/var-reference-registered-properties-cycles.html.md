@@ -1,0 +1,145 @@
+# css/css-properties-values-api/var-reference-registered-properties-cycles.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-properties-values-api/var-reference-registered-properties-cycles.html"
+}
+```
+
+## style[0]
+
+```css
+
+#test1 {
+    --registered-1-a: var(--registered-1-b, 10px);
+    --registered-1-b: var(--registered-1-a, 20px);
+
+    --registered-1-c: var(--registered-1-b, 30px);
+    --registered-1-d: var(--registered-1-b);
+    --unregistered-1-a:var(--registered-1-a,40px);
+    --unregistered-1-a:var(--registered-1-a);
+    left: var(--registered-1-a, 50px);
+    top: var(--registered-1-b, 60px);
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```
+
+## style[1]
+
+```css
+
+#test2 {
+    --registered-2-a: var(--unregistered-2-a, 10px);
+    --unregistered-2-a:var(--registered-2-a,20px);
+
+    --registered-2-b: var(--registered-2-a, 30px);
+    --registered-2-c: var(--registered-2-a);
+    --registered-2-d: var(--unregistered-2-a, 40px);
+    --registered-2-e: var(--unregistered-2-a);
+    --unregistered-2-b:var(--registered-2-a,50px);
+    --unregistered-2-c:var(--registered-2-a);
+    --unregistered-2-d:var(--unregistered-2-a,60px);
+    --unregistered-2-e:var(--unregistered-2-a);
+    left: var(--registered-2-a, 70px);
+    top: var(--unregistered-2-a, 80px);
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```
+
+## style[2]
+
+```css
+
+#test3 {
+    --unregistered-3-a:var(--unregistered-3-b,10px);
+    --unregistered-3-b:var(--unregistered-3-a,20px);
+
+    --registered-3-a: var(--unregistered-3-a, 30px);
+    --registered-3-b: var(--unregistered-3-a);
+    --registered-3-c: var(--unregistered-3-b, 40px);
+    --registered-3-d: var(--registered-3-c, 50px);
+    left: var(--registered-3-d, 60px);
+    top: var(--registered-3-b, 70px);
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```
+
+## style[3]
+
+```css
+
+#test4 {
+    --registered-4-a:var(--unregistered-4-a,hello);
+    --unregistered-4-a:var(--registered-4-a,world);
+
+    --registered-4-b:var(--unregistered-4-a,meow);
+    --registered-4-c:var(--unregistered-4-a);
+    --unregistered-4-b:var(--unregistered-4-a,woof);
+    --unregistered-4-c:var(--unregistered-4-a);
+    transition-property: var(--registered-4-a, water);
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```
+
+## style[4]
+
+```css
+
+#test5_parent {
+    --registered-5-c:foo;
+    --registered-5-d:bar;
+    --registered-5-e:baz;
+    color: green;
+}
+#test5 {
+    --registered-5-a:var(--registered-5-b,hello);
+    --registered-5-b:var(--registered-5-a,world);
+
+    --registered-5-c:var(--registered-5-a);
+    --registered-5-d:var(--registered-5-b);
+    --registered-5-e:var(--unknown);
+    color: var(--registered-5-e);
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

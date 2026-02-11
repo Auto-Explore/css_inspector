@@ -1,0 +1,51 @@
+# css/css-grid/grid-definition/grid-auto-repeat-intrinsic-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-definition/grid-auto-repeat-intrinsic-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+    border: 2px solid black;
+    position: relative;
+    padding-top: 10px;
+    justify-items: start;
+}
+
+.item {
+    background: cyan;
+    height: 20px;
+}
+
+.gridAutoFillFixed { grid-template-columns: repeat(auto-fill, 20px) minmax(min-content, 40px); }
+.gridAutoFillAuto { grid-template-columns: repeat(auto-fill, 10px) minmax(60px, auto); }
+.gridAutoFitFixed { grid-template-columns: repeat(auto-fit, 20px) minmax(min-content, 40px); }
+.gridAutoFitAuto { grid-template-columns: repeat(auto-fit, 10px) minmax(60px, auto); }
+
+.paddingTop { padding-top: 10px; }
+
+.abs {
+    height: 5px;
+    position: absolute;
+    width: 100%;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

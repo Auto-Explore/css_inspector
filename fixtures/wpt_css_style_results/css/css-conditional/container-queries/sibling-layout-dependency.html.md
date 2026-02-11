@@ -1,0 +1,61 @@
+# css/css-conditional/container-queries/sibling-layout-dependency.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-conditional/container-queries/sibling-layout-dependency.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+  @container (width: 10px) { .affected { --x:10; } }
+  @container (width: 20px) { .affected { --x:20; } }
+
+  .flex {
+    display: flex;
+    height: 30px;
+    width: 30px;
+  }
+
+  .container {
+    container-type: size;
+    flex: 1;
+    background: tomato;
+  }
+
+  .sibling {
+    background-color: skyblue;
+  }
+  .w10 {
+    width: 10px;
+  }
+  .ahem { font: 5px Ahem; }
+
+  /* The following is just to make the results more human-readable. */
+  main {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

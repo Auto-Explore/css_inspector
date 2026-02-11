@@ -1,0 +1,38 @@
+# css/css-flexbox/flexbox-min-width-auto-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flexbox-min-width-auto-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+      .item {
+        /* Flex items have purple border: */
+        border: 2px dotted purple;
+        margin-bottom: 2px; /* (Just for spacing things out, visually) */
+      }
+
+      .small { width: 50px; }
+      .big   { width: 80px; }
+
+      .item > * {
+        /* Flex items' contents are gray & fixed-size: */
+        background: gray;
+        height: 10px;
+        width: 80px;
+      }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

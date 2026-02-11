@@ -1,0 +1,46 @@
+# css/css-transforms/transforms-rotate-translate-scale.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/transforms-rotate-translate-scale.html"
+}
+```
+
+## style[0]
+
+```css
+
+        .greenSquare {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 100px;
+            height: 100px;
+            background: green;
+            transform: translate(75px, 75px) scale(1.5, 1.5) rotate(90deg) ;
+        }
+
+        .redSquare {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 150px;
+            height: 150px;
+            background: red;
+        }
+      
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “transform”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

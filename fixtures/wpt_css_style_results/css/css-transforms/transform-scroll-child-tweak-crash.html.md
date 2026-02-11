@@ -1,0 +1,50 @@
+# css/css-transforms/transform-scroll-child-tweak-crash.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/transform-scroll-child-tweak-crash.html"
+}
+```
+
+## style[0]
+
+```css
+
+* {
+	pointer-events: none;
+}
+.transformed {
+	width: 200px;
+	height: 200px;
+	transform: translate(10px, 10px);
+}
+.scrollcontainer {
+	width: 150px;
+	height: 150px;
+	overflow: auto;
+	scrollbar-width: none;
+}
+#container {
+	width: 10px;
+	height: 200px;
+}
+#thediv1 {
+	width: 2px; height: 2px;
+	background: green;
+}
+
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “pointer-events”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

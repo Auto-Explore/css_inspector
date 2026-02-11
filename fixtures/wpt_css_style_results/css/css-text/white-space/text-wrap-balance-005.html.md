@@ -1,0 +1,76 @@
+# css/css-text/white-space/text-wrap-balance-005.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/white-space/text-wrap-balance-005.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+    border: solid;
+    font-family: monospace;
+    margin: 1ch;
+    width: 8.5ch;
+    /* the .5ch above should not be necessary,
+       but in some browsers the ellipsis is a little larger than 1ch,
+       so this gives it room to breathe.
+       Needing this may or may not be a bug,
+       but this is not what we're testing here.
+     */
+}
+.test {
+    border-color: blue;
+
+    text-wrap-style: balance;
+    line-clamp: 2;
+    /* This code is unnecessary in any browser that supports the unprefixed version of line-clamp,
+       but neither does it have any detrimental effect,
+       and it broadens the test to browsers that only support the prefixed version */
+
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.ref1 {
+    border-color: orange;
+}
+
+.ref2 {
+    border-color: magenta;
+}
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Unknown property “line-clamp”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “-webkit-line-clamp”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “-webkit-box-orient”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

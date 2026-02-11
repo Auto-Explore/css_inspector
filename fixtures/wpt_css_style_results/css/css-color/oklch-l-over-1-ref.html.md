@@ -1,0 +1,23 @@
+# css/css-color/oklch-l-over-1-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-color/oklch-l-over-1-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .ref { background-color: oklch(1 0.5 50); border: 1px solid black; width: 200px; height: 200px}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

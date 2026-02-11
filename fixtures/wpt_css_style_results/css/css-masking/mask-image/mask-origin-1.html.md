@@ -1,0 +1,76 @@
+# css/css-masking/mask-image/mask-origin-1.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-masking/mask-image/mask-origin-1.html"
+}
+```
+
+## style[0]
+
+```css
+
+      div.outer {
+        border: 1px solid black;
+        width: 100px;
+        height: 100px;
+      }
+
+      div.inner {
+        /*
+         * content box: 60 x 60
+         * padding box: 72 x 78
+         * border  box: 80 x 90
+         * margin  box: 86 x 94
+         */
+        margin: 1px 2px 3px 4px;
+        border: solid transparent;
+        border-width: 8px 2px 4px 6px;
+        padding: 6px 9px 12px 3px;
+        width: 60px;
+        height: 60px;
+        background-color: purple;
+        mask-image: url(support/50x50-opaque-blue.svg);
+        mask-repeat: no-repeat;
+        mask-position: left top;
+      }
+
+      #border { mask-origin: border-box; }
+      #padding { mask-origin: padding-box; }
+      #content { mask-origin: content-box; }
+    
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-repeat”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-origin”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-origin”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-origin”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,52 @@
+# css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-3-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-3-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    line-height: 0;
+  }
+
+  div {
+    display: inline-block;
+    height: 250px;
+    width: 350px;
+    background: grey;
+    margin: 10px;
+    vertical-align: top;
+  }
+
+  img {
+    display: block;
+    width: 300px;
+    height: 150px;
+  }
+
+  .justify {
+    width: 350px;
+  }
+  .align {
+    height: 250px;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

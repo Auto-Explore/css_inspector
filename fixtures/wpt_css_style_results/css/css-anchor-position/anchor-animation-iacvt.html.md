@@ -1,0 +1,53 @@
+# css/css-anchor-position/anchor-animation-iacvt.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-animation-iacvt.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #cb {
+    border: 1px solid black;
+    width: 400px;
+    height: 400px;
+    position: relative;
+  }
+  #anchored {
+    width: 50px;
+    height: 50px;
+    background: skyblue;
+    animation: --anim 9999s linear;
+    position: absolute;
+    top: 42px; /* This should be overwritten by the anim. effect value. */
+  }
+  @keyframes --anim {
+    from { top: anchor(--unknown top); }
+    to { top: anchor(--unknown bottom); }
+  }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

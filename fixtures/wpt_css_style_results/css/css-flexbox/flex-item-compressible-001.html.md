@@ -1,0 +1,67 @@
+# css/css-flexbox/flex-item-compressible-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flex-item-compressible-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .flexbox {
+    display: flex;
+    width: 300px;
+    height: 40px;
+    border: 1px solid black;
+    margin-bottom: 5px;
+  }
+  .spacer {
+    /* Just to occupy some space, so that the flex algorithm will try to shrink
+       the <input> element below its percentage specified width. */
+    flex: 0 0 200px;
+    background: lightgray;
+  }
+  input {
+    font: 20px/1 Ahem;
+    background: lightblue;
+    /* Get rid of native theming and UA default styles. */
+    appearance: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .test1 {
+    width: 100%;
+  }
+  .test2 {
+    width: calc(100%);
+  }
+  .test3 {
+    width: calc(140px + 100%);
+  }
+  
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “flex”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

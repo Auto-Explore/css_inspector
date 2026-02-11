@@ -1,0 +1,38 @@
+# css/css-tables/visibility-hidden-row-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-tables/visibility-hidden-row-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+    x-table {
+      border: 5px solid black;
+    }
+    x-table span {
+        display: inline-block;
+        vertical-align: top;
+        background: pink;
+        margin: 3px;
+        height: 100px;
+        width: 100px;
+    }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

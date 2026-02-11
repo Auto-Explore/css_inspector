@@ -1,0 +1,72 @@
+# css/css-gaps/multicol/multicol-gap-decorations-016.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/multicol/multicol-gap-decorations-016.html"
+}
+```
+
+## style[0]
+
+```css
+
+    body {
+        margin: 0px;
+    }
+
+    .outer {
+        columns: 4;
+        column-rule: solid 1px black;
+        orphans: 1;
+        widows: 1;
+        border: dotted 2px black;
+        width: 500px;
+    }
+
+    .col-box {
+        background: cyan;
+        height: 20px;
+        /* keep each box whole */
+        break-inside: avoid;
+    }
+
+    .spanner {
+        column-span: all;
+        background: grey;
+        opacity: 0.5;
+        height: 20px;
+    }
+
+    .pink-box {
+        column-span: all;
+        background: hotpink;
+        height: 20px;
+        width: 100px;
+    }
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “column-rule”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

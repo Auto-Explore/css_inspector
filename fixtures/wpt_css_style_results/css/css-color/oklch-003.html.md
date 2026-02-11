@@ -1,0 +1,30 @@
+# css/css-color/oklch-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-color/oklch-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+    body { background-color: grey; }
+    .test { background-color: red; width: 12em; height: 12em; }
+    .test { background-color: oklch(100% 0 0); } /* white (sRGB #FFFFFF) converted to OKLCH */
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,70 @@
+# css/css-view-transitions/scoped/nested-scope.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/scoped/nested-scope.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+.box { position: relative; view-transition-scope: auto; }
+#scopeA { background: #ddd; view-transition-name: none;
+          left: 0; top: 0; width: 300px; height: 300px; }
+#partA { background: #4af;
+         left: 30px; top: 30px; width: 240px; height: 240px; }
+#scopeB { background: #eee; contain: view-transition;
+          left: 30px; top: 30px; width: 180px; height: 180px; }
+#partB { background: cyan;
+         left: 30px; top: 30px; width: 120px; height: 120px; }
+
+::view-transition-old(*) { animation: -ua-view-transition-fade-out 1s paused; }
+::view-transition-new(*) { animation: -ua-view-transition-fade-in 1s paused; }
+.tr { view-transition-name: demo; }
+
+```
+
+```json
+{
+  "errors": 8,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-scope”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

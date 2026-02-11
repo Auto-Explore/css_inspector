@@ -1,0 +1,55 @@
+# css/css-writing-modes/sizing-orthog-vlr-in-htb-013.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/sizing-orthog-vlr-in-htb-013.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  body
+    {
+      font-size: 16px;
+      line-height: 1.25; /* therefore, each line box is 20px tall */
+      margin-bottom: 0px;
+      margin-top: 0px;
+    }
+
+  div#auto-sized-htb-containing-block
+    {
+      height: auto;
+      /*
+      'height: auto' causes the measurement of the orthogonal
+      box's containing block to be indefinite
+      */
+    }
+
+  div#ortho-block-vlr
+    {
+      border: blue solid 3px;
+      height: auto;
+      writing-mode: vertical-lr;
+    }
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

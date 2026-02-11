@@ -1,0 +1,42 @@
+# css/CSS2/fonts/font-size-094.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/fonts/font-size-094.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            #div1
+            {
+                font: 1in Ahem;
+                line-height: 1em;
+                position: relative;
+            }
+            #div2
+            {
+                font-size: 100%;
+                width: 1in;
+            }
+            #div3
+            {
+                border-top: 1in solid black;
+                left: 1.1in;
+                position: absolute;
+                top: 0;
+                width: 1in;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

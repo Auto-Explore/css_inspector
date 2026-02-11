@@ -1,0 +1,52 @@
+# css/css-flexbox/order/order-abs-children-painting-order.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/order/order-abs-children-painting-order.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #test {
+    display: flex;
+    position: relative;
+    height: 100px;
+    width: 100px;
+  }
+
+  #order-1 {
+    order: 1;
+  }
+
+  #order-2 {
+    order: 2;
+  }
+
+  .inner {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  #order-1 .inner {
+    background-color: red;
+  }
+
+  #order-2 .inner {
+    background-color: green;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

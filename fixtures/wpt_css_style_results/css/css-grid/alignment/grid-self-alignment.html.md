@@ -1,0 +1,40 @@
+# css/css-grid/alignment/grid-self-alignment.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-self-alignment.html"
+}
+```
+
+## style[0]
+
+```css
+
+body {
+  line-height: 30px;
+}
+.grid {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: 20px;
+  grid-template-rows: 20px;
+  width: 20px;
+  height: 20px;
+  border: solid;
+  vertical-align: bottom;
+}
+.child {
+  background: green;
+  width: 10px;
+  height: 10px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

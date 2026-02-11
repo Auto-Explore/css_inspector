@@ -1,0 +1,78 @@
+# css/css-scroll-snap/snap-after-relayout/multiple-aligned-targets/prefer-common-to-both-axes.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-snap/snap-after-relayout/multiple-aligned-targets/prefer-common-to-both-axes.html"
+}
+```
+
+## style[0]
+
+```css
+
+      .scroller {
+        overflow: scroll;
+        width: 350px;
+        height: 350px;
+        border: solid 1px black;
+        scroll-snap-type: both mandatory;
+        position: relative;
+        resize: both;
+      }
+      .large-space {
+        height: 300vh;
+        width: 300vw;
+        position: absolute;
+      }
+      .snap {
+        scroll-snap-align: start;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+        position: absolute;
+      }
+      .leftcol {
+        left: 110px;
+      }
+      .midcol {
+        left: 220px;
+      }
+      .rightcol {
+        left: 330px;
+      }
+      .toprow {
+        top: 110px;
+      }
+      .midrow {
+        top: 220px;
+      }
+      .bottomrow {
+        top: 330px;
+      }
+      .placeholder {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 10px;
+        height: 10px;
+        background-color: black;
+        scroll-snap-align: start;
+      }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

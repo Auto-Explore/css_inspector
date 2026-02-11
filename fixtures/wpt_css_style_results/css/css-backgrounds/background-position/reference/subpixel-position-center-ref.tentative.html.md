@@ -1,0 +1,47 @@
+# css/css-backgrounds/background-position/reference/subpixel-position-center-ref.tentative.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/background-position/reference/subpixel-position-center-ref.tentative.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .first{
+      outline: 2px solid green;
+      position: absolute;
+      width: 87.5px;
+      height: 87.5px;
+      left: 43.75px;
+      top: 43.75px;
+    }
+    .second {
+      background-image: url("../../resources/green-100.png");
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 38.5px 35px;
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      left: 17.5px;
+      top: 17.5px;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

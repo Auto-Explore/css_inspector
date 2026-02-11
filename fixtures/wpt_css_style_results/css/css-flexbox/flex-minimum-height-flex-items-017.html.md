@@ -1,0 +1,49 @@
+# css/css-flexbox/flex-minimum-height-flex-items-017.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flex-minimum-height-flex-items-017.html"
+}
+```
+
+## style[0]
+
+```css
+
+.flexbox {
+  display: flex;
+  width: 100px;
+  height: 0;
+  flex-direction: column;
+}
+.item {
+  /* Because flex-basis is 0, we rely on min-height to size this item.
+   * We give it an explicit height so that percentages have a chance of
+   * resolving. We can't use 0 for the height because the min-height is
+   * basically min(height, min-content).  */
+  flex: 0 1 0px;
+  height: 100px;
+  background: green;
+}
+.percentage {
+  height: 100%;
+}
+.fixed {
+  height: 100px;
+}
+
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “flex”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

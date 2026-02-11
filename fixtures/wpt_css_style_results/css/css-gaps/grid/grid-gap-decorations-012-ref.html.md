@@ -1,0 +1,68 @@
+# css/css-gaps/grid/grid-gap-decorations-012-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/grid/grid-gap-decorations-012-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .grid-container {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 100px 100px 100px;
+    height: 320px;
+
+    column-rule-color: blue;
+    column-rule-style: solid;
+    column-rule-width: 5px;
+  }
+
+  .item {
+    background: gray;
+    opacity: 0.5;
+  }
+
+  .row-gap {
+    position: absolute;
+    width: 320px;
+    height: 0px;
+    border-bottom: solid 5px red;
+  }
+
+  .row-gap1 {
+    top: 110.5px;
+  }
+
+  .row-gap2 {
+    top: 220.5px;
+  }
+
+  .col-gap {
+    position: absolute;
+    top: 3px;
+    width: 0px;
+    height: 330px;
+    border-left: solid 5px blue;
+  }
+
+  .col-gap1 {
+    left: 110.5px;
+  }
+
+  .col-gap2 {
+    left: 220.5px;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

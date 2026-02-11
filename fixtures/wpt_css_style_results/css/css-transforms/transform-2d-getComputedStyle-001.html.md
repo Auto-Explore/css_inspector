@@ -1,0 +1,59 @@
+# css/css-transforms/transform-2d-getComputedStyle-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/transform-2d-getComputedStyle-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .block {
+    	display: block;
+    	width: 50px;
+    	height: 50px;
+    	background-color: green;
+    }
+    #translate {
+    	transform: translate(10px, 20px);
+    }
+    #translateX {
+    	transform: translateX(10px);
+    }
+    #translateY {
+    	transform: translateY(20px);
+    }
+    #rotate {
+    	transform: rotate(90deg);
+    }
+    #scale {
+    	transform: scale(2.0);
+    }
+    #scaleX {
+    	transform: scaleX(0.5);
+    }
+    #scaleY {
+    	transform: scaleY(1.5);
+    }
+    #skewX {
+    	transform: skewX(45deg);
+    }
+    #skewY {
+    	transform: skewY(45deg);
+    }
+    #matrix {
+    	transform: matrix(1, 2, 3, 4, 5, 6);
+    }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,39 @@
+# css/css-multicol/moz-multicol3-column-balancing-break-inside-avoid-1.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-multicol/moz-multicol3-column-balancing-break-inside-avoid-1.html"
+}
+```
+
+## style[0]
+
+```css
+
+@page { size:5in 3in; margin:0.5in; }
+
+        html,body {
+            color:black; background-color:white; font-size:16px; padding:0; margin:0;
+        }
+
+  .colset {
+    column-count: 3;
+    column-gap: 0;
+    border: solid silver;
+    width: 9em;
+  }
+  p { margin: 0; page-break-inside:avoid; }
+  .short { height: 5px; page-break-inside:avoid; }
+  .short p { page-break-inside:auto; }
+
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

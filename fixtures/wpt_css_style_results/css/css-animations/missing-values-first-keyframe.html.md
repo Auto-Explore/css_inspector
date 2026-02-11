@@ -1,0 +1,90 @@
+# css/css-animations/missing-values-first-keyframe.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-animations/missing-values-first-keyframe.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0;
+  }
+
+  .box {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    left: 0;
+    background-color: green;
+  }
+
+  #box1 {
+    left: 200px;
+    animation: move-left 2s paused linear;
+  }
+
+  #box2 {
+    transform: translateX(200px);
+    animation: move-transform 2s paused linear;
+  }
+
+  @keyframes move-left {
+    0% {
+      opacity: 1;
+    }
+    25% {
+      opacity: 1;
+    }
+    50% {
+      left: 0;
+      opacity: 1;
+    }
+    100% {
+      left: 0;
+      opacity: 0;
+    }
+  }
+
+  @keyframes move-transform {
+    0% {
+      opacity: 1;
+    }
+    25% {
+      opacity: 1;
+    }
+    50% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 0;
+    }
+  }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

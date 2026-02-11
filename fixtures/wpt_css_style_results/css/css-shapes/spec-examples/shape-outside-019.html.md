@@ -1,0 +1,55 @@
+# css/css-shapes/spec-examples/shape-outside-019.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shapes/spec-examples/shape-outside-019.html"
+}
+```
+
+## style[0]
+
+```css
+
+        #test {
+            position: relative;
+            color: green;
+            width: 400px;
+            font-family: Ahem;
+            font-size: 20px;
+            line-height: 2em;
+        }
+        #image {
+            float: left;
+            shape-outside: url("support/circle-shadow.png");
+            shape-margin: 20px;
+        }
+        #margin-circle {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 300px;
+            height: 300px;
+            background-color: black;
+            clip-path: ellipse(141px 127px at 115px 100px);
+            z-index: -1;
+        }
+    
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown property “shape-outside”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “shape-margin”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

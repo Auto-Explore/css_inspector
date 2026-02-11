@@ -1,0 +1,78 @@
+# css/css-fonts/font-size-adjust-010.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-size-adjust-010.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @font-face {
+    font-family: test;
+    src: url(/fonts/noto/noto-sans-v8-latin-regular.woff);
+         /* this font has a 'zero' width (and therefore 'ch' unit) of 1128/2048 units */
+  }
+  div {
+    clear: left;
+    float: left;
+    font: 56px/112px test;
+    color: orange;
+    background: orange;
+  }
+  #test1 {
+    color: green;
+    background: green;
+    font-size-adjust: ch-width calc(1128 / 2048);  /* should cause no change */
+  }
+  #test2 {
+    color: blue;
+    background: blue;
+    font-size-adjust: ch-width calc(1.5 * 1128 / 2048);  /* should be 1.5 times larger */
+  }
+  #test3 {
+    color: magenta;
+    background: magenta;
+    font-size-adjust: ch-width calc(0.75 * 1128 / 2048);  /* should be 0.75 times larger */
+  }
+```
+
+```json
+{
+  "errors": 7,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-size-adjust”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-size-adjust”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-size-adjust”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

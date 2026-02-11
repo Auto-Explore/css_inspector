@@ -1,0 +1,75 @@
+# css/css-gaps/grid/subgrid/subgrid-gap-decorations-006.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/grid/subgrid/subgrid-gap-decorations-006.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+    width: 430px;
+    height: 430px;
+  }
+  .subgrid {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    column-rule: blue solid 5px;
+    row-rule: red solid 5px;
+
+    column-rule-break: none;
+    row-rule-break: none;
+  }
+  .grid-item {
+    background-color: gray;
+    opacity: 0.5;
+    border: 1px solid #000;
+  }
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “column-rule”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “column-rule-break”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule-break”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

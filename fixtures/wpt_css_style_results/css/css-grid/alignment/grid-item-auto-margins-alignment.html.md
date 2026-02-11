@@ -1,0 +1,38 @@
+# css/css-grid/alignment/grid-item-auto-margins-alignment.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-item-auto-margins-alignment.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+    grid-template-columns: 100px 100px;
+    grid-template-rows: 200px 200px;
+    margin-bottom: 20px;
+}
+
+.item {
+    width: 20px;
+    height: 40px;
+}
+
+.autoMarginTop { margin-top: auto; }
+.autoMarginRight { margin-right: auto; }
+.autoMarginBottom { margin-bottom: auto; }
+.autoMarginLeft { margin-left: auto; }
+.autoMargin { margin: auto; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

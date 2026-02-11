@@ -1,0 +1,48 @@
+# css/css-grid/grid-definition/grid-auto-repeat-multiple-values-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-definition/grid-auto-repeat-multiple-values-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+        .grid-container {
+            display: grid;
+            border: solid thick;
+            margin: 10px;
+        }
+
+        .columns {
+            grid-template-columns: repeat(auto-fill, 50px 50px);
+            grid-auto-rows: 25px;
+            grid-column-gap: 100px;
+            width: 300px;
+        }
+
+        .rows {
+            grid-auto-flow: column;
+            grid-template-rows: repeat(auto-fill, 50px 50px);
+            grid-auto-columns: 25px;
+            grid-row-gap: 100px;
+            width: min-content;
+            height: 300px;
+        }
+
+        .grid-container>div {
+            background: lime;
+        }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

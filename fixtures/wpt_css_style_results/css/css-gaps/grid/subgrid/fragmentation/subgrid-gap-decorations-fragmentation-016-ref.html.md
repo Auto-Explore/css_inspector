@@ -1,0 +1,110 @@
+# css/css-gaps/grid/subgrid/fragmentation/subgrid-gap-decorations-fragmentation-016-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/grid/subgrid/fragmentation/subgrid-gap-decorations-fragmentation-016-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0px;
+  }
+  .multicol {
+    position: relative;
+    columns: 3;
+    column-fill: auto;
+    width: 420px;
+    height: 72px;
+    background: yellow;
+    column-gap: 0px;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 20px 10px 20px 10px 20px 10px 20px 10px 20px;
+    column-gap: 10px;
+  }
+  .subgrid {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    background: teal;
+    grid-column: 2 / -2;
+    grid-row: 3 / -3;
+    background: orange;
+  }
+  .item {
+    background: purple;
+  }
+  .col-gap-group {
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    display: flex;
+    gap: 20px;
+    height: 72px;
+  }
+  .col-gap {
+    width: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+  .col-gap-segment {
+    background: skyblue;
+    height: 20px;
+  }
+  .row-gap-group {
+    position: absolute;
+    top: 20px;
+    left: 140px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 140px;
+  }
+  .row-gap {
+    height: 10px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+  }
+  .row-gap-segment {
+    background: cornflowerblue;
+    width: 20px;
+  }
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

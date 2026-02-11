@@ -1,0 +1,44 @@
+# css/css-flexbox/justify-content_flex-start.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/justify-content_flex-start.html"
+}
+```
+
+## style[0]
+
+```css
+
+      #test01, #test02, #test03{
+        text-align:center;
+        font-size: 20px;
+        width: 30px;
+      }
+      #test01{
+        background: #7FFF00;
+      }
+      #test02{
+        background: #00FFFF;
+      }
+      #test03{
+        background: #4169E1;
+      }
+      #test{
+        background: #ff0000;
+        height: 200px;
+        width: 200px;
+        display: flex;
+        justify-content: flex-start;
+      }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

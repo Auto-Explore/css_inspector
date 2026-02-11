@@ -1,0 +1,82 @@
+# css/css-scroll-snap/nested-scrollIntoView-snaps.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-snap/nested-scrollIntoView-snaps.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  position: absolute;
+}
+:root {
+  overflow: scroll;
+  scroll-snap-type: both mandatory;
+}
+.scroller {
+  overflow: scroll;
+  scroll-snap-type: both mandatory;
+  padding: 0px;
+}
+#outer {
+  left: 1000px;
+  top: 1000px;
+  width: 600px;
+  height: 600px;
+}
+#out-snap-1 {
+  scroll-snap-align: start;
+  left: 1200px;
+  top: 1200px;
+  width: 10px;
+  height: 10px;
+}
+#out-snap-2 {
+  scroll-snap-align: start;
+  left: 1100px;
+  top: 1100px;
+  width: 10px;
+  height: 10px;
+}
+#inner {
+  left: 1000px;
+  top: 1000px;
+  width: 400px;
+  height: 400px;
+}
+.space {
+  left: 0px;
+  top: 0px;
+  width: 3000px;
+  height: 3000px;
+}
+#target {
+  scroll-snap-align: end;
+  left: 800px;
+  top: 800px;
+  width: 200px;
+  height: 200px;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,99 @@
+# css/css-writing-modes/logical-physical-mapping-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/logical-physical-mapping-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+#body tr td:nth-child(2) div {
+  writing-mode: horizontal-tb;
+}
+#body tr td:nth-child(3) div {
+  writing-mode: horizontal-tb;
+}
+#body tr td:nth-child(4) div {
+  writing-mode: vertical-rl;
+}
+#body tr td:nth-child(5) div {
+  writing-mode: vertical-rl;
+}
+#body tr td:nth-child(6) div {
+  writing-mode: vertical-lr;
+}
+#body tr td:nth-child(7) div {
+  writing-mode: vertical-lr;
+}
+#body tr td:nth-child(8) div {
+  writing-mode: sideways-lr;
+}
+#body tr td:nth-child(9) div {
+  writing-mode: sideways-lr;
+}
+
+
+#body tr td:nth-child(2n+2) div {
+  direction: ltr;
+}
+#body tr td:nth-child(2n+3) div {
+  direction: rtl;
+}
+
+
+td {
+  padding: 5px;
+  font-size: 13px;
+  background-color: silver;
+  width: 70px;
+  height: 70px;
+}
+
+
+.top {
+  border-bottom: 2px dotted blue;
+  border-top: 2px dotted orange;
+}
+.right {
+  border-left: 2px dotted blue;
+  border-right: 2px dotted orange;
+}
+
+.bottom {
+  border-top: 2px dotted blue;
+  border-bottom: 2px dotted orange;
+}
+.left {
+  border-right: 2px dotted blue;
+  border-left: 2px dotted orange;
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,67 @@
+# css/css-variables/variable-first-line.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-variables/variable-first-line.html"
+}
+```
+
+## style[0]
+
+```css
+
+        div {
+            width: 500px;
+        }
+
+        #div1::first-line {
+            color: var(--my-color);
+            --my-color: rgb(0, 0, 255);
+        }
+
+        #div2::first-line {
+            font-size: var(--my-font-size);
+            --my-font-size: 25px;
+        }
+
+        #div3::first-line {
+            font-weight: var(--my-font-weight);
+            --my-font-weight: 900;
+        }
+
+        #div4::first-line {
+            position: var(--my-position);
+            --my-position: absolute;
+        }
+
+        #div5::first-line {
+            color: var(--my-color1);
+            --my-color1: var(--my-color2);
+            --my-color2: rgb(0, 0, 255);
+        }
+
+        #div6::first-line {
+            position: var(--my-position1);
+            --my-position1: var(--my-position2);
+            --my-position2: absolute;
+        }
+    
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

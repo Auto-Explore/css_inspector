@@ -1,0 +1,68 @@
+# css/css-grid/alignment/grid-self-alignment-stretch-011.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-self-alignment-stretch-011.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+  position: relative;
+  display: inline-grid;
+  font: 20px/1 Ahem;
+  background: grey;
+  width: 250px;
+  height: 250px;
+}
+.grid > div { border-style: solid; }
+.firstRowFirstColumn {
+  grid-row: 1;
+  grid-column: 1;
+  background: green;
+  justify-self: stretch;
+  align-self: start;
+  border-width: 0px 10px 0px 0px;
+}
+.firstRowSecondColumn {
+  grid-row: 1;
+  grid-column: 2;
+  background: blue;
+  justify-self: start;
+  align-self: stretch;
+  border-width: 0px 0px 20px 0px;
+}
+.secondRowFirstColumn {
+  grid-row: 2;
+  grid-column: 1;
+  background: yellow;
+  justify-self: start;
+  align-self: start;
+  border-width: 0px 0px 0px 0px;
+}
+.secondRowSecondColumn {
+  grid-row: 2;
+  grid-column: 2;
+  background: red;
+  justify-self: stretch;
+  align-self: stretch;
+  border-width: 0px 20px 10px 0px;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

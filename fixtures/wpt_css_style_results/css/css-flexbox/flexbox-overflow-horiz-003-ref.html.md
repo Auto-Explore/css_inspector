@@ -1,0 +1,48 @@
+# css/css-flexbox/flexbox-overflow-horiz-003-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flexbox-overflow-horiz-003-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .flexContainer {
+      background: purple;
+      display: flex;
+      justify-content: space-around;
+      width: 70px;
+      height: 70px;
+      float: left;
+      margin-right: 5px;
+    }
+    .bigItem {
+      background: blue;
+      width: 20px;
+      height: 200px;
+    }
+    .smallItem {
+      background: teal;
+      width: 20px;
+      height: 20px;
+    }
+    .hidden > .bigItem {
+      /* To match the testcase's "overflow:hidden"-cropped flex item, we
+         just use a smaller height that exactly fits our container (and
+         doesn't overflow). */
+      height: 70px;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

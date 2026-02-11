@@ -1,0 +1,95 @@
+# css/css-writing-modes/support/embedded-doc-abs-pos-non-replaced-icb-vlr-007.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/support/embedded-doc-abs-pos-non-replaced-icb-vlr-007.html"
+}
+```
+
+## style[0]
+
+```css
+
+  html
+    {
+      direction: ltr;
+    }
+
+  div
+    {
+      border-left: green solid 25px;
+      border-right: green solid 75px;
+      height: 100px;
+      left: auto;
+      position: absolute;
+      right: 80%;
+      top: 0px;
+      width: auto;
+      writing-mode: vertical-lr;
+    }
+
+  /*
+  "
+  1. [If] 'left' and 'width' are 'auto' and 'right' is not 'auto', then the width is shrink-to-fit. Then solve for 'left'
+  "
+  10.3.7 Absolutely positioned, non-replaced elements
+  http://www.w3.org/TR/CSS21/visudet.html#abs-non-replaced-width
+
+  So:
+
+           auto : left
+        +
+            0px : margin-left
+        +
+           25px : border-left-width
+        +
+            0px : padding-left
+        +
+           auto : width
+        +
+            0px : padding-right
+        +
+           75px : border-right-width
+        +
+            0px : margin-right
+        +
+            80% : right
+        ====================
+          500px : width of containing block (width of Initial Containing Block)
+
+  becomes
+
+        (solve) : left
+        +
+            0px : margin-left
+        +
+           25px : border-left-width
+        +
+            0px : padding-left
+        +
+            0px : width (shrink-to-fit)
+        +
+            0px : padding-right
+        +
+           75px : border-right-width
+        +
+            0px : margin-right
+        +
+          400px : right (80% of 500px == 400px)
+        ====================
+          500px : width of containing block (width of Initial Containing Block)
+
+   so used left offset value must be 0 .
+
+  */
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

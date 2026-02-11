@@ -1,0 +1,55 @@
+# css/css-scroll-snap/scroll-target-margin-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-snap/scroll-target-margin-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    border: solid blue 4px;
+    height: 4em;
+    overflow: auto;
+
+    /* to make failing more obvious */
+    background: 0 1em / 100% 1em linear-gradient(red, red) repeat-x;
+    /* avoid anti-aliasing issues */
+    font: 20px/1 sans-serif;
+    scrollbar-width: none;
+  }
+  .container > div {
+    height: 1em;
+  }
+  #target    { scroll-margin: 2em 0 1em; } /* snap area is exact fit for snapport */
+  #stripe    { background: green;        } /* color part of the snap area         */
+  .fail      { color: red;               } /* make failing more obvious           */
+
+  /* emulate `scrollbar-width: none` for browsers that don't support it yet */
+  ::-webkit-scrollbar { display: none; }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-margin”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

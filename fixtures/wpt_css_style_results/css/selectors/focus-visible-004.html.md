@@ -1,0 +1,48 @@
+# css/selectors/focus-visible-004.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/selectors/focus-visible-004.html"
+}
+```
+
+## style[0]
+
+```css
+
+    @supports not selector(:focus-visible) {
+      :focus {
+        outline: red solid 5px;
+        background-color: red;
+      }
+    }
+
+    :focus-visible {
+      outline: red solid 5px;
+    }
+
+    :focus:not(:focus-visible) {
+      outline: 0;
+      background-color: lime;
+    }
+
+    .check {
+      -webkit-appearance: none;
+      appearance: none;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “-webkit-appearance”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

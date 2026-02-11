@@ -1,0 +1,53 @@
+# css/css-page/page-margin-auto-and-non-zero-print.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/page-margin-auto-and-non-zero-print.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @page {
+    size: 20em 7em;
+    border: solid;
+    margin: 30px;
+  }
+  @page aaa { }
+  @page bbb {
+    margin-top: auto;
+  }
+  @page ccc {
+    margin-bottom: auto;
+  }
+  @page ddd {
+    margin-top: auto;
+    margin-left: auto;
+  }
+  @page eee {
+    margin-top: auto;
+    margin-right: auto;
+  }
+  @page fff {
+    margin-bottom: auto;
+    margin-right: auto;
+  }
+  :root {
+    print-color-adjust: exact;
+  }
+  body {
+    margin: 0;
+    background: yellow;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

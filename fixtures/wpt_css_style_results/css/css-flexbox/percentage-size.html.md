@@ -1,0 +1,68 @@
+# css/css-flexbox/percentage-size.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/percentage-size.html"
+}
+```
+
+## style[0]
+
+```css
+
+.flexbox {
+    display: flex;
+}
+.column, .column .fixed {
+    height: 50px;
+}
+.row, .row .fixed {
+    width: 50px;
+}
+.container > div {
+    outline: 2px solid blue;
+}
+.row > div > div {
+    height: 20px;
+}
+.flexbox > div {
+    flex: 0 0 auto;
+}
+.column > .flexbox {
+    flex-direction: column;
+}
+.container > div > :nth-child(1) {
+    background-color: orange;
+}
+.container > div > :nth-child(2) {
+    background-color: yellow;
+}
+.container > div > :nth-child(3) {
+    background-color: salmon;
+}
+.container > div > :nth-child(4) {
+    background-color: purple;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “flex”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

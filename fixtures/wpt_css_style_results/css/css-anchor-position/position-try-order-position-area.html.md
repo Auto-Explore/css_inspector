@@ -1,0 +1,163 @@
+# css/css-anchor-position/position-try-order-position-area.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/position-try-order-position-area.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #cb {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border: 1px solid black;
+  }
+  #anchor {
+    position: absolute;
+    left: 150px;
+    top: 200px;
+    width: 150px;
+    height: 150px;
+    background-color: coral;
+    anchor-name: --a;
+  }
+  #target, #ref {
+    position: absolute;
+    left: 450px; /* force fallback */
+    width: 40px;
+    height: 40px;
+    background-color: skyblue;
+    position-anchor: --a;
+    /* Note: align/justify is for cosmetic/debugging reasons only,
+       it should not have any effect on the result. */
+    align-self: start;
+    justify-self: start;
+  }
+  #ref {
+    background-color: seagreen;
+  }
+
+/*
+
+The IMCB for --right is the whole area to the right of the anchor, and similarly
+for --left, etc.
+
+  ┌──────────────┐
+  │          xxxx│
+  │          xxxx│
+  │    ┌────┐xxxx│
+  │    │    │xxxx│
+  │    └────┘xxxx│
+  │          xxxx│
+  │          xxxx│
+  └──────────────┘
+
+**/
+
+  @position-try --right {
+    inset: unset;
+    position-area: right;
+  }
+  @position-try --left {
+    inset: unset;
+    position-area: left;
+  }
+  @position-try --top {
+    inset: unset;
+    position-area: top;
+  }
+  @position-try --bottom {
+    inset: unset;
+    position-area: bottom;
+  }
+
+/*
+
+The IMCB for --right-sweep is the area that would be "swept" by the anchor if it
+moved right, and similarly for --left-sweep, etc.
+
+   ┌──────────────┐
+   │              │
+   │              │
+   │    ┌────┐xxxx│
+   │    │    │xxxx│
+   │    └────┘xxxx│
+   │              │
+   │              │
+   └──────────────┘
+
+*/
+
+  @position-try --right-sweep {
+    inset: unset;
+    position-area: right center;
+  }
+
+  @position-try --left-sweep {
+    inset: unset;
+    position-area: left center;
+  }
+
+  @position-try --bottom-sweep {
+    inset: unset;
+    position-area: bottom center;
+  }
+
+  @position-try --top-sweep {
+    inset: unset;
+    position-area: top center;
+  }
+
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[1]
+
+```css
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,58 @@
+# css/css-page/margin-boxes/alignment-001-print-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/margin-boxes/alignment-001-print-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    display: grid;
+    grid-template-rows: 50px auto auto auto 50px;
+    height: 100%;
+  }
+  .outerRow {
+    display: flex;
+    align-items: center;
+  }
+  .outerRow > div:nth-child(1) { text-align: right; }
+  .outerRow > div:nth-child(2) { text-align: left; }
+  .outerRow > div:nth-child(3) { text-align: center; }
+  .outerRow > div:nth-child(4) { text-align: right; }
+  .outerRow > div:nth-child(5) { text-align: left; }
+  .outerRow > div:first-child,
+  .outerRow > div:last-child { width: 50px; }
+  .outerRow > div:nth-child(3) { margin:auto; }
+
+  .innerRow {
+    display: flex;
+    flex: 1;
+  }
+  .innerRow > div {
+    width: 50px;
+    text-align: center;
+  }
+  .innerRow > div:first-child {
+    margin-right: auto;
+  }
+  @page {
+    size: 550px 400px;
+    margin: 0;
+  }
+  body {
+    margin: 0;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

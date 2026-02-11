@@ -1,0 +1,73 @@
+# css/CSS2/box-display/containing-block-017.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/box-display/containing-block-017.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div
+            {
+                border: solid silver;
+                direction: ltr;
+                margin-bottom: 20px;
+                padding: 100px;
+                width: 450px;
+            }
+            #first-box, #last-box
+            {
+                color: silver;
+            }
+            .position
+            {
+                height: 30px;
+                position: absolute;
+                width: 30px;
+            }
+            #tl-control
+            {
+                border-top: 30px solid red;
+                margin-left: -50px;
+                margin-right: 20px;
+                padding: 20px 15px;
+            }
+            #br-control
+            {
+                border-bottom: 30px solid red;
+                margin-left: 20px;
+                margin-right: -50px;
+                padding: 20px 15px;
+            }
+            .top-left
+            {
+                background: green;
+                left: 0;
+                top: 0;
+            }
+            .bottom-right
+            {
+                background: green;
+                bottom: 0;
+                right: 0;
+            }
+            #test
+            {
+                border: 5px solid silver;
+                padding: 50px;
+                position: relative;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

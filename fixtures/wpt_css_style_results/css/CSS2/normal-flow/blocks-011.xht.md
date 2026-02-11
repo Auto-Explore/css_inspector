@@ -1,0 +1,27 @@
+# css/CSS2/normal-flow/blocks-011.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/normal-flow/blocks-011.xht"
+}
+```
+
+## style[0]
+
+```css
+
+   .container { width: 3em; }
+   .test { margin-left: 0; border-left: 2em solid; padding-left: 0; width: auto; padding-right: 0; border-right: 2em solid; margin-right: 0; }
+   .control { margin-left: 0; border-left: none; padding-left: 0; width: 4em; padding-right: 0; border-right: none; margin-right: 0; }
+   .body div { background: blue; border-color: blue; height: 1em; } /* need the .body to increase specificity */
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

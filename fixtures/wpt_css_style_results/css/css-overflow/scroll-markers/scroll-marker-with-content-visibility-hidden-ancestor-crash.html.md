@@ -1,0 +1,75 @@
+# css/css-overflow/scroll-markers/scroll-marker-with-content-visibility-hidden-ancestor-crash.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/scroll-markers/scroll-marker-with-content-visibility-hidden-ancestor-crash.html"
+}
+```
+
+## style[0]
+
+```css
+
+#scroller {
+  position: relative;
+  width: 500px;
+  height: 200px;
+  overflow: auto;
+  scroll-marker-group: after;
+  columns: 1;
+
+  &::scroll-marker-group {
+    height: 20px;
+    width: 200px;
+  }
+}
+
+.wrapper {
+  height: 100%;
+  content-visibility: hidden;
+}
+
+.item {
+  width: 100%;
+  height: 100%;
+  &::scroll-marker {
+    display: inline-block;
+    content: "";
+    width: 10px;
+    height: 10px;
+    border: 1px solid black;
+    border-radius: 50%;
+  }
+
+  &::scroll-marker:target-current {
+    background: blue;
+  }
+}
+
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “scroll-marker-group”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

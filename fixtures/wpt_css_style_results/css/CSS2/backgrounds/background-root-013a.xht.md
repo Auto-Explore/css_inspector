@@ -1,0 +1,37 @@
+# css/CSS2/backgrounds/background-root-013a.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/backgrounds/background-root-013a.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+   body { border: solid lime; background: green url(support/square-purple.png) no-repeat 50% 50%; color: white; }
+   html { border: solid blue; background: navy; color: yellow; }
+   :link, :visited { color: inherit; background: transparent; }
+   * { margin: 1em 5%; padding: 1em; }
+   body { margin-right: 30%; }
+]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

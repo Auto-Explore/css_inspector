@@ -1,0 +1,42 @@
+# css/css-color/relative-currentcolor-hsl-02.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-color/relative-currentcolor-hsl-02.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  color: red;
+  background-color: hsl(from currentColor 120 s l);
+}
+div div {
+  color: hsl(none 100% 25%); /* hsl(120 100% 25%) is green */
+  background-color: inherit;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

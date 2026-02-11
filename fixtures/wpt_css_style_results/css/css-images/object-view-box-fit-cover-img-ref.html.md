@@ -1,0 +1,71 @@
+# css/css-images/object-view-box-fit-cover-img-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-images/object-view-box-fit-cover-img-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  margin: 5px;
+}
+
+video {
+  object-fit: fill;
+}
+
+.container_view_box_subset {
+  width: 40px;
+  height: 50px;
+  overflow: hidden;
+  display: inline-block;
+}
+.view_box_subset {
+  width: 50px;
+  height: 100px;
+  position: relative;
+  left: -5px;
+  top: -50px;
+}
+
+.container_view_box_subset_with_position {
+  width: 40px;
+  height: 50px;
+  overflow: hidden;
+  display: inline-block;
+}
+.view_box_subset_with_position {
+  width: 50px;
+  height: 100px;
+  position: relative;
+  top: -50px;
+}
+
+.container_view_box_subset_with_scaling {
+  width: 50px;
+  height: 100px;
+  overflow: hidden;
+  display: inline-block;
+  clip-path: inset(1px 0px 0px 0px);
+}
+.view_box_subset_with_scaling {
+  width: 100px;
+  height: 200px;
+  position: relative;
+  left: -25px;
+  top: -100px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

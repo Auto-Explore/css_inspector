@@ -1,0 +1,109 @@
+# css/css-view-transitions/hit-test-pseudo-element-element-from-point.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/hit-test-pseudo-element-element-from-point.html"
+}
+```
+
+## style[0]
+
+```css
+
+html { view-transition-name: none; }
+
+body { margin: 0; }
+
+#target {
+  width: 100px;
+  height: 100vh;
+  view-transition-name: target;
+}
+
+::view-transition {
+  background-color: green;
+}
+
+::view-transition,
+::view-transition-group(target),
+::view-transition-image-pair(target) {
+  height: 100%;
+  padding-left: 100px;
+}
+
+::view-transition-group(target) {
+  animation-duration: 30s;
+  background-color: lightgreen;
+}
+
+::view-transition-image-pair(target) {
+  height: 100%;
+  background-color: skyblue;
+  animation: none;
+  margin-left: 100px;
+}
+
+::view-transition-old(target) {
+  height: 100%;
+  width: 100px;
+  animation: none;
+  background-color: navy;
+}
+::view-transition-new(target) {
+  height: 100%;
+  width: 100px;
+  margin-left: 100px;
+  animation: none;
+  background-color: purple;
+}
+```
+
+```json
+{
+  "errors": 10,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,59 @@
+# css/filter-effects/css-backdrop-filters-animation-combined-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/filter-effects/css-backdrop-filters-animation-combined-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .square {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        top: 100px;
+        left: 100px;
+        background: black;
+    }
+    .filt {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        top: 50px;
+        left: 50px;
+        backdrop-filter:
+            blur(10px)
+            brightness(50%)
+            sepia(50%)
+            grayscale(50%)
+            saturate(50%)
+            hue-rotate(45deg)
+            invert(50%)
+            opacity(50%)
+    }
+    .greenbox {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        top: 75px;
+        left: 75px;
+        background: green;
+    }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “backdrop-filter”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

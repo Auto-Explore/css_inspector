@@ -1,0 +1,75 @@
+# css/css-shadow/part/interaction-with-pseudo-elements.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shadow/part/interaction-with-pseudo-elements.html"
+}
+```
+
+## style[0]
+
+```css
+
+      #c-e::part(before-p)::before { color: green; }
+      #c-e::part(after-p)::after { color: green; }
+      #c-e::part(placeholder-p)::placeholder { color: green; }
+      #c-e::part(selection-p)::selection { color: green; }
+      #c-e::part(first-line-p)::first-line { color: green; }
+      #c-e::part(first-letter-p)::first-letter { color: green; }
+    
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[1]
+
+```css
+
+        #before-i::before { content: "this text"; color: red; }
+        #after-i::after { content: "this text"; color: red; }
+        #placeholder-i::placeholder { color: red; }
+        #selection-i::selection { color: red; }
+        #first-line-i::first-line { color: red; }
+        #first-letter-i::first-letter { color: red; }
+      
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

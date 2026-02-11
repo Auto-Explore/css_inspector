@@ -1,0 +1,70 @@
+# css/css-anchor-position/anchor-position-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-position-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+#container {
+  position: relative;
+}
+#a1 {
+  anchor-name: --a1;
+  background: orange;
+  margin-left: 100px;
+  margin-top: 100px;
+  width: 100px;
+  height: 100px;
+}
+#a2 {
+  anchor-name: --a2;
+  background: purple;
+  margin-left: 500px;
+  margin-top: 100px;
+  width: 100px;
+  height: 100px;
+}
+#target {
+  background: green;
+  position: absolute;
+  left: anchor(--a1 right);
+  top: anchor(--a1 bottom);
+  right: anchor(--a2 left);
+  bottom: anchor(--a2 top);
+}
+#ref {
+  background: red;
+  position: absolute;
+  left: 200px;
+  top: 100px;
+  width: 300px;
+  height: 100px;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

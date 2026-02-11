@@ -1,0 +1,55 @@
+# css/css-overflow/line-clamp/line-clamp-017.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/line-clamp/line-clamp-017.html"
+}
+```
+
+## style[0]
+
+```css
+
+.clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 4;
+  font: 16px / 32px serif;
+  white-space: pre;
+  padding: 0 4px;
+  background-color: yellow;
+
+  /* If display: -webkit-box behaves the same as without line-clamp,
+   * these properties would cause the anonymous inline box to be centered. */
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  align-items: center;
+  justify-content: center;
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Unknown property “-webkit-box-orient”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “line-clamp”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “-webkit-box-align”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “-webkit-box-pack”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,64 @@
+# css/CSS2/normal-flow/block-non-replaced-height-010.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/normal-flow/block-non-replaced-height-010.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            html, body
+            {
+                overflow: scroll;
+            }
+            #div1
+            {
+                position: relative;
+            }
+            #div2
+            {
+                background: blue;
+                border-bottom: 0.25in solid blue;
+                border-top: 0.25in solid blue;
+            }
+            #div2, #div3, #div4, #div5
+            {
+                width: 1in;
+            }
+            #div3, #div4
+            {
+                background: blue;
+                height: 0.25in;
+            }
+            #div3
+            {
+                border-top: 0.25in solid blue;
+                margin-top: 0.25in;
+            }
+            #div4
+            {
+                border-bottom: 0.25in solid blue;
+                margin-bottom: 0.25in;
+            }
+            #div5
+            {
+                background: blue;
+                height: 2in;
+                left: 1in;
+                position: absolute;
+                top: 0;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

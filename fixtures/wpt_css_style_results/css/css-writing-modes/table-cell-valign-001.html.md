@@ -1,0 +1,67 @@
+# css/css-writing-modes/table-cell-valign-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/table-cell-valign-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+table {
+  font: 50px/1 Ahem;
+}
+
+.v {
+  writing-mode: vertical-lr;
+}
+
+.h {
+  writing-mode: horizontal-tb;
+}
+
+td {
+  block-size: 2em;
+  padding: 0;
+  color: green;
+}
+
+/* If vertical-align works correctly on the cells, their green Ahem glyphs
+   should cover the red part of each background. */
+td:nth-child(1) {
+  vertical-align: top;
+  background: linear-gradient(to bottom, red 50%, transparent 50%);
+}
+td:nth-child(2) {
+  vertical-align: middle;
+  background: linear-gradient(to bottom, transparent 25%, red 25%, red 75%, transparent 75%);
+}
+td:nth-child(3) {
+  vertical-align: bottom;
+  background: linear-gradient(to bottom, transparent 50%, red 50%);
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

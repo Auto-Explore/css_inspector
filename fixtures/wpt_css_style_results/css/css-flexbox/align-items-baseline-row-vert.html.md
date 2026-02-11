@@ -1,0 +1,73 @@
+# css/css-flexbox/align-items-baseline-row-vert.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/align-items-baseline-row-vert.html"
+}
+```
+
+## style[0]
+
+```css
+
+#target {
+  writing-mode: vertical-rl;
+  display: flex;
+  align-items: baseline;
+  inline-size: min-content;
+  block-size: 200px;
+  border: solid 3px;
+}
+#target > div {
+  margin: 5px 7px 9px 11px;
+}
+#target > :nth-child(1) {
+  background: lime;
+  font: 30px/1 Ahem;
+  writing-mode: vertical-rl;
+}
+#target > :nth-child(2) {
+  background: hotpink;
+  font: 20px/1 Ahem;
+  writing-mode: vertical-rl;
+}
+#target > :nth-child(3) {
+  background: cyan;
+  font: 16px/1 Ahem;
+  width: 40px;
+  height: 40px;
+  writing-mode: horizontal-tb;
+}
+#target > :nth-child(4) {
+  background: lime;
+  font: 30px/1 Ahem;
+  writing-mode: vertical-lr;
+}
+#target > :nth-child(5) {
+  background: hotpink;
+  font: 20px/1 Ahem;
+  writing-mode: vertical-lr;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

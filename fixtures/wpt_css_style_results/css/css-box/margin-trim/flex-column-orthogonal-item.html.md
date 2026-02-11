@@ -1,0 +1,47 @@
+# css/css-box/margin-trim/flex-column-orthogonal-item.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-box/margin-trim/flex-column-orthogonal-item.html"
+}
+```
+
+## style[0]
+
+```css
+
+flexbox {
+    display: flex;
+    flex-direction: column;
+    margin-trim: block;
+}
+item {
+    display: block;
+    background-color: green;
+    width: 100px;
+    height: 50px;
+}
+.orthogonal {
+    writing-mode: vertical-rl;
+}
+item:first-child {
+    margin-inline-start: 10px;
+}
+item:last-child {
+    margin-block-end: 10px;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “margin-trim”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,83 @@
+# css/css-anchor-position/anchor-inherited.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-inherited.html"
+}
+```
+
+## style[0]
+
+```css
+
+.cb {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  border: 1px solid black;
+}
+
+.anchor {
+  width: 100px;
+  height: 100px;
+  top: 10px;
+  left: 20px;
+  position: absolute;
+  background: red;
+  anchor-name: --a;
+}
+
+.anchored {
+  position-anchor: --a;
+  position: absolute;
+  /* Anchored directly on top */
+  top: anchor(top);
+  left: anchor(left);
+  width: anchor-size(width);
+  height: anchor-size(height);
+  background: coral;
+}
+
+/* The child should have the same size as the anchored element,
+   and inset by top:10px,left:20px vs. that element. */
+.child {
+  position-anchor: --unknown; /* Should have no effect. */
+  position: relative;
+  background: skyblue;
+  top: inherit;
+  left: inherit;
+  width: inherit;
+  height: inherit;
+}
+
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

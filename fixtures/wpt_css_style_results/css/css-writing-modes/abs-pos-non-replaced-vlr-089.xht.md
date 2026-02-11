@@ -1,0 +1,110 @@
+# css/css-writing-modes/abs-pos-non-replaced-vlr-089.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/abs-pos-non-replaced-vlr-089.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  div#containing-block
+    {
+      background: red url("support/bg-red-3col-2row-320x320.png");
+      color: transparent;
+      direction: ltr;
+      font: 80px/1 Ahem;
+      height: 320px;
+      position: relative;
+      width: 320px;
+    }
+
+  div#containing-block > span
+    {
+      background-color: red;
+      color: green;
+      left: 2em;
+      margin-left: 0em;
+      margin-right: 0em;
+      position: absolute;
+      right: 2em;
+      width: 1em;
+      writing-mode: vertical-lr;
+    }
+
+/*
+"
+If none of the three is 'auto': If both 'margin-left' and 'margin-right' are 'auto', solve the equation under the extra constraint that the two margins get equal values, unless this would make them negative, in which case when direction of the containing block is 'ltr' ('rtl'), set 'margin-left' ('margin-right') to zero and solve for 'margin-right' ('margin-left'). If one of 'margin-left' or 'margin-right' is 'auto', solve the equation for that value. If the values are over-constrained, ignore the value for 'left' (in case the 'direction' property of the containing block is 'rtl') or 'right' (in case 'direction' is 'ltr') and solve for that value.
+"
+
+'left' + 'margin-left' + 'border-left-width' + 'padding-left' + 'width' + 'padding-right' + 'border-right-width' + 'margin-right' + 'right' = width of containing block
+
+So:
+
+    160px : left
+  +
+      0px : margin-left
+  +
+      0px : border-top-width
+  +
+      0px : padding-top
+  +
+     80px : width
+  +
+      0px : padding-right
+  +
+      0px : border-right-width
+  +
+      0px : margin-right
+  +
+    160px : right
+    =====================
+    320px : width of containing block
+
+gives us:
+
+    160px : left
+  +
+      0px : margin-left
+  +
+      0px : border-top-width
+  +
+      0px : padding-top
+  +
+     80px : width
+  +
+      0px : padding-right
+  +
+      0px : border-right-width
+  +
+      0px : margin-right
+  +
+  (solve) : right
+    =====================
+    320px : width of containing block
+
+And so computed right value must be 80px .
+*/
+
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,44 @@
+# css/css-gaps/grid/fragmentation/grid-gap-decorations-fragmentation-006.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/grid/fragmentation/grid-gap-decorations-fragmentation-006.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .multicol {
+    columns: 3;
+    column-fill: auto;
+    width: 100px;
+    height: 100px;
+    background: green;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-rows: repeat(3, 100px);
+    row-gap: 20px;
+    background: red;
+    row-rule: solid;
+  }
+  .grid-item {
+    background: green;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “row-rule”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

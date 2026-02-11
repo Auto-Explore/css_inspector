@@ -1,0 +1,29 @@
+# css/css-scroll-anchoring/exclude-sticky.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-anchoring/exclude-sticky.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+body { height: 400vh; margin: 0; }
+#sticky, #content { width: 200px; height: 100px; }
+#sticky { position: sticky; left: 100px; top: 50px; }
+#before { height: 50px; }
+#content { margin-top: 100px; }
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,103 @@
+# css/css-view-transitions/hit-test-unpainted-element-from-point.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/hit-test-unpainted-element-from-point.html"
+}
+```
+
+## style[0]
+
+```css
+
+html { view-transition-name: none }
+#target {
+  width: 100px;
+  height: 100px;
+  contain: paint;
+  view-transition-name: shared;
+  position: relative;
+  z-index: 1;
+}
+.before {
+  background: yellow;
+  left: 200px;
+}
+.after {
+  background: green;
+}
+.after:hover {
+  background: red;
+}
+#unrelated {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  top: -50px;
+  background: blue;
+}
+
+html::view-transition {
+  pointer-events: none;
+}
+html::view-transition-group(*) {
+  pointer-events: auto;
+}
+
+html::view-transition-group(shared) {
+  animation-delay: 300s;
+}
+html::view-transition-old(shared) {
+  animation: unset;
+  opacity: 1;
+}
+html::view-transition-new(shared) {
+  display: none;
+}
+```
+
+```json
+{
+  "errors": 9,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “pointer-events”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “pointer-events”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

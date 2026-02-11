@@ -1,0 +1,39 @@
+# css/motion/offset-path-ray-contain-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/motion/offset-path-ray-contain-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+      #container {
+        width: 300px;
+        height: 300px;
+      }
+      #target {
+        position: relative;
+        left: 30px;
+        top: 40px;
+        width: 10px;
+        height: 10px;
+        background-color: lime;
+        /* ray length is sqrt(30^2 + 40^2); contain does -max(10, 10) / 2; */
+        /* the result length is 45px. angle is 180deg; */
+        /* 5 is origin shift. */
+        transform: translate(-5px, 40px);
+      }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

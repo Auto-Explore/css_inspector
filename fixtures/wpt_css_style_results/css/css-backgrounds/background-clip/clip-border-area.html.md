@@ -1,0 +1,54 @@
+# css/css-backgrounds/background-clip/clip-border-area.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/background-clip/clip-border-area.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .test {
+        display: inline-block;
+        margin: 20px;
+        width: 300px;
+        height: 150px;
+        box-sizing: border-box;
+        border: 50px solid transparent;
+        background-clip: border-area;
+        background-image: url(../resources/blue-100.png);
+    }
+
+    .rounded {
+        border-radius: 40%;
+    }
+
+    .missing-border {
+        border-right-style: hidden;
+    }
+
+    .double {
+        border-style: double;
+    }
+
+    .inset {
+        border-style: inset;
+    }
+
+    .complex {
+        border-right-style: double;
+        border-bottom-style: dashed;
+        border-left-style: dotted;
+    }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,51 @@
+# css/css-break/ink-overflow-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-break/ink-overflow-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+.col {
+  column-width: 100px;
+  column-rule: 100px solid red;
+  height: 100px;
+  column-fill: auto;
+  gap: 0;
+  overflow: hidden;
+}
+
+.col > div {
+  display: flow-root;
+  width: 100px;
+  height: 100px;
+  background: green;
+}
+
+.col > div > div {
+  width: 10px;
+  height: 10px;
+  margin-top: 80px;
+  margin-left: 50px;
+  outline: 30px solid green;
+  box-shadow: 0 30px 0 30px green;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “column-rule”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

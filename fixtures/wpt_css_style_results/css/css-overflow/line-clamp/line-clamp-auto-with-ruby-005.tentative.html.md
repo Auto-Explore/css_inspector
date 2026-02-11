@@ -1,0 +1,49 @@
+# css/css-overflow/line-clamp/line-clamp-auto-with-ruby-005.tentative.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/line-clamp/line-clamp-auto-with-ruby-005.tentative.html"
+}
+```
+
+## style[0]
+
+```css
+
+.clamp {
+  line-clamp: auto;
+  max-height: 5lh;
+  font: 16px / 32px serif;
+  white-space: pre;
+  background-color: yellow;
+  padding: 0 4px;
+
+  /* With the Ahem font, the text is 16px = .5lh tall. Without ruby, the leading
+   * would be evenly distributed, so the bottom leading would be .25lh. Since
+   * the ruby annotation is 1lh tall, we need .75lh of padding to completely
+   * contain it. */
+  padding-bottom: .75lh;
+}
+ruby {
+  font-family: Ahem;
+  ruby-position: under;
+}
+rt {
+  font: 32px / 32px Ahem;
+  color: blue;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “line-clamp”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,49 @@
+# css/css-images/object-position-png-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-images/object-position-png-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+      div {
+        background: lightgray;
+        margin-right: 2px;
+        background-image: url("support/colors-16x8.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        image-rendering: pixelated; /* for UAs that don't support crisp-edges */
+        image-rendering: crisp-edges;
+        float: left;
+        width: 20px;
+        height: 20px;
+      }
+
+      .op_y-7  { background-position: 50%  -7% }
+      .op_y13  { background-position: 50%  13% }
+      .op_y23  { background-position: 50%  23% }
+      .op_y50  { background-position: 50%  50% }
+      .op_y75  { background-position: 50%  75% }
+      .op_y88  { background-position: 50%  88% }
+      .op_y111 { background-position: 50% 111% }
+
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

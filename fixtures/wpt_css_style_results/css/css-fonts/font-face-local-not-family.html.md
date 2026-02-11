@@ -1,0 +1,31 @@
+# css/css-fonts/font-face-local-not-family.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-face-local-not-family.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+  /* Load the regular face of Arial, or if not present, harmlessly fall back to Ahem
+     (but the test will then be pointless). */
+  font-family: "LocalArial";
+  src: local("Arial"),
+       local("ArialMT"),
+       local(Ahem),
+       url(/fonts/Ahem.ttf);
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

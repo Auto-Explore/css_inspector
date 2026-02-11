@@ -1,0 +1,30 @@
+# css/css-ui/cursor-text-001-manual.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-ui/cursor-text-001-manual.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  cursor: text;
+  color: blue;
+  writing-mode: vertical-rl;
+}
+p {
+	cursor: text;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

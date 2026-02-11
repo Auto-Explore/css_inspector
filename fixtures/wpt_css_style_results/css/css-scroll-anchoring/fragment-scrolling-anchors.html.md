@@ -1,0 +1,52 @@
+# css/css-scroll-anchoring/fragment-scrolling-anchors.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-anchoring/fragment-scrolling-anchors.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0px;
+    height: 2000px;
+    width: 2000px;
+  }
+
+  #first {
+    height: 1000px;
+    background-color: #FFA5D2;
+  }
+
+  #anchor {
+    position: absolute;
+    background-color: #84BE6A;
+    height: 600px;
+    width: 100%;
+  }
+
+  #fragment {
+    position: relative;
+    background-color: orange;
+    height: 200px;
+    width: 200px;
+    margin: 10px;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

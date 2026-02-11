@@ -1,0 +1,78 @@
+# css/css-view-transitions/scoped/paint-order.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/scoped/paint-order.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+#scope {
+  position: relative; width: 200px; height: 100px;
+  background: white; contain: strict;
+  view-transition-name: none;
+}
+#part {
+  position: absolute; top: 10px; left: 10px;
+  width: 50px; height: 50px; background: #8cf;
+  z-index: 1; view-transition-name: foo;
+}
+#higher-nonpart {
+  position: absolute; top: 20px; left: 30px;
+  z-index: 2; width: 50px; height: 50px; background: #f88;
+}
+#lower-nonpart {
+  position: absolute; top: 40px; left: 20px;
+  z-index: -1; width: 50px; height: 50px; background: #a4f;
+}
+::view-transition { background: rgba(0, 0, 0, 0.1); }
+::view-transition-group(*) { animation-play-state: paused; }
+::view-transition-new(*) {
+  animation: unset; opacity: 1;
+  transform: translateX(40px) translateY(20px);
+}
+::view-transition-old(*) { animation: unset; opacity: 0; }
+
+```
+
+```json
+{
+  "errors": 7,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “transform”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

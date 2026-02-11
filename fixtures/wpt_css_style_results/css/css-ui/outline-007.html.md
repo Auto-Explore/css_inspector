@@ -1,0 +1,38 @@
+# css/css-ui/outline-007.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-ui/outline-007.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  width: 100px;
+  height: 100px;
+  outline-style: auto;
+
+  /* These values may be ignored by the UA, but just in case they are not,
+     set them to something that does not result in the outline being invisible */
+  outline-width: 5px;
+  outline-color: green;
+}
+
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “outline-style”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,47 @@
+# css/css-align/gaps/gap-animation-004.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-align/gaps/gap-animation-004.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @keyframes gap-100-200-to-200-400 {
+    from { gap: 100px 200px; }
+    to { gap: 200px 400px; }
+  }
+
+  #target {
+    animation-name: gap-100-200-to-200-400;
+    animation-timing-function: linear;
+    animation-duration: 2s;
+    animation-delay: -1s;
+    animation-play-state: paused;
+  }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “gap”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “gap”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

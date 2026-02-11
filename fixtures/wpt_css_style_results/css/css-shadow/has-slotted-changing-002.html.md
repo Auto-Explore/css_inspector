@@ -1,0 +1,42 @@
+# css/css-shadow/has-slotted-changing-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shadow/has-slotted-changing-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+    p {
+      color: rgb(0 255 0);
+    }
+    slot:not(:has-slotted) + p {
+      color: rgb(0 0 255);
+    }
+    
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,57 @@
+# css/css-grid/placement/grid-placement-using-named-grid-lines-007.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/placement/grid-placement-using-named-grid-lines-007.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container {
+  display: grid;
+  width: 300px;
+  height: 100px;
+  background: red;
+}
+.container::before {
+  content: "";
+  grid-area: main;
+  background: green;
+}
+.explicit {
+  grid-template-columns: [quux-start] 100% [quux-end];
+  grid-template-rows: [quux-start] 100% [quux-end];
+}
+.explicit.changed {
+  grid-template-columns: [main-start] 100% [main-end];
+  grid-template-rows: [main-start] 100% [main-end];
+}
+.auto-repeat {
+  grid-template-columns: repeat(auto-fill, [quux-start] 100% [quux-end]);
+  grid-template-rows: repeat(auto-fill, [quux-start] 100% [quux-end]);
+}
+.auto-repeat.changed {
+  grid-template-columns: repeat(auto-fill, [main-start] 100% [main-end]);
+  grid-template-rows: repeat(auto-fill, [main-start] 100% [main-end]);
+}
+.implicit {
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
+  grid-template-areas: "quux";
+}
+.implicit.changed {
+  grid-template-areas: "main";
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

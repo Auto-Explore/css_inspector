@@ -1,0 +1,84 @@
+# css/css-logical/logicalprops-block-size-vlr.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-logical/logicalprops-block-size-vlr.html"
+}
+```
+
+## style[0]
+
+```css
+
+.block {
+  border: 1px solid #000;
+  writing-mode: vertical-lr;
+}
+#block1 {
+  block-size: 40px;
+  min-block-size: 50px;
+  max-block-size: 100px;
+}
+#block2 {
+  block-size: 100px;
+  min-block-size: 50px;
+  max-block-size: 100px;
+}
+#block3 {
+  block-size: 120px;
+  min-block-size: 50px;
+  max-block-size: 100px;
+}
+
+.override {
+  border: 1px solid #000;
+  writing-mode: vertical-lr;
+}
+#override1 {
+  block-size: 100px;
+  width: 50px;
+}
+#override2 {
+  width: 50px;
+  block-size: 100px;
+}
+
+.table {
+  border: 1px solid #000;
+  display: table;
+  writing-mode: vertical-lr;
+}
+.tablecell {
+  display: table-cell;
+}
+#table1_cell {
+  block-size: 40px;
+  min-block-size: 50px;
+  max-block-size: 100px;
+  inline-size: 100px;
+  background-color: red;
+}
+#table2_cell {
+  block-size: 100px;
+  min-block-size: 50px;
+  max-block-size: 100px;
+  inline-size: 100px;
+  background-color: blue;
+}
+#table3_cell {
+  block-size: 120px;
+  min-block-size: 50px;
+  max-block-size: 100px;
+  inline-size: 100px;
+  background-color: green;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

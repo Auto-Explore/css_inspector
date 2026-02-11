@@ -1,0 +1,37 @@
+# css/css-fonts/font-synthesis-05-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-synthesis-05-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    @font-face {
+				font-family: "test";
+				src: url(/fonts/Lato-Medium.ttf);
+			}
+    .test {
+				font-family: "test";
+				font-size: 3em;
+                font-synthesis: weight style;
+                color: green;
+			}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “font-synthesis”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

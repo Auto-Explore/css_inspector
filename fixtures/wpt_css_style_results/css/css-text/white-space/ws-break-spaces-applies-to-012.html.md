@@ -1,0 +1,63 @@
+# css/css-text/white-space/ws-break-spaces-applies-to-012.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/white-space/ws-break-spaces-applies-to-012.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div#cell, td#reference
+    {
+      border: black solid 2px;
+      font-family: monospace;
+      font-size: 32px;
+      width: 4ch;
+    }
+
+  div#table
+    {
+      display: table;
+    }
+
+  div#test
+    {
+      display: table-column-group;
+      white-space: break-spaces;
+    }
+
+  div#row
+    {
+      display: table-row;
+    }
+
+  div#cell
+    {
+      display: table-cell;
+    }
+
+  table
+    {
+      border-spacing: 0px;
+      margin-top: 0.5em;
+    }
+
+  td#reference
+    {
+      padding: 0px;
+      white-space: normal;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

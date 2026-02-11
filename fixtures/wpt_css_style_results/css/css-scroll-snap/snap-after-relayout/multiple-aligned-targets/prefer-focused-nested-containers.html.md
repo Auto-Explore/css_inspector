@@ -1,0 +1,79 @@
+# css/css-scroll-snap/snap-after-relayout/multiple-aligned-targets/prefer-focused-nested-containers.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-snap/snap-after-relayout/multiple-aligned-targets/prefer-focused-nested-containers.html"
+}
+```
+
+## style[0]
+
+```css
+
+      .snap {
+        scroll-snap-align: start;
+      }
+      .placeholder {
+        height: 40%;
+        width: 40%;
+        position: absolute;
+        top: 0px;
+        border: solid 1px black;
+      }
+      .right {
+        left: 50%;
+      }
+      .container {
+        position: relative;
+        border: solid 1px blue;
+        overflow: scroll;
+        scroll-snap-type: y mandatory;
+      }
+      .bigcontainer {
+        height: 1000px;
+        width: 1000px;
+      }
+      .smallcontainer {
+        height: 400px;
+        width: 400px;
+        position: absolute;
+        border: solid 1px blue;
+        top: 500px;
+        overflow: scroll;
+        scroll-snap-type: y mandatory;
+      }
+      .large-space {
+        height: 300vh;
+        width: 300vw;
+        position: absolute;
+      }
+      .target {
+        top: 50%;
+        width: 40%;
+        height: 40%;
+        position: absolute;
+        border: solid 1px red;
+      }
+      .target:focus {
+        border:solid 2px green;
+      }
+    
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

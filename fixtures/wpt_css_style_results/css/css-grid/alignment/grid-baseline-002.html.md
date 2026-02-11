@@ -1,0 +1,39 @@
+# css/css-grid/alignment/grid-baseline-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-baseline-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+.inline-block { display: inline-block; }
+.grid, .inline-grid {
+   background-color: lightgrey;
+   grid-auto-flow: column;
+}
+.border { border: 11px solid pink; }
+.padding { padding: 13px; }
+.margin { margin: 8px 0; }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

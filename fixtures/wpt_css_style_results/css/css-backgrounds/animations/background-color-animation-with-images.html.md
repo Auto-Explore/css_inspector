@@ -1,0 +1,107 @@
+# css/css-backgrounds/animations/background-color-animation-with-images.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/animations/background-color-animation-with-images.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container1 {
+  width: 200px;
+  height: 200px;
+  /* Test the case where images partially occludes the background color */
+  background-image: url("../support/green.png"), url("../support/red.png");
+  background-size: 100px 100px;
+  background-repeat: no-repeat;
+  animation: blue-anim 100s;
+}
+.container2 {
+  width: 200px;
+  height: 200px;
+  /* Test the case where images partially occludes the background color */
+  background-image: url("../support/green.png"), url("../support/red.png");
+  background-size: 100px 100px;
+  background-repeat: no-repeat;
+  animation: transparent-anim 100s;
+}
+.container3 {
+  width: 100px;
+  height: 100px;
+  /* Test the case where images occludes the background color */
+  background-image: url("../support/green.png"), url("../support/red.png");
+  animation: transparent-anim 100s;
+}
+.container4 {
+  width: 100px;
+  height: 100px;
+  /* Test the case where images occludes the background color */
+  background-image: url("../support/green.png"), url("../support/red.png");
+  animation: blue-anim 100s;
+}
+@keyframes blue-anim {
+  0% { background-color: rgb(0, 0, 199); }
+  100% { background-color: rgb(0, 0, 200); }
+}
+@keyframes transparent-anim {
+  0% { background-color: rgba(0, 200, 0, 0); }
+  100% { background-color: rgba(200, 0, 0, 0); }
+}
+```
+
+```json
+{
+  "errors": 11,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,50 @@
+# css/filter-effects/reference/backdrop-filter-basic-blur-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/filter-effects/reference/backdrop-filter-basic-blur-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+.colorbox {
+    width: 200px; height: 200px;
+    background: red;
+    position: absolute;
+    left: 150px;
+    top: 150px;
+}
+.filterbox {
+    display: block;
+    position: absolute;
+    left: 100px;
+    width: 150px;
+    height: 100px;
+    margin: 0px auto;
+    border: 1px solid blue;
+}
+.box1 {
+    top: -50px;
+    background: #0000ff7f;
+}
+.box2 {
+    top: 150px;
+}
+.box3 {
+    top: 50px;
+    left: -100px;
+    opacity: 0.6;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

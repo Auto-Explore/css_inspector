@@ -1,0 +1,61 @@
+# css/css-contain/contain-style-counters-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-contain/contain-style-counters-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div#create-counter
+    {
+      counter-reset: counter-of-span 9;
+    }
+
+    /*
+    This creates a new counter identified as "counter-of-span"
+    and initially sets such counter to 9 (an entirely
+    arbitrary number).
+    */
+
+  div#test
+    {
+      contain: style;
+      font-size: 3em;
+    }
+
+  div#test span
+    {
+      counter-increment: counter-of-span 5;
+    }
+
+    /*
+    This increments the counter identified as "counter-of-span"
+    of the step value of 5 (an entirely arbitrary number) each
+    and every time there is a <span> descendant within the subtree
+    of div#test
+    */
+
+  div#test span::after
+    {
+      content: counter(counter-of-span);
+    }
+    /*
+    Now, the generated content after the span is set to the
+    current value of the counter identified as "counter-of-span"
+    */
+
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

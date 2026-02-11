@@ -1,0 +1,47 @@
+# css/css-text/text-indent/text-indent-percentage-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/text-indent/text-indent-percentage-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+body { background: white; }
+section { position: absolute; }
+section, div {
+  border-right: 10px solid white;
+  margin-right: 10px;
+  padding-right: 10px;
+}
+div {
+  box-sizing: border-box;
+  width: 120px;
+}
+span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: green;
+}
+.ref span {
+  background: red;
+  /* the next two lines are to avoid antialiasing artifacts causing a tiny about of red to be visible */
+  box-sizing: border-box;
+  border: 1px solid white;
+}
+.test div { text-indent: 50%; }
+.ref div { text-indent: 50px; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

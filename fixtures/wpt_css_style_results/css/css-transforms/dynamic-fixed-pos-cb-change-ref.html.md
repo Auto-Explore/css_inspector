@@ -1,0 +1,65 @@
+# css/css-transforms/dynamic-fixed-pos-cb-change-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/dynamic-fixed-pos-cb-change-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: #222;
+}
+
+body {
+  display: flex;
+  transform: scale(0.9);
+}
+
+#fixed {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: black;
+}
+
+#popup {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  background: green;
+  transform: scale( 1.1111 );
+}
+
+body, #popup {
+  transform-origin: 50% 50%;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “transform-origin”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

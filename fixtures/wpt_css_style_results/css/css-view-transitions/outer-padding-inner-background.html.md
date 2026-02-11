@@ -1,0 +1,92 @@
+# css/css-view-transitions/outer-padding-inner-background.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/outer-padding-inner-background.html"
+}
+```
+
+## style[0]
+
+```css
+
+:root { view-transition-name: none; }
+::view-transition { background: rebeccapurple; }
+.target {
+  width: 200px;
+  height: 200px;
+  view-transition-name: target;
+  padding: 20px;
+}
+
+.child {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  background: green;
+}
+
+html::view-transition-group(target) {
+  animation-play-state: paused;
+ }
+html::view-transition-old(target),
+html::view-transition-new(target) {
+  animation: unset;
+  opacity: 1;
+}
+
+html::view-transition-new(target) {
+  position: relative;
+  top: 100px;
+}
+
+/* None of these should apply, so make everything red if it does */
+html::view-transition-group(root) { animation: unset; opacity: 1; background: red; }
+html::view-transition-image-pair(root) { visibility: hidden }
+```
+
+```json
+{
+  "errors": 9,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

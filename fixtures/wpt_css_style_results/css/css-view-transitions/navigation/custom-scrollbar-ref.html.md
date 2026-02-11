@@ -1,0 +1,72 @@
+# css/css-view-transitions/navigation/custom-scrollbar-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/navigation/custom-scrollbar-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+.old {
+  width: 50vw;
+  height: 100vh;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background: blue;
+}
+
+.new {
+  width: 50vw;
+  height: 100vh;
+  position: fixed;
+  left: 50vw;
+  top: 0px;
+  background: grey;
+}
+
+html {
+    overflow: scroll;
+}
+@layer {
+    ::-webkit-scrollbar {
+        background-color: hsl(0, 100%, 10%);
+        color: hsl(0, 100%, 90%);
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: hsl(0, 100%, 50%);
+    }
+    ::-webkit-scrollbar-corner {
+        background-color: hsl(0, 100%, 0%);
+    }
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,73 @@
+# css/css-backgrounds/animations/background-color-animation-with-mask.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/animations/background-color-animation-with-mask.html"
+}
+```
+
+## style[0]
+
+```css
+
+@keyframes blue-anim {
+  0% { background-color: rgb(0, 0, 100); }
+  100% { background-color: rgb(0, 0, 200); }
+}
+.container {
+  width: 100px;
+  height: 100px;
+  -webkit-mask-image: url('../resources/stripes-100.png');
+  -webkit-mask-size: 100px 100px;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url('../resources/stripes-100.png');
+  mask-size: 100px 100px;
+  mask-repeat: no-repeat;
+
+  /* force animation to start effectively stalled at the midpoint */
+  animation: blue-anim 10000s cubic-bezier(0, 1, 1, 0) -5000s;
+}
+
+```
+
+```json
+{
+  "errors": 8,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “-webkit-mask-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “-webkit-mask-size”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “-webkit-mask-repeat”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-size”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-repeat”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

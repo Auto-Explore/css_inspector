@@ -1,0 +1,57 @@
+# css/motion/offset-path-shape-shape-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/motion/offset-path-shape-shape-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+#outer {
+  top: 50px;
+  left: 50px;
+  position: relative;
+  width: 600px;
+  height: 400px;
+  padding: 50px;
+  box-sizing: content-box;
+}
+#box {
+  width: 100px;
+  height: 100px;
+  background-color: green;
+  offset-path: shape(from 50px 10%,
+                     hline by calc(100% - 100px),
+                     vline to calc(100% - 50px),
+                     hline to 50px,
+                     close)
+               padding-box;
+  offset-distance: 40%;
+  border-radius: 50% 50% 0 0;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown property “offset-path”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “offset-distance”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-radius”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

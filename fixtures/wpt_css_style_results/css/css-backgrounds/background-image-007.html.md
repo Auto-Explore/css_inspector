@@ -1,0 +1,44 @@
+# css/css-backgrounds/background-image-007.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/background-image-007.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div
+    {
+      color: transparent;
+      /* So that background shines through both "A" and "Z" glyphs */
+      line-height: 1;
+    }
+
+  div::first-letter
+    {
+      background-color: red;
+      background-image:
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' style='background: green'></svg>"),
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' style='background: red'></svg>");
+      font-family: Ahem;
+      font-size: 100px;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-image”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

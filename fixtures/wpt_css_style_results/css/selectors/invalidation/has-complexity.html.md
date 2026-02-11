@@ -1,0 +1,35 @@
+# css/selectors/invalidation/has-complexity.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/selectors/invalidation/has-complexity.html"
+}
+```
+
+## style[0]
+
+```css
+
+div, main { color: grey }
+main:has(span) .subject { color: red }
+main:has(span + span) .subject { color: green }
+main:has(span + final) .subject { color: blue }
+main:has(nonexistent + span) .subject { color: black }
+main:has(span) span { color: black }
+main:has(nonexistent) span { color: black }
+main:has(div div span) .subject { color: purple }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

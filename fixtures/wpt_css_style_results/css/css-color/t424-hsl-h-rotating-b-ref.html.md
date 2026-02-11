@@ -1,0 +1,31 @@
+# css/css-color/t424-hsl-h-rotating-b-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-color/t424-hsl-h-rotating-b-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    table { border-spacing: 0; padding: 0; border: none; }
+    td { border: none; padding: 0; }
+    td { width: 1.2em; height: 1.2em; }
+    #one { background: #FF0000; }
+    #two { background: #FFFF00; }
+    #three { background: #00FF00; }
+    #four { background: #00FFFF; }
+    #five { background: #0000FF; }
+    #six { background: #FF00FF; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

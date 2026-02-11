@@ -1,0 +1,99 @@
+# css/css-scroll-snap/snap-after-relayout/multiple-aligned-targets/common-to-both-axes-supercedes-first-in-tree-order.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-snap/snap-after-relayout/multiple-aligned-targets/common-to-both-axes-supercedes-first-in-tree-order.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .placeholder {
+      top: 0px;
+      left: 0px;
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: black;
+      scroll-snap-align: start;
+    }
+    .space {
+      position: absolute;
+      height: 300vh;
+      width: 300vw;
+      top: 100px;
+      left: 100px;
+    }
+    .scroller {
+      overflow: scroll;
+      scroll-snap-type: both mandatory;
+      width: 550px;
+      height: 550px;
+      border: solid 1px black;
+      position: relative;
+      resize: both;
+    }
+    .box {
+      background-color: green;
+      height: 200px;
+      width: 200px;
+      scroll-snap-align: start;
+      position: absolute;
+      border: solid 1px white;
+    }
+    .row {
+      top: 100px;
+    }
+    .col {
+      left: 100px;
+    }
+    /* Place boxes 0 through 4 on a horizontal row. */
+    #box0 {
+      left: 300px;
+    }
+    #box1 {
+      left: 500px;
+    }
+    #box2 {
+      left: 700px;
+    }
+    #box3 {
+      left: 900px;
+    }
+    #box4 {
+      left: 1100px;
+    }
+    /* Place boxes 5 through 9 in a vertical column. */
+    #box5 {
+      top: 300px;
+    }
+    #box6 {
+      top: 500px;
+    }
+    #box7 {
+      top: 700px;
+    }
+    #box8 {
+      top: 900px;
+    }
+    #box9 {
+      top: 1100px;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

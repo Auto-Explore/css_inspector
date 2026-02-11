@@ -1,0 +1,48 @@
+# css/css-backgrounds/animations/background-color-animation-half-opaque.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/animations/background-color-animation-half-opaque.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container {
+  width: 600px;
+  height: 600px;
+  will-change: transform;
+  /* Use a long animation that start at 50% progress where the slope of the
+     selected timing function is zero. By setting up the animation in this way,
+     we accommodate lengthy delays in running the test without a potential drift
+     in the animated property value. This is important for avoiding flakes,
+     especially on debug builds. The screenshots are taken as soon as the
+     animation is ready, thus the long animation duration has no bearing on
+     the actual duration of the test. */
+  animation: bgcolor 1000000s cubic-bezier(0,1,1,0) -500000s;
+}
+@keyframes bgcolor {
+  0% { background-color: rgba(0, 200, 0, 1); }
+  100% { background-color: rgba(200, 0, 0, 0.6); }
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,48 @@
+# css/css-flexbox/align-content-wrap-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/align-content-wrap-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.default {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    height: 70px;
+    border: 1px solid red;
+    margin: 5px;
+}
+
+.default > div {
+  height: 20px;
+}
+
+.verticalWriting {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    width: 70px;
+    border: 1px solid red;
+    margin: 5px;
+    writing-mode: vertical-lr;
+}
+
+.verticalWriting > div {
+  width: 20px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

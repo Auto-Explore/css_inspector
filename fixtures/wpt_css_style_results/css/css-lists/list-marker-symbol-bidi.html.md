@@ -1,0 +1,51 @@
+# css/css-lists/list-marker-symbol-bidi.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-lists/list-marker-symbol-bidi.html"
+}
+```
+
+## style[0]
+
+```css
+
+section {
+  float: left;
+}
+.inside {
+  list-style-position: inside;
+}
+.embed-item, .embed-both {
+  unicode-bidi: embed;
+}
+.isolate-item, .isolate-both {
+  unicode-bidi: isolate;
+}
+.override-item, .override-both {
+  unicode-bidi: bidi-override;
+}
+.isolateoverride-item, .isolateoverride-both {
+  unicode-bidi: isolate-override;
+}
+.plaintext-item, .plaintext-both {
+  unicode-bidi: plaintext;
+}
+.embed-item::marker, .embed-none::marker,
+.isolate-item::marker, .isolate-none::marker,
+.override-item::marker, .override-none::marker,
+.paintext-item::marker, .paintext-none::marker,
+.isolateoverride-item::marker, .isolateoverride-none::marker {
+  unicode-bidi: normal;
+}
+::marker { font-family: inherit; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

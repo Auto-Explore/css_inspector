@@ -1,0 +1,72 @@
+# css/css-grid/subgrid/line-names-012.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/subgrid/line-names-012.html"
+}
+```
+
+## style[0]
+
+```css
+
+html,body {
+  color:black; background-color:white; font:12px/1 monospace;
+}
+
+.grid {
+  display: grid;
+  grid: 0.2em 1.4em / repeat(10,30px);
+  border: 1px solid;
+  padding: 0 2px;
+}
+
+div > div {
+  position: relative;
+  display: grid;
+  grid-column: 2 / span 2;
+  grid: auto / subgrid;
+  border: 1px solid black;
+  background: grey;
+}
+
+n {
+  grid-row: 1;
+  counter-increment: n;
+}
+n::before { content: counter(n, decimal); }
+
+x {
+  background: silver;
+}
+
+.rtl { writing-mode: horizontal-tb; direction:rtl; }
+.ltr { writing-mode: horizontal-tb; direction:ltr; }
+  
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

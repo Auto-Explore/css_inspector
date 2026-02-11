@@ -1,0 +1,75 @@
+# css/css-view-transitions/scoped/display-change.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/scoped/display-change.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+body { margin: 20px }
+#scope {
+  position: relative; z-index: 0; background: pink;
+  border: 5px dashed purple; padding: 5px;
+  width: 180px; height: 120px; view-transition-name: none;
+}
+#part {
+  position: relative; z-index: 0; background: lightgrey;
+  border: 5px solid blue; padding: 5px;
+  width: 120px; height: 60px;
+  left: 20px; top: 20px;
+  view-transition-name: foo;
+}
+
+#scope::view-transition { background: yellow; }
+#scope::view-transition-group(foo) { animation-play-state: paused; }
+#scope::view-transition-new(foo) { animation: unset; opacity: 1; }
+#scope::view-transition-old(foo) { animation: unset; opacity: 0; }
+
+```
+
+```json
+{
+  "errors": 8,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

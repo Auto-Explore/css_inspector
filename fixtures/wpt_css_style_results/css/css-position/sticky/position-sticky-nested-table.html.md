@@ -1,0 +1,72 @@
+# css/css-position/sticky/position-sticky-nested-table.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-position/sticky/position-sticky-nested-table.html"
+}
+```
+
+## style[0]
+
+```css
+
+.group {
+  display: inline-block;
+  position: relative;
+  width: 150px;
+  height: 250px;
+}
+
+.scroller {
+  position: relative;
+  width: 100px;
+  height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.contents {
+  height: 700px;
+}
+
+.prepadding {
+  height: 100px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td, th {
+  height: 50px;
+  width: 50px;
+  padding: 0;
+}
+
+th {
+  background: green;
+}
+
+.sticky {
+  position: sticky;
+  top: 25px;
+}
+
+.indicator {
+  position: absolute;
+  left: 0;
+  background-color: red;
+  height: 50px;
+  width: 50px;
+}
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

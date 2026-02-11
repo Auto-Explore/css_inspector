@@ -1,0 +1,35 @@
+# css/CSS2/cascade/specificity-005.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/cascade/specificity-005.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div:first-line /* a=0 b=0 c=0 d=2 -> specificity = 0,0,0,2 */
+            {
+                color: green;
+            }
+            :first-line /* a=0 b=0 c=0 d=1 -> specificity = 0,0,0,1 */
+            {
+                color: red;
+            }
+            #p1:first-line
+            {
+                color: black;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

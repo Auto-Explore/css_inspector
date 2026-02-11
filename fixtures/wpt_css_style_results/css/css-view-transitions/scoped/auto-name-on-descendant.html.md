@@ -1,0 +1,110 @@
+# css/css-view-transitions/scoped/auto-name-on-descendant.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/scoped/auto-name-on-descendant.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #container {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    /* Currently needed to force a stacking context in the absence of an
+       animation-name.
+    */
+    will-change: opacity;
+    view-transition-name: none;
+  }
+
+  .item {
+    background-color: teal;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    position: relative;
+    will-change: opacity;
+    view-transition-name: auto;
+  }
+
+  #item1.active {
+    background-color: orange;
+    transform: scale(1.2);
+  }
+
+  #item2.active {
+    background-color: salmon;
+    transform: scale(0.9);
+  }
+
+  #item3.active {
+    background-color: hotpink;
+    transform: scale(0.8) translateX(-10px);
+  }
+
+  ::view-transition-group(*) {
+    animation-duration: 2s;
+  }
+
+  ::view-transition-old(*) {
+    animation-name: -ua-view-transition-fade-out;
+  }
+
+  ::view-transition-new(*) {
+    animation-name: -ua-view-transition-fade-in;
+  }
+
+```
+
+```json
+{
+  "errors": 9,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “transform”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

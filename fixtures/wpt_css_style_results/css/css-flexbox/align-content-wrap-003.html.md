@@ -1,0 +1,97 @@
+# css/css-flexbox/align-content-wrap-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/align-content-wrap-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+.flexbox {
+    display: flex;
+    background-color: #aaa;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.horizontal {
+    width: 200px;
+    height: 120px;
+}
+.horizontal > div {
+    min-height: 20px;
+}
+.horizontal > :nth-child(1) {
+    width: 100px;
+    min-height: 10px;
+}
+.horizontal > :nth-child(2) {
+    width: 100px;
+}
+.horizontal > :nth-child(3) {
+    width: 200px;
+}
+.horizontal > :nth-child(4) {
+    width: 50px;
+}
+
+.vertical-rl {
+    writing-mode: vertical-rl;
+    width: 120px;
+    height: 20px;
+}
+.vertical-rl > div {
+    min-width: 20px;
+}
+.vertical-rl > :nth-child(1) {
+    height: 10px;
+    min-width: 10px;
+}
+.vertical-rl > :nth-child(2) {
+    height: 10px;
+}
+.vertical-rl > :nth-child(3) {
+    height: 20px;
+}
+.vertical-rl > :nth-child(4) {
+    height: 5px;
+}
+
+.flexbox :nth-child(1) {
+    background-color: lightblue;
+}
+.flexbox :nth-child(2) {
+    background-color: lightgreen;
+}
+.flexbox :nth-child(3) {
+    background-color: pink;
+}
+.flexbox :nth-child(4) {
+    background-color: yellow;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

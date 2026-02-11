@@ -1,0 +1,49 @@
+# css/css-grid/grid-items/grid-item-rel-pos-002-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-items/grid-item-rel-pos-002-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+  margin: 40px;
+  display: grid;
+  grid: auto / repeat(3,100px);
+  grid-gap: 20px;
+}
+span, even {
+  position: relative;
+  min-height: 20px;
+  background: grey;
+  left: 0px;
+  width: 30px;
+  justify-self: center;
+}
+.offset even {
+  left: 20%;
+}
+
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,72 @@
+# css/css-contain/content-visibility/content-visibility-style-containment-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-contain/content-visibility/content-visibility-style-containment-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  /* Selectors for content-visibility */
+  #spacer_for_far_to_viewport {
+      height: 300vh;
+  }
+  #visible .content_visibility {
+      content-visibility: visible;
+  }
+  #hidden .content_visibility {
+      content-visibility: hidden;
+  }
+  #auto_far .content_visibility {
+      content-visibility: auto;
+  }
+  #auto_close .content_visibility {
+      content-visibility: auto;
+  }
+  #visible_to_hidden .content_visibility {
+      content-visibility: visible;
+  }
+  #hidden_to_visible .content_visibility {
+      content-visibility: hidden;
+  }
+  #visible_to_auto .content_visibility {
+      content-visibility: visible;
+  }
+  #auto_to_visible .content_visibility {
+      content-visibility: auto;
+  }
+
+  /* Selectors for testing counters */
+  .set_counter_to_9 {
+      counter-set: testcounter 9;
+  }
+  .increment_counter {
+      counter-increment: testcounter;
+  }
+  span.print_counter::after {
+      font: 25px/1 Ahem;
+      content: counters(testcounter, ".");
+  }
+
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “counter-set”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “content”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

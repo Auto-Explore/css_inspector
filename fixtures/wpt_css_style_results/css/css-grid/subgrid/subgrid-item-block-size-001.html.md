@@ -1,0 +1,78 @@
+# css/css-grid/subgrid/subgrid-item-block-size-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/subgrid/subgrid-item-block-size-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+html,body {
+  color:black; background-color:white; font:16px/1 monospace; padding:0; margin:0;
+}
+
+
+body { width:600px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow:dense;
+  gap: 40px;
+}
+
+.card {
+  background-color: #fff;
+  grid-row: auto / span 3;
+  grid-template-rows: subgrid;
+  grid-template-columns: auto;
+  display: grid;
+}
+
+
+.card .inner, .card footer {
+  padding: 10px;
+}
+
+.card .inner { background: grey; }
+
+.card h2 {
+  margin: 0;
+  color: #fff;
+  background-color: rgb(3,99,143);
+  border-bottom: 4px solid rgb(24,154,153);
+}
+
+.card footer {
+  background-color: rgb(182,222,211);
+}
+
+* { box-sizing: border-box; }
+
+item {
+  border: 1px solid;
+  grid-column: 2;
+}
+
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

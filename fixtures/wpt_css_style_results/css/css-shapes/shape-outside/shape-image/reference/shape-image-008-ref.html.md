@@ -1,0 +1,50 @@
+# css/css-shapes/shape-outside/shape-image/reference/shape-image-008-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shapes/shape-outside/shape-image/reference/shape-image-008-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+        body {
+            margin: 0;
+        }
+        .left-rect {
+            left: 30px;
+            top: 90px;
+         }
+        .right-rect {
+            left: 140px;
+            top: 70px;
+            width: 50px;
+            height: 100px;
+            background-color: rgb(0,100,0);
+         }
+        .blue {
+            width: 2px;
+            height: 100px;
+            top: 70px;
+            background-color: blue;
+        }
+        .line-left {
+            left: 135px;
+        }
+        .line-right {
+            left: 195px;
+        }
+        .green, .blue { position: absolute; }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

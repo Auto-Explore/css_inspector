@@ -1,0 +1,55 @@
+# css/css-grid/layout-algorithm/flex-sizing-rows-indefinite-height.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/layout-algorithm/flex-sizing-rows-indefinite-height.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+  display: inline-grid;
+  position: relative;
+  grid-template-columns: minmax(0, .5fr);
+  grid-template-rows: minmax(0, .5fr);
+}
+.item {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(green, green) no-repeat;
+  background-size: 100px 100px;
+}
+.abspos {
+  grid-area: 1 / 1 / 2 / 2;
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: red;
+  z-index: -1;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-area”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

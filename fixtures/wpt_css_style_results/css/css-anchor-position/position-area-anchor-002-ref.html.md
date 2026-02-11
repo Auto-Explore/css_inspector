@@ -1,0 +1,78 @@
+# css/css-anchor-position/position-area-anchor-002-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/position-area-anchor-002-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+.abs-cb {
+  width: 180px;
+  height: 180px;
+  position: relative;
+  border: 5px solid;
+}
+
+.scroller {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+
+.anchor {
+  width: 60px;
+  height: 60px;
+  margin-left: 60px;
+  background: pink;
+}
+
+.filler {
+  width: 1px;
+  height: 180px;
+}
+
+.positioned {
+  width: 30px;
+  height: 30px;
+  background: purple;
+  position: absolute;
+}
+
+.tl {
+  right: 120px;
+  bottom: 120px;
+}
+
+.tr {
+  left: 120px;
+  bottom: 120px;
+}
+
+.bl {
+  right: 120px;
+  top: 120px;
+}
+
+.br {
+  left: 120px;
+  top: 120px;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

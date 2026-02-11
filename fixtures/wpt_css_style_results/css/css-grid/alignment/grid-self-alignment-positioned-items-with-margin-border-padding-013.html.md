@@ -1,0 +1,111 @@
+# css/css-grid/alignment/grid-self-alignment-positioned-items-with-margin-border-padding-013.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-self-alignment-positioned-items-with-margin-border-padding-013.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: 100px 150px;
+  grid-template-rows: 150px 100px;
+  font: 10px/1 Ahem;
+  background: grey;
+  justify-content: center;
+}
+.grid.LTR, .grid.RTL { width: 450px; }
+.grid.verticalLR, .grid.verticalRL { height: 450px; }
+.grid > div { position: absolute; }
+.grid > :nth-child(1) { background: green; }
+.grid > :nth-child(2) { background: blue; }
+.grid > :nth-child(3) { background: yellow; }
+.grid > :nth-child(4) { background: red; }
+
+.grid > div {
+   border-color: silver;
+   border-style: solid;
+   border-width: 5px 10px 15px 20px;
+}
+
+.LTR { direction: ltr; }
+.RTL { direction: rtl; }
+.verticalLR { writing-mode: vertical-lr; }
+.verticalRL { writing-mode: vertical-rl; }
+
+.firstRowFirstColumn {
+  grid-row: 1 / 2;
+  grid-column: auto / 1;
+  align-self: start;
+  justify-self: right;
+}
+.firstRowSecondColumn {
+  grid-row: 1 / 2;
+  grid-column: 2 / auto;
+  align-self: end;
+  justify-self: center;
+}
+.secondRowFirstColumn {
+  grid-row: 2 / 3;
+  grid-column: auto / auto;
+  align-self: center;
+  justify-self: self-start;
+}
+.secondRowSecondColumn {
+  grid-row: 2 / 3;
+  grid-column: 1 / 2;
+  align-self: self-end;
+  justify-self: left;
+}
+```
+
+```json
+{
+  "errors": 9,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

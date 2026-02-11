@@ -1,0 +1,83 @@
+# css/css-borders/tentative/border-shape/border-shape-geometry-box.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-borders/tentative/border-shape/border-shape-geometry-box.html"
+}
+```
+
+## style[0]
+
+```css
+
+body {
+  margin: 0;
+}
+.container {
+  display: inline-block;
+  background: yellow;
+}
+.test {
+  width: 100px;
+  height: 100px;
+  background: thistle;
+  padding: 10px;
+  margin: 10px;
+  border: 10px solid palegoldenrod;
+}
+.contents {
+  width: 100%;
+  height: 100%;
+  background: lightblue;
+}
+#margin-border {
+  border-shape: polygon(0 0, 100% 0, 100% 100%, 0 100%) margin-box polygon(0 0, 100% 0, 100% 100%, 0 100%) border-box;
+}
+#border-padding {
+  border-shape: polygon(0 0, 100% 0, 100% 100%, 0 100%) border-box polygon(0 0, 100% 0, 100% 100%, 0 100%) padding-box;
+}
+#padding-content {
+  border-shape: polygon(0 0, 100% 0, 100% 100%, 0 100%) padding-box polygon(0 0, 100% 0, 100% 100%, 0 100%) content-box;
+}
+#margin-content {
+  border-shape: polygon(0 0, 100% 0, 100% 100%, 0 100%) margin-box polygon(0 0, 100% 0, 100% 100%, 0 100%) content-box;
+}
+```
+
+```json
+{
+  "errors": 7,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “border-shape”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “border-shape”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “border-shape”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “border-shape”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

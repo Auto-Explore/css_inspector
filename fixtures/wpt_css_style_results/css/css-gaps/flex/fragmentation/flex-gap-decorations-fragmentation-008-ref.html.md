@@ -1,0 +1,64 @@
+# css/css-gaps/flex/fragmentation/flex-gap-decorations-fragmentation-008-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/flex/fragmentation/flex-gap-decorations-fragmentation-008-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .multi-column {
+        columns: 2;
+        height: 90px;
+        column-width: 100px;
+        width: 330px;
+    }
+
+    body {
+        margin: 0px;
+    }
+
+    #flexbox {
+        border: 2px solid rgb(96 139 168);
+        display: flex;
+        column-gap: 10px;
+        row-gap: 10px;
+        width: 90px;
+        flex-wrap: wrap;
+        height: 170px;
+    }
+
+    .items {
+        background-color: rgb(96 139 168 / 0.2);
+        width: 30px;
+        height: 30px;
+        break-before: column;
+    }
+    .column-rule {
+        background-color: blue;
+        position: absolute;
+        height: 30px;
+        width: 10px;
+    }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

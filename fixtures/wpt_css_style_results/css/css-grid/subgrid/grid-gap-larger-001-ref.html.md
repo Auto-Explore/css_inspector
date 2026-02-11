@@ -1,0 +1,100 @@
+# css/css-grid/subgrid/grid-gap-larger-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/subgrid/grid-gap-larger-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+html,body {
+  color:black; background-color:white; font:16px/1 monospace; padding:0; margin:0;
+}
+
+  .wrapper {
+    display: grid;
+    gap: 0;
+    grid-template-columns: 150px 100px 150px 100px;
+    grid-template-rows: repeat(3,auto);
+    background-color: #fff;
+    color: #444;
+  }
+
+  .box {
+    background-color: #444;
+    color: #fff;
+    padding: 20px;
+  }
+
+  .box .box {
+    background-color: #ccc;
+    color: #444;
+  }
+
+  .a {
+    grid-column: 1 / 3;
+  }
+
+  .b {
+    grid-column: 4 ;
+  }
+
+  .c {
+    grid-column: 1;
+    grid-row: 2 / 4;
+  }
+
+  .box .f { background-color: purple; }
+  .box .i { background-color: blue; }
+  .box .e { background-color: yellow; }
+  .a { background-color: grey; }
+  .c { background-color: black; }
+  .b { background-color: black; }
+
+  .d {
+    grid-column: 2 / 5;
+    grid-row: 2 / 4;
+    display: grid;
+    gap: 20px;
+    grid: auto / 70px 130px 70px;
+  }
+
+  
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

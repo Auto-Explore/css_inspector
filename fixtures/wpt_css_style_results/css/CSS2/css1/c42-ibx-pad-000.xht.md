@@ -1,0 +1,37 @@
+# css/CSS2/css1/c42-ibx-pad-000.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/css1/c42-ibx-pad-000.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+   div { font: 10px/240% Ahem; color: black; width: 200px; margin: 0 0 0 10px; }
+   span { border: solid 10px blue; padding: 2px 20px 2px 10px; margin: 40px 30px 0 40px; }
+   td { padding: 0; border: 2px solid black; }
+   img { display: block; }
+   .control { background: red; color: yellow; }
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

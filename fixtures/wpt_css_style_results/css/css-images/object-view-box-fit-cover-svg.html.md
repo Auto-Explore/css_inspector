@@ -1,0 +1,66 @@
+# css/css-images/object-view-box-fit-cover-svg.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-images/object-view-box-fit-cover-svg.html"
+}
+```
+
+## style[0]
+
+```css
+
+.view_box_subset {
+  object-view-box: inset(50px 0px 0px 0px);
+  object-fit: cover;
+  width: 40px;
+  height: 50px;
+  margin: 5px;
+}
+
+.view_box_subset_with_position {
+  object-view-box: inset(50px 0px 0px 0px);
+  object-fit: cover;
+  width: 40px;
+  height: 50px;
+  margin: 5px;
+  object-position: 0% 0%;
+}
+
+.view_box_subset_with_scaling {
+  object-view-box: inset(50px 0px 0px 0px);
+  object-fit: cover;
+  margin: 5px;
+  width: 50px;
+  height: 100px;
+  /* The top row of pixels can have minor differences due to mismatch in order
+     of clipping and scaling operations */
+  clip-path: inset(1px 0px 0px 0px);
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Unknown property “object-view-box”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “object-view-box”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “object-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “object-view-box”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

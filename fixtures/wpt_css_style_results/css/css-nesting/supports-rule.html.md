@@ -1,0 +1,63 @@
+# css/css-nesting/supports-rule.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-nesting/supports-rule.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .test {
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    display: grid;
+  }
+
+  @supports(not selector(> .test-1)) {
+    .test-1 {
+      background-color: green;
+    }
+  }
+
+  .test {
+    > .test-2 {
+      background-color: green;
+    }
+    @supports (selector(> .test-2)) {
+      > .test-2 {
+        background-color: red;
+      }
+    }
+  }
+
+  .test-3 {
+    @supports (selector(&)) {
+      & {
+        background-color: green;
+      }
+    }
+  }
+
+  @supports(selector(&)) {
+    .test-4 {
+      background-color: green;
+    }
+  }
+
+  body * + * {
+    margin-top: 8px;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

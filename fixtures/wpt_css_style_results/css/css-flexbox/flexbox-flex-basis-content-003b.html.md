@@ -1,0 +1,81 @@
+# css/css-flexbox/flexbox-flex-basis-content-003b.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flexbox-flex-basis-content-003b.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    display: flex;
+    /* flex container has an extremely-constrained width (and items will
+       overflow horizontally). This is intentional, as part of stress-testing
+       item sizing. */
+    width: 1px;
+  }
+
+  .item {
+    /* We give all flex items a used "flex-basis" of "content"
+       (from "flex-basis:auto" and default "width:auto").
+       We also give them zero flex-grow, flex-shrink, and min-main-size, so
+       that the flex base size entirely determines the flex item's size. */
+    flex: 0 0 auto;
+    min-width: 0;
+    border: 2px solid teal;
+  }
+  ib {
+    display: inline-block;
+    background: blue;
+    border: 1px solid gray;
+    width: 15px;
+    height: 10px;
+  }
+  float {
+    float: left;
+    background: fuchsia;
+    border: 1px solid gray;
+    width: 15px;
+    height: 10px;
+  }
+  canvas {
+    background: brown;
+    border: 1px solid gray;
+  }
+  .innerFlex {
+    display: flex;
+  }
+  innerItem {
+    background: salmon;
+    border: 1px solid gray;
+    height: 10px;
+    width: 15px;
+    flex: none;
+  }
+  
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “flex”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

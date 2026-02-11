@@ -1,0 +1,37 @@
+# css/css-sizing/available-height-for-replaced-content-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-sizing/available-height-for-replaced-content-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+#wrapper {
+  width: 200px;
+  min-height: 1px;
+  height: 20px;
+  border: 1px solid green;
+  padding: 50px;
+}
+img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  background: silver;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

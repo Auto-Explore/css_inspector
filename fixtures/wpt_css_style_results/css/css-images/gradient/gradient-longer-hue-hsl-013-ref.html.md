@@ -1,0 +1,51 @@
+# css/css-images/gradient/gradient-longer-hue-hsl-013-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-images/gradient/gradient-longer-hue-hsl-013-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  margin: 20px 0px 20px 50px;
+  height: 40px;
+  width: 100px;
+  position: relative;
+}
+/* same colors as the testcase but specified directly in the interpolation color space */
+.ref1 {
+  background: linear-gradient(to right in hsl longer hue, hsl(0 100% 50%), hsl(0 0% 0%));
+}
+.ref2 {
+  background: linear-gradient(to right in hsl longer hue, hsl(0 100% 50%), hsl(0 0% 100%));
+}
+.ref3 {
+  background: linear-gradient(to right in hsl longer hue, hsl(0 100% 50%), hsl(0 0% 0% / 0%));
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

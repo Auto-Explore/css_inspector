@@ -1,0 +1,36 @@
+# css/css-anchor-position/position-visibility-anchors-visible-after-scroll-out-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/position-visibility-anchors-visible-after-scroll-out-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #scroll-container {
+    overflow: hidden scroll;
+    width: 300px;
+    height: 100px;
+  }
+
+  #spacer {
+    height: 200px;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “overflow”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

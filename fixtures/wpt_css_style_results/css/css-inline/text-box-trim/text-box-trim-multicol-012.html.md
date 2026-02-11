@@ -1,0 +1,41 @@
+# css/css-inline/text-box-trim/text-box-trim-multicol-012.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-inline/text-box-trim/text-box-trim-multicol-012.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .multicol {
+    columns: 3;
+    column-fill: auto;
+    width: 640px;
+    height: 400px;
+    gap: 20px;
+    text-box-trim: trim-both;
+    font-family: Ahem;
+    font-size: 50px;
+    line-height: 100px;
+    orphans: 2;
+    widows: 1;
+    background: yellow;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “text-box-trim”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

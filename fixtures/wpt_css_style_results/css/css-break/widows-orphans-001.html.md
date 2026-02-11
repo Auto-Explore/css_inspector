@@ -1,0 +1,36 @@
+# css/css-break/widows-orphans-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-break/widows-orphans-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+div p { margin: 0; }
+
+div {
+  columns: 2;
+  column-gap: 0;
+  position: absolute; /* shrinkwrap. Using an explicit width in 'ch' with a monospace font would be fine as well if all UAs supported 'ch', but some don't. */
+  column-fill: balance-all; /* to make sure it balances as well on paged media */
+
+  widows: 4;
+}
+
+/* If the property applied to block container boxes that contain block-level boxes,
+   it would force the two two-line paragraphs to stick together.*/
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

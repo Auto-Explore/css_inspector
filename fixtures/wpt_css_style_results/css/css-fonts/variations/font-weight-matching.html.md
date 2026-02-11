@@ -1,0 +1,84 @@
+# css/css-fonts/variations/font-weight-matching.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/variations/font-weight-matching.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+        .testcase {
+            float:left;
+            margin: 5px;
+            font-size:48pt;
+            font-feature-settings: "kern" 1;
+            color: rgba(0,0,0,0.5);
+            background: linear-gradient(to left, lime 0%, lime 91px, red 91px);
+        }
+
+        @font-face {
+            font-family: fontMatch;
+            src: url('./resources/csstest-weights-900-kerned.ttf');
+            font-weight: 100;
+        }
+
+        @font-face {
+            font-family: fontMatch;
+            src: url('./resources/csstest-weights-800-kerned.ttf');
+            font-weight: 250;
+        }
+
+        @font-face {
+            font-family: fontMatch;
+            src: url('./resources/csstest-weights-700-kerned.ttf');
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: fontMatch;
+            src: url('./resources/csstest-weights-600-kerned.ttf');
+            font-weight: 450;
+        }
+
+        @font-face {
+            font-family: fontMatch;
+            src: url('./resources/csstest-weights-300-kerned.ttf');
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: fontMatch;
+            src: url('./resources/csstest-weights-200-kerned.ttf');
+            font-weight: 750;
+        }
+
+        @font-face {
+            font-family: fontMatch;
+            src: url('./resources/csstest-weights-100-kerned.ttf');
+            font-weight: 900;
+        }
+
+    
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “font-feature-settings”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

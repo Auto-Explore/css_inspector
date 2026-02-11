@@ -1,0 +1,42 @@
+# css/CSS2/selectors/first-line-pseudo-011.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/selectors/first-line-pseudo-011.xht"
+}
+```
+
+## style[0]
+
+```css
+
+   td { width: 8em; padding: 0; border: solid; }
+   .test { background: orange; }
+   .test .a { margin: 0 0 1em 0; background: teal; height: 1em; }
+   .test .b { margin: 0 0 0 0; background: red; }
+   .test .c { margin: 1em 0 0 0; background: yellow; height: 1em; }
+   .test.fl .b:first-line { color: red; }
+   .control { background: red; }
+   .control .a { border-top: 1em teal solid; }
+   .control .b { border-top: 1em orange solid; }
+   .control .c { border-top: 1em yellow solid; }
+  
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

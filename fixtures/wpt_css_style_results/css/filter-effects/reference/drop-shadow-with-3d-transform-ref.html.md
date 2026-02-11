@@ -1,0 +1,80 @@
+# css/filter-effects/reference/drop-shadow-with-3d-transform-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/filter-effects/reference/drop-shadow-with-3d-transform-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+body {
+  margin: 0;
+}
+
+#container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  border: 1px solid black;
+}
+
+#box1 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: green;
+  left: -50px;
+  top: -50px;
+  transform: translateZ(0);
+}
+
+#box1-filter {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: lightgreen;
+  left: 50px;
+  top: 50px;
+}
+
+#box2 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: blue;
+  left: 350px;
+  top: 350px;
+  transform: translateZ(0);
+}
+
+#box2-filter {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: lightblue;
+  left: 250px;
+  top: 250px;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

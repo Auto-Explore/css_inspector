@@ -1,0 +1,113 @@
+# css/css-view-transitions/old-content-object-view-box-clip-path-reference.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/old-content-object-view-box-clip-path-reference.html"
+}
+```
+
+## style[0]
+
+```css
+
+.target {
+  color: red;
+  width: 100px;
+  height: 100px;
+  contain: paint;
+  overflow-clip-margin: 1000px;
+  position: relative;
+  top: 50px;
+  left: 50px;
+}
+.child {
+  width: 123px;
+  height: 150px;
+  background: lightblue;
+  position: relative;
+  top: -10px;
+  left: -20px;
+}
+.grandchild {
+  width: 25px;
+  height: 25px;
+  position: relative;
+  top: 20px;
+  left: 40px;
+  background: green;
+}
+#one {
+  view-transition-name: target-one;
+  clip-path: url(#clip1);
+}
+#two {
+  view-transition-name: target-two;
+  clip-path: url(#clip2)
+}
+
+html::view-transition-group(target-one),
+html::view-transition-group(target-two) { animation-duration: 300s; }
+html::view-transition-new(target-one),
+html::view-transition-new(target-two) { animation: unset; opacity: 0; height: 100%; }
+html::view-transition-old(target-one),
+html::view-transition-old(target-two) {
+  animation: unset;
+  opacity: 1;
+  /* clip overflow, and verify inner contents only */
+  overflow: hidden;
+  height: 100%;
+}
+
+html::view-transition-group(root) { animation: unset; opacity: 0; }
+html::view-transition { background: lightpink; }
+```
+
+```json
+{
+  "errors": 9,
+  "messages": [
+    {
+      "message": "“overflow-clip-margin” is not supported by Safari.",
+      "severity": "Warning"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 1
+}
+```

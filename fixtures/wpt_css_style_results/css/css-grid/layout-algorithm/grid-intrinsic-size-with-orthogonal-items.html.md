@@ -1,0 +1,62 @@
+# css/css-grid/layout-algorithm/grid-intrinsic-size-with-orthogonal-items.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/layout-algorithm/grid-intrinsic-size-with-orthogonal-items.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+    display: inline-grid;
+    font: 25px/1 Ahem;
+    background: green;
+    height: 150px;
+}
+
+.item { writing-mode: vertical-lr; }
+
+.minmax-100-200 { grid: minmax(100px, 200px) / auto; }
+.minmax-auto-200 { grid: minmax(100px, 200px) / auto; }
+.minmax-auto-100 { grid: minmax(auto, 100px) / auto; }
+.minmax-100-auto { grid: minmax(100px, auto) / auto; }
+.minmax-100-fitcontent { grid: minmax(100px, fit-content) / auto; }
+.minmax-100-1fr { grid: minmax(100px, 1fr) / auto; }
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

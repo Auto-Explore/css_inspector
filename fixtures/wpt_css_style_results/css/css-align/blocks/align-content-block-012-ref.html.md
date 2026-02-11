@@ -1,0 +1,56 @@
+# css/css-align/blocks/align-content-block-012-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-align/blocks/align-content-block-012-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @import "/fonts/ahem.css";
+  html { font: 15px/1 Ahem; max-width: 800px;  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [
+    {
+      "message": "Imported style sheets are not checked.",
+      "severity": "Warning"
+    }
+  ],
+  "warnings": 1
+}
+```
+
+## style[1]
+
+```css
+
+  .test { height: 3em; margin: 0.5em 1.25em; box-sizing: border-box;
+          /* show bounds of test box without interfering with margin-collapsing */
+          border-left: solid blue 5px;
+          /* ensure bullet follows first line */
+          display: list-item;
+          /* don't wrap, as that will throw off the reference */
+          white-space: nowrap; }
+  /* cram into 800x600 */
+  html { max-height: 600px; columns: 3 }
+  .wrapper { break-inside: avoid; border: solid 2px gray; }
+  /* predictability */
+  input { height: 4px; margin: 0; vertical-align: 4px; }
+  img { height: 8px }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

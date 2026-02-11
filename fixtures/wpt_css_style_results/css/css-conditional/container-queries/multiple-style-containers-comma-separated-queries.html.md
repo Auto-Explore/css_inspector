@@ -1,0 +1,51 @@
+# css/css-conditional/container-queries/multiple-style-containers-comma-separated-queries.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-conditional/container-queries/multiple-style-containers-comma-separated-queries.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #combined {
+    container-type: inline-size;
+    --foo: qux;
+  }
+  #outer {
+    container-name: --container;
+    --foo: bar;
+  }
+  #inner {
+    --foo: baz;
+  }
+  #target {
+    --match: no;
+    --match-combined: no;
+  }
+
+  @container style(--foo: bar), --container style(--foo: bar) {
+    #target { --match: yes; }
+  }
+  @container style(--foo: bar) {
+    #target { --match: no-way; }
+  }
+
+  @container style(--foo: qux), (inline-size) and style(--foo: qux) {
+    #target { --match-combined: yes; }
+  }
+  @container style(--foo: qux) {
+    #target { --match-combined: no-way; }
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

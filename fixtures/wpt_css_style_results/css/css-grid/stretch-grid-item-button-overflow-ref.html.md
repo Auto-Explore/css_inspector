@@ -1,0 +1,66 @@
+# css/css-grid/stretch-grid-item-button-overflow-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/stretch-grid-item-button-overflow-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+body,html { color:black; background:white; font:16px/1 monospace; padding:0; margin:0; }
+
+.grid {
+  display: inline-grid;
+  width: 100px;
+  height: 50px;
+  grid: 7px auto 3px / 7px auto 3px;
+  grid-gap: 5px;
+  border:1px solid;
+}
+
+.grid > * {
+  grid-area: 2/2;
+  border:1px solid;
+  appearance: none;
+  min-width:0;
+  min-height:0;
+  box-sizing: border-box;
+}
+
+.os {
+  /* Note: overflow:scroll does add scrollbars to the testcase's
+     empty buttons in some UAs, so we need to include this style
+     in the reference case to create a proper reference rendering
+     that's robust in the face of UAs that do/don't support
+     scrollable buttons. */
+  overflow: scroll;
+}
+.m  { margin: 17px 3px 5px 7px; }
+
+x { display:block; width:110px; height:5px; background:grey; }
+.h .grid x { width:5px; height:110px; }
+
+br { clear:both; }
+  
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

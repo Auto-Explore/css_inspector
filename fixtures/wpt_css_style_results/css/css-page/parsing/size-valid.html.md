@@ -1,0 +1,64 @@
+# css/css-page/parsing/size-valid.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/parsing/size-valid.html"
+}
+```
+
+## style[0]
+
+```css
+
+@page {
+    size: 640px 480px;
+}
+@page {
+    size: 8.5in 11in;
+}
+@page {
+    size: 3in 10in;
+}
+@page {
+    size: auto;
+}
+@page {
+    size: A5;
+}
+@page {
+    size: A4;
+}
+@page {
+    size: A3;
+}
+@page {
+    size: B5;
+}
+@page {
+    size: B4;
+}
+@page {
+    size: jis-B5;
+}
+@page {
+    size: jis-B4;
+}
+@page {
+    size: landscape;
+}
+@page {
+    size: letter portrait;
+}
+@page {
+    size: legal landscape;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

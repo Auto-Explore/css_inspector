@@ -1,0 +1,46 @@
+# css/css-fonts/font-palette-30-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-palette-30-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+    font-family: "COLR-test-font1";
+    src: url("resources/COLR-palettes-test-font.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "COLR-test-font2";
+    src: url("resources/COLR-palettes-test-font.ttf") format("truetype");
+}
+
+@font-palette-values --MyPalette1 {
+    font-family: "COLR-test-font1";
+    base-palette: 3;
+}
+
+@font-palette-values --MyPalette2 {
+    font-family: "COLR-test-font2";
+    base-palette: 2;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

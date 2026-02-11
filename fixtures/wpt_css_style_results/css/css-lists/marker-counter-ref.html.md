@@ -1,0 +1,49 @@
+# css/css-lists/marker-counter-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-lists/marker-counter-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+ol {
+  padding-left: 5em;
+}
+li:nth-child(1)::marker {
+  content: "[1] ";
+}
+li:nth-child(2)::marker {
+  content: "[2] ";
+}
+li:nth-child(3)::marker {
+  content: "[10] ";
+}
+li:nth-child(4)::marker {
+  content: "[11] ";
+}
+li:nth-child(5)::marker {
+  content: "[12] ";
+}
+li:nth-child(6)::marker {
+  content: "[12:1] ";
+}
+li:nth-child(7)::marker {
+  content: "[13] ";
+}
+li:nth-child(8)::marker {
+  content: "[14] ";
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

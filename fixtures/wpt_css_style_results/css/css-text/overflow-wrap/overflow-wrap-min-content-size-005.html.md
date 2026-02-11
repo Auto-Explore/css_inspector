@@ -1,0 +1,40 @@
+# css/css-text/overflow-wrap/overflow-wrap-min-content-size-005.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/overflow-wrap/overflow-wrap-min-content-size-005.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  position: relative;
+  font: 20px/1 Ahem;
+}
+#red {
+  position: absolute;
+  z-index: -1;
+  background: red;
+  color: transparent;
+}
+.test {
+  background: green;
+  color: transparent;
+  width: min-content;
+
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

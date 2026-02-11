@@ -1,0 +1,104 @@
+# css/css-view-transitions/new-element-on-start.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/new-element-on-start.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  width: 100px;
+  height: 100px;
+  contain: paint;
+  position: absolute;
+  top: 50px;
+}
+
+.before {
+  background: lightblue;
+  left: 50px;
+}
+.after {
+  background: black;
+  left: 200px;
+}
+.hidden {
+  background: red;
+  left: 350px;
+}
+
+html::view-transition-group(hidden) { animation-duration: 300s; }
+html::view-transition-image-pair(hidden) { opacity: 0; }
+
+html::view-transition-group(before) { animation-duration: 0s; }
+html::view-transition-image-pair(before) { filter: invert(1); }
+
+html::view-transition-group(after) { animation-duration: 0s; }
+html::view-transition-image-pair(after) { filter: invert(1); }
+
+html::view-transition-group(root) { animation: unset; opacity: 0; }
+html::view-transition { background: lightpink; }
+
+```
+
+```json
+{
+  "errors": 12,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “filter”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “filter”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

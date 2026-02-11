@@ -1,0 +1,85 @@
+# css/css-page/page-box-004-print-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/page-box-004-print-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @page {
+    size: 500px;
+    margin: 0;
+  }
+  @page larger {
+    size: 500px 800px;
+  }
+  @page smaller {
+    size: 400px 300px;
+  }
+  :root {
+    print-color-adjust: exact;
+  }
+  body {
+    margin: 0;
+  }
+  .pagebox {
+    display: flow-root;
+  }
+  .pagebox > div {
+    border: 10px solid lightblue;
+  }
+  .pagebox > div > div {
+    background: yellow;
+  }
+  .normalpage {
+    page: normal;
+    height: 500px;
+  }
+  .normalpage > div {
+    margin: 25px 50px 75px 100px;
+    padding: 100px 75px 50px 25px;
+  }
+  .normalpage > div > div {
+    height: 230px;
+  }
+  .largerpage {
+    page: larger;
+    height: 800px;
+  }
+  .largerpage > div {
+    margin: 40px 50px 120px 100px;
+    padding: 160px 75px 80px 25px;
+  }
+  .largerpage > div > div {
+    height: 380px;
+  }
+  .smallerpage {
+    page: smaller;
+    height: 300px;
+  }
+  .smallerpage > div {
+    margin: 15px 40px 45px 80px;
+    padding: 60px 60px 30px 20px;
+  }
+  .smallerpage > div > div {
+    height: 130px;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

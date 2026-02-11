@@ -1,0 +1,67 @@
+# css/css-ruby/block-ruby-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-ruby/block-ruby-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face
+{
+  font-family: "mplus-1p-regular";
+  src: url("/fonts/mplus-1p-regular.woff") format("woff");
+}
+
+html
+{
+  font-family: "mplus-1p-regular";
+}
+
+ruby { display: block ruby; background: lightblue; }
+.mbp {
+  margin: 1px 3px 5px 7px;
+  padding: 3px 5px 7px 1px;
+  border-width: 3px 1px 7px 5px;
+  border-style: solid;
+}
+.columns {
+  columns: 3 auto;
+  column-rule: 1px;
+  background: lightgrey;
+  height: 2em;
+}
+rbc {
+  display: ruby-base-container;
+  unicode-bidi: isolate;
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “display”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “columns”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

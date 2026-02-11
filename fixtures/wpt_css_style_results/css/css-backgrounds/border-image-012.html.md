@@ -1,0 +1,44 @@
+# css/css-backgrounds/border-image-012.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/border-image-012.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div#red-overlapped-ref
+    {
+      background-color: red;
+      width: 100px;
+      height: 100px;
+      overflow: auto;
+    }
+
+  div#green-overlapping-test
+    {
+      background-color: green;
+      border: 1px solid red;
+      width: 98px;
+      height: 98px;
+      /* border-box is therefore 100px by 100px */
+
+      border-image-source: url("support/60x60-green.png");
+      border-image-slice: 10;
+      border-image-width: 10px;
+      border-image-outset: 9px;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

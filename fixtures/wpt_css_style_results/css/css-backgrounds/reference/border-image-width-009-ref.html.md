@@ -1,0 +1,68 @@
+# css/css-backgrounds/reference/border-image-width-009-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/reference/border-image-width-009-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div
+    {
+      border: transparent solid 50px;
+      border-image-source: url("../support/9-colored-areas.png");
+      border-image-slice: 5% 10% 15% 20%;
+      margin-bottom: 8px;
+      width: 0px;
+    }
+
+  div#sub-test1
+    {
+      border-image-width: 50px;
+    }
+
+  div#sub-test2
+    {
+      border-image-width: 50px 30px;
+    }
+
+  div#sub-test3
+    {
+      border-image-width: 70px 0px 30px 0px;
+    }
+
+  div#sub-test4
+    {
+      border-image-width: 0px 70px 0px 30px;
+    }
+  
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “border-image-slice”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-image-width”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-image-width”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-image-width”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

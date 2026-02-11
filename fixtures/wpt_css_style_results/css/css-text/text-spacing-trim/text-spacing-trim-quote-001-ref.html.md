@@ -1,0 +1,48 @@
+# css/css-text/text-spacing-trim/text-spacing-trim-quote-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/text-spacing-trim/text-spacing-trim-quote-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+  font-family: halt-font;
+  src: url('/fonts/noto/cjk/NotoSansCJKjp-Regular-subset-halt.otf');
+}
+#container {
+  font-family: halt-font;
+  font-size: 20px;
+  text-spacing-trim: space-all;
+}
+.vrl {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+halt {
+  font-feature-settings: 'halt' 1, 'vhal' 1;
+}
+if-zh { display: none; }
+:root:lang(zh-hans), :root:lang(zh-hant) {
+  if-ja { display: none; }
+  if-zh { display: block; }
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “font-feature-settings”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

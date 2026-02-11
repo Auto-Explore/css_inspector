@@ -1,0 +1,42 @@
+# css/css-flexbox/fixed-table-layout-with-percentage-width-in-flex-item-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/fixed-table-layout-with-percentage-width-in-flex-item-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    display: flex;
+    width: 300px;
+    margin-bottom: 5px;
+    border: 1px solid black;
+    background: red;
+  }
+  .tbl {
+    width: 100%;
+    height: 30px;
+    border: 1px solid blue;
+    box-sizing: border-box;
+    background: lightgray;
+  }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

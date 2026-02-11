@@ -1,0 +1,50 @@
+# css/css-animations/animation-offscreen-to-onscreen.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-animations/animation-offscreen-to-onscreen.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0;
+  }
+
+  @keyframes anim {
+    from { transform: translate(100px, 0px); }
+    to { transform: translate(100px, 0px); }
+  }
+
+  #box {
+    position: absolute;
+    left: 0px;
+    top: 100px;
+    height: 100px;
+    width: 100px;
+    margin: 0;
+    background-color: green;
+    transform: translate(-2000px, 0px);
+    animation-duration: 10s;
+    animation-direction: normal;
+    animation-timing-function: linear;
+    animation-name: anim;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

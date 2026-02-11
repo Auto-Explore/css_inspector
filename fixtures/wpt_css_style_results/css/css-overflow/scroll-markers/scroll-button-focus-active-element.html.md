@@ -1,0 +1,50 @@
+# css/css-overflow/scroll-markers/scroll-button-focus-active-element.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/scroll-markers/scroll-button-focus-active-element.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0;
+  }
+
+  #scroller {
+    width: 600px;
+    height: 300px;
+    overflow: auto;
+    white-space: nowrap;
+  }
+
+  #scroller div {
+    display: inline-block;
+    width: 600px;
+    height: 270px;
+  }
+
+  #scroller::scroll-button(right) {
+    content: ">";
+    width: 100px;
+    height: 20px;
+    background-color: blue;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

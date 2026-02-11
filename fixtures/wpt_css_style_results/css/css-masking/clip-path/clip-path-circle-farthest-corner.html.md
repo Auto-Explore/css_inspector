@@ -1,0 +1,46 @@
+# css/css-masking/clip-path/clip-path-circle-farthest-corner.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-masking/clip-path/clip-path-circle-farthest-corner.html"
+}
+```
+
+## style[0]
+
+```css
+
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    .test {
+        position: absolute;
+        left: 100px;
+        top: 150px;
+        width: 200px;
+        height: 300px;
+        background-color: red;
+        clip-path: circle(farthest-corner at 200px 150px);
+    }
+
+    .inner {
+        position: absolute;
+        top: -110px;
+        left: -100px;
+        width: 600px;
+        height: 520px;
+        background-color: green;
+    }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

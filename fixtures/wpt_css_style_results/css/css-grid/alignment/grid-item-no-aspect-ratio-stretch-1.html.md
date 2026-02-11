@@ -1,0 +1,45 @@
+# css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-1.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-item-no-aspect-ratio-stretch-1.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    line-height: 0;
+  }
+
+  div {
+    display: inline-grid;
+    height: 250px;
+    width: 350px;
+    background: purple;
+    margin: 10px;
+    vertical-align: top;
+  }
+
+  svg {
+    background: green;
+  }
+
+  .justify {
+    justify-self: stretch;
+  }
+  .align {
+    align-self: stretch;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

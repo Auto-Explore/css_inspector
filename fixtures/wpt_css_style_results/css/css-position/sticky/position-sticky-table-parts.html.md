@@ -1,0 +1,61 @@
+# css/css-position/sticky/position-sticky-table-parts.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-position/sticky/position-sticky-table-parts.html"
+}
+```
+
+## style[0]
+
+```css
+
+.scroller {
+  position: relative;
+  width: 100px;
+  height: 250px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.contents {
+  height: 700px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.child, td, th {
+  height: 50px;
+  width: 50px;
+  padding: 0;
+}
+
+.child {
+  background: green;
+}
+
+table * {
+  position: sticky;
+  top: 5px;
+}
+
+.indicator {
+  position: absolute;
+  left: 0;
+  background-color: red;
+  height: 50px;
+  width: 50px;
+}
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

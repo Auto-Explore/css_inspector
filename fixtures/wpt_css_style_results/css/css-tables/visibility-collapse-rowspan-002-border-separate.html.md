@@ -1,0 +1,30 @@
+# css/css-tables/visibility-collapse-rowspan-002-border-separate.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-tables/visibility-collapse-rowspan-002-border-separate.html"
+}
+```
+
+## style[0]
+
+```css
+
+table {
+    border-spacing: 0;
+    border-collapse: separate;
+}
+table td {
+    border: 1px solid blue;
+    padding: 5px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

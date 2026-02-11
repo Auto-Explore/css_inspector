@@ -1,0 +1,29 @@
+# css/CSS2/borders/border-top-width-091.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/borders/border-top-width-091.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div
+            {
+                border-top-style: solid;
+                border-top-width: +0;
+                border-top-color: red;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

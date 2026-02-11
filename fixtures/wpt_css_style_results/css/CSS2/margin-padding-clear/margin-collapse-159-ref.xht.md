@@ -1,0 +1,58 @@
+# css/CSS2/margin-padding-clear/margin-collapse-159-ref.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/margin-padding-clear/margin-collapse-159-ref.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  table
+  {
+  border: black solid medium;
+  border-spacing: 0;
+  font-size: 50px;
+  }
+
+  td
+  {
+  background: aqua;
+  padding: 0;
+  width: 2em;
+  }
+
+  td > p
+  {
+  background-color: yellow;
+  height: 1em;
+  margin: 1em 0em;
+  }
+
+  div  {border-bottom: orange solid 1em;}
+  ]]>
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

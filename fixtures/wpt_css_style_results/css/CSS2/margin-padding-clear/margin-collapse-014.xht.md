@@ -1,0 +1,47 @@
+# css/CSS2/margin-padding-clear/margin-collapse-014.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/margin-padding-clear/margin-collapse-014.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div
+            {
+                font: 20px/0 Ahem;
+                width: 5em;
+            }
+            #div1
+            {
+                background: url('support/margin-collapse-2em-space.png');
+                height: 4em;
+            }
+            div div
+            {
+                background: green;
+                display: inline-block;
+                height: 1em;
+            }
+            #div2
+            {
+                margin-bottom: 1em;
+            }
+            #div3
+            {
+                margin-top: 1em;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

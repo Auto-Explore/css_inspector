@@ -1,0 +1,54 @@
+# css/css-fonts/font-face-weight-auto-variable.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-face-weight-auto-variable.html"
+}
+```
+
+## style[0]
+
+```css
+
+    @font-face {
+        font-family: "Roboto";
+        src: url('support/fonts/RobotoExtremo-VF.subset.ttf') format('truetype');
+        font-display: swap;
+        font-style: normal;
+        font-weight: auto;
+    }
+    .weight50 {
+        font-family: "Roboto";
+        font-size: 3em;
+        font-weight: 50;
+    }
+    .weight100 {
+        font-family: "Roboto";
+        font-size: 3em;
+        font-weight: 100;
+    }
+    .weight400 {
+        font-family: "Roboto";
+        font-size: 3em;
+        font-weight: 400;
+    }
+    .weight900 {
+        font-family: "Roboto";
+        font-size: 3em;
+        font-weight: 900;
+    }
+    .weight990 {
+        font-family: "Roboto";
+        font-size: 3em;
+        font-weight: 990;
+    }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

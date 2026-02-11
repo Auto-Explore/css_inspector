@@ -1,0 +1,44 @@
+# css/css-counter-styles/counter-style-at-rule/disclosure-styles.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-counter-styles/counter-style-at-rule/disclosure-styles.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @counter-style disclosure-closed2 {
+    system: extends disclosure-closed;
+  }
+  @counter-style disclosure-open2 {
+    system: extends disclosure-open;
+  }
+  ul {
+    padding: 0;
+    list-style-position: inside;
+  }
+  .closed { list-style-type: disclosure-closed2; }
+  .open { list-style-type: disclosure-open2; }
+  p::before {
+    content: counter(a, disclosure-closed) " ";
+  }
+  div { font: 16px system-ui; margin: 1em; border: 1px solid gray; }
+  ::marker { font-family: inherit; }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

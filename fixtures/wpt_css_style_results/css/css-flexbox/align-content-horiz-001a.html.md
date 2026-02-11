@@ -1,0 +1,74 @@
+# css/css-flexbox/align-content-horiz-001a.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/align-content-horiz-001a.html"
+}
+```
+
+## style[0]
+
+```css
+
+      div.flexbox {
+        width: 20px; /* Skinny, to force us to wrap */
+        height: 200px;
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: 2px;
+        float: left;
+        background: lightgray;
+      }
+      div.a {
+        width: 20px;
+        height: 10px;
+        flex: none;
+        background: lightgreen;
+      }
+      div.b {
+        width: 20px;
+        height: auto; /* height comes from contents */
+        flex: none;
+        background: pink;
+      }
+      div.c {
+        width: 20px;
+        height: 40px;
+        flex: none;
+        background: orange;
+      }
+
+      /* Inside of 'b': */
+      div.fixedSizeChild {
+        width: 10px;
+        height: 30px;
+        background: purple;
+      }
+    
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

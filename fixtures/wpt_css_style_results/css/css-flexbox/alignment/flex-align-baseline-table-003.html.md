@@ -1,0 +1,55 @@
+# css/css-flexbox/alignment/flex-align-baseline-table-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/alignment/flex-align-baseline-table-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+.target {
+  display: flex;
+  position: relative;
+  writing-mode: vertical-lr;
+}
+.target > div, .target td {
+  background: hotpink;
+  font-size: 20px;
+  line-height: 0;
+}
+.target table { border-spacing: 0; }
+.target td { padding: 5px; min-width: 5px; min-height: 5px; }
+.target caption {
+  margin: 10px;
+  background: lime;
+  block-size: 20px;
+}
+.target span {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  outline: solid cyan 3px;
+  outline-offset: -3px;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “outline”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

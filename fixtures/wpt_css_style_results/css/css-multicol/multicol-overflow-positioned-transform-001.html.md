@@ -1,0 +1,36 @@
+# css/css-multicol/multicol-overflow-positioned-transform-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-multicol/multicol-overflow-positioned-transform-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    overflow: auto;
+    background: silver;
+    border: solid thick;
+  }
+
+  .element {
+    width: 50px;
+    height: 50px;
+    background: lime;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

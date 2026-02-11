@@ -1,0 +1,60 @@
+# css/css-writing-modes/text-shadow-orientation-upright-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/text-shadow-orientation-upright-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div
+    {
+      color: yellow;
+      font-family: Ahem;
+      font-size: 100px;
+      line-height: 1;
+      margin: calc(1em + 8px) auto auto 1em;
+      text-orientation: upright;
+      writing-mode: vertical-rl;
+
+      text-shadow: 0em -1em purple, 1em 0em blue, 0em 1em fuchsia, -1em 0em orange;
+    }
+
+  /*
+
+  Value: [ <color>? && <length>{2,3} ]#
+
+  color: color of text-shadow
+
+  1st <length>
+    Specifies the horizontal offset
+    of the shadow. A positive value draws a shadow that is
+    offset to the right of the box, a negative length to the
+    left.
+
+  2nd <length>
+    Specifies the vertical offset
+    of the shadow. A positive value offsets the shadow down,
+    a negative one up.
+
+  */
+
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “text-shadow”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

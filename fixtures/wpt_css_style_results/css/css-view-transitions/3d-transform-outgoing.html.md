@@ -1,0 +1,102 @@
+# css/css-view-transitions/3d-transform-outgoing.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/3d-transform-outgoing.html"
+}
+```
+
+## style[0]
+
+```css
+
+div { box-sizing: border-box; will-change: transform }
+.rotate3d {
+  transform: translate(20px, 100px) rotate3d(1, 1, 1, 45deg);
+  background: blue;
+}
+
+.wrap_perspective {
+  perspective: 100px;
+  width: max-content;
+  transform: translate(200px);
+}
+.rotatex {
+  transform-style: preserve-3d;
+  transform: rotateX(20deg);
+  background: green;
+}
+.shared {
+  view-transition-name: shared;
+  width: 100px;
+  height: 100px;
+}
+#hidden {
+  view-transition-name: hidden;
+  width: 10px;
+  height: 10px;
+  background: red;
+}
+
+::view-transition-group(hidden) { animation-duration: 300s; }
+::view-transition-image-pair(hidden) { visibility: hidden; }
+::view-transition-group(root) { visibility: hidden; }
+::view-transition { background: pink; }
+::view-transition-group(*) { animation-duration: 0s; }
+::view-transition-new(*) { animation: unset; opacity: 0; }
+::view-transition-old(*) { animation: unset; opacity: 1; }
+```
+
+```json
+{
+  "errors": 11,
+  "messages": [
+    {
+      "message": "Invalid value for property “transform”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

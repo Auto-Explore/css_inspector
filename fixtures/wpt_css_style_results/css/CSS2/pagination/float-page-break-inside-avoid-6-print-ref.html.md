@@ -1,0 +1,28 @@
+# css/CSS2/pagination/float-page-break-inside-avoid-6-print-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/pagination/float-page-break-inside-avoid-6-print-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+@page { size:5in 3in; margin:0.5in; }
+html,body {
+    color:black; background-color:white; font-size:16px; padding:0; margin:0; height:100%;
+}
+p { height:60%; width:90%; margin:0; background-color:blue; border:1px solid black; }
+.test { page-break-before:always; float:left; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

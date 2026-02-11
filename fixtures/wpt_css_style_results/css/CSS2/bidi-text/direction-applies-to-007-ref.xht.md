@@ -1,0 +1,45 @@
+# css/CSS2/bidi-text/direction-applies-to-007-ref.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/bidi-text/direction-applies-to-007-ref.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  div
+  {
+  background-color: orange;
+  height: 100px;
+  text-align: right;
+  width: 100px;
+  }
+
+  img {vertical-align: top;}
+  ]]>
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

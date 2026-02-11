@@ -1,0 +1,52 @@
+# css/css-flexbox/flex-minimum-size-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flex-minimum-size-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.flexbox {
+    width: 10px;
+    height: 10px;
+    background-color: grey;
+}
+
+.item {
+    background-color: red;
+    margin: 5px;
+}
+
+.child {
+    height: 100px;
+    width: 100px;
+    background-color: green;
+}
+
+.width-20 {
+    width: 20px;
+}
+
+.flex-basis-20 {
+    flex-basis: 20px;
+}
+
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

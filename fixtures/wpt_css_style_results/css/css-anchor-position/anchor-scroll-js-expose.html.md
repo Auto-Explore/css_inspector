@@ -1,0 +1,65 @@
+# css/css-anchor-position/anchor-scroll-js-expose.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-scroll-js-expose.html"
+}
+```
+
+## style[0]
+
+```css
+
+#container {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-family: Ahem;
+}
+#scroller {
+  margin-left: 100px;
+  margin-top: 100px;
+  width: 400px;
+  height: 400px;
+  overflow: scroll;
+}
+#anchor-container {
+  width: 2000px;
+  height: 1000px;
+}
+#anchor {
+  margin: 400px;
+  margin-left: 1400px;
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+  anchor-name: --anchor;
+}
+#anchored {
+  position: absolute;
+  left: anchor(left);
+  bottom: anchor(top);
+  width: 100px;
+  height: 100px;
+  position-anchor: --anchor;
+  background-color: green;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

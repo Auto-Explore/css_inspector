@@ -1,0 +1,63 @@
+# css/css-overflow/overflow-clip-margin-visual-box-and-value-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/overflow-clip-margin-visual-box-and-value-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    width: 100px;
+    height: 100px;
+    overflow: visible;
+    padding: 10px;
+    border: 10px solid black;
+    margin: 10px;
+    background: grey;
+  }
+
+  .inner_border_box {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    top: -25px;
+    left: -25px;
+    background: blue;
+  }
+
+  .inner_padding_box {
+    width: 130px;
+    height: 130px;
+    position: relative;
+    top: -15px;
+    left: -15px;
+    background: blue;
+  }
+
+  .inner_content_box {
+    width: 110px;
+    height: 110px;
+    position: relative;
+    top:  -5px;
+    left: -5px;
+    background: blue;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

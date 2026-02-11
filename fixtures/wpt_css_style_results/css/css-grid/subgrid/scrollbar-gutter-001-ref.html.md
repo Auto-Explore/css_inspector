@@ -1,0 +1,44 @@
+# css/css-grid/subgrid/scrollbar-gutter-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/subgrid/scrollbar-gutter-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+:root {
+  overflow: scroll; /* Required to reproduce the bug on Firefox */
+}
+.grid {
+  display: inline-block;
+  inline-size: 75px;
+  border: 5px solid blue;
+  vertical-align: top;
+}
+.subgrid {
+  block-size: 75px;
+}
+.item {
+  inline-size: 50px;
+  block-size: 50px;
+  background: green;
+}
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

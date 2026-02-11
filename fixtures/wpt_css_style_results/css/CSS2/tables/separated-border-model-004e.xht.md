@@ -1,0 +1,104 @@
+# css/CSS2/tables/separated-border-model-004e.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/tables/separated-border-model-004e.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  div#table
+  {
+  border-left: 100px solid white;
+  border-right: 100px solid white;
+  border-spacing: 52px 0;
+  display: table;
+  padding: 0 33px;
+  width: 200px;
+  /*
+  The width of a CSS table is the distance from the left inner padding
+  edge to the right inner padding edge (including the table border-spacing
+  but excluding table padding and table borders).
+
+  Therefore the 'padding: 0 33px;' is not involved in the used width
+  calculation and 'border-left: 100px solid white;' and
+  'border-right: 100px solid white;' are not involved in the used
+  width calculation.
+
+  The width of a CSS table is given by the greater of the value of
+  the 'width' property as set for the CSS table and the sum of the columns
+  width (plus border spacing):
+
+  max(set width, sum of columns width plus border spacing)
+
+  Here, the set width is 200px.
+
+  The sums of columns' width plus border spacing is given by:
+
+   52px   (left-most border-spacing)
+ +
+    0px   (div#td's width)
+ +
+   52px   (right-most border-spacing)
+  ======
+  104px : sum of columns plus border spacing
+
+  200px (set width of table)
+ -
+  104px (sum of columns plus border spacing)
+  =====
+   96px : such extra (exceeding) 96px width will be distributed over
+  the columns, therefore given to the unique cell of such div#table
+
+  So, the div#td should be 96px wide, 16px tall and painted black.
+  */
+  }
+
+  div#tr {display: table-row;}
+
+  div#td
+  {
+  background-color: black;
+  display: table-cell;
+  height: 1em;
+  }
+
+  div#reference
+  {
+  background-color: blue;
+  height: 1em;
+  left: 185px;
+  /*
+  100px : table's border-left
+   33px : table's padding-left
+   52px : left-most border-spacing
+  -----
+  185px
+  */
+  margin-top: 10px;
+  position: relative;
+  width: 96px;
+  }
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,106 @@
+# css/css-anchor-position/anchor-scroll-position-try-011.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-scroll-position-try-011.html"
+}
+```
+
+## style[0]
+
+```css
+
+.flex {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+#container {
+  transform: scale(1);
+  width: fit-content;
+  height: fit-content;
+  margin: 100px;
+}
+
+#scroller {
+  width: 400px;
+  height: 400px;
+  overflow: scroll;
+}
+
+#scroll-content {
+  min-width: 800px;
+  min-height: 800px;
+}
+
+#anchor {
+  anchor-name: --a;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 400px;
+  margin-inline-start: 400px;
+  background: orange;
+}
+
+#anchored {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: green;
+  position-anchor: --a;
+  position-try-fallbacks: --pf1, --pf2, --pf3;
+  bottom: anchor(top);
+  left: anchor(right);
+  position-visibility: always;
+}
+
+@position-try --pf1 {
+  inset: auto;
+  top: anchor(bottom);
+  left: anchor(right);
+}
+@position-try --pf2 {
+  inset: auto;
+  bottom: anchor(top);
+  right: anchor(left);
+}
+@position-try --pf3 {
+  inset: auto;
+  top: anchor(bottom);
+  right: anchor(left);
+}
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-try-fallbacks”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-visibility”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

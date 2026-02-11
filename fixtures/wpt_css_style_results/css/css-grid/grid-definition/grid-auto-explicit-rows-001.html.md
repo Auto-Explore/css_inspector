@@ -1,0 +1,67 @@
+# css/css-grid/grid-definition/grid-auto-explicit-rows-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-definition/grid-auto-explicit-rows-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+ display: grid;
+ grid-template-areas: "a b c" "d e f" "g e h";
+ grid-template-rows: 11px 13px;
+ grid-auto-rows: 17px 19px;
+ grid-template-columns: 23px 29px;
+ grid-auto-columns: 31px 37px;
+}
+
+.grid > div {
+ background: rgba(0, 0, 0, .2);
+}
+#c1 { grid-area: 1 / 1 / 2 / 2; }
+#c2 { grid-area: 1 / 1 / 3 / 3; }
+#c3 { grid-area: 1 / 1 / 4 / 4; }
+#c4 { grid-area: 1 / 1 / 5 / 5; }
+```
+
+```json
+{
+  "errors": 7,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-template-areas”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-auto-rows”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-auto-columns”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-area”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-area”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-area”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-area”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

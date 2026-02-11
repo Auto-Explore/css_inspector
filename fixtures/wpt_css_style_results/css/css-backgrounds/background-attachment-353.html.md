@@ -1,0 +1,46 @@
+# css/css-backgrounds/background-attachment-353.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/background-attachment-353.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div#control
+    {
+      background-color: red;
+      border: solid green;
+      border-width: 50px 0 0 50px;
+      height: 50px;
+      margin-bottom: -100px;
+      width: 50px;
+    }
+
+  div#target
+    {
+      background-attachment: local;
+      background-image: url("support/100x100-gr-rr.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      font-family: Ahem;
+      font-size: 100px;
+      line-height: 1;
+      height: 100px;
+      overflow: hidden;
+      width: 100px;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

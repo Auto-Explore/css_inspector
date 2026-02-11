@@ -1,0 +1,103 @@
+# css/css-masking/mask-image/mask-mode-a.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-masking/mask-image/mask-mode-a.html"
+}
+```
+
+## style[0]
+
+```css
+
+      div {
+        background-color: blue;
+        position: absolute;
+        margin: 0px;
+        padding: 0px;
+        width: 100px;
+        height: 100px;
+        top: 10px;
+      }
+
+      div.auto {
+        left: 10px;
+        mask-mode: match-source;
+        mask-image: url(support/blue-100x100.svg);
+      }
+
+      div.alpha {
+        left: 120px;
+        mask-mode: alpha;
+        mask-image: url(support/blue-100x100.svg);
+      }
+
+      div.luminance1 {
+        left: 230px;
+        mask-mode: luminance;
+        mask-image: url(support/blue-100x100.svg);
+      }
+
+      div.luminance2 {
+        left: 340px;
+        mask-mode: luminance;
+        mask-image: url(support/red-100x100.svg);
+      }
+
+      div.luminance3 {
+        left: 450px;
+        mask-mode: luminance;
+        mask-image: url(support/green-100x100.svg);
+      }
+    
+```
+
+```json
+{
+  "errors": 10,
+  "messages": [
+    {
+      "message": "Unknown property “mask-mode”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-mode”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-mode”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-mode”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-mode”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

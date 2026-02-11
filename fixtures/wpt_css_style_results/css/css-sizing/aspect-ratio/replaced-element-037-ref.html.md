@@ -1,0 +1,27 @@
+# css/css-sizing/aspect-ratio/replaced-element-037-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-sizing/aspect-ratio/replaced-element-037-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  img {
+    width: 200px;
+    height: 100px;
+    padding-top: 50px;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

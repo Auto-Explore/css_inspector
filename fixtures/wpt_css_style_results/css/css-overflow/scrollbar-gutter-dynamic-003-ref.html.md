@@ -1,0 +1,75 @@
+# css/css-overflow/scrollbar-gutter-dynamic-003-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/scrollbar-gutter-dynamic-003-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .line {
+    display: flex;
+  }
+
+  .container {
+    writing-mode: horizontal-tb;
+    direction: ltr;
+    block-size: 200px;
+    inline-size: 200px;
+    overflow-y: hidden;
+    margin: 10px;
+    background: deepskyblue;
+  }
+
+  .content {
+    inline-size: 100%;
+    block-size: 200%;
+    background: lightsalmon;
+  }
+
+  .width-auto {
+    scrollbar-width: auto;
+  }
+
+  .width-thin {
+    scrollbar-width: thin;
+  }
+
+  .width-none {
+    scrollbar-width: none;
+  }
+
+  .gutter-stable {
+    scrollbar-gutter: stable;
+  }
+
+  .gutter-both {
+    scrollbar-gutter: stable both-edges;
+  }
+  
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scrollbar-gutter”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

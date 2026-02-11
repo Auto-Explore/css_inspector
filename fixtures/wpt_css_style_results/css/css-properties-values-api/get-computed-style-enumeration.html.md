@@ -1,0 +1,83 @@
+# css/css-properties-values-api/get-computed-style-enumeration.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-properties-values-api/get-computed-style-enumeration.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @property --inherited-length-1 {
+      syntax: "<length>";
+      inherits: true;
+      initial-value: 10px;
+  }
+  @property --inherited-length-2 {
+      syntax: "<length>";
+      inherits: true;
+      initial-value: 20px;
+  }
+  @property --non-inherited-length-1 {
+      syntax: "<length>";
+      inherits: false;
+      initial-value: 30px;
+  }
+  @property --non-inherited-length-2 {
+      syntax: "<length>";
+      inherits: false;
+      initial-value: 40px;
+  }
+  @property --inherited-no-initial-value-1 {
+      syntax: "*";
+      inherits: true;
+  }
+  @property --inherited-no-initial-value-2 {
+      syntax: "*";
+      inherits: true;
+  }
+  @property --inherited-no-initial-value-3 {
+      syntax: "*";
+      inherits: true;
+  }
+  @property --non-inherited-no-initial-value-1 {
+      syntax: "*";
+      inherits: false;
+  }
+  @property --non-inherited-no-initial-value-2 {
+      syntax: "*";
+      inherits: false;
+  }
+  @property --non-inherited-no-initial-value-3 {
+      syntax: "*";
+      inherits: false;
+  }
+  #parent {
+      --inherited-no-initial-value-2: parent-A;
+      --non-inherited-no-initial-value-2: parent-B;
+      --non-registered-property-2: parent-C;
+  }
+  #node {
+      --inherited-length-1: 50px;
+      --non-inherited-length-1: 60px;
+      --inherited-no-initial-value-1: child-A;
+      --non-inherited-no-initial-value-1: child-B;
+      --non-registered-property-1: child-C;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,26 @@
+# css/CSS2/backgrounds/background-alpha-002.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/backgrounds/background-alpha-002.xht"
+}
+```
+
+## style[0]
+
+```css
+
+   html { background: white url(support/background-alpha-test.png); color: black; }
+   p { background: white; color: black; padding: 0.25em; border: thin solid black; display: inline; line-height: 2; }
+   div { position: fixed; height: 60%; top: 20%; left: 20%; width: 60%; background: url(support/background-alpha-test.png) center center; border: solid thick black; }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

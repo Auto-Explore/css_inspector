@@ -1,0 +1,32 @@
+# css/css-display/display-contents-fieldset-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-display/display-contents-fieldset-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+fieldset { padding:0; }
+span { display:block; width:10px; height:10px; background:lime; }
+.contents { display: contents; }
+legend { border: 1px solid; }
+.test2 legend { display:contents; }
+.test2 legend::after, .test3 legend::after { content:"legend"; }
+.test2 legend.static, .test3 legend.static { display:block; }
+.test2 legend.static::before, .test3 legend.static::before { content:"static "; }
+.after::after { content:"::after"; }
+.before::before { content:"::before"; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

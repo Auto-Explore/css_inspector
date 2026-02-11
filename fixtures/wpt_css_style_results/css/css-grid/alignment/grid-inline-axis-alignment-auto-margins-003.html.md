@@ -1,0 +1,49 @@
+# css/css-grid/alignment/grid-inline-axis-alignment-auto-margins-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-inline-axis-alignment-auto-margins-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #grid {
+      display: grid;
+      position: relative;
+      background: grey;
+      grid-template-columns: 40% 60%;
+      grid-template-rows: 300px;
+      height: 400px;
+      width: 500px;
+  }
+  #grid div {
+    margin: 0px auto 0px auto;
+  }
+  #item1 {
+      background: green;
+      width: 50px;
+      height: 25px;
+  }
+  #item2 {
+      background: blue;
+      width: 100px;
+      height: 25px;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

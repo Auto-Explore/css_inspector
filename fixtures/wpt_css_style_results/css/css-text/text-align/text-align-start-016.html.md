@@ -1,0 +1,54 @@
+# css/css-text/text-align/text-align-start-016.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/text-align/text-align-start-016.html"
+}
+```
+
+## style[0]
+
+```css
+
+.test { text-align: start; }
+/* the CSS below is not part of the test */
+.test, .ref1, .ref2 { width: 300px; color: orange; font: 25px/1 Ahem; }
+.test { border: 1px solid orange; margin: 20px; }
+.ref1, .ref2 { border-left: 1px solid orange; border-right: 1px solid orange; margin: 0 20px; }
+.ref1 { border-top: 1px solid orange; text-align: left; }
+.ref2 { border-bottom: 1px solid orange; text-align: right; }
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

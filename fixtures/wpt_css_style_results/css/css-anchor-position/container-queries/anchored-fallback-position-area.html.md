@@ -1,0 +1,66 @@
+# css/css-anchor-position/container-queries/anchored-fallback-position-area.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/container-queries/anchored-fallback-position-area.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #anchor {
+    anchor-name: --a;
+    width: 100px;
+    height: 100px;
+  }
+  #anchored {
+    position: absolute;
+    position-anchor: --a;
+    position-area: top;
+    position-try-fallbacks: bottom;
+    width: 100px;
+    /* Too tall to fit over the anchor to trigger fallback */
+    height: 100px;
+    container-type: anchored;
+  }
+  #target {
+    /* Logical values are resolved against anchored / anchor container elements.
+       Changing the writing-mode for the target should have no effect. */
+    writing-mode: vertical-lr;
+    @container anchored(fallback: bottom) { --bottom: yes; }
+    @container anchored(fallback: span-all bottom) { --span-all-bottom: yes; }
+    @container anchored(fallback: block-end) { --block-end: yes; }
+    @container anchored(fallback: block-end span-all) { --block-end-span-all: yes; }
+    @container anchored(fallback: self-block-end) { --self-block-end: yes; }
+    @container anchored(fallback: span-all self-block-end) { --span-all-self-block-end: yes; }
+    @container anchored(fallback: self-y-end) { --self-y-end: yes; }
+  }
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-area”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-try-fallbacks”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

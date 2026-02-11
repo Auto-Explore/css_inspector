@@ -1,0 +1,56 @@
+# css/css-position/sticky/position-sticky-child-multicolumn-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-position/sticky/position-sticky-child-multicolumn-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0;
+  }
+  #scroller {
+    overflow-y: scroll;
+    width: 200px;
+    height: 200px;
+  }
+  #relative {
+    position: relative;
+    top: 100px;
+    margin: 10px;
+  }
+  #child {
+    width: 100px;
+    height: 100px;
+    background: green;
+  }
+  #contents {
+    position: relative;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    background: lightgreen;
+  }
+  #spacer {
+    height: 400px;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

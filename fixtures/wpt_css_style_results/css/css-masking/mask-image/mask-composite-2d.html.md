@@ -1,0 +1,100 @@
+# css/css-masking/mask-image/mask-composite-2d.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-masking/mask-image/mask-composite-2d.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  rect {
+    fill: blue;
+    width: 100px;
+    height: 100px;
+    y: 10px;
+    mask-image: url(support/blue-100x50-transparent-100x50.svg),
+                url(support/transparent-100x50-blue-100x50.svg);
+  }
+
+  rect.add {
+    x: 10px;
+    mask-composite: add;
+  }
+
+  rect.subtract {
+    x: 120px;
+    mask-composite: subtract;
+  }
+
+  rect.intersect {
+    x: 230px;
+    mask-composite: intersect;
+  }
+
+  rect.exclude {
+    x: 340px;
+    mask-composite: exclude;
+  }
+```
+
+```json
+{
+  "errors": 11,
+  "messages": [
+    {
+      "message": "Unknown property “fill”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “y”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “x”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-composite”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “x”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-composite”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “x”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-composite”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “x”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “mask-composite”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

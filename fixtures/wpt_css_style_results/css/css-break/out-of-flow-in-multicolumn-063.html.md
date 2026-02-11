@@ -1,0 +1,46 @@
+# css/css-break/out-of-flow-in-multicolumn-063.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-break/out-of-flow-in-multicolumn-063.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .multicol {
+    writing-mode: vertical-lr;
+    direction: rtl;
+    columns: 2;
+    column-fill: auto;
+    height: 100px;
+    width: 100px;
+    column-gap: 0px;
+    margin-top: 66px;
+    margin-left: -50px;
+  }
+  .rel {
+    position: relative;
+    inset-block-start: 50px;
+    inset-inline-start: 50px;
+  }
+  .abs {
+    position: absolute;
+    inline-size: 50px;
+    block-size: 200px;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    background: green;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

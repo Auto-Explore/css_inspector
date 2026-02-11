@@ -1,0 +1,79 @@
+# css/css-anchor-position/position-try-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/position-try-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+.cb {
+  width: 400px;
+  height: 400px;
+  transform: scale(1);
+  background: yellow;
+}
+.anchor1 {
+  anchor-name: --a;
+  margin-left: 100px;
+  width: 100px;
+  height: 100px;
+  background: blue;
+}
+.target {
+  position: absolute;
+  position-try-fallbacks: --f1, --f2;
+  width: min-content;
+  height: 100px;
+  background: orange;
+  /* 1: Position to the left of the anchor. */
+  left: 0;
+  right: anchor(--a left);
+  top: anchor(--a top);
+}
+.inline-spacer {
+  display: inline-block;
+  width: 200px;
+  height: 100px;
+}
+@position-try --f1 {
+  /* 2: Position to the right of the anchor. */
+  left: anchor(--a right);
+  right: 0;
+  top: anchor(--a top);
+}
+@position-try --f2 {
+  /* 3: Placeholder fallback that shouldn't be selected when the previous
+        ones do not overflow the available space. */
+  inset: 0;
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-try-fallbacks”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,39 @@
+# css/css-transitions/transition-duration-003-manual.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transitions/transition-duration-003-manual.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div {
+    height: 100px;
+    transition-property: width;
+    transition-timing-function: linear;
+    width: 100px;
+  }
+  #ref1 {
+    background-color: yellow;
+    transition-duration: 2s;
+  }
+  #ref2 {
+    background-color: gray;
+    transition-duration: 0s;
+  }
+  #test {
+    background-color: blue;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

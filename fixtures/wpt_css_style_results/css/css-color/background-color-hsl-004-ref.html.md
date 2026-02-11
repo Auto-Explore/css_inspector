@@ -1,0 +1,33 @@
+# css/css-color/background-color-hsl-004-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-color/background-color-hsl-004-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+      #p1 { background-color: hsl(120, 75%, 50%); }
+      #p2 { background-color: hsl(120.0, 75%, 50%); }
+      #p3 { background-color: hsl(1.2e2, 75%, 50%); }
+      #p4 { background-color: hsl(1.2E2, 75%, 50%); }
+      #p5 { background-color: hsl(60, 75%, 50%); }
+      #p6 { background-color: hsla(120, 75%, 50%, 0.2); }
+      #p7 { background-color: hsla(120.0, 75%, 50%, 0.4); }
+      #p8 { background-color: hsla(1.2e2, 75%, 50%, 0.6); }
+      #p9 { background-color: hsla(1.2E2, 75%, 50%, 0.8); }
+      #p10 { background-color: hsla(60.0, 75%, 50%, 1.0); }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

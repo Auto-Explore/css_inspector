@@ -1,0 +1,54 @@
+# css/CSS2/floats/overhanging-float-paint-order.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/floats/overhanging-float-paint-order.html"
+}
+```
+
+## style[0]
+
+```css
+
+#first-container {
+  width: 100px;
+  height: 60px;
+}
+
+#red-first-float {
+  width: 100px;
+  height: 60px;
+  background-color: red;
+  float: left;
+}
+
+#container {
+  width: 100px;
+  height: 80px;
+}
+
+#blue-second-float-overhanging {
+  width: 100px;
+  height: 60px;
+  background-color: blue;
+  float: left;
+  margin-top: -20px;
+}
+
+#green-third-float {
+  width: 100px;
+  height: 80px;
+  background-color: green;
+  float: left;
+  margin-top: -100px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

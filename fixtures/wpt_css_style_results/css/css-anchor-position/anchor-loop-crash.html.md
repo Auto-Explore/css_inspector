@@ -1,0 +1,112 @@
+# css/css-anchor-position/anchor-loop-crash.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-loop-crash.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.scroller {
+  position: absolute;
+  overflow: auto;
+  scrollbar-width: none;
+  width: 150px;
+  height: 100px;
+}
+.spacer {
+  width: 1px;
+  height: 500px;
+}
+.anchor1 {
+  width: 50px;
+  height: 50px;
+  background: blue;
+  anchor-name: --my-anchor1;
+  position: absolute;
+  position-anchor: --my-anchor2;
+  position-visibility: always;
+  left: anchor(right);
+  top: anchor(bottom);
+}
+.anchor2 {
+  width: 50px;
+  height: 50px;
+  background: pink;
+  anchor-name: --my-anchor2;
+  position: absolute;
+  position-anchor: --my-anchor3;
+  position-visibility: always;
+  left: anchor(right);
+  top: anchor(bottom);
+}
+.anchored {
+  position: absolute;
+  position-anchor: --my-anchor1;
+  position-visibility: always;
+  width: 50px;
+  height: 50px;
+  background: yellow;
+  left: anchor(right);
+  top: anchor(bottom);
+  anchor-name: --my-anchor3;
+}
+```
+
+```json
+{
+  "errors": 10,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-visibility”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-visibility”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-visibility”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

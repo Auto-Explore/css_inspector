@@ -1,0 +1,93 @@
+# css/css-gaps/flex/flex-gap-decorations-029.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/flex/flex-gap-decorations-029.html"
+}
+```
+
+## style[0]
+
+```css
+
+    body {
+        margin: 0px;
+    }
+    .flex {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        left: 0px;
+        top: 0px;
+        width: 340px;
+        column-rule: 3px solid red;
+        row-rule: 3px solid gray;
+        column-rule-break: intersection;
+        column-rule-interior-inset-start: 0;
+        column-rule-interior-inset-end: -5px;
+        column-rule-edge-inset-end: -10px;
+        column-rule-edge-inset-start: 1px;
+        row-rule-break: intersection;
+        row-rule-edge-inset-end: 5px;
+        row-rule-edge-inset-start: 1px;
+    }
+    .item {
+        width: 100px;
+        height: 100px;
+        background: lightgray;
+    }
+```
+
+```json
+{
+  "errors": 11,
+  "messages": [
+    {
+      "message": "Invalid value for property “column-rule”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “column-rule-break”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “column-rule-interior-inset-start”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “column-rule-interior-inset-end”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “column-rule-edge-inset-end”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “column-rule-edge-inset-start”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule-break”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule-edge-inset-end”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule-edge-inset-start”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

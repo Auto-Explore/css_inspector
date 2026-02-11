@@ -1,0 +1,54 @@
+# css/css-page/margin-boxes/dimensions-015-print.tentative.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/margin-boxes/dimensions-015-print.tentative.html"
+}
+```
+
+## style[0]
+
+```css
+
+  /* The default page box size in WPT is 5 by 3 inches. */
+  @page {
+    width: 150vw; /* Page area width: 7.5in */
+    height: 200vh; /* Page area height: 6in */
+    margin: 0;
+    margin-top: 2in;
+
+    @top-left {
+      width: 20vw; /* 1in */
+      height: 50vh; /* 1.5in */
+      margin-bottom: 10vw; /* 0.5in; */
+      margin-left: 10px;
+      background: cyan;
+      content: "";
+    }
+  }
+  :root {
+    print-color-adjust: exact;
+  }
+  body {
+    margin: 0;
+    background: yellow;
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

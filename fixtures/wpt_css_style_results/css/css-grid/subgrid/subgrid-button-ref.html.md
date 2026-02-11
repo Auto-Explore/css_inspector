@@ -1,0 +1,48 @@
+# css/css-grid/subgrid/subgrid-button-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/subgrid/subgrid-button-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+  display: grid;
+  width: 400px;
+  grid-template-columns: auto auto 1fr;
+  background-color: #ccc;
+}
+.button {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: span 3;
+  text-align: initial;
+
+  background: transparent;
+  padding: 5px 10px;
+  margin: 0;
+  border: 2px solid;
+  font: inherit;
+}
+.right {
+  text-align: right;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

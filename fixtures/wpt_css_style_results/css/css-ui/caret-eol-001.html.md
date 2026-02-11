@@ -1,0 +1,37 @@
+# css/css-ui/caret-eol-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-ui/caret-eol-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+    font-size: 40px;
+    font-family: monospace;
+    width: 5ch;
+    caret-color: orange;
+    caret-shape: block;
+    caret-animation: manual;
+    outline: none;
+    white-space: pre;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “caret-animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

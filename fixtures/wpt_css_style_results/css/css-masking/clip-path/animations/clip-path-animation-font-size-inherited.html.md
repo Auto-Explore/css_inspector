@@ -1,0 +1,51 @@
+# css/css-masking/clip-path/animations/clip-path-animation-font-size-inherited.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-masking/clip-path/animations/clip-path-animation-font-size-inherited.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    font-size: 20px;
+  }
+
+  .container {
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    animation: clippath 20s steps(2, jump-end) -9.999s;
+  }
+
+  @keyframes clippath {
+    0% {
+      clip-path: circle(1em);
+    }
+
+    100% {
+      clip-path: circle(2em);
+    }
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

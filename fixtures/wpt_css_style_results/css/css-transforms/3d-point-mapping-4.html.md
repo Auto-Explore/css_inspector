@@ -1,0 +1,67 @@
+# css/css-transforms/3d-point-mapping-4.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/3d-point-mapping-4.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .scene {
+    position: absolute;
+    border: 1px solid black;
+    height: 400px;
+    width: 400px;
+    perspective: 600px;
+    transform-style: preserve-3d;
+  }
+
+  .two {
+    left: 450px;
+  }
+
+  .container {
+    position: absolute;
+    height: 300px;
+    width: 300px;
+    margin: 50px;
+    border: 1px solid blue;
+    transform-style: preserve-3d;
+  }
+
+  .card {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    height: 200px;
+    width: 200px;
+    background-color: #81AA8A;
+    transform-origin: right top;
+    transform: rotateY(45deg);
+  }
+
+  .card:hover {
+    background-color: orange;
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “transform-origin”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

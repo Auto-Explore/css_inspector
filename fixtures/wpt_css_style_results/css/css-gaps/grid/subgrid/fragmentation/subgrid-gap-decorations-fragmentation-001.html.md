@@ -1,0 +1,69 @@
+# css/css-gaps/grid/subgrid/fragmentation/subgrid-gap-decorations-fragmentation-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/grid/subgrid/fragmentation/subgrid-gap-decorations-fragmentation-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .multi-col {
+    position: relative;
+    columns: 3;
+    column-fill: auto;
+    width: 100px;
+    height: 100px;
+    background: green;
+    column-gap: 0px;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-rows: repeat(3, 80px);
+    gap: 30px;
+  }
+  .subgrid {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    background: red;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    row-rule: solid 10px;
+  }
+  .subgrid-item {
+    background: green;
+  }
+  .abspos {
+    background: green;
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    left: 0;
+    top: 80px;
+  }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

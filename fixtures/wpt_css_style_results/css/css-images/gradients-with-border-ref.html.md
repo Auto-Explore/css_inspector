@@ -1,0 +1,57 @@
+# css/css-images/gradients-with-border-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-images/gradients-with-border-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .test {
+        width: 200px;
+        height: 100px;
+        margin-left: 90px;
+        border: solid 10px blue;
+    }
+
+    .spacer {
+        float: left;
+        width: 90px;
+        height: 120px;
+        background-color: blue;
+    }
+
+    .outer {
+        width: 200px;
+        height: 100px;
+        margin-left: 90px;
+        padding: 10px;
+        background-color: blue;
+    }
+
+    #gradient1 {
+        width: 200px;
+        height: 100px;
+        background-image: linear-gradient(to right top, black 49%, white 50%);
+    }
+
+    #gradient2 {
+        background-image: linear-gradient(to right top, black 49%, white 50%);
+    }
+
+    #gradient3 {
+        background-image: radial-gradient(ellipse at 30% 30%, black 49%, white 50%);
+    }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

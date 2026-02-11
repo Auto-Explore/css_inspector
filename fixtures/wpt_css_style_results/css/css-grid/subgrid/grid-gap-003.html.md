@@ -1,0 +1,110 @@
+# css/css-grid/subgrid/grid-gap-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/subgrid/grid-gap-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+html,body {
+  color:black; background-color:white; font:12px/1 monospace; padding:0; margin:0;
+}
+
+.grid {
+  display: grid;
+  grid: repeat(4, auto) / repeat(5, auto);
+  place-content: start;
+  border: 1px solid;
+}
+
+.subgrid {
+  display: grid;
+  grid: subgrid / auto auto;
+  gap: 20% 20%;
+  background: lightgrey;
+  grid-column: 2 / span 5;
+  grid-row: 2 / span 5;
+  min-width:10px;
+  min-height:0;
+  border: 0 solid lightblue;
+  border-bottom-width: 40px;
+  background: grey;
+}
+
+.subgrid > * { background: lightgrey; }
+
+x {
+  min-width:10px;
+  min-height:0px;
+}
+x:nth-child(2n+1) { background: silver; }
+x:nth-child(2n+2) { background: magenta; }
+x:nth-child(2n+3) { background: pink; }
+x:nth-child(2n+4) { background: grey; }
+
+e { display:block; width: 20px; height:15px; background:black; }
+
+  
+```
+
+```json
+{
+  "errors": 12,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “gap”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,88 @@
+# css/css-view-transitions/view-transition-types-match-late-mutation.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/view-transition-types-match-late-mutation.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #target {
+    background: green;
+    width: 100px;
+    height: 100px;
+    view-transition-name: target;
+  }
+
+  html::view-transition-group(*) {}
+
+  html:active-view-transition-type(type-name)::view-transition-group(target) {
+    animation-play-state: paused;
+    width: 100px;
+    height: 100px;
+    background: green;
+  }
+
+  html:active-view-transition-type(type-name)::view-transition-new(target) {
+    animation: unset;
+    opacity: 0;
+  }
+
+  html:active-view-transition-type(type-name)::view-transition-old(target) {
+    animation: unset;
+    opacity: 0;
+  }
+
+  html::view-transition-group(root) {
+    display: none;
+  }
+
+  html::view-transition {
+    background: lightpink;
+  }
+```
+
+```json
+{
+  "errors": 8,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

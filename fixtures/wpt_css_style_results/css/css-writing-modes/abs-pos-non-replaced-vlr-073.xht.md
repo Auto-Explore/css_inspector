@@ -1,0 +1,98 @@
+# css/css-writing-modes/abs-pos-non-replaced-vlr-073.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/abs-pos-non-replaced-vlr-073.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  html
+    {
+      writing-mode: vertical-lr;
+    }
+
+  div#containing-block
+    {
+      background: red url("support/bg-red-2col-3row-320x320.png");
+      color: transparent;
+      direction: rtl;
+      font: 80px/1 Ahem;
+      height: 320px;
+      position: relative;
+      width: 320px;
+    }
+
+  div#containing-block > span
+    {
+      background-color: green;
+      bottom: 1em;
+      height: auto;
+      position: absolute;
+      top: 2em;
+      width: 1em;
+    }
+
+/*
+"
+Layout calculation rules (such as those in CSS2.1, Section 10.3) that apply to the horizontal dimension in horizontal writing modes instead apply to the vertical dimension in vertical writing modes.
+"
+7.1 Principles of Layout in Vertical Writing Modes
+http://www.w3.org/TR/css-writing-modes-3/#vertical-layout
+
+So here, *-top and *-bottom properties are input into the §10.3.7 algorithms where *-top properties refer to *-left properties in the layout rules and where *-bottom properties refer to *-right properties in the layout rules.
+
+"
+5. 'width' is 'auto', 'left' and 'right' are not 'auto', then solve for 'width'
+"
+
+'top' + 'margin-top' + 'border-top-width' + 'padding-top' + 'height' + 'padding-bottom' + 'border-bottom-width' + 'margin-bottom' + 'bottom' = height of containing block
+
+So:
+
+    160px : top
+  +
+      0px : margin-top
+  +
+      0px : border-top-width
+  +
+      0px : padding-top
+  +
+  (solve) : height: auto
+  +
+      0px : padding-bottom
+  +
+      0px : border-bottom-width
+  +
+      0px : margin-bottom
+  +
+     80px : bottom
+    =====================
+    320px : height of containing block
+
+And so computed height value must be 80px .
+*/
+
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

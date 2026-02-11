@@ -1,0 +1,62 @@
+# css/css-flexbox/interactive/flexbox_interactive_flex-transitions.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/interactive/flexbox_interactive_flex-transitions.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+	width: 20em;
+	height: 8em;
+
+	display: flex;
+}
+span {
+	background: yellow;
+	width: 8em;
+	flex: 1 1 0%;
+}
+#test, .ref, p+div {
+	background: #3366cc;
+}
+div:hover #test {
+	transition: flex 4s;
+	flex: 0 1 100%;
+}
+p~div {
+	margin-right: 1em;
+	float: left;
+	display: block;
+}
+p~div span {
+	width: auto;
+	height: 8em;
+	float: left;
+}
+p~div~div span {
+	width: 5em;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “flex”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “flex”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,30 @@
+# css/CSS2/normal-flow/max-width-059.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/normal-flow/max-width-059.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div
+            {
+                background: red;
+                height: 1in;
+                max-width: -0in;
+                width: 1in;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

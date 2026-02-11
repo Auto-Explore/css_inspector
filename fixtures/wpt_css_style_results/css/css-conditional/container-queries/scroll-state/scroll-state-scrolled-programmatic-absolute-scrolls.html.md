@@ -1,0 +1,63 @@
+# css/css-conditional/container-queries/scroll-state/scroll-state-scrolled-programmatic-absolute-scrolls.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-conditional/container-queries/scroll-state/scroll-state-scrolled-programmatic-absolute-scrolls.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #scroller {
+    width: 200px;
+    height: 200px;
+    container-type: scroll-state;
+    overflow-x: scroll;
+    overflow-y: scroll;
+  }
+  #filler {
+    height: 600px;
+    width: 600px;
+  }
+  #target {
+    --top: no;
+    --bottom: no;
+    --y: no;
+    --left: no;
+    --right: no;
+    --x: no;
+    --none: no;
+    @container scroll-state(scrolled: top) {
+      --top: yes;
+    }
+    @container scroll-state(scrolled: bottom) {
+      --bottom: yes;
+    }
+    @container scroll-state(scrolled: y) {
+      --y: yes;
+    }
+    @container scroll-state(scrolled: left) {
+      --left: yes;
+    }
+    @container scroll-state(scrolled: right) {
+      --right: yes;
+    }
+    @container scroll-state(scrolled: x) {
+      --x: yes;
+    }
+    @container scroll-state(scrolled: none) {
+      --none: yes;
+    }
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

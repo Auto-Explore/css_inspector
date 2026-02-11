@@ -1,0 +1,50 @@
+# css/css-page/margin-boxes/dimensions-004-print-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/margin-boxes/dimensions-004-print-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  html {
+    font: 16px/1 Ahem;
+  }
+  @page {
+    margin: 0;
+    width: 32em;
+    height: 27em;
+  }
+  :root {
+    print-color-adjust: exact;
+  }
+  body {
+    display: grid;
+    grid-template-columns: 7em auto 5em;
+    grid-template-rows: 4em auto 8em;
+    height: 100vh;
+    margin: 0;
+  }
+  .vertical-edge {
+    display: flex;
+  }
+  .horizontal-edge {
+    display: flex;
+    flex-flow: column;
+  }
+  .corner {
+    border: solid thin;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

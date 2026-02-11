@@ -1,0 +1,127 @@
+# css/css-view-transitions/japanese-tag.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/japanese-tag.html"
+}
+```
+
+## style[0]
+
+```css
+
+#hidden {
+  width: 100px;
+  height: 100px;
+  background: red;
+  position: absolute;
+  top: 0;
+  left: 0;
+  contain: paint;
+  view-transition-name: 隠れた;
+}
+.tb { writing-mode: horizontal-tb; }
+.lr { writing-mode: vertical-lr; }
+.rl { writing-mode: vertical-rl; }
+.shared {
+  margin: 2px;
+  width: 100px;
+  height: 50px;
+  background: green;
+  contain: paint;
+  border: 1px solid black;
+}
+#target1, #target2, #target3 {
+  background: red;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 100px;
+  height: 500px;
+  contain: paint;
+}
+#one { view-transition-name: 第一; }
+#two { view-transition-name: 第二; }
+#three { view-transition-name: 第三; }
+
+html::view-transition-group(隠れた) { animation-duration: 300s; }
+html::view-transition-image-pair(隠れた) { animation: unset; opacity: 0; }
+
+html::view-transition-group(第一),
+html::view-transition-group(第二),
+html::view-transition-group(第三) {
+  animation-delay: 300s;
+  animation-fill-mode: both;
+}
+
+html::view-transition-new(第一),
+html::view-transition-new(第二),
+html::view-transition-new(第三) { animation: unset; opacity: 0; }
+
+html::view-transition-old(第一),
+html::view-transition-old(第二),
+html::view-transition-old(第三) { animation: unset; opacity: 1; }
+
+/* hide the root so we show transition background to ensure we're in a transition */
+html::view-transition-group(root) { animation: unset; opacity: 0; }
+html::view-transition { background: lightpink; }
+
+```
+
+```json
+{
+  "errors": 12,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,36 @@
+# css/CSS2/ui/outline-width-047.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/ui/outline-width-047.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            #reference
+            {
+                border: solid green 1mm;
+                margin-top: 10mm;
+                width: 300px;
+            }
+            #test
+            {
+                margin: 1mm 0 0 1mm;
+                outline: solid green;
+                outline-width: 1mm;
+                width: 300px;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

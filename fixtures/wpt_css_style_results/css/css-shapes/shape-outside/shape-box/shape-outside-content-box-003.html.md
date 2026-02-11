@@ -1,0 +1,66 @@
+# css/css-shapes/shape-outside/shape-box/shape-outside-content-box-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shapes/shape-outside/shape-box/shape-outside-content-box-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+#container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  margin-left: 25px;
+}
+#test-container {
+  /* Allow at most 1.5 glyphs to overflow the left edge of #container. */
+  margin-left: -30px;
+  width: 230px;
+  height: 200px;
+  font: 20px/1 Ahem;
+  color: green;
+  background-color: red;
+  text-align: right;
+}
+#test-shape {
+  margin-left: 30px;
+  float: right;
+  box-sizing: border-box;
+  width: 200px;
+  height: 200px;
+  padding: 95px 40px 95px 120px;
+  shape-margin: 70px;
+  shape-outside: content-box;
+}
+#static-shape {
+  position: absolute;
+  left: 50px;
+  top: 20px;
+  width: 150px;
+  height: 160px;
+  background-color: green;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown property “shape-margin”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “shape-outside”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

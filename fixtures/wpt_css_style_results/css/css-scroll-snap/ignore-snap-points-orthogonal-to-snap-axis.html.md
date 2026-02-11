@@ -1,0 +1,70 @@
+# css/css-scroll-snap/ignore-snap-points-orthogonal-to-snap-axis.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-snap/ignore-snap-points-orthogonal-to-snap-axis.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  position: absolute;
+  margin: 0;
+}
+
+#scroller {
+  height: 500px;
+  width: 500px;
+  overflow: hidden;
+  scroll-snap-type: x mandatory;
+}
+
+#y-target {
+  width: 300px;
+  height: 300px;
+  top: 100px;
+  left: 0;
+  background-color: green;
+  /* align only on y-axis */
+  scroll-snap-align: start none;
+}
+
+#x-target {
+  width: 300px;
+  height: 300px;
+  top: 0;
+  left: 100px;
+  background-color: red;
+  scroll-snap-align: none start;
+}
+
+.area {
+  width: 2000px;
+  height: 2000px;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-snap-align”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-snap-align”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

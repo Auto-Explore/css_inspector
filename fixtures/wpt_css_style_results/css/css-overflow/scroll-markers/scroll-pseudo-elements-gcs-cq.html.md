@@ -1,0 +1,67 @@
+# css/css-overflow/scroll-markers/scroll-pseudo-elements-gcs-cq.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/scroll-markers/scroll-pseudo-elements-gcs-cq.html"
+}
+```
+
+## style[0]
+
+```css
+
+  html {
+    container-type: inline-size;
+    width: 500px;
+    @container (width = 500px) {
+      /* None of these pseudo elements are rendered, but getComputedStyle()
+         should still work. If rendered, they would become child boxes of the
+         root element, thus they can query their originating element for size
+         container queries. */
+      &::scroll-marker-group { --test: pass; }
+      &::scroll-button(left) { --test: pass; }
+    }
+  }
+  #container {
+    container-type: inline-size;
+    width: 400px;
+  }
+  #scroller {
+    container-type: inline-size;
+    width: 200px;
+    height: 200px;
+    @container (width = 400px) {
+      /* None of these pseudo elements are rendered, but getComputedStyle()
+         should still work and skip the originating element as an eligible
+         size container. */
+      &::scroll-marker-group { --test: pass; }
+      &::scroll-button(left) { --test: pass; }
+    }
+  }
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

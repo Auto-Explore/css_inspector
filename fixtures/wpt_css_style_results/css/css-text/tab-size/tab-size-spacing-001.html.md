@@ -1,0 +1,49 @@
+# css/css-text/tab-size/tab-size-spacing-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/tab-size/tab-size-spacing-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.test {
+  white-space: pre;
+  tab-size: 8; /* the initial value, but since we're measuring against it, we might as well be sure */
+  font-family: monospace; /* because the ch unit is based on the size of the 0 character,
+                             and we want to measure space characters
+                             so they need to be the same size. */
+  letter-spacing: 2px;
+  word-spacing: 10px;
+}
+span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: green;
+}
+.ref {
+  position: absolute;
+  z-index: -1;
+  width: 20px;
+  height: 20px;
+  background: red;
+  margin-left: calc( 8ch + 8 * 2px + 8 * 10px );
+
+   /* this is to avoid antialiasing effects at the edge */
+   box-sizing: border-box;
+   border: 2px solid white;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

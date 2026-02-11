@@ -1,0 +1,59 @@
+# css/cssom-view/getBoundingClientRect-scroll.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/cssom-view/getBoundingClientRect-scroll.html"
+}
+```
+
+## style[0]
+
+```css
+
+      body {
+        margin: 0;
+      }
+      .scroll_container {
+        width: 300px;
+        height: 300px;
+        overflow: scroll;
+        scrollbar-width: none;
+      }
+      .dummy_overflowing_box {
+        width: 5000px;
+        height: 5000px;
+      }
+      .target_box {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+      }
+      .display_none {
+        display: none;
+      }
+      .display_content {
+        display: content;
+      }
+      .position_absolute {
+        position: absolute;
+      }
+      .position_fixed {
+        position: fixed;
+      }
+      .absolute_containing_block {
+        position: relative;
+      }
+      .fixed_containing_block {
+        will-change: transform;
+      }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,76 @@
+# css/css-gaps/grid/grid-gap-decorations-038.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/grid/grid-gap-decorations-038.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0px;
+  }
+
+  .grid-container {
+    height: 110px;
+    width: 120px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    column-gap: 20px;
+    row-gap: 10px;
+
+    column-rule-color: blue;
+    column-rule-style: solid;
+    column-rule-width: 20px;
+
+    column-rule-break: intersection;
+    column-rule-inset: 0;
+
+    row-rule-color: gold;
+    row-rule-style: solid;
+    row-rule-width: 10px;
+  }
+
+  .grid-item {
+    background: skyblue;
+  }
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Unknown property “column-rule-break”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “column-rule-inset”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule-style”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule-width”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

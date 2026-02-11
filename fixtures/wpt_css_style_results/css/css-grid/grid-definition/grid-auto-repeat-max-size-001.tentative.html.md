@@ -1,0 +1,54 @@
+# css/css-grid/grid-definition/grid-auto-repeat-max-size-001.tentative.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-definition/grid-auto-repeat-max-size-001.tentative.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+  position: relative;
+  display: grid;
+  grid: repeat(auto-fill, 50px) / repeat(auto-fill, 100px);
+  max-width: 300px;
+  max-height: 200px;
+}
+.border {
+  border: 10px solid;
+}
+.border-box {
+  box-sizing: border-box;
+}
+.item {
+  background: lime;
+  /* Place item on the last cell. */
+  grid-column: -2;
+  grid-row: -2;
+}
+.pad-calc {
+ border-width: 0;
+ padding: calc(10% + 20px);
+}
+.pad-percent {
+ border-width: 0;
+ padding: 10%;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

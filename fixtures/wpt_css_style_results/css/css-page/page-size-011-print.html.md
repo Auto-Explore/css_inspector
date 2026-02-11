@@ -1,0 +1,69 @@
+# css/css-page/page-size-011-print.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/page-size-011-print.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @page {
+    margin: 10mm;
+  }
+  @page a5 {
+    size: a5;
+  }
+  @page a5-landscape {
+    size: a5 landscape;
+  }
+  @page a4 {
+    size: a4;
+  }
+  @page a4-landscape {
+    size: a4 landscape;
+  }
+  @page a3 {
+    size: a3;
+  }
+  @page a3-landscape {
+    size: a3 landscape;
+  }
+  @page b5 {
+    size: b5;
+  }
+  @page b5-landscape {
+    size: b5 landscape;
+  }
+  @page b4 {
+    size: b4;
+  }
+  @page b4-landscape {
+    size: b4 landscape;
+  }
+  @page jis-b5 {
+    size: jis-b5;
+  }
+  @page jis-b5-landscape {
+    size: jis-b5 landscape;
+  }
+  @page jis-b4 {
+    size: jis-b4;
+  }
+  @page jis-b4-landscape {
+    size: jis-b4 landscape;
+  }
+  body { margin: 0; }
+  div { border: solid; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

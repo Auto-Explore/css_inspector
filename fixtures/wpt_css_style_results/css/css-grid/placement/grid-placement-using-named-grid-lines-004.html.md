@@ -1,0 +1,38 @@
+# css/css-grid/placement/grid-placement-using-named-grid-lines-004.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/placement/grid-placement-using-named-grid-lines-004.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+  display: grid;
+  width: 300px;
+  height: 300px;
+  grid-template-columns: [foo] repeat(auto-fill, 100px [foo]);
+  grid-template-rows: repeat(auto-fill, [foo] 100px);
+}
+.grid > div {
+  grid-area: 1 foo / 1 foo;
+  background: green;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-area”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

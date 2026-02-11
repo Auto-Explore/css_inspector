@@ -1,0 +1,63 @@
+# css/css-transforms/ttwf-css-3d-polygon-cycle-mismatch.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/ttwf-css-3d-polygon-cycle-mismatch.html"
+}
+```
+
+## style[0]
+
+```css
+
+        #container {
+        	position: absolute;
+        	top: 100px;
+        	left: 100px;
+        }
+        .rect {
+        	position: absolute;
+        }
+        #red0 {
+        	background-color: red;
+        	left: 6px;
+        	width: 100px;
+        	height: 50px;
+        }
+        #green0 {
+        	background-color: green;
+        	top: 6px;
+        	width: 50px;
+        	height: 100px;
+        }
+        #blue0 {
+        	background-color: blue;
+        	width: 50px;
+        	height: 100px;
+        }
+        #red1 {
+        	background-color: red;
+        	width: 100px;
+        	height: 50px;
+        }
+        #green1 {
+        	background-color: green;
+        	width: 50px;
+        	height: 100px;
+        }
+        #blue1 {
+        	background-color: blue;
+        	width: 50px;
+        	height: 100px;
+        }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

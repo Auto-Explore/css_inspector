@@ -1,0 +1,66 @@
+# css/css-fonts/font-size-adjust-metrics-override.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-size-adjust-metrics-override.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+  font-family: Ahem;
+  src: local(Ahem), url(/fonts/Ahem.ttf);
+  /* The default ascent and descent are 80% and 20%, respectively. */
+  ascent-override: 100%;
+  descent-override: 50%;
+}
+
+.size-adjusted {
+  font: 20px Ahem;
+  /* Scale up 200% since the Ahem font has an aspect ratio of 0.8 of x-height
+     to size. */
+  font-size-adjust: 1.6;
+  color: green;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.overridden-ascent-ref {
+  display: inline-block;
+  background-color: green;
+  vertical-align: top;
+  width: 1em;
+  height: 1em; /* Scale a reference block to match the overridden ascent of 100%. */
+}
+
+.overridden-descent-ref {
+  display: inline-block;
+  background-color: green;
+  vertical-align: bottom;
+  width: 1em;
+  height: 0.5em; /* Scale a reference block to match the overridden descen of 50%. */
+}
+
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown property “ascent-override”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “descent-override”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

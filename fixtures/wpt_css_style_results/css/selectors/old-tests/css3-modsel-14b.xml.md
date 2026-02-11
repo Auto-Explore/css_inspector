@@ -1,0 +1,39 @@
+# css/selectors/old-tests/css3-modsel-14b.xml
+
+```json
+{
+  "format_version": 3,
+  "file": "css/selectors/old-tests/css3-modsel-14b.xml"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+p { background: green; color: white; }
+.t1.fail { background: red; color: yellow; }
+.fail.t1 { background: red; color: yellow; }
+.t2.fail { background: red; color: yellow; }
+.fail.t2 { background: red; color: yellow; }
+/* Note: This is a valid test even per CSS1, since in CSS1 those rules
+         are invalid and should be dropped. */
+]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

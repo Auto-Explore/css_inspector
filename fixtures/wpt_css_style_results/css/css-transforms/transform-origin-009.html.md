@@ -1,0 +1,55 @@
+# css/css-transforms/transform-origin-009.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/transform-origin-009.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .div1 {
+    height: 150px;
+    position: absolute;
+    width: 150px;
+  }
+  .div2 {
+    background-color: gray;
+  }
+  #test {
+    background-color: red;
+    height: 50px;
+    margin: 50px 0px 50px 100px;
+    transform: rotate(180deg);
+    transform-origin: 0% center;
+    width: 50px;
+  }
+  #ref {
+    background-color: green;
+    height: 50px;
+    margin: 50px 0px 50px 100px;
+    transform: rotate(180deg);
+    transform-origin: 0% 50%;
+    width: 50px;
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “transform-origin”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “transform-origin”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

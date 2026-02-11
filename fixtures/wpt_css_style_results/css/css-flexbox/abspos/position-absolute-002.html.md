@@ -1,0 +1,90 @@
+# css/css-flexbox/abspos/position-absolute-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/abspos/position-absolute-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+body {
+    margin: 0;
+}
+.flexbox {
+    background-color: green;
+    height: 100px;
+    width: 100px;
+    margin: 10px;
+}
+.flexbox > * {
+    flex: none;
+}
+.relative {
+    position: relative;
+}
+.flexbox > div {
+    width: 20px;
+    height: 20px;
+}
+.absolute {
+    position: absolute;
+}
+#placed-absolute {
+    top: 20px;
+    left: 20px;
+}
+
+.rtl {
+    direction: rtl;
+}
+.ltr {
+    direction: ltr;
+}
+
+.flexbox :nth-child(1) {
+    background-color: blue;
+}
+.flexbox :nth-child(2) {
+    background-color: yellow;
+}
+.flexbox :nth-child(3) {
+    background-color: salmon;
+}
+.flexbox :nth-child(4) {
+    background-color: grey;
+}
+.flexbox :nth-child(5) {
+    background-color: red;
+}
+.flexbox :nth-child(6) {
+    background-color: orange;
+}
+.flexbox :nth-child(7) {
+    background-color: purple;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

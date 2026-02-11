@@ -1,0 +1,31 @@
+# css/printing/transition-in-media-print.tentative.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/printing/transition-in-media-print.tentative.html"
+}
+```
+
+## style[0]
+
+```css
+
+#target {
+  transition-duration: 100000s;
+  print-color-adjust: exact;
+}
+@media not print {
+  #target {
+    color: red;
+  }
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

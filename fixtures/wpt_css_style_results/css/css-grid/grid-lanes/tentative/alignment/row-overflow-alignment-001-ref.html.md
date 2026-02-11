@@ -1,0 +1,72 @@
+# css/css-grid/grid-lanes/tentative/alignment/row-overflow-alignment-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/alignment/row-overflow-alignment-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+    display: grid;
+    background: gray;
+    grid-template-rows: 70px;
+    grid-template-columns: 75px 50px 75px 100px;
+    align-items: unsafe center;
+    width: 300px;
+    height: 70px;
+}
+.overflow-safe {
+    align-self: safe end;
+    width: 75px;
+    height: 75px;
+    background-color: lightgreen;
+}
+.overflow-unsafe {
+    align-self: unsafe end;
+    width: 75px;
+    height: 75px;
+    background-color: lightblue;
+}
+.small-item {
+    width: 50px;
+    background-color: lightyellow;
+}
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Invalid value for property “align-items”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-self”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-self”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

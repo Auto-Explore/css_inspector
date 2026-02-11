@@ -1,0 +1,74 @@
+# css/css-position/sticky/position-sticky-right-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-position/sticky/position-sticky-right-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div.scrolling-container
+    {
+      background-image: url("support/100x100-red.png");
+      background-repeat: no-repeat;
+      height: 150px;
+      margin-bottom: 30px;
+      overflow-y: hidden;
+      position: static;
+      white-space: nowrap;
+      width: 250px;
+    }
+
+  div#first-scrolling-container
+    {
+      background-position: 75px top;
+    }
+
+  div#second-scrolling-container
+    {
+      background-position: 50px top;
+    }
+
+  div#third-scrolling-container
+    {
+      background-position: left top;
+    }
+
+  div.horizontal-spacer
+    {
+      display: inline-block;
+      height: 100%;
+      width: 100px;
+    }
+
+  div.content
+    {
+      display: inline-block;
+      height: 100%;
+      width: 300px;
+    }
+
+  div.sticky
+    {
+      background-color: green;
+      display: inline-block;
+      height: 100px;
+      position: sticky;
+      right: 100px;
+      vertical-align: top;
+      width: 100px;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

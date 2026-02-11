@@ -1,0 +1,75 @@
+# css/css-page/margin-boxes/content-001-print.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/margin-boxes/content-001-print.html"
+}
+```
+
+## style[0]
+
+```css
+
+  :root {
+    print-color-adjust: exact;
+  }
+  @page {
+    size: 400px;
+    margin: 100px;
+
+    @top-left-corner {
+      /* No content property here. */
+      width: 50px;
+      height: 50px;
+      background: red;
+    }
+    @top-left {
+      width: 100px;
+      text-align: left;
+      vertical-align: top;
+      content: "PASS";
+      background: hotpink;
+    }
+    @top-right {
+      text-align: left;
+      vertical-align: top;
+      content: "PA" "SS";
+      background: yellow;
+    }
+    @bottom-left {
+      /* An empty string is also content. */
+      content: "";
+      background: yellow;
+    }
+    @bottom-left-corner {
+      width: 50px;
+      height: 50px;
+      content: none; /* This is nothing. */
+      background: red;
+    }
+    @bottom-right-corner {
+      width: 50px;
+      height: 50px;
+      content: normal; /* This also nothing. */
+      background: red;
+    }
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

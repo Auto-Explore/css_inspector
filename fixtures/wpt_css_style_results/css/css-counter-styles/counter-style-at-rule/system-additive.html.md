@@ -1,0 +1,45 @@
+# css/css-counter-styles/counter-style-at-rule/system-additive.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-counter-styles/counter-style-at-rule/system-additive.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @counter-style a {
+    system: additive;
+    additive-symbols: 6 \2685, 5 \2684, 4 \2683, 3 \2682, 2 \2681, 1 \2680;
+    suffix: "";
+  }
+  @counter-style b {
+    system: additive;
+    additive-symbols: 7 \2630, 6 \2631, 5 \2632, 4 \2633, 3 \2634, 2 \2635, 1 \2636, 0 \2637;
+    suffix: "";
+  }
+  @counter-style c {
+    system: additive;
+    additive-symbols: 3 "a", 2 "b";
+  }
+  @counter-style d {
+    system: additive;
+    additive-symbols: 1 \10300;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

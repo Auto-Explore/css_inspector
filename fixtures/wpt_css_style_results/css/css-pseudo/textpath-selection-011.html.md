@@ -1,0 +1,59 @@
+# css/css-pseudo/textpath-selection-011.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-pseudo/textpath-selection-011.html"
+}
+```
+
+## style[0]
+
+```css
+
+  ::selection
+    {
+      background-color: transparent;
+      /*
+      color suppresses UA default background-color,
+      but fill and stroke do not, so set explicitly
+      */
+      fill: green;
+      /*
+      fill is the shorthand form for fill-color,
+      fill-image, fill-origin, fill-position, fill-size
+      and fill-repeat
+      https://www.w3.org/TR/fill-stroke-3/#fill-shorthand
+      */
+      stroke: yellow;
+      /*
+      stroke is the shorthand form for stroke-color,
+      stroke-image, stroke-origin, stroke-position,
+      stroke-size, and stroke-repeat
+      https://www.w3.org/TR/fill-stroke-3/#stroke-shorthand
+      */
+      stroke-width: 2px;
+    }
+  
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown property “fill”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “stroke”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “stroke-width”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

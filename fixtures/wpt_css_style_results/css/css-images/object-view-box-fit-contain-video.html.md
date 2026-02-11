@@ -1,0 +1,90 @@
+# css/css-images/object-view-box-fit-contain-video.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-images/object-view-box-fit-contain-video.html"
+}
+```
+
+## style[0]
+
+```css
+
+.view_box_subset {
+  object-view-box: inset(50px 0px 0px 0px);
+  object-fit: contain;
+  width: 50px;
+  height: 100px;
+  background-color: grey;
+  margin: 5px;
+}
+
+.view_box_subset_with_position {
+  object-view-box: inset(50px 0px 0px 0px);
+  object-fit: contain;
+  width: 50px;
+  height: 100px;
+  background-color: grey;
+  margin: 5px;
+
+  object-position: 0% 0%;
+  background-color: grey;
+}
+
+.view_box_subset_with_scaling {
+  object-view-box: inset(50px 0px 0px 0px);
+  object-fit: contain;
+  background-color: grey;
+  margin: 5px;
+
+  width: 100px;
+  height: 200px;
+  object-position: 25px 125px;
+}
+```
+
+```json
+{
+  "errors": 9,
+  "messages": [
+    {
+      "message": "Unknown property “object-view-box”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “object-view-box”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “object-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “object-view-box”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “object-position”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

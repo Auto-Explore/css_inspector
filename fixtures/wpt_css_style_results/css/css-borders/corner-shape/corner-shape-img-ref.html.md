@@ -1,0 +1,35 @@
+# css/css-borders/corner-shape/corner-shape-img-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-borders/corner-shape/corner-shape-img-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .target {
+        width: 100px;
+        height: 100px;
+        border-radius: 25px;
+        box-sizing: border-box;
+        background-image: url("/images/green.png");
+        corner-shape: notch superellipse(3) bevel scoop;
+    }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “corner-shape”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

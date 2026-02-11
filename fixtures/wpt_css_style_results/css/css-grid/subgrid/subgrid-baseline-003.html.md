@@ -1,0 +1,63 @@
+# css/css-grid/subgrid/subgrid-baseline-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/subgrid/subgrid-baseline-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+html,body {
+  color:black; background-color:white; font:16px/1 Ahem; padding:0; margin:0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  max-width: 100px;
+  place-items: baseline start;
+}
+
+.subgrid {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: 1 / 3;
+  grid-column: 2;
+
+  padding-bottom: 20px;
+  place-items: inherit;
+}
+
+.first {
+  font-size: 3em;
+  grid-row: 2;
+}
+
+.second {
+  font-size: 2em;
+  grid-row: 2;
+}
+  
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “place-items”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

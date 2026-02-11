@@ -1,0 +1,54 @@
+# css/css-anchor-position/anchor-scroll-implicit-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-scroll-implicit-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.positioned {
+  position: fixed;
+  width: 100px;
+  height: 50px;
+  left: anchor(left);
+  top: anchor(bottom);
+  background: green;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background: red;
+  overflow: hidden;
+}
+
+.filler {
+  width: 1px;
+  height: 50px;
+}
+
+.anchor {
+  width: 100px;
+  height: 50px;
+  background: green;
+  border: none;
+  padding: 0;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,34 @@
+# css/css-env/env-revert-rule.tentative.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-env/env-revert-rule.tentative.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #test1 {
+    color: green;
+  }
+  #test1 {
+    color: red;
+    color: env(unknown-env, revert-rule);
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

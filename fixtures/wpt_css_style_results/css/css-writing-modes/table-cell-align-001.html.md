@@ -1,0 +1,92 @@
+# css/css-writing-modes/table-cell-align-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/table-cell-align-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+table {
+  font: 20px/1 Ahem;
+  border: 1px solid gray;
+  writing-mode: vertical-lr;
+}
+
+td {
+  inline-size: 2em;
+  padding: 0;
+  color: green;
+  writing-mode: horizontal-tb;
+}
+
+/* If text-align works correctly on the cells, their green Ahem glyphs
+   should cover the red part of each background. */
+.left {
+  text-align: left;
+  background: linear-gradient(to right, red 50%, transparent 50%);
+}
+.center {
+  text-align: center;
+  background: linear-gradient(to right, transparent 25%, red 25%, red 75%, transparent 75%);
+}
+.right {
+  text-align: right;
+  background: linear-gradient(to right, transparent 50%, red 50%);
+}
+.start {
+  text-align: start;
+  background: linear-gradient(to right, red 50%, transparent 50%);
+}
+.start:dir(rtl) {
+  background: linear-gradient(to left, red 50%, transparent 50%);
+}
+.end {
+  text-align: end;
+  background: linear-gradient(to right, transparent 50%, red 50%);
+}
+.end:dir(rtl) {
+  background: linear-gradient(to left, transparent 50%, red 50%);
+}
+```
+
+```json
+{
+  "errors": 7,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

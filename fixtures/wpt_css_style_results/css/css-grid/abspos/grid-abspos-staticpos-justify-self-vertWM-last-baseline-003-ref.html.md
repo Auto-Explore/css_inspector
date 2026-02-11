@@ -1,0 +1,53 @@
+# css/css-grid/abspos/grid-abspos-staticpos-justify-self-vertWM-last-baseline-003-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/abspos/grid-abspos-staticpos-justify-self-vertWM-last-baseline-003-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .container {
+      display: block;
+      padding: 1px 2px;
+      border: 1px solid black;
+      background: yellow;
+      margin-bottom: 5px;
+      margin-right: 5px;
+      float: left; /* For testing in "rows" of containers */
+    }
+    br { clear: both }
+
+    .big > .container {
+      height: 30px;
+      width: 22px;
+    }
+    .small > .container {
+      height: 2px;
+      width: 4px;
+    }
+
+    .container > * {
+      background: teal;
+      height: 6px;
+      width: 8px;
+    }
+    .big   > .container > * { margin-left: 14px; }
+    .small > .container > * { margin-left: -4px; }
+
+    .big   .alignEnd    { margin-top: 24px; }
+    .small .alignEnd    { margin-top: -4px; }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

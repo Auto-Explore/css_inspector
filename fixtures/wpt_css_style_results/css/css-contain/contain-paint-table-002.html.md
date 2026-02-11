@@ -1,0 +1,49 @@
+# css/css-contain/contain-paint-table-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-contain/contain-paint-table-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div#table
+    {
+      display: table;
+      font-family: monospace;
+      font-size: 100px;
+      table-layout: fixed;
+      width: 4ch;
+      contain: paint;
+    }
+  div.caption
+    {
+      display: table-caption;
+      color: green;
+      /* We have to limit the width of the caption here, or else the caption's
+         intrinsic width (including the "FAIL" span) would "prop up" the width
+         of the table to be a size that'd be larger than its specified width.
+         Really, we want the table to be *only* 4 characters wide (as wide as
+         the text "PASS"), with "FAIL" overflowing and getting clipped by
+         "contain:paint" on the table wrapper box. */
+      width: 4ch;
+    }
+  span
+    {
+      background-color: red;
+      color: yellow;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

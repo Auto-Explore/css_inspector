@@ -1,0 +1,48 @@
+# css/css-transforms/transform-translatex-006.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/transform-translatex-006.html"
+}
+```
+
+## style[0]
+
+```css
+
+        /* Positioned container allows for the self-describing statement to still
+           be visible in the case of failure */
+        .container {
+            position: absolute;
+        }
+        .greenSquare {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            transform: translateX(50px);
+            /* Add CSS transform here */
+         }
+         /* This div should only be visible if the test fails */
+        .redSquare {
+            position: absolute;
+            /* It is approximately the same size as the test div, but with a 1px margin */
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            top: 0px;
+            left: 50px;
+        }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

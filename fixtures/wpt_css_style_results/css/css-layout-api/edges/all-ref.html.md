@@ -1,0 +1,60 @@
+# css/css-layout-api/edges/all-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-layout-api/edges/all-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+td { text-align: center; }
+
+.parent {
+  box-sizing: border-box;
+  width: 60px;
+  height: 60px;
+  border: solid;
+  border-width: 1px 2px 3px 4px;
+  padding: 0px 4px 8px 12px;
+  position: relative;
+}
+
+.child {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: green;
+}
+
+.top-left {
+  top: 0;
+  left: 12px;
+}
+
+.top-right {
+  top: 0;
+  right: 4px;
+}
+
+.bottom-left {
+  bottom: 8px;
+  left: 12px;
+}
+
+.bottom-right {
+  bottom: 8px;
+  right: 4px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

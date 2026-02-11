@@ -1,0 +1,61 @@
+# css/css-backgrounds/background-clip-color.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/background-clip-color.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #borderBoxHelper {
+    margin: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+  }
+  #borderBox {
+    border: 6px dashed green;
+    padding: 6px;
+    width: 6px;
+    height: 6px;
+    background-color: green;
+    background-clip: border-box;
+  }
+  #paddingBoxHelper {
+    width: 30px;
+    height: 30px;
+    background-color: red;
+  }
+  #paddingBox {
+    border: 10px dashed white;
+    padding: 10px;
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    background-clip: padding-box;
+  }
+  #contentBoxHelper {
+    width: 30px;
+    height: 30px;
+    background-color: red;
+  }
+  #contentBox {
+    padding: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: green;
+    background-clip: content-box;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,27 @@
+# css/css-backgrounds/border-top-width-medium.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/border-top-width-medium.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .red-if-too-thin { height: 3px; background: red; }
+  .cb { position: relative; }
+  .red-if-too-thick { height: 20px; background: red; }
+  .overlap-red-if-too-thick { height: 20px; background: white; position: absolute; top: 3px; width: 100%; }
+  .border-test { border-top-style: solid; border-top-width: medium; margin-top: -3px; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

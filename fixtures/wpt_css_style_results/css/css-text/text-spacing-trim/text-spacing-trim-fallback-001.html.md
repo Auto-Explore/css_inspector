@@ -1,0 +1,42 @@
+# css/css-text/text-spacing-trim/text-spacing-trim-fallback-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/text-spacing-trim/text-spacing-trim-fallback-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+  font-family: halt;
+  src: url('/fonts/noto/cjk/NotoSansCJKjp-Regular-subset-halt.otf');
+}
+@font-face {
+  font-family: halt-3002;
+  src: url('/fonts/noto/cjk/NotoSansCJKjp-Regular-subset-halt-3002.otf');
+}
+@font-face {
+  font-family: halt-300C;
+  src: url('/fonts/noto/cjk/NotoSansCJKjp-Regular-subset-halt-300C.otf');
+}
+@font-face {
+  font-family: halt-FF1A;
+  src: url('/fonts/noto/cjk/NotoSansCJKjp-Regular-subset-halt-FF1A.otf');
+}
+#container {
+  font-family: halt;
+  font-size: 20px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,46 @@
+# css/css-masking/animations/clip-interpolation.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-masking/animations/clip-interpolation.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container {
+  width: 80px;
+  height: 80px;
+  background: black;
+  display: inline-block;
+  padding: 5px;
+}
+
+.container:nth-child(2n) {
+  background: green;
+}
+
+.parent {
+  clip: rect(100px, 0px, 100px, 0px);
+}
+
+.target {
+  width: 80px;
+  height: 80px;
+  display: inline-block;
+  position: absolute;
+  background: white;
+  clip: rect(0px, 100px, 0px, 100px);
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

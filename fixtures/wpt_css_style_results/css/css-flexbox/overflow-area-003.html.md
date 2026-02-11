@@ -1,0 +1,72 @@
+# css/css-flexbox/overflow-area-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/overflow-area-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .set {
+    clear: both;
+    margin: 1em;
+  }
+
+  .test {
+    display: flex;
+    overflow: auto;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    background: teal;
+    margin: 0.5em;
+    float: left;
+  }
+
+  .item {
+    width: 10px;
+    height: 10px;
+  }
+
+  .absolute {
+    position: absolute;
+  }
+
+  .center {
+    justify-content: center;
+    align-items: center
+  }
+
+  .relative {
+    position: relative;
+  }
+
+  .relative > .item {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+  }
+
+  .top-left {
+    left: -10px;
+    top: -10px;
+  }
+
+  .bottom-right {
+    bottom: -10px;
+    right: -10px;
+  }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

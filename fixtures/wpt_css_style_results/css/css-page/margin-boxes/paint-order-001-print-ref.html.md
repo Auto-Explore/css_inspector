@@ -1,0 +1,104 @@
+# css/css-page/margin-boxes/paint-order-001-print-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/margin-boxes/paint-order-001-print-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @page {
+    margin: 0;
+    size: 500px 400px;
+  }
+  :root {
+    print-color-adjust: exact;
+  }
+  body {
+    display: grid;
+    grid-template-columns: 100px auto 100px;
+    grid-template-rows: 100px auto 100px;
+    height: 100vh;
+    margin: 0;
+  }
+  .box {
+    border: solid thin;
+    flex: 1;
+  }
+  body > .box {
+    background: pink;
+  }
+  .vertical-edge {
+    display: flex;
+  }
+  .horizontal-edge {
+    display: flex;
+    flex-flow: column;
+  }
+  .vertical-edge > .box.first {
+    width: 5em;
+    margin: 5px -4em;
+    background: hotpink;
+  }
+  .vertical-edge > .box.second {
+    width: 5em;
+    flex: none;
+    margin: 10px 0;
+    background: cyan;
+  }
+  .vertical-edge > .box.third {
+    margin: 15px -4em;
+    background: yellow;
+  }
+  .horizontal-edge > .box.first {
+    height: 5em;
+    margin: -4em 5px;
+    background: hotpink;
+  }
+  .horizontal-edge > .box.second {
+    height: 5em;
+    flex: none;
+    margin: 0 10px;
+    background: cyan;
+  }
+  .horizontal-edge > .box.third {
+    margin: -4em 15px;
+    background: yellow;
+  }
+  .pagearea {
+    padding: 8px;
+  }
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

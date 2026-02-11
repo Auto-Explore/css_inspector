@@ -1,0 +1,88 @@
+# css/css-grid/alignment/grid-baseline-justify-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-baseline-justify-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @import "/fonts/ahem.css";
+  .grid {
+    border: solid silver;
+    margin: 1em 2px;
+    font: 20px/1 Ahem;
+
+    display: inline-grid;
+    vertical-align: top;
+    grid-template-rows: repeat(4, max-content);
+  }
+  .grid > div {
+    border: black 10px;
+    border-style: none solid;
+    color: orange;
+    writing-mode: vertical-rl;
+  }
+  div + div {
+    font-size: 2em;
+  }
+  div + div + div {
+    font-size: 50%;
+  }
+  .self > div {
+    justify-self: baseline;
+  }
+  .content > div {
+    align-content: baseline;
+  }
+  div.stretch {
+    justify-self: stretch;
+  }
+
+  .ref {
+    position: relative;
+    width: 96px;
+    height: 80px;
+  }
+  .ref > div {
+    position: absolute;
+  }
+  .ref1 { right:  16px; }
+  .ref2 { top:    20px;
+          right:   0px; }
+  .ref3 { right:  24px;
+          top:    60px; }
+  .ref4 { bottom:  0px;
+          right:   0px;
+          left:    0px;
+          height: 10px; }
+
+  .ref.content > div:not(.stripe) {
+    border-color: transparent;
+  }
+  .stripe {
+    width: 76px;
+    height: 80px;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Imported style sheets are not checked.",
+      "severity": "Warning"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 1
+}
+```

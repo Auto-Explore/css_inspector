@@ -1,0 +1,47 @@
+# css/css-grid/subgrid/auto-track-sizing-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/subgrid/auto-track-sizing-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+html,body {
+  color:black; background-color:white; font:16px/1 monospace; padding:0; margin:0;
+}
+
+.grid {
+  display: grid;
+  max-width: 260px;
+  padding: 1px 5px;
+  border: 1px solid;
+}
+.subgrid {
+  display: grid;
+  padding: 3px 5px 7px 11px;
+  border-style: solid;
+  border-width: 5px 7px 11px 3px;
+  margin: 7px 11px 3px 5px;
+  background: grey;
+}
+
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

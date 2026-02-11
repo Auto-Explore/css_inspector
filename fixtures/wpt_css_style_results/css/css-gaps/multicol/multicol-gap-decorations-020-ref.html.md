@@ -1,0 +1,76 @@
+# css/css-gaps/multicol/multicol-gap-decorations-020-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/multicol/multicol-gap-decorations-020-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0px;
+  }
+
+  #container {
+    border: 2px solid rgb(96 139 168);
+    width: 200px;
+    height: 200px;
+    column-gap: 10px;
+    row-gap: 10px;
+    column-width: 60px;
+    column-count: 3;
+    column-fill: auto;
+  }
+
+  p {
+    background: rgb(96 139 168 / 0.2);
+    height: 50px;
+    margin: 0px;
+  }
+
+  h2 {
+    column-span: all;
+    background-color: #4d4e53;
+    color: #fff;
+    margin: 0px;
+    opacity: 0.5;
+  }
+
+  .column-decor-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 2px;
+    left: 62px;
+    row-gap: 18px;
+    height: 200px;
+  }
+
+  .column-decor {
+    width: 10px;
+    height: 200px;
+    background: blue;
+  }
+
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

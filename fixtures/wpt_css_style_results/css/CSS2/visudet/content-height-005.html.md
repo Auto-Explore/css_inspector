@@ -1,0 +1,49 @@
+# css/CSS2/visudet/content-height-005.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/visudet/content-height-005.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+  font-family: 'high';
+  font-style: normal;
+  font-weight: 400;
+  src:  url(/fonts/Revalia.woff) format('woff');
+}
+@font-face {
+  font-family: 'deep';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/fonts/AD.woff) format('woff');
+}
+
+div {
+  font-size: 50px;
+  display: inline-block;
+}
+
+span {
+  padding-left: 1em;
+  color: black;
+  border-top: solid 1px;
+  border-bottom: solid 1px;
+}
+
+div:nth-of-type(1) { font-family: deep; }
+div:nth-of-type(2) { font-family: high; margin-left: -1em; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,46 @@
+# css/css-values/ch-pseudo-recalc-on-font-load.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-values/ch-pseudo-recalc-on-font-load.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container {
+  font: 25px/1 "custom font", monospace;
+}
+
+.before::before,
+.after::after,
+.first-letter::first-letter,
+.first-line::first-line {
+  font-family: monospace;
+  font-size: 1ch; /* Refers to originating element's font metrics, which are different from self font metrics. */
+}
+
+.before::before,
+.after::after {
+  content: 'text';
+}
+
+/* Defined separately so that browsers that haven't shipped it can still pass other tests. */
+.marker::marker {
+  font-family: monospace;
+  font-size: 1ch;
+  content: 'text';
+}
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

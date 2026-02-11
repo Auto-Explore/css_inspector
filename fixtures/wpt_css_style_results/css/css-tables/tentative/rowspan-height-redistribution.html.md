@@ -1,0 +1,66 @@
+# css/css-tables/tentative/rowspan-height-redistribution.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-tables/tentative/rowspan-height-redistribution.html"
+}
+```
+
+## style[0]
+
+```css
+
+  main table {
+    margin-top: 8px;
+    border-collapse: collapse;
+    background: rgba(0,0,255,0.1);
+    background-image: linear-gradient(45deg, #DDD 25%, transparent 25%), linear-gradient(-45deg, #DDD 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #DDD 75%), linear-gradient(-45deg, transparent 75%, #DDD 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  }
+  .sizer {
+    width: 30px;
+    height: 100px;
+  }
+  main tbody tr:nth-child(odd) {
+    background: rgba(255,255,0,1.0);
+  }
+  main tbody tr:nth-child(even) {
+    background: rgba(255,165,0,1.0);
+  }
+  main td div {
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.5) 0%, rgba(0,255,0,0.7) 100%);
+  }
+  main .td-padding td {
+    padding: 2px;
+  }
+  main .td-padding-xl td {
+    padding: 10px;
+  }
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

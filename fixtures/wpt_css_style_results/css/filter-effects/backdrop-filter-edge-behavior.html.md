@@ -1,0 +1,53 @@
+# css/filter-effects/backdrop-filter-edge-behavior.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/filter-effects/backdrop-filter-edge-behavior.html"
+}
+```
+
+## style[0]
+
+```css
+
+  html {
+    overflow: hidden;
+  }
+  #scroller {
+    width: 250px;
+    height: 250px;
+    overflow: scroll;
+    scrollbar-width: none;
+    border: 6px solid red;
+    scrollbar-width: none;
+  }
+  #scroller::-webkit-scrollbar {
+    width: 0px;
+  }
+  #backdrop {
+    height: 200px;
+    width: 200px;
+    backdrop-filter: blur(10px);
+    border: 1px solid black;
+  }
+  .filler {
+    position: relative;
+    left: 50px;
+    width: 100px;
+    height: 100px;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

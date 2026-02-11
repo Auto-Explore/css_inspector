@@ -1,0 +1,37 @@
+# css/css-fonts/font-synthesis-weight.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-synthesis-weight.html"
+}
+```
+
+## style[0]
+
+```css
+
+    @font-face {
+        font-family: "lato";
+        src: url(/fonts/Lato-Medium.ttf);
+    }
+    @supports not (font-synthesis-weight: none) {
+        .test {color: red;}
+    }
+    .test {
+        font-family: "lato";
+        font-size: 3em;
+    }
+    .nosynth {
+        font-weight: bold;
+        font-synthesis-weight: none;
+    }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

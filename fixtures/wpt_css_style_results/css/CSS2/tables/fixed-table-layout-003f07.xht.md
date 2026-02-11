@@ -1,0 +1,138 @@
+# css/CSS2/tables/fixed-table-layout-003f07.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/tables/fixed-table-layout-003f07.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  div, table {font: 1.25em/1.2 serif;}
+
+  table
+  {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 400px;
+  }
+
+  td {padding: 0px;}
+
+  td#tested-cell
+  {
+  background-color: blue;
+  border-left: orange solid 32px;
+  border-right: orange solid 88px;
+  color: blue;
+  width: 80px;
+  }
+
+  div#reference
+  {
+  background-color: black;
+  color: black;
+  margin-left: 114px;
+
+  /*
+
+  "
+  In the fixed table layout algorithm, the width of each column is determined as follows:
+
+  (...) a cell in the first row with a value other than 'auto' for the 'width' property determines the width for that column. (...)
+    Any remaining columns equally divide the remaining horizontal table space (minus borders or cell spacing).
+  "
+  Section 17.5.2.1 Fixed table layout
+  http://www.w3.org/TR/CSS21/tables.html#fixed-table-layout
+
+
+  Middle column width calculations
+  --------------------------------
+
+   16px : halrf of border-left since such border must be split with cell in 1st column
+ +
+   80px : width of cell in the middle column
+ +
+   44px : half of border-right since such border must be split with cell in 3rd column
+
+  =======
+  140px : width of the middle column
+
+
+  So,
+      400px : table set width
+    -
+      140px : width of the middle column
+      ======
+      260px
+
+      So, each of the 2 remaining columns must be
+      half of such extra horizontal table space,
+      which is 260px divided by 2 == 130px.
+
+  1st column width calculations
+  -----------------------------
+
+
+    (solve) : width of cell in 1st column
+  +
+     16px   : border-right of cell in 1st column
+    ======
+    130px   : width of 1st column
+
+  So, the width of the cell in first column must be exactly 114px.
+
+
+  3rd column width calculations
+  -----------------------------
+
+    44px    : border-left of cell in 3rd column
+  +
+   (solve)  : width of cell in 3rd column
+   =======
+   130px    : width of 3rd column
+
+   So, the width of the cell in 3rd column must be exactly 86px.
+
+
+  Finally, the precise horizontal point where the border-right of cell
+  in first column begins to be drawn, painted is:
+
+   114px    : width of cell in 1st column
+
+  Therefore the margin-left: 114px value of the div#reference.
+
+  */
+
+  width: 200px;
+  }
+  ]]>
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

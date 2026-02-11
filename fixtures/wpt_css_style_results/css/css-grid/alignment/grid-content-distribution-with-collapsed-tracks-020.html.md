@@ -1,0 +1,48 @@
+# css/css-grid/alignment/grid-content-distribution-with-collapsed-tracks-020.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-content-distribution-with-collapsed-tracks-020.html"
+}
+```
+
+## style[0]
+
+```css
+
+.block {
+  position: absolute;
+  z-index: -1;
+  background: green;
+  width: 200px;
+  height: 200px;
+}
+.block > div {
+  position: absolute;
+  background: red;
+  width: 95px;
+  height: 95px;
+}
+.grid {
+  z-index: 1;
+  display: grid;
+  width: 200px;
+  height: 200px;
+  grid-template-columns: repeat(auto-fit, minmax(25px, auto));
+  grid-template-rows: repeat(auto-fit, minmax(25px, auto));
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+  align-content: stretch;
+  justify-content: stretch;
+}
+.grid > div { background: green; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

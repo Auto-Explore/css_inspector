@@ -1,0 +1,78 @@
+# css/css-anchor-position/position-try-order-logical.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/position-try-order-logical.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  border: solid 3px;
+}
+
+.anchor {
+  position: absolute;
+  anchor-name: --a;
+  width: 25px;
+  height: 25px;
+  left: 50px;
+  top: 25px;
+  background: dodgerblue;
+}
+
+.anchored {
+  position: absolute;
+  position-anchor: --a;
+  left: 100px;  /* ensure the element will overflow the IMCB at "base" position */
+  /* fallbacks: (1) with left inset removed; (2) also flipped in both axes */
+  position-try-fallbacks: --noinset, --noinset flip-block flip-inline;
+  width: 15px;
+  height: 15px;
+  background: green;
+}
+
+@position-try --noinset {
+  /* a fallback that just removes the left inset from the base position */
+  left: unset;
+}
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-try-fallbacks”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

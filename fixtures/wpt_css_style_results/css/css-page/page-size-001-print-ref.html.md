@@ -1,0 +1,25 @@
+# css/css-page/page-size-001-print-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/page-size-001-print-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  /* Assuming a default page margin of 0.5in (48px) on each side. */
+  @page { size: 300px 400px; }
+  body { margin: 0; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

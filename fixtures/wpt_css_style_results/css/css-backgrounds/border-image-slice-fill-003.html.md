@@ -1,0 +1,87 @@
+# css/css-backgrounds/border-image-slice-fill-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/border-image-slice-fill-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div
+    {
+      border: red none 100px;
+      border-image-repeat: repeat;
+      border-image-slice: 100 fill;
+      border-image-source: url("support/500x500-red-with-green-center.png");
+      height: 100px;
+      width: 100px;
+   }
+
+   /*
+
+   This is how the border-image 500x500-red-with-green-center.png is painted:
+
+
+   (0, 500) (50, 500)                 (200, 500)  (300, 500)                  (450, 500) (500, 500)
+   + - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
+   |                                          ^                                          |
+   |         White area                      50                    White area            |
+   |                                          v                                          |
+   |        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -        | (500, 450)
+   |       | FAIL                             ^                                  |       |
+   |       |                                  .                                  |       |
+   |<-50-> |                                                                     |<-50-> |
+   |       |                                  1                                  |       |
+   |  W    |       Red area                                   Red area           |  W    |
+   |  h    |                                  5                                  |  h    |
+   |  i    |                                                                     |  i    |
+   |  t    |                                  0                                  |  t    |
+   |  e    |                                                                     |  e    |
+   |       |                                  .                                  |       |
+   |  a    |                                  v                                  |  a    |
+   |  r    |                            ------------                             |  r    | (500, 300)
+   |  e    |                           |            |                            |  e    |
+   |  a    |       Red area            |    Green   |         Red area           |  a    |
+   |       |                           |            |                            |       |
+   |       |  <!- . . . 150 . . .  ->  |    area    |  <!- . . .  150  . . . ->  |       |
+   |       |                           |            |                            |       |
+   |       |                            ------------                             |       | (500, 200)
+   |       |                                  ^                                  |       |
+   |       |                                  .                                  |       |
+   |       |                                                                     |       |
+   |       |       Red area                   1               Red area           |       |
+   |       |                                                                     |       |
+   |       |                                  5                                  |       |
+   |       |                                                                     |       |
+   |       |                                  0                                  |       |
+   |       |                                                                     |       |
+   |       |                                  .                                  |       |
+   |       |                                  v                                  |       |
+   |        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -        | (500, 50)
+   |                                          ^                                          |
+   |         White area                      50                    White area            |
+   |                                          v                                          |
+   + - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
+   (0, 0) (50, 0)                     (200, 0)  (300, 0)                        (450, 0) (500, 0)
+
+   */
+
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “border-image-slice”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

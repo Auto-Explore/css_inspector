@@ -1,0 +1,58 @@
+# css/css-shapes/shape-outside/supported-shapes/inset/shape-outside-inset-014.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shapes/shape-outside/supported-shapes/inset/shape-outside-inset-014.html"
+}
+```
+
+## style[0]
+
+```css
+
+        #container {
+            position: relative;
+            margin-left: 25px;
+        }
+        #test-container {
+            width: 200px;
+            height: 200px;
+            font-family: Ahem;
+            font-size: 25px;
+            line-height: 1;
+            background-color: red;
+            color: green;
+        }
+        #test-shape {
+            float: left;
+            width: 50px;
+            height: 50px;
+            border: 25px solid red;
+            margin: 25px;
+            padding: 25px;
+            shape-outside: content-box inset(-25px 25px -25px -75px);
+        }
+        #static-shape {
+            position: absolute;
+            top: 50px;
+            left: 0px;
+            width: 100px;
+            height: 100px;
+            background-color: green;
+        }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “shape-outside”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,33 @@
+# css/css-values/calc-background-position-1.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-values/calc-background-position-1.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+p {
+    height: 50px; width: 200px;
+    border: thin solid;
+    background-image: url(support/blue-32x32.png);
+    background-repeat: no-repeat;
+}
+
+#one { background-position: calc(50px + 50%) calc(100% - 30px) }
+#two { background-position: calc(-12.5% + 3px) calc(-10px - 50%) }
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

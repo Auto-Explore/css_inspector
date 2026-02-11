@@ -1,0 +1,45 @@
+# css/css-layout-api/edges/padding-htb-rtl.https.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-layout-api/edges/padding-htb-rtl.https.html"
+}
+```
+
+## style[0]
+
+```css
+
+.test {
+  writing-mode: horizontal-tb;
+  direction: rtl;
+  background: red;
+  box-sizing: border-box;
+  width: 100px;
+
+  --edges-inline-start-expected: 8;
+  --edges-inline-end-expected: 20;
+  --edges-block-start-expected: 10;
+  --edges-block-end-expected: 0;
+
+  font-size: 8px;
+
+  padding: 10px 1em 0 20px;
+}
+
+@supports (display: layout(test)) {
+  .test {
+    display: layout(test);
+    background: green;
+  }
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

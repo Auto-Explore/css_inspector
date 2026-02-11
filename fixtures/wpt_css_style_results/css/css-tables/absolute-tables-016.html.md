@@ -1,0 +1,48 @@
+# css/css-tables/absolute-tables-016.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-tables/absolute-tables-016.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container {
+  /* I've chosen this position/size so that a 100px child element that's
+     centered within us will be placed at our "normal" position (where our
+     top-left corner would be, in the absence of relative positioning), so we
+     can use the simple filled-green-100px-square reference case. */
+  position: relative;
+  left: -30px;
+  top: -30px;
+  width: 160px;
+  height: 160px;
+}
+.target {
+  display: block;
+  background: red;
+}
+.table {
+  display: table;
+  background: green;
+}
+.centered {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  inset: 0;
+  margin: auto; /* use auto margins for centering */
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

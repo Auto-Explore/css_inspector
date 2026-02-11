@@ -1,0 +1,76 @@
+# css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-item-baseline-cyclic-dependency-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-item-baseline-cyclic-dependency-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .grid-lanes {
+      display: inline-grid-lanes;
+      background-color: grey;
+      position: relative;
+      border: solid;
+      text-orientation: sideways;
+      font: 15px/1 Ahem;
+      justify-items: baseline;
+    }
+
+    .fit-content-columns { grid-template-columns: fit-content; }
+
+    .height100 { height: 100px; }
+    .height200 { height: 200px; }
+    .width25   { width: 25px; }
+    .width50   { width: 50px; }
+    .width200  { width: 200px; }
+    .width200Percent  { width: 200%; }
+
+    .firstRowFirstItem {
+      background-color: blue;
+      grid-column: 1;
+      height: 100px;
+    }
+
+    .secondRowFirstItem {
+      background-color: purple;
+      grid-column: 1;
+      height: 100px;
+    }
+
+    .spanning2 {
+      background-color: maroon;
+      grid-column: 2;
+      height: 200px;
+    }
+
+    .verticalLR {
+      writing-mode: vertical-lr;
+    }
+
+    .verticalRL {
+      writing-mode: vertical-rl;
+    }
+  
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-template-columns”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

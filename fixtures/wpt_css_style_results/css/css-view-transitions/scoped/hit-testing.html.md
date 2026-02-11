@@ -1,0 +1,115 @@
+# css/css-view-transitions/scoped/hit-testing.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/scoped/hit-testing.html"
+}
+```
+
+## style[0]
+
+```css
+
+    * {
+      box-sizing: border-box;
+    }
+    .tr {
+      view-transition-name: demo;
+    }
+    ::view-transition {
+      pointer-events: none;
+      outline: 3px solid orange;
+    }
+    ::view-transition-group(demo) {
+      animation: none;
+      transform: translateX(200px) translateY(30px);
+      outline: 3px dashed gray
+    }
+    .box {
+      position: relative;
+      z-index: 0;
+      will-change: transform;
+      contain: strict;
+    }
+    #scope {
+      background: #eee;
+      position: relative;
+      left: 0px;
+      top: 0px;
+      width: 490px;
+      height: 190px;
+      view-transition-name: none;
+      contain: strict;
+    }
+    .part {
+      left: 50px;
+      top: -70px;
+      width: 120px;
+      height: 120px;
+      background: blue;
+    }
+    .part.state2 {
+      background: lavender;
+    }
+    ::view-transition-old(demo),
+    ::view-transition-new(demo) {
+      animation-duration: 5s;
+    }
+    #behind {
+      left: 20px;
+      top: 20px;
+      width: 120px;
+      height: 120px;
+      background: orange;
+    }
+```
+
+```json
+{
+  "errors": 10,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “pointer-events”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “outline”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “transform”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

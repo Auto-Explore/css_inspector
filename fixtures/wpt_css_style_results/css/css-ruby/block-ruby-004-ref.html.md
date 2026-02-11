@@ -1,0 +1,58 @@
+# css/css-ruby/block-ruby-004-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-ruby/block-ruby-004-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+html,body {
+  font:10px/1 monospace;
+}
+
+ruby { display: ruby; background: lightblue; }
+rbb { display: block ruby; background: lightblue; }
+grid { display: grid; }
+.mbp {
+  margin: 1px 3px 5px 7px;
+  padding: 3px 5px 7px 1px;
+  border-width: 3px 1px 7px 5px;
+  border-style: solid;
+}
+rbc {
+  display: ruby-base-container;
+  unicode-bidi: isolate;
+  font-size: 200%;
+}
+rtc {
+  display: ruby-text-container;
+  unicode-bidi: isolate;
+  ruby-position: under;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “display”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

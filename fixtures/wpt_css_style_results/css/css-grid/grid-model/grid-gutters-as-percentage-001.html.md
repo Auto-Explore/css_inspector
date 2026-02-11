@@ -1,0 +1,36 @@
+# css/css-grid/grid-model/grid-gutters-as-percentage-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-model/grid-gutters-as-percentage-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+body { margin: 0; }
+.grid { font: 10px/1 Ahem; position: relative; }
+.widthAuto { width: auto; }
+.heightAuto { height: auto; }
+.width400 { width: 400px; }
+.width200 { width: 200px; }
+.height200 { height: 200px; }
+.height100 { height: 100px; }
+.columns100-100 { grid-template-columns: 100px 100px; }
+.rows50-50 { grid-template-rows: 50px 50px; }
+.autoRepeat { grid-template: repeat(auto-fill, 50px) / repeat(auto-fill, 100px); }
+.columnGap10Percent { grid-column-gap: 10% }
+.rowGap20Percent { grid-row-gap: 20% }
+.positioned { position: absolute; width: 100%; height: 100%; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

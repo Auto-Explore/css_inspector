@@ -1,0 +1,53 @@
+# css/css-flexbox/negative-overflow-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/negative-overflow-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container {
+  width: 100px; height: 100px;
+  overflow: scroll;
+  border: solid 3px;
+  display: inline-flex;
+  padding: 10px;
+  gap: 10px;
+  align-items: start;
+  margin: 10px;
+  vertical-align: bottom;
+}
+
+.item {
+  min-width: 110px; min-height: 110px;
+  background: cyan;
+}
+
+.container:hover::before {
+  position: fixed;
+  top: 0; left: 0;
+  font-size: 10px;
+  content: attr(style);
+  background: yellow;
+  direction: ltr;
+  writing-mode: horizontal-tb;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

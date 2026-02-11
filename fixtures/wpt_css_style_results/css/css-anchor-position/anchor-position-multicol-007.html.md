@@ -1,0 +1,70 @@
+# css/css-anchor-position/anchor-position-multicol-007.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-position-multicol-007.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    border: solid transparent; border-width: 3px 5px 7px 9px;
+    columns: 3; column-fill: auto; gap: 10px;
+    inline-size: 230px; block-size: 100px;
+    writing-mode: vertical-rl;
+  }
+  .test {
+    position: absolute;
+    position-anchor: --a1;
+    place-self: stretch;
+  }
+  .test.area {
+    position-area: center;
+  }
+  .test.func {
+    inset: anchor(inside);
+  }
+  .test.inside {
+    border: solid 5px green;
+  }
+  .test.inside.area {
+    margin: 5px;
+  }
+  .test.outside.func {
+    margin: 5px; background: green;
+    z-index: -1;
+  }
+  .test.outside.area {
+    border: 5px solid green;
+    z-index: -1;
+  }
+  .anchor {
+    anchor-name:--a1;
+    background: red;
+  }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-area”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

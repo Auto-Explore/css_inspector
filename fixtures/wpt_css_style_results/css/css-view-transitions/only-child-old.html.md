@@ -1,0 +1,87 @@
+# css/css-view-transitions/only-child-old.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/only-child-old.html"
+}
+```
+
+## style[0]
+
+```css
+
+::view-transition {
+  background-color: black;
+}
+html:only-child {
+  background-color: black;
+}
+:root:only-child {
+  background-color: black;
+}
+:only-child {
+  background-color: black;
+}
+.foo:only-child {
+  background-color: black;
+}
+
+::view-transition-old(root) {
+  background-color: blue;
+}
+::view-transition-old(target) {
+  background-color: blue;
+}
+::view-transition-old(*) {
+  color: blue;
+}
+
+::view-transition-old(root):only-child {
+  background-color: red;
+}
+::view-transition-old(target):only-child {
+  background-color: red;
+}
+::view-transition-old(*):only-child {
+  color: red;
+}
+
+```
+
+```json
+{
+  "errors": 7,
+  "messages": [
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

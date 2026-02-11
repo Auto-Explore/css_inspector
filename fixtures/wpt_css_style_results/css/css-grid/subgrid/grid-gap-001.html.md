@@ -1,0 +1,88 @@
+# css/css-grid/subgrid/grid-gap-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/subgrid/grid-gap-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+html,body {
+  color:black; background-color:white; font:24px/1 monospace; padding:0; margin:0;
+}
+
+  .wrapper {
+    display: inline-grid;
+    gap: 20px;
+    grid-template-columns:  repeat(4,auto);
+    grid-template-rows: repeat(3,auto);
+    background-color: #fff;
+    color: #444;
+  }
+
+  .box {
+    background-color: #444;
+    color: #fff;
+    padding: 20px;
+  }
+
+  .box .box {
+    background-color: #ccc;
+    color: #444;
+  }
+
+  .a {
+    grid-column: 1 / 3;
+  }
+
+  .b {
+    grid-column: 4;
+  }
+
+  .c {
+    grid-column: 1;
+    grid-row: 2 / 4;
+  }
+
+  .d {
+    grid-column: 2 / 5;
+    grid-row: 2 / 4;
+    display: grid;
+    row-gap: 100px;
+    column-gap: 10px;
+    grid: subgrid / subgrid;
+  }
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,81 @@
+# css/css-anchor-position/anchor-position-multicol-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-position-multicol-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+.relpos {
+  position: relative;
+}
+.columns {
+  columns: 2;
+  column-fill: auto;
+  column-gap: 10px;
+  width: 170px;
+  height: 50px;
+}
+.anchor1 {
+  anchor-name: --a1;
+  position: absolute;
+  width: 10px;
+  height: 30px;
+  background: red;
+}
+.target {
+  position: absolute;
+  left: anchor(--a1 left);
+  top: anchor(--a1 top);
+  width: anchor-size(--a1 width);
+  height: anchor-size(--a1 height);
+}
+.target::before {
+  position: absolute;
+  content: "";
+  background: green;
+}
+.first {
+  .target.inside::before {
+    width: 100%;
+    height: 100%;
+  }
+}
+.second {
+  .target.inside::before {
+    width: 100%;
+    height: 50%;
+  }
+  .target.inside.part2::before {
+    top: 50%;
+  }
+}
+.target.outside::before {
+  width: calc(50% - 10px);
+  height: 100%;
+}
+.target.outside.part1::before {
+  left: 10px;
+}
+.target.outside.part2::before {
+  right: 10px;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,37 @@
+# css/CSS2/box-display/containing-block-001.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/box-display/containing-block-001.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            #div1
+            {
+                background: red;
+                display: block;
+                height: 100px;
+                width: 100px;
+            }
+            div div
+            {
+                background: green;
+                height: 100%;
+                position: relative;
+                width: 100%;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

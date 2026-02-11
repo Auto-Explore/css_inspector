@@ -1,0 +1,80 @@
+# css/css-scroll-snap/snap-to-combination-of-two-elements-1.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-snap/snap-to-combination-of-two-elements-1.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  position: absolute;
+  margin: 0px;
+}
+
+#scroller {
+  height: 600px;
+  width: 600px;
+  overflow: hidden;
+  scroll-snap-type: both mandatory;
+}
+
+#space {
+  width: 2000px;
+  height: 2000px;
+}
+
+#left-top {
+  /*
+   * the scroll position of this `scroll-snap-align: start start` is (200, 200)
+   */
+  left: 200px;
+  top: 200px;
+  height: 450px;
+  width: 450px;
+  background-color: rgb(255, 0, 0);
+  opacity: 0.5;
+  scroll-snap-align: start start;
+}
+
+#right-bottom {
+  /*
+   * the scroll position of this `scroll-snap-align: end end` is (50, 50),
+   * i.e, (`left` - scroll container's `width`  + this element's `width,
+           `top`  - scroll container's `height` + this element's `height)
+   */
+  left: 600px;
+  top: 600px;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(0, 255, 0);
+  opacity: 0.5;
+  scroll-snap-align: end end;
+}
+
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-snap-align”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-snap-align”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

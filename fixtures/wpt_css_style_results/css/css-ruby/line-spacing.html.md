@@ -1,0 +1,72 @@
+# css/css-ruby/line-spacing.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-ruby/line-spacing.html"
+}
+```
+
+## style[0]
+
+```css
+
+body {
+  font: 16px/1 Ahem;
+}
+
+body > div {
+  border: 1px solid lime;
+}
+
+.over_emp {
+  -webkit-text-emphasis: 'x';
+  -webkit-text-emphasis-position: over left;
+  text-emphasis: 'x';
+  text-emphasis-position: over left;
+}
+
+.under_emp {
+  -webkit-text-emphasis: 'x';
+  -webkit-text-emphasis-position: under left;
+  text-emphasis: 'x';
+  text-emphasis-position: under left;
+}
+
+#log {
+  font-family: sans-serif;
+}
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Unknown property “-webkit-text-emphasis”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “-webkit-text-emphasis-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “text-emphasis-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “-webkit-text-emphasis”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “-webkit-text-emphasis-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “text-emphasis-position”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

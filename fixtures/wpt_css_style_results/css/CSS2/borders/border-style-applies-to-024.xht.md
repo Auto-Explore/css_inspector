@@ -1,0 +1,49 @@
+# css/CSS2/borders/border-style-applies-to-024.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/borders/border-style-applies-to-024.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  table
+  {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 200px;
+  }
+
+  tfoot
+  {
+  border-color: red;
+  border-style: hidden;
+  }
+
+  tfoot td
+  {
+  height: 100px;
+  }
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

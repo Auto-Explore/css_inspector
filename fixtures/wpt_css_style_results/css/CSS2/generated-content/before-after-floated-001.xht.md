@@ -1,0 +1,53 @@
+# css/CSS2/generated-content/before-after-floated-001.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/generated-content/before-after-floated-001.xht"
+}
+```
+
+## style[0]
+
+```css
+
+div { counter-reset:ctr; quotes:"\0022" "\0022" "\0022" "\0022"; }
+
+div:before {
+  content:counter(ctr) url(support/square-outline-32x32.png) open-quote "Before " attr(class);
+  counter-increment:ctr;
+}
+div:after {
+  content:counter(ctr) url(support/square-outline-32x32.png) "After " attr(class) close-quote;
+  counter-increment:ctr;
+}
+
+.beforeleft:before {
+  float:left;
+}
+.beforeright:before {
+  float:right;
+}
+.afterleft:after {
+  float:left;
+}
+.afterright:after {
+  float:right;
+}
+
+div { border:1px solid green; margin:5px; }
+div { overflow:auto; }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “quotes”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

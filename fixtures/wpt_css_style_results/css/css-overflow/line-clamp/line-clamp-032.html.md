@@ -1,0 +1,63 @@
+# css/css-overflow/line-clamp/line-clamp-032.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/line-clamp/line-clamp-032.html"
+}
+```
+
+## style[0]
+
+```css
+
+.clamp {
+  line-clamp: 4;
+  width: 150px;
+  line-height: 25px;
+  /* The ellipsis would be outside of the 100x100 green square,
+   * and it shouldn't show up. */
+  color: transparent;
+}
+.green {
+  background-color: green;
+}
+.red {
+  background-color: red;
+}
+.inline-block {
+  display: inline-block;
+  height: 25px;
+  width: 100px;
+}
+.inline-flex {
+  display: inline-flex;
+}
+.inline-grid {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+}
+.inline-table {
+  display: inline-table;
+}
+.inline-table span {
+  display: table-cell;
+}
+:is(.inline-flex, .inline-grid, .inline-table) span {
+  height: 25px;
+  width: 50px;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “line-clamp”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

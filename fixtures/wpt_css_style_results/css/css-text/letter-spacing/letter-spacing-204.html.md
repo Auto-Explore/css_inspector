@@ -1,0 +1,65 @@
+# css/css-text/letter-spacing/letter-spacing-204.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/letter-spacing/letter-spacing-204.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @import "/fonts/ahem.css";
+  .contain {
+    font: 20px/1 Ahem;
+    border: solid blue;
+    margin: 1em;
+    float: left; }
+  .ls1 {
+    letter-spacing: 1em;
+  }
+  .block, .table, .flex, .grid {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: orange;
+  }
+  .table {
+    display: inline-table;
+  }
+  .flex {
+    display: inline-flex;
+  }
+  .grid {
+    display: inline-grid;
+  }
+  .control p {
+    white-space: pre-wrap;
+  }
+  p {
+    letter-spacing: 0;
+    margin: 0;
+  }
+  span:not([class]) {
+    padding-top: 1em;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Imported style sheets are not checked.",
+      "severity": "Warning"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 1
+}
+```

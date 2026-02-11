@@ -1,0 +1,80 @@
+# css/css-align/abspos/align-self-static-position-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-align/abspos/align-self-static-position-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+.inline {
+  display: inline;
+  color: transparent;
+  font: 10px Ahem;
+  line-height: 25px;
+}
+
+.container {
+  border: 1px solid;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  margin-left: 50px;
+  margin-bottom: 50px;
+}
+
+.abs {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background: purple;
+}
+
+.static-positioned-inline {
+  left: auto;
+  right: auto;
+}
+
+.static-positioned-block {
+  top: auto;
+  bottom: auto;
+}
+
+.positioned-inline {
+  left: 0;
+  right: 0;
+}
+
+.positioned-block {
+  top: 0;
+  bottom: 0;
+}
+
+.center {
+  justify-self: center;
+  align-self: center;
+}
+
+.end {
+  justify-self: end;
+  align-self: end;
+}
+
+.start {
+  justify-self: start;
+  align-self: start;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

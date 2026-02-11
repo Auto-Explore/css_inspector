@@ -1,0 +1,38 @@
+# css/css-multicol/column-balancing-with-overflow-auto-crash.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-multicol/column-balancing-with-overflow-auto-crash.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #multicol {
+    column-count: 2;
+    column-gap: 5px;
+    width: 200px;
+  }
+  #container {
+    position: relative;
+    box-sizing: border-box;
+    width: 50px;
+    overflow: auto;
+  }
+  #abs {
+    position: absolute;
+    width: 20px;
+    height: 200px;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

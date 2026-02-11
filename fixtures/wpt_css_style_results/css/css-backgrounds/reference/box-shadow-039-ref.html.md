@@ -1,0 +1,80 @@
+# css/css-backgrounds/reference/box-shadow-039-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/reference/box-shadow-039-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div.blue
+    {
+      background-color: rgba(0, 0, 255, 0.5);  /* semi-transparent blue */
+      border: black double 18px;
+      height: 36px;
+      width: 36px;
+    }
+
+  div#sub-test1-orange
+    {
+      background-color: rgba(255, 165, 0, 0.5);  /* semi-transparent orange */
+      bottom: 72px; /* offsetHeight == 72px */
+      height: 72px;
+      left: 72px; /* offsetWidth == 72px */
+      position: relative;
+      width: 36px;
+    }
+
+  div#sub-test21-orange
+    {
+      background-color: rgba(255, 165, 0, 0.5);  /* semi-transparent orange */
+      bottom: 126px; /* 18px + 72px + 36px == 126px */
+      height: 18px;
+      left: 18px;
+      position: relative;
+      width: 108px;
+    }
+
+  div#sub-test22-orange
+    {
+      background-color: rgba(255, 165, 0, 0.5);  /* semi-transparent orange */
+      bottom: 126px;
+      height: 72px;
+      left: 72px;
+      position: relative;
+      width: 54px;
+    }
+
+  div#sub-test23-orange
+    {
+      background-color: rgba(255, 165, 0, 0.5);  /* semi-transparent orange */
+      bottom: 126px;
+      height: 18px;
+      left: 18px;
+      position: relative;
+      width: 108px;
+    }
+
+  div#sub-test3-orange
+    {
+      background-color: rgba(255, 165, 0, 0.5);  /* semi-transparent orange */
+      bottom: 162px;
+      height: 36px;
+      left: 72px;
+      position: relative;
+      width: 18px;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

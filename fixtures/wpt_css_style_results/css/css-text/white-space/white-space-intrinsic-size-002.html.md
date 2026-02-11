@@ -1,0 +1,44 @@
+# css/css-text/white-space/white-space-intrinsic-size-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/white-space/white-space-intrinsic-size-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+aside {
+  float: left;
+  white-space: break-spaces;
+  background: blue;
+}
+aside:last-of-type {
+  float:right;
+  overflow-wrap: break-word;
+}
+div {
+  color: transparent;
+  font-family: Ahem;
+  font-size: 50px;
+  width: 3ch;
+  /* both floats should take the full 3ch,
+     one on each line
+     and therefore line up to look like a single large box.
+
+     If the spaces are not taken into account for min-content sizing,
+     the floats will leave a gap between them */
+}
+.owbw { overflow-wrap: break-word; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

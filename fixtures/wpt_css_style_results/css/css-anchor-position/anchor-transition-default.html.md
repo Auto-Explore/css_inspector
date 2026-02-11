@@ -1,0 +1,79 @@
+# css/css-anchor-position/anchor-transition-default.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-transition-default.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #cb {
+    display: inline-block;
+    position: relative;
+    width: 250px;
+    height: 250px;
+    border: 1px solid black;
+  }
+  #anchor1, #anchor2 {
+    width: 100px;
+  }
+  #anchor1 {
+    background: wheat;
+    height: 50px;
+    anchor-name: --a1;
+  }
+  #anchor2 {
+    background: tomato;
+    height: 90px;
+    anchor-name: --a2;
+  }
+  #anchored {
+    position: absolute;
+    width: anchor-size(width);
+    height: anchor-size(height);
+    top: anchor(top);
+    left: anchor(right);
+    transition-duration: 1000s;
+    transition-timing-function: steps(2, start);
+    transition-property: top, height;
+    background-color: skyblue;
+    position-anchor: --a1;
+  }
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

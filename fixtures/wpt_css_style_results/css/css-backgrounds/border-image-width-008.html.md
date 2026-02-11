@@ -1,0 +1,37 @@
+# css/css-backgrounds/border-image-width-008.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/border-image-width-008.html"
+}
+```
+
+## style[0]
+
+```css
+
+    #test {
+        width: 400px;
+        height: 300px;
+        border-style: solid;
+        /* Note: Chrome does not display an image if border-width is 0 */
+        border-width: 0px;
+        border-image-source: url("support/border.png");
+        border-image-width: 40px 40px 20px 0px;
+        border-image-slice: 27;
+    }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “border-image-width”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

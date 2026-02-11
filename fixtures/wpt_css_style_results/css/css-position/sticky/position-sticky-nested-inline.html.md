@@ -1,0 +1,79 @@
+# css/css-position/sticky/position-sticky-nested-inline.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-position/sticky/position-sticky-nested-inline.html"
+}
+```
+
+## style[0]
+
+```css
+
+.group {
+  display: inline-block;
+  position: relative;
+  width: 150px;
+  height: 250px;
+}
+
+.scroller {
+  position: relative;
+  width: 100px;
+  height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font: 25px/1 Ahem;
+}
+
+.contents {
+  height: 500px;
+}
+
+.prepadding {
+  height: 100px;
+}
+
+.container {
+  height: 200px;
+}
+
+.innerpadding {
+  height: 50px;
+}
+
+.outerIndicator {
+  color: red;
+  position: absolute;
+  left: 0;
+}
+
+.innerIndicator {
+  color: red;
+  position: absolute;
+  left: 25px;
+}
+
+.outerSticky {
+  display: inline;
+  color: green;
+  position: sticky;
+  top: 50px;
+}
+
+.innerSticky {
+  display: inline;
+  color: yellow;
+  position: sticky;
+  top: 60px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

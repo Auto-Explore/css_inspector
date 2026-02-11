@@ -1,0 +1,49 @@
+# css/css-transforms/perspective-translateZ-negative.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/perspective-translateZ-negative.html"
+}
+```
+
+## style[0]
+
+```css
+
+        .container {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top: 100px;
+            left: 100px;
+            perspective: 3px;
+        }
+        .redSquare {
+            position: absolute;
+            top: -25px;
+            left: -25px;
+            width: 200px;
+            height: 200px;
+            background: red;
+            transform: translateZ(-1px);
+         }
+        .greenSquare {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 150px;
+            height: 150px;
+            background: green;
+            transform: translateZ(0px);
+         }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

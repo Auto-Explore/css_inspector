@@ -1,0 +1,90 @@
+# css/css-anchor-position/position-try-custom-property.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/position-try-custom-property.html"
+}
+```
+
+## style[0]
+
+```css
+
+.cb {
+  position: relative;
+  width: 195px;
+  height: 70px;
+  background: yellow;
+  border-bottom: 1px solid black;
+}
+.spacer {
+  width: 1px;
+  height: 20px;
+}
+.anchor1 {
+  anchor-name: --a1;
+  margin-left: 45px;
+  width: 100px;
+  height: 30px;
+  background: blue;
+}
+.target {
+  position: absolute;
+  position-try-fallbacks: --fallback1;
+  width: 40px;
+  height: 15px;
+  margin: 5px;
+  background: orange;
+  --left: anchor(--a1 right);
+  --top: anchor(--a1 top);
+}
+.fallback1 {
+  position-try-fallbacks: --fallback1;
+}
+.fallback2 {
+  position-try-fallbacks: --fallback2;
+}
+@position-try --fallback1 {
+  /* Position to the right of the anchor. */
+  left: var(--left);
+  top: var(--top);
+}
+/* Same as above, but using a shorthand. */
+@position-try --fallback2 {
+  inset: var(--top) 0px 0px var(--left);
+}
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-try-fallbacks”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-try-fallbacks”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-try-fallbacks”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

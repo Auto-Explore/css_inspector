@@ -1,0 +1,59 @@
+# css/css-overflow/scrollbar-gutter-scroll-into-view.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/scrollbar-gutter-scroll-into-view.html"
+}
+```
+
+## style[0]
+
+```css
+
+  :root {
+    scrollbar-gutter: stable both-edges;
+    writing-mode: vertical-lr;
+    overflow: hidden;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  #target {
+    width: 100px;
+    height: 100px;
+    border: 4px solid black;
+    position: absolute;
+    left: 10px;
+    top: 150vh;
+    background-color: lightgreen;
+  }
+  #bg {
+    background-color: khaki;
+    width: 200vw;
+    height: 400vh;
+  }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “scrollbar-gutter”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

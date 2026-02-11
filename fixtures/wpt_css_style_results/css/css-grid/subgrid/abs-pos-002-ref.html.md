@@ -1,0 +1,83 @@
+# css/css-grid/subgrid/abs-pos-002-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/subgrid/abs-pos-002-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+html,body {
+  color:black; background-color:white; font:12px/1 monospace; padding:0; margin:0;
+}
+
+.grid {
+  display: grid;
+  grid: repeat(4, auto) / repeat(10, 30px) 100px;
+  place-content: start;
+  border: 1px solid;
+  width: 500px;
+  padding: 1px 2px;
+}
+
+.subgrid {
+  position: relative;
+  display: grid;
+  grid: auto / 27px repeat(7, 30px);
+  grid-column: 2 / span 8;
+  grid-row: 2 / span 2;
+  padding: 4px 0 1px 0;
+  border: 3px solid black;
+  min-height: 1em;
+  background: yellow;
+}
+
+i {
+  grid-row: 1;
+  counter-increment: i;
+  background: pink;
+}
+i::before { content: counter(i, decimal); }
+
+x {
+  position: absolute;
+  top:0; bottom:0; left:0; right:0;
+  background: silver;
+}
+
+.hr { writing-mode: horizontal-tb; direction:rtl; }
+  
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-row”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

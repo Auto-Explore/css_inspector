@@ -1,0 +1,60 @@
+# css/css-inline/baseline-source/baseline-source-first-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-inline/baseline-source/baseline-source-first-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+.target {
+  inline-size: 200px;
+  padding: 10px;
+  border: solid 3px;
+  position: relative;
+  line-height: 0;
+  font-size: 20px;
+  writing-mode: vertical-rl;
+}
+
+.inner {
+  border: solid 5px;
+  padding: 10px;
+  baseline-source: first;
+  font-size: 30px;
+}
+
+table { border-spacing: 0; }
+tr { vertical-align: baseline; }
+td { padding: 0; }
+caption {
+  margin: 10px;
+  background: lime;
+  block-size: 20px;
+}
+
+span {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  outline: solid cyan 3px;
+  outline-offset: -3px;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “outline”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

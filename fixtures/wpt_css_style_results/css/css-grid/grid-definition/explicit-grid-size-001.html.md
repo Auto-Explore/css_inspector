@@ -1,0 +1,76 @@
+# css/css-grid/grid-definition/explicit-grid-size-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-definition/explicit-grid-size-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+.grid {
+    grid-auto-columns: 10px;
+    grid-auto-rows: 10px;
+    position: relative;
+}
+
+.oneColumnOneRow {
+    grid-template-columns: 50px;
+    grid-template-rows: 50px;
+}
+
+.twoColumnsOneRow {
+    grid-template-columns: 50px 50px;
+    grid-template-rows: 50px;
+}
+
+.oneColumnTwoRows {
+    grid-template-columns: 50px;
+    grid-template-rows: 50px 50px;
+}
+
+.twoColumnsTwoRows {
+    grid-template-columns: 50px 50px;
+    grid-template-rows: 50px 50px;
+}
+
+.oneColumnOneRowAreas {
+    grid-template-areas: "a";
+}
+
+.twoColumnsOneRowAreas {
+    grid-template-areas: "a b";
+}
+
+.oneColumnTwoRowsAreas {
+    grid-template-areas: "a"
+                         "b";
+}
+
+.twoColumnsTwoRowsAreas {
+    grid-template-areas: "a b"
+                         "c d";
+}
+
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid-template-areas”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-template-areas”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

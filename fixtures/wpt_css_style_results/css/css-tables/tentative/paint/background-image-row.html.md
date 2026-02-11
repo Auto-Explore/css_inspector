@@ -1,0 +1,54 @@
+# css/css-tables/tentative/paint/background-image-row.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-tables/tentative/paint/background-image-row.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    --peek: LightGreen;
+  }
+  .bg {
+    background-color: var(--peek);
+    background-image: linear-gradient(45deg, orange 0px, orange 5px, gainsboro 3px, gainsboro 25%, rgba(160,160,160,0.5) 25%, rgba(160,160,160,0.5) 50%, silver 50%, silver 75%, darkgray 75%, darkgray 99%, blue 99%);
+    background-size: 230px 50px;
+    background-repeat: no-repeat;
+    /* FF sometimes defaults to no-repeat for background images */
+  }
+  main > * {
+    box-sizing: border-box;
+  }
+  main table {
+    border-spacing: 10px;
+    border: 10px solid yellow;
+    padding: 10px;
+  }
+  main td {
+    width: 50px;
+    height: 50px;
+    padding: 0px;
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,35 @@
+# css/CSS2/backgrounds/background-bg-pos-208.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/backgrounds/background-bg-pos-208.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+   html { background: bottom right url(support/diamond.png) scroll white no-repeat; color: black; }
+   html, body { margin: 0; border: 0; padding: 0; }
+   p { margin: 2em 0 0 0; }
+]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

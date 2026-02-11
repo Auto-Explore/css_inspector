@@ -1,0 +1,78 @@
+# css/css-anchor-position/anchor-center-safe-rtl-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-center-safe-rtl-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+body {
+  direction: rtl;
+  display: inline;
+}
+.anchor {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  height: 30px;
+  color: white;
+  background-color: green;
+}
+.infobox {
+  color: darkblue;
+  background-color: azure;
+  border: 1px solid #ddd;
+  padding: 10px;
+  position: fixed;
+  top: 35px;
+  right: 0px;
+}
+.anchor2 {
+  position: fixed;
+  top: 0px;
+  right: 390px;
+  width: 100px;
+  height: 30px;
+  color: white;
+  background-color: green;
+}
+.infobox2 {
+  color: darkblue;
+  background-color: azure;
+  border: 1px solid #ddd;
+  padding: 10px;
+  position: fixed;
+  top: 0px;
+  right: 495px; /* This value is calculated from the right position value of .anchor2 plus its width, plus an additional 5 px of padding */
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

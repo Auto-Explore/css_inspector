@@ -1,0 +1,36 @@
+# css/css-text/text-justify/text-justify-word-separators.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/text-justify/text-justify-word-separators.html"
+}
+```
+
+## style[0]
+
+```css
+
+        .justified {
+            font: 10px/1 Ahem;
+            text-align: justify;
+            text-justify: inter-word;
+            width: 120px;
+            border: solid 1px black;
+        }
+        /* Hide the word separators, in case the system doesn't
+           have an appropriate font installed and shows tofu.
+           Justification should still work in this case. */
+        .hidden {
+            color: transparent;
+        }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

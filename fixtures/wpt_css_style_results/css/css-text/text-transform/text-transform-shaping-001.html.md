@@ -1,0 +1,31 @@
+# css/css-text/text-transform/text-transform-shaping-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/text-transform/text-transform-shaping-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div { font-size: 4em; }
+  div:last-of-type::first-letter { text-transform: capitalize; }
+  body {
+    /* Optional bit, just to avoid the arabic strings being too far off to the right,
+     which makes them harder to notice if you're going through a lot of tests
+     and not paying all that much attention. */
+    max-width: 600px;
+    max-width: max-content;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

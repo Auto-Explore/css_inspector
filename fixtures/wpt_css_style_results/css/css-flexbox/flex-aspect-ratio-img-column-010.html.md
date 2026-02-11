@@ -1,0 +1,50 @@
+# css/css-flexbox/flex-aspect-ratio-img-column-010.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flex-aspect-ratio-img-column-010.html"
+}
+```
+
+## style[0]
+
+```css
+
+#reference-overlapped-red {
+    position: absolute;
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    z-index: -1;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  float: left;
+}
+
+img {
+  flex: 0 0 0%;
+  height: 500px;
+  min-width: 0;
+  min-height: 0; /* Disable min-size: auto so we don't have to think about it. */
+  width: 40px;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “flex”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

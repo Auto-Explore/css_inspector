@@ -1,0 +1,49 @@
+# css/css-ui/caret-color-008.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-ui/caret-color-008.html"
+}
+```
+
+## style[0]
+
+```css
+
+  textarea {
+    font-size: 3em;
+    font-weight: bold;
+    width: 10em;
+    padding: 10px;
+    background: black; color: white; /* the color of a thin object like the caret is easier to see on a black background. */
+
+    caret-color: red;
+    animation: caret-many-colors 5s linear alternate infinite;
+  }
+  @keyframes caret-many-colors {
+	0% { caret-color: lime; }
+	20% { caret-color: gray; }
+	40% { caret-color: cyan; }
+	60% { caret-color: pink; }
+	80% { caret-color: blue; }
+	100% { caret-color: brown; }
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

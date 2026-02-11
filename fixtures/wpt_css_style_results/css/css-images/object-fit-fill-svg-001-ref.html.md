@@ -1,0 +1,77 @@
+# css/css-images/object-fit-fill-svg-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-images/object-fit-fill-svg-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+      .objectOuter {
+        border: 1px dashed gray;
+        padding: 1px;
+        float: left;
+      }
+      .objectOuter > * {
+        background-image: url("support/colors-16x8.svg");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+      .bigWide {
+        width: 48px;
+        height: 32px;
+      }
+      .bigTall {
+        width: 32px;
+        height: 48px;
+      }
+      .small {
+        width: 8px;
+        height: 8px;
+      }
+
+      br { clear: both; }
+
+      .tr { background-position: top right }
+      .bl { background-position: bottom left }
+      .tl { background-position: top 25% left 25% }
+      .br { background-position: bottom 1px right 2px }
+
+      .tc { background-position: top 3px center }
+      .cr { background-position: center right 25% }
+      .default { background-position: 50% 50% }
+    
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-position”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-position”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

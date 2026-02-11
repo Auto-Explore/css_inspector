@@ -1,0 +1,50 @@
+# css/css-text/text-align/text-align-end-016.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/text-align/text-align-end-016.html"
+}
+```
+
+## style[0]
+
+```css
+
+.test { text-align: end; }
+/* the CSS below is not part of the test */
+.test, .ref1, .ref2 { width: 300px; color: orange; font: 25px/1 Ahem; }
+.test { border: 1px solid orange; margin: 20px; }
+.ref1, .ref2 { border-inline: 1px solid orange; margin: 0 20px; }
+.ref1 { border-top: 1px solid orange; text-align: right; }
+.ref2 { border-bottom: 1px solid orange; text-align: left; }
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-inline”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

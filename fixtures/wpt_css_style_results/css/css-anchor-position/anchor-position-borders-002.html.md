@@ -1,0 +1,54 @@
+# css/css-anchor-position/anchor-position-borders-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-position-borders-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+.cb {
+  position: relative;
+  border-bottom: 2px solid gray;
+}
+.not-positioned-cb {
+  transform: translate(0, 0);  /* Make it a containing block. */
+}
+.scroller { overflow: scroll; }
+.borders { border-width: 5px 6px 7px 8px; border-style: solid; }
+.spacer {
+  height: 9px;
+}
+.anchor1 {
+  anchor-name: --a1;
+  margin-right: 50px;
+  width: 31px;
+  height: 31px;
+  background: red;
+}
+.target {
+  position: absolute;
+  left: anchor(--a1 left);
+  right: anchor(--a1 right);
+  top: anchor(--a1 top);
+  bottom: anchor(--a1 bottom);
+  background: lime;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

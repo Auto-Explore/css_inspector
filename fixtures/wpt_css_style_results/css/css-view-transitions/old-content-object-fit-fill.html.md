@@ -1,0 +1,118 @@
+# css/css-view-transitions/old-content-object-fit-fill.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/old-content-object-fit-fill.html"
+}
+```
+
+## style[0]
+
+```css
+
+#target {
+  width: 100px;
+  height: 100px;
+  contain: paint;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  view-transition-name: target;
+  background: lightblue;
+}
+#inner {
+  width: 10px;
+  height: 10px;
+  background: green;
+  top: 5px;
+  left: 10px;
+}
+#hidden {
+  background: pink;
+  width: 10px;
+  height: 10px;
+  view-transition-name: hidden;
+}
+
+html::view-transition-group(target) {
+  animation: unset;
+  transform: unset;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 50px;
+  height: 50px;
+}
+
+html::view-transition-new(target) {
+  animation: unset;
+  opacity: 0;
+}
+html::view-transition-old(target) {
+  animation: unset;
+  opacity: 1;
+  object-fit: fill;
+}
+
+html::view-transition-group(hidden) {
+  animation-duration: 500s;
+  visibility: hidden;
+}
+
+html::view-transition-group(root) { animation: unset; opacity: 0; }
+html::view-transition { background: lightpink; }
+```
+
+```json
+{
+  "errors": 11,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,42 @@
+# css/css-highlight-api/painting/resources/iframe-viewport-first-line.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-highlight-api/painting/resources/iframe-viewport-first-line.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    width: 200px;
+    font-size: 16px;
+  }
+
+  /* ::first-line causes text frames in the first line to have a different
+     ComputedStyle than the element's primary frame style. This tests that
+     cached lazy pseudos are findable for viewport invalidation even when
+     resolved from a frame with a different parent style. */
+  .container::first-line {
+    font-weight: bold;
+  }
+
+  /* The highlight uses viewport units */
+  ::highlight(highlight1) {
+    text-underline-offset: 1vw;
+    text-decoration-line: underline;
+    text-decoration-color: green;
+    text-decoration-thickness: 2vh;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

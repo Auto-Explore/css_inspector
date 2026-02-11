@@ -1,0 +1,49 @@
+# css/css-backgrounds/box-shadow-040.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/box-shadow-040.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div
+    {
+      background-color: rgba(0, 0, 255, 0.5);  /* semi-transparent blue */
+      border: black double 18px;
+      height: 36px;
+      margin-bottom: 54px;
+      width: 36px;
+    }
+
+  /* Npx Mpx, zero spread, not-inset */
+  div#sub-test4
+    {
+      box-shadow: 36px 18px rgba(255, 165, 0, 0.5);  /* semi-transparent orange */
+    }
+
+  /* Npx Mpx, positive spread, not-inset */
+  div#sub-test5
+    {
+      box-shadow: 36px 18px 0px 18px rgba(255, 165, 0, 0.5);  /* semi-transparent orange */
+    }
+
+  /* Npx Mpx, negative spread, not-inset */
+  div#sub-test6
+    {
+      box-shadow: 36px 18px 0px -18px rgba(255, 165, 0, 0.5);  /* semi-transparent orange */
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

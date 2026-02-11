@@ -1,0 +1,40 @@
+# css/css-animations/animation-important-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-animations/animation-important-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @keyframes color_and_bg_animation {
+    from { background-color: rgb(0, 100, 0); color: rgb(100, 0, 0); }
+    to { background-color: rgb(0, 200, 0); color: rgb(200, 0, 0); }
+  }
+  a {
+    animation-name: color_and_bg_animation;
+    animation-duration: 1000s;
+    animation-delay: -500s;
+    animation-timing-function: steps(2, end);
+  }
+  a:visited {
+    color: white !important;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

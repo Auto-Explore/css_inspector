@@ -1,0 +1,71 @@
+# css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-item-baseline-cyclic-dependency-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-item-baseline-cyclic-dependency-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .grid-lanes {
+      display: inline-grid-lanes;
+      background-color: grey;
+      position: relative;
+      border: solid;
+      text-orientation: sideways;
+      font: 15px/1 Ahem;
+      justify-items: baseline;
+    }
+
+    .min-content-columns { grid-template-columns: min-content; }
+    .max-content-columns { grid-template-columns: max-content; }
+
+    .width25   { width: 25px; }
+    .width50   { width: 50px; }
+    .width200  { width: 200px; }
+    .width200Percent  { width: 200%; }
+
+    .firstRowFirstItem {
+      background-color: blue;
+      grid-column: 1;
+      height: 100px;
+    }
+
+    .secondRowFirstItem {
+      background-color: purple;
+      grid-column: 1;
+      height: 100px;
+    }
+
+    .spanning2 {
+      background-color: maroon;
+      grid-column: 2;
+      height: 200px;
+    }
+
+    .verticalLR {
+      writing-mode: vertical-lr;
+    }
+
+    .verticalRL {
+      writing-mode: vertical-rl;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

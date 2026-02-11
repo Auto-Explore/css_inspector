@@ -1,0 +1,41 @@
+# css/CSS2/normal-flow/inline-block-replaced-width-001-ref.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/normal-flow/inline-block-replaced-width-001-ref.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  div
+  {
+  border: black solid medium;
+  height: 2in;
+  line-height: 15px;
+  width: 2in;
+  }
+
+  img {vertical-align: top;}
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

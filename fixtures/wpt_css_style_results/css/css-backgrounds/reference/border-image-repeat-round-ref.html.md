@@ -1,0 +1,59 @@
+# css/css-backgrounds/reference/border-image-repeat-round-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/reference/border-image-repeat-round-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    position: relative;
+    width: 96px;
+    height: 96px;
+  }
+  .container > div {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-image: url("../support/border.png");
+    background-size: 48px 48px;
+  }
+  .top { top: 0; }
+  .right { left: 80px; }
+  .bottom { top: 80px; }
+  .left { left: 0; }
+  .top-left-corner-tile     { background-position:   0px   0px; }
+  .top-edge-tile            { background-position: -16px   0px; }
+  .top-right-corner-tile    { background-position: -32px   0px; }
+  .left-edge-tile           { background-position:   0px -16px; }
+  .right-edge-tile          { background-position: -32px -16px; }
+  .bottom-left-corner-tile  { background-position:   0px -32px; }
+  .bottom-edge-tile         { background-position: -16px -32px; }
+  .bottom-right-corner-tile { background-position: -32px -32px; }
+  .h-pos-0 { left: 16px; }
+  .h-pos-1 { left: 32px; }
+  .h-pos-2 { left: 48px; }
+  .h-pos-3 { left: 64px; }
+  .v-pos-0 { top: 16px; }
+  .v-pos-1 { top: 32px; }
+  .v-pos-2 { top: 48px; }
+  .v-pos-3 { top: 64px; }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

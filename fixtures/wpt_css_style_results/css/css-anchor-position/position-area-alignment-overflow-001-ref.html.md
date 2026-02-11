@@ -1,0 +1,78 @@
+# css/css-anchor-position/position-area-alignment-overflow-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/position-area-alignment-overflow-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    position: relative;
+    overflow: scroll;
+    scrollbar-width: none;
+    width: 100px;
+    height: 120px;
+    border: solid;
+    margin: 1em;
+    float: left;
+  }
+  .anchor {
+    border: solid blue 10px;
+    inset: 0;
+    place-self: center;
+    position: absolute;
+  }
+  .test {
+    border: solid 5px #0084;
+    box-sizing: border-box;
+    position: absolute;
+  }
+  .start-inline {
+    margin-inline: 0 -10px;
+  }
+  .start-block {
+    margin-block: 0 -10px;
+  }
+  .end-inline {
+    margin-inline: -10px 0;
+  }
+  .end-block {
+    margin-block: -10px 0;
+  }
+  .center-inline {
+    margin-inline: -5px;
+  }
+  .center-block {
+    margin-block: -5px;
+  }
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “margin-inline”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “margin-block”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “margin-inline”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “margin-block”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

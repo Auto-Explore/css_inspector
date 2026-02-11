@@ -1,0 +1,71 @@
+# css/css-position/sticky/position-sticky-table-thead-top.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-position/sticky/position-sticky-table-thead-top.html"
+}
+```
+
+## style[0]
+
+```css
+
+table {
+  border-collapse:collapse;
+}
+
+td, th {
+  padding: 0;
+}
+
+td > div, th > div {
+  height: 50px;
+  width: 50px;
+}
+
+.group {
+  display: inline-block;
+  position: relative;
+  width: 150px;
+  height: 200px;
+}
+
+.scroller {
+  position: relative;
+  width: 100px;
+  height: 150px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.prepadding {
+  height: 100px;
+}
+
+.postpadding {
+  height: 250px;
+}
+
+.indicator {
+  position: absolute;
+  background-color: red;
+  left: 0;
+  height: 50px;
+  width: 50px;
+}
+
+.sticky {
+  position: sticky;
+  top: 25px;
+  background-color: green;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

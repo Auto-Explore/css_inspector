@@ -1,0 +1,91 @@
+# css/css-flexbox/flexbox-align-self-vert-004-ref.xhtml
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flexbox-align-self-vert-004-ref.xhtml"
+}
+```
+
+## style[0]
+
+```css
+
+      .flexbox {
+        border: 1px dashed blue;
+        width: 4px;
+        float: left;
+        font-family: sans-serif;
+        font-size: 10px;
+        margin-left: 80px;
+      }
+
+      .flex-start, .flex-end, .center, .baseline, .stretch {
+        clear: both;
+        margin:       1px 2px 3px 4px;
+        border-width: 2px 3px 4px 5px;
+        padding:      3px 4px 5px 6px;
+        border-style: dotted;
+      }
+
+      div.big {
+        font-size: 18px;
+        width: 50px;
+      }
+
+      /* Classes for each of the various align-self values */
+      .flex-start {
+        background: lime;
+        float: left;
+      }
+      .flex-end {
+        background: orange;
+        float: right;
+      }
+      <!-- We center shrinkwrapped text by putting it into an inline-block, and
+           then wrapping that inline-block in a helper-div that has
+           "text-align:center" set. For this to work, the parent has to be at
+           least as wide as the centered content inside of it, so we make it
+           large with a negative margin such that its center aligns with the
+           4px-wide container's center. -->
+      .centerParent {
+        text-align: center;
+        width: 100px;
+        margin-left: -48px;
+      }
+      .center {
+        background: lightblue;
+        display: inline-block;
+        text-align: left; /* Keep parent's centering from tweaking my text */
+      }
+      .baseline {
+        background: teal;
+        float: left;
+      }
+      .stretch {
+        background: pink;
+      }
+      .clearFloats { clear: both }
+   
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unbalanced braces.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

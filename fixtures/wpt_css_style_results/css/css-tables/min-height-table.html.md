@@ -1,0 +1,37 @@
+# css/css-tables/min-height-table.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-tables/min-height-table.html"
+}
+```
+
+## style[0]
+
+```css
+
+td {
+  padding: 0;
+}
+
+table {
+  border-spacing: 0;
+  min-height: 312px; /* To account for the padding + border, which apply to the wrapper box, not the grid box */
+  border: 1px solid black;
+  background: green;
+  padding: 5px;
+}
+div {
+  width: 300px;
+  height: 5px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

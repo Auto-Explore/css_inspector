@@ -5,6 +5,18 @@ use std::path::{Path, PathBuf};
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
+mod wpt_style;
+
+pub use wpt_style::{
+    WPT_CSS_STYLE_RESULTS_FORMAT_VERSION, WPT_CSS_STYLE_RESULTS_META_FILE, WptCssStyleBlockResult,
+    WptCssStyleCheckOptions, WptCssStyleCheckSummary, WptCssStyleFailure, WptCssStyleFailureKind,
+    WptCssStyleFileResults, WptCssStyleResultsMeta, WptCssStyleWriteSummary,
+    check_wpt_css_style_results_tree, extract_style_blocks, git_head_commit,
+    load_wpt_css_style_results_meta, write_wpt_css_style_file_results_atomic,
+    write_wpt_css_style_results_meta_atomic, write_wpt_css_style_results_tree,
+    wpt_css_style_results_file_path, wpt_css_style_results_meta_path,
+};
+
 #[derive(Debug, Error)]
 pub enum SuiteError {
     #[error("I/O error: {0}")]

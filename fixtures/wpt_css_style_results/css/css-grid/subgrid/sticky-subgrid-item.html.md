@@ -1,0 +1,49 @@
+# css/css-grid/subgrid/sticky-subgrid-item.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/subgrid/sticky-subgrid-item.html"
+}
+```
+
+## style[0]
+
+```css
+
+:root { scrollbar-width: none }
+body { margin: 0 }
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-bottom: 100vh;
+}
+
+.subgrid {
+  border: 10px solid orange;
+  display: grid;
+  grid-template-columns: subgrid;
+  height: 400px;
+  margin-bottom: 100px;
+}
+
+.sticky {
+  background: red;
+  position: sticky;
+  top: 10px;
+  height: 200px;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

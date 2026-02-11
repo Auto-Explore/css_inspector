@@ -1,0 +1,50 @@
+# css/CSS2/visudet/line-height-205.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/visudet/line-height-205.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+  font-family: 'high-a-only';
+  font-style: normal;
+  font-weight: 400;
+  src:  url(/fonts/Revalia.woff) format('woff');
+  unicode-range: U+0020, U+0061;
+}
+@font-face {
+  font-family: 'deep-b-only';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/fonts/AD.woff) format('woff');
+  unicode-range: U+0020, U+0062;
+}
+
+div {
+  position: absolute;
+  line-height: normal;
+  font-size: 100px;
+  color: transparent;
+}
+
+.h { font-family: high-a-only; }
+.d { font-family: deep-b-only; }
+.hd { font-family: high-a-only, deep-b-only; }
+.white { background: white; }
+.red { background: red; }
+.shift { margin-left: 300px; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

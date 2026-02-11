@@ -1,0 +1,40 @@
+# css/css-transforms/scale-optional-second-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/scale-optional-second-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+        .greenSquare {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 100px;
+            height: 100px;
+            background: green;
+            transform:scale(2);
+        }
+        .redSquare {
+            position: absolute;
+            top: 52px;
+            left: 52px;
+            width: 196px;
+            height: 196px;
+            background: red;
+        }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

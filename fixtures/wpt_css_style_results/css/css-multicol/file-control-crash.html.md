@@ -1,0 +1,43 @@
+# css/css-multicol/file-control-crash.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-multicol/file-control-crash.html"
+}
+```
+
+## style[0]
+
+```css
+
+* {
+  aspect-ratio: 1206265768.1737075 / 726190483.5455273 ! important;
+  float: inline-start;
+  padding-block-end: 4348105909.35903Q;
+  column-count: 1027970145;
+  width: min-content;
+  border-inline-end: groove gainsboro 319302447.513733ch;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “aspect-ratio”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “float”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-inline-end”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

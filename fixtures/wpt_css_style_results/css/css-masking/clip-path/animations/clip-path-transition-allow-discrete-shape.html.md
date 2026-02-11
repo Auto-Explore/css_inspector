@@ -1,0 +1,42 @@
+# css/css-masking/clip-path/animations/clip-path-transition-allow-discrete-shape.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-masking/clip-path/animations/clip-path-transition-allow-discrete-shape.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    width: 100px;
+    height: 100px;
+    clip-path: shape(from 0 40px, arc to 80px 40px of 40px, arc to 0 40px of 40px);
+    background-color: green;
+    transition-property: clip-path;
+    transition-duration: 20s;
+    transition-timing-function: steps(2, jump-end);
+    transition-delay: -9.95s;
+    transition-behavior: allow-discrete;
+  }
+
+  .container.next {
+    clip-path: shape(from 0 40%, arc to 80% 40% of 40%, arc to 0 40% of 40%);
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “transition-behavior”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,45 @@
+# css/CSS2/positioning/top-applies-to-004.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/positioning/top-applies-to-004.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            #test
+            {
+                background: green;
+                top: 0;
+                display: table-row;
+                position: absolute;
+            }
+            #table
+            {
+                display: table;
+                table-layout: fixed;
+            }
+            #cell
+            {
+                display: table-cell;
+                height: 1in;
+                width: 1in;
+            }
+            p
+            {
+                margin-top: 1.5in;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

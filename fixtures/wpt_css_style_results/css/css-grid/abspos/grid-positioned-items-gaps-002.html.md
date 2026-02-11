@@ -1,0 +1,44 @@
+# css/css-grid/abspos/grid-positioned-items-gaps-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/abspos/grid-positioned-items-gaps-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+.grid {
+  grid-template-columns: 100px 100px 100px 100px;
+  grid-template-rows: 50px 50px 50px 50px;
+  width: 800px;
+  height: 600px;
+  border: 5px solid black;
+  margin: 30px;
+  padding: 15px;
+  /* Ensures that the grid container is the containing block of the absolutely positioned grid children. */
+  position: relative;
+}
+
+.grid > div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: lime;
+}
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

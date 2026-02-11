@@ -1,0 +1,81 @@
+# css/css-logical/logicalprops-inline-size.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-logical/logicalprops-inline-size.html"
+}
+```
+
+## style[0]
+
+```css
+
+.block {
+  border: 1px solid #000;
+}
+#block1 {
+  inline-size: 40px;
+  min-inline-size: 50px;
+  max-inline-size: 100px;
+}
+#block2 {
+  inline-size: 100px;
+  min-inline-size: 50px;
+  max-inline-size: 100px;
+}
+#block3 {
+  inline-size: 120px;
+  min-inline-size: 50px;
+  max-inline-size: 100px;
+}
+
+.override {
+  border: 1px solid #000;
+}
+#override1 {
+  inline-size: 100px;
+  width: 50px;
+}
+#override2 {
+  width: 50px;
+  inline-size: 100px;
+}
+
+.table {
+  border: 1px solid #000;
+  display: table;
+}
+.tablecell {
+  display: table-cell;
+}
+#table1_cell {
+  inline-size: 40px;
+  min-inline-size: 50px;
+  max-inline-size: 100px;
+  block-size: 100px;
+  background-color: red;
+}
+#table2_cell {
+  inline-size: 100px;
+  min-inline-size: 50px;
+  max-inline-size: 100px;
+  block-size: 100px;
+  background-color: blue;
+}
+#table3_cell {
+  inline-size: 120px;
+  min-inline-size: 50px;
+  max-inline-size: 100px;
+  block-size: 100px;
+  background-color: green;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,64 @@
+# css/css-contain/contain-size-multicol-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-contain/contain-size-multicol-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .contain {
+    contain: size;
+    border: 1em solid green;
+    background: red;
+    column-count: 3;
+  }
+  .innerContents {
+    color: transparent;
+    height: 50px;
+    width: 50px;
+  }
+  .minHeight {
+    min-height: 20px;
+    background: lightblue;
+  }
+  .height {
+    height: 20px;
+    background: lightblue;
+  }
+  .maxWidth {
+    max-width: 20px;
+  }
+  .width {
+    width: 20px;
+  }
+  .floatLBasic {
+    float: left;
+  }
+  .floatLWidth {
+    float: left;
+    width: 20px;
+  }
+  
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

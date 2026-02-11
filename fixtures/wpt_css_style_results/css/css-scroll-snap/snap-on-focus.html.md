@@ -1,0 +1,64 @@
+# css/css-scroll-snap/snap-on-focus.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-snap/snap-on-focus.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  position: absolute;
+  margin: 0;
+}
+
+#scroller {
+  height: 500px;
+  width: 500px;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+.snap {
+  width: 100%;
+  height: 300px;
+  top: 100px;
+  left: 0;
+  background-color: green;
+  scroll-snap-align: start none;
+}
+
+.no-snap {
+  width: 100%;
+  height: 300px;
+  top: 100px;
+  left: 0;
+  background-color: red;
+}
+
+.area {
+  width: 100%;
+  height: 2000px;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-snap-align”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

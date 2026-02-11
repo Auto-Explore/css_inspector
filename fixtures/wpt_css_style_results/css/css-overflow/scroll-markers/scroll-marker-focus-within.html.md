@@ -1,0 +1,93 @@
+# css/css-overflow/scroll-markers/scroll-marker-focus-within.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/scroll-markers/scroll-marker-focus-within.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0;
+  }
+
+  #scroller {
+    background: red;
+    width: 600px;
+    height: 300px;
+    overflow: auto;
+    scroll-marker-group: before;
+    white-space: nowrap;
+  }
+
+  #scroller:focus-within {
+    background: green;
+  }
+
+  #scroller div {
+    background: green;
+    display: inline-block;
+    width: 600px;
+    height: 270px;
+  }
+
+  #scroller div:focus-within {
+    background: red;
+  }
+
+  #scroller::scroll-marker-group {
+    background: red;
+    display: flex;
+    height: 20px;
+    width: 40px;
+  }
+
+  #scroller::scroll-marker-group:focus-within {
+    background: green;
+  }
+
+  #scroller div::scroll-marker {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    display: inline-block;
+  }
+
+  #scroller div::scroll-marker:focus-within {
+    background: green;
+  }
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Unknown property “scroll-marker-group”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

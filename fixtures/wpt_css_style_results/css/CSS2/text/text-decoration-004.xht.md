@@ -1,0 +1,27 @@
+# css/CSS2/text/text-decoration-004.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/text/text-decoration-004.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div
+            {
+               text-decoration: blink;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

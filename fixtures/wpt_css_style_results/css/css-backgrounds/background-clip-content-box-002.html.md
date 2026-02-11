@@ -1,0 +1,43 @@
+# css/css-backgrounds/background-clip-content-box-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/background-clip-content-box-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+.back {
+  background-color: red;
+  width: 100px;
+  display: flex;
+}
+
+.left {
+  flex-basis: 50%;
+  border-left: 5px solid green;
+}
+
+.right {
+  flex-basis: 50%;
+  border-right: 6px solid green;
+}
+
+.left, .right {
+  background-color: green;
+  background-clip: content-box;
+  height: 100px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,71 @@
+# css/css-box/margin-trim/computed-margin-values/grid-block-end.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-box/margin-trim/computed-margin-values/grid-block-end.html"
+}
+```
+
+## style[0]
+
+```css
+
+grid {
+    display: grid;
+    width: min-content;
+    border: 1px solid black;
+    grid-template-columns: repeat(4, auto);
+    margin-trim: block-end;
+}
+item {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+.locked-position {
+    grid-row: 2;
+    grid-column: 2;
+    margin-block-end: 50px;
+    background-color: magenta;
+}
+.span-three-columns {
+    grid-column: span 3;
+    background-color: purple;
+}
+.span-five-columns {
+    grid-column: span 5;
+}
+item:nth-child(1) {
+    background-color: green;
+}
+item:nth-child(4) {
+    background-color: blue;
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Unknown property “margin-trim”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

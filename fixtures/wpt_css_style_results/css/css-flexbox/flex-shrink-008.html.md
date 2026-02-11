@@ -1,0 +1,43 @@
+# css/css-flexbox/flex-shrink-008.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flex-shrink-008.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .container {
+    background: red;
+    height: 50px;
+    width: 100px;
+  }
+  #test1, #test2 {
+    display: flex;
+    width: 50px;
+  }
+  #test1 > div, #test2 > div {
+    background: green;
+    height: 50px;
+  }
+  #test1 > div {
+    flex-shrink: 0.9;
+    width: 550px;
+  }
+  #test2 > div {
+    flex-shrink: 0.25;
+    width: 75px;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

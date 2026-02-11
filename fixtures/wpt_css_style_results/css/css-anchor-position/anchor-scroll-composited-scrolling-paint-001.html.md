@@ -1,0 +1,93 @@
+# css/css-anchor-position/anchor-scroll-composited-scrolling-paint-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-scroll-composited-scrolling-paint-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.abs-cb {
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+
+.scroller {
+  overflow: scroll;
+  scrollbar-width: none;
+  width: 100%;
+  height: 100%;
+}
+
+.anchor {
+  anchor-name: --a;
+  width: 50px;
+  height: 50px;
+  background: blue;
+}
+
+.chain {
+  width: 25px;
+  height: 25px;
+  background: pink;
+  position: absolute;
+  position-anchor: --a;
+  anchor-name: --b;
+  left: anchor(right);
+  top: anchor(bottom);
+}
+
+.filler {
+  width: 1px;
+  height: 50px;
+}
+
+.positioned {
+  width: 25px;
+  height: 25px;
+  background: yellow;
+  position: absolute;
+  position-anchor: --b;
+  left: anchor(right);
+  top: anchor(bottom);
+  position-visibility: always;
+}
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-visibility”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

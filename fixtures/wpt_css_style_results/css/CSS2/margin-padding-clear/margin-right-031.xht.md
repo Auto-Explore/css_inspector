@@ -1,0 +1,42 @@
+# css/CSS2/margin-padding-clear/margin-right-031.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/margin-padding-clear/margin-right-031.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div
+            {
+                direction: rtl;
+                height: 1in;
+                width: 0;
+            }
+            #wrapper
+            {
+                border-right: 1pc solid red;
+            }
+            #div1
+            {
+                margin-right: 6pc;
+            }
+            #div2
+            {
+                border-right: 1pc solid black;
+                margin-right: -7pc;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

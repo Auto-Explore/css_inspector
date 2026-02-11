@@ -1,0 +1,45 @@
+# css/css-animations/display-none-to-display-block.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-animations/display-none-to-display-block.html"
+}
+```
+
+## style[0]
+
+```css
+
+@keyframes display-animation {
+  0% { display: none; }
+  100% { display: block; }
+}
+#target {
+  display: none;
+  width: 100px;
+  height: 100px;
+  background-color: green;
+}
+#target.animate {
+  animation: display-animation 1s;
+  display: block;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

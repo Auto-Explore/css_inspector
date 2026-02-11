@@ -1,0 +1,66 @@
+# css/css-viewport/zoom/reference/margin-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-viewport/zoom/reference/margin-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+body {
+    --scale: 1;
+}
+
+#reference-overlapped-red {
+    background-color: red;
+    width: calc(100px * var(--scale));
+    height: calc(100px * var(--scale));
+    z-index: -1;
+}
+#reference-overlapped-big-red {
+    background-color: red;
+    width: calc(200px * var(--scale));
+    height: calc(200px * var(--scale));
+    z-index: -1;
+}
+
+.container {
+    padding: calc(20px * var(--scale));
+}
+.margin-container {
+    width: calc(200px * var(--scale));
+    margin-left: calc(-50px * var(--scale));
+}
+.margin-big-container {
+    width: 400px;
+    margin-left: -100px /*calc(-100px * var(--scale))*/;
+}
+.green-box {
+    background-color: green;
+    width: calc(100px * var(--scale));
+    height: calc(100px * var(--scale));
+    font-size: calc(1rem * var(--scale));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    margin-top: calc(-100px * var(--scale));
+    justify-self: right;
+}
+.zoom {
+    --scale: 2;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

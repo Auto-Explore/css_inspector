@@ -5,6 +5,10 @@ use std::path::PathBuf;
 use css_inspector::{
     Config, Message, Report, Severity, StdFetcher, ValidatorError, starts_with_ascii_ci,
 };
+use css_inspector_suite::{
+    WptCssStyleFailureKind, WptCssStyleCheckOptions, check_wpt_css_style_results_tree,
+    git_head_commit, workspace_root, write_wpt_css_style_results_tree,
+};
 
 type Failure = (String, (bool, i64, i64), (bool, i64, i64));
 
@@ -67,6 +71,145 @@ where
                 css_inspector::validate_css_text(&css, &config)?
             };
             writeln!(stdout, "{}", serde_json::to_string_pretty(&report)?)?;
+            Ok(())
+        }
+        "wpt-style" => {
+            let root = workspace_root();
+            let mut wpt_root = root.join("fixtures").join("wpt");
+            let mut results_root = root.join("fixtures").join("wpt_css_style_results");
+
+            let mut config = Config::default();
+            let mut write_results = false;
+            let mut strict = false;
+            let mut max_failures: Option<usize> = None;
+            let mut id_contains: Option<String> = None;
+            let mut print_failures: usize = 20;
+
+            while let Some(arg) = args.next() {
+                match arg.as_str() {
+                    "--wpt-root" => {
+                        wpt_root =
+                            PathBuf::from(args.next().ok_or("missing value for --wpt-root")?)
+                    }
+                    "--results" => {
+                        results_root =
+                            PathBuf::from(args.next().ok_or("missing value for --results")?)
+                    }
+                    "--write" => write_results = true,
+                    "--strict" => strict = true,
+                    "--profile" => {
+                        config.profile = Some(args.next().ok_or("missing value for --profile")?)
+                    }
+                    "--medium" => {
+                        config.medium = Some(args.next().ok_or("missing value for --medium")?)
+                    }
+                    "--warning" => {
+                        config.warning = Some(args.next().ok_or("missing value for --warning")?)
+                    }
+                    "--max-failures" => {
+                        max_failures = Some(
+                            args.next()
+                                .ok_or("missing value for --max-failures")?
+                                .parse()?,
+                        )
+                    }
+                    "--id-contains" => {
+                        id_contains = Some(args.next().ok_or("missing value for --id-contains")?)
+                    }
+                    "--print-failures" => {
+                        print_failures = args
+                            .next()
+                            .ok_or("missing value for --print-failures")?
+                            .parse()?
+                    }
+                    other => return Err(format!("unknown arg: {other}").into()),
+                }
+            }
+
+            let wpt_commit = git_head_commit(&wpt_root)?;
+
+            if write_results {
+                let summary =
+                    write_wpt_css_style_results_tree(&wpt_root, &wpt_commit, &results_root, &config)?;
+                writeln!(
+                    stderr,
+                    "wpt-style wrote {} file(s) / {} style block(s) under {} (wpt_commit={})",
+                    summary.files_written,
+                    summary.blocks_written,
+                    results_root.display(),
+                    wpt_commit
+                )?;
+                return Ok(());
+            }
+
+            let options = WptCssStyleCheckOptions {
+                id_contains,
+                max_failures,
+            };
+            let (summary, failures) =
+                check_wpt_css_style_results_tree(&wpt_root, &wpt_commit, &results_root, &config, options)?;
+
+            writeln!(
+                stderr,
+                "wpt-style summary: files={} matched={} failed={} blocks={} matched={} failed={}",
+                summary.files_total,
+                summary.files_matched,
+                summary.files_failed,
+                summary.blocks_total,
+                summary.blocks_matched,
+                summary.blocks_failed
+            )?;
+            if !failures.is_empty() {
+                writeln!(stderr, "failures (showing up to {print_failures}):")?;
+                for f in failures.iter().take(print_failures) {
+                    match &f.kind {
+                        WptCssStyleFailureKind::MissingResultsFile => {
+                            writeln!(stderr, "  {}: missing results file", f.id)?;
+                        }
+                        WptCssStyleFailureKind::UnexpectedResultsFile => {
+                            writeln!(stderr, "  {}: unexpected results file", f.id)?;
+                        }
+                        WptCssStyleFailureKind::InvalidResultsFile { message } => {
+                            writeln!(stderr, "  {}: invalid results file: {}", f.id, message)?;
+                        }
+                        WptCssStyleFailureKind::StyleBlockCountMismatch { wpt, stored } => {
+                            writeln!(
+                                stderr,
+                                "  {}: style block count mismatch (wpt={} stored={})",
+                                f.id, wpt, stored
+                            )?;
+                        }
+                        WptCssStyleFailureKind::StyleTextMismatch {
+                            expected_len,
+                            actual_len,
+                        } => {
+                            writeln!(
+                                stderr,
+                                "  {}: style text mismatch (stored_len={} wpt_len={})",
+                                f.id, expected_len, actual_len
+                            )?;
+                        }
+                        WptCssStyleFailureKind::ReportMismatch { expected, actual } => {
+                            let (exp_e, exp_w) = report_counts(expected);
+                            let (act_e, act_w) = report_counts(actual);
+                            writeln!(
+                                stderr,
+                                "  {}: expected errors={:?} warnings={:?} got errors={:?} warnings={:?}",
+                                f.id, exp_e, exp_w, act_e, act_w
+                            )?;
+                        }
+                    }
+                }
+            }
+            if strict && (!failures.is_empty() || summary.files_failed != 0 || summary.blocks_failed != 0) {
+                return Err(
+                    format!(
+                        "wpt-style had failures: files_failed={} blocks_failed={}",
+                        summary.files_failed, summary.blocks_failed
+                    )
+                    .into(),
+                );
+            }
             Ok(())
         }
         "autotest" => {
@@ -211,6 +354,10 @@ where
             )?;
             writeln!(
                 stderr,
+                "  css_inspector_cli wpt-style [--wpt-root DIR] [--results DIR] [--write] [--strict] [--profile NAME] [--medium NAME] [--warning LEVEL] [--max-failures N] [--id-contains STR] [--print-failures N]"
+            )?;
+            writeln!(
+                stderr,
                 "  css_inspector_cli autotest --manifest <path> [--strict] [--allow-network] [--max-failures N] [--id-contains STR] [--print-failures N] [--expected valid|invalid|any]"
             )?;
             Ok(())
@@ -222,6 +369,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut stdout = std::io::stdout();
     let mut stderr = std::io::stderr();
     run(env::args().skip(1), &mut stdout, &mut stderr)
+}
+
+fn report_counts(value: &serde_json::Value) -> (Option<i64>, Option<i64>) {
+    let errors = value.get("errors").and_then(serde_json::Value::as_i64);
+    let warnings = value.get("warnings").and_then(serde_json::Value::as_i64);
+    (errors, warnings)
 }
 
 #[cfg(test)]

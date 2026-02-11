@@ -1,0 +1,52 @@
+# css/css-backgrounds/box-shadow-overlapping-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/box-shadow-overlapping-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div
+    {
+      color: red;
+      float: left;
+      font-family: Ahem;
+      font-size: 100px;
+      line-height: 1;
+    }
+
+  span
+    {
+      color: green;
+      box-shadow: -3em 0em;
+    }
+
+    /*
+
+    omitted colors default to the value of the color property.
+
+    1st <length>
+    Specifies the horizontal offset of the shadow. A positive value
+    draws a shadow that is offset to the right of the box, a negative
+    length to the left.
+
+    2nd <length>
+    Specifies the vertical offset of the shadow. A positive value
+    offsets the shadow down, a negative one up.
+
+    */
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

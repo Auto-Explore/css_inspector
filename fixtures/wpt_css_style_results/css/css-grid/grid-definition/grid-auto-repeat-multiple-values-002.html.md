@@ -1,0 +1,47 @@
+# css/css-grid/grid-definition/grid-auto-repeat-multiple-values-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-definition/grid-auto-repeat-multiple-values-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+.holder {
+  height: 30px;
+  width: 300px;
+  border-bottom: 2px solid #cfbfcf;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 10px 20px repeat(auto-fill, 30px 40px) 50px 60px;
+  grid-template-rows: repeat(auto-fill, minmax(30px, auto));
+}
+
+.grid-container > :nth-child(2n)   {  background: sienna; }
+.grid-container > :nth-child(2n+1) {  background: orange; }
+  
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

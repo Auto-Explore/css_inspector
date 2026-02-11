@@ -1,0 +1,68 @@
+# css/css-align/abspos/align-items-static-position-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-align/abspos/align-items-static-position-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+.flex {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.grid {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  border: 1px solid;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.abs {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background: purple;
+}
+
+.center-inline {
+  left: 25px;
+}
+
+.left {
+  left: 0;
+}
+
+.top {
+  top: 0;
+}
+
+.center-block {
+  top: 25px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

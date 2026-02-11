@@ -1,0 +1,41 @@
+# css/css-backgrounds/box-shadow-radius-generated-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/box-shadow-radius-generated-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #shadow {
+    position: absolute;
+    background: black;
+    top: calc(100px - var(--spread) * 1px);
+    left: calc(100px - var(--spread) * 1px);
+    width: calc((var(--width) + var(--spread) * 2) * 1px);
+    height: calc((var(--height) + var(--spread) * 2) * 1px);
+  }
+
+  #target {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: calc(var(--width) * 1px);
+    height: calc(var(--height) * 1px);
+    border-radius: var(--radius);
+    box-shadow: 0 0 0 var(--spread) black;
+    background: green;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

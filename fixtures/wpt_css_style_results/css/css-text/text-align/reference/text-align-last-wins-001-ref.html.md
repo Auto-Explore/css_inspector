@@ -1,0 +1,27 @@
+# css/css-text/text-align/reference/text-align-last-wins-001-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/text-align/reference/text-align-last-wins-001-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  text-align: right;
+  width: 300px;
+  border: solid;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

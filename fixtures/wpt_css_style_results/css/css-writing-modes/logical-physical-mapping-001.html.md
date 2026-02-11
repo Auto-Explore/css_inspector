@@ -1,0 +1,108 @@
+# css/css-writing-modes/logical-physical-mapping-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/logical-physical-mapping-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+#block-start div.outer div {
+  border-block-start: dotted 2px orange;
+}
+#block-end div.outer div {
+  border-block-end: dotted 2px orange;
+}
+#inline-start div.outer div {
+  border-inline-start: dotted 2px orange;
+}
+#inline-end div.outer div {
+  border-inline-end: dotted 2px orange;
+}
+
+#body tr td:nth-child(2) div {
+  writing-mode: horizontal-tb;
+}
+#body tr td:nth-child(3) div {
+  writing-mode: horizontal-tb;
+}
+#body tr td:nth-child(4) div {
+  writing-mode: vertical-rl;
+}
+#body tr td:nth-child(5) div {
+  writing-mode: vertical-rl;
+}
+#body tr td:nth-child(6) div {
+  writing-mode: vertical-lr;
+}
+#body tr td:nth-child(7) div {
+  writing-mode: vertical-lr;
+}
+#body tr td:nth-child(8) div {
+  writing-mode: sideways-lr;
+}
+#body tr td:nth-child(9) div {
+  writing-mode: sideways-lr;
+}
+
+
+#body tr td:nth-child(2n+2) div {
+  direction: ltr;
+}
+#body tr td:nth-child(2n+3) div {
+  direction: rtl;
+}
+
+
+td {
+  padding: 5px;
+  font-size: 13px;
+  background-color: silver;
+  width: 70px;
+  height: 70px;
+}
+
+
+.top {
+  border-bottom: 2px dotted blue;
+}
+.right {
+  border-left: 2px dotted blue;
+}
+
+.bottom {
+  border-top: 2px dotted blue;
+}
+.left {
+  border-right: 2px dotted blue;
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “border-block-start”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-block-end”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-inline-start”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border-inline-end”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

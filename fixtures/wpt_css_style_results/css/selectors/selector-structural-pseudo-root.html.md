@@ -1,0 +1,24 @@
+# css/selectors/selector-structural-pseudo-root.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/selectors/selector-structural-pseudo-root.html"
+}
+```
+
+## style[0]
+
+```css
+
+html { background: red; }
+html:nth-child(1):nth-last-child(1):nth-of-type(1):nth-last-of-type(1):first-child:last-child:only-child:first-of-type:last-of-type:only-of-type { background: green; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

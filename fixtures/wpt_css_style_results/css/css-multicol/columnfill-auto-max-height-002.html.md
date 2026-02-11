@@ -1,0 +1,59 @@
+# css/css-multicol/columnfill-auto-max-height-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-multicol/columnfill-auto-max-height-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+  div
+    {
+      color: green;
+      column-count: 4;
+      column-fill: auto; /* fill columns sequentially */
+      column-gap: 4em; /* computes to 100px */
+      column-rule: red solid 4em;
+      font-family: Ahem;
+      /*
+      To download Ahem font:
+      http://www.w3.org/Style/CSS/Test/Fonts/Ahem/
+      */
+      font-size: 25px;
+      line-height: 1;
+      max-height: 100px;
+      orphans: 1;
+      /*
+      In this test, the orphans property specifies the
+      minimum number of line boxes that must be left
+      in a column box before a column break, that must
+      be left at the bottom of a column box.
+      */
+      widows: 1;
+      /*
+      In this test, the widows property specifies the
+      minimum number of line boxes that must be left
+      in a column box after a column break, that must
+      be left at the top of a column box.
+      */
+      width: 700px;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “column-rule”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

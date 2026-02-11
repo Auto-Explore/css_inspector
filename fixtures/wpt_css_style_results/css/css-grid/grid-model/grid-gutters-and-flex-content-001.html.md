@@ -1,0 +1,39 @@
+# css/css-grid/grid-model/grid-gutters-and-flex-content-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-model/grid-gutters-and-flex-content-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.gridPercentAndFlexContent { grid-template: 50px / 50% minmax(30px, 2fr); }
+.gridTwoDoubleMaxFlexContent { grid-template: 50px / minmax(10px, 0.5fr) minmax(10px, 2fr); }
+.gridIgnoreSecondGridItem { grid-template: 50px / minmax(300px, 3fr) minmax(150px, 1fr); }
+
+.gridRowsPercentAndFlexContent { grid-template: minmax(30px, 2fr) 50% / 50px; }
+.gridRowsTwoMaxFlexContent { grid-template: minmax(10px, 1fr) minmax(10px, 2fr) / 50px; }
+.gridRowsTwoDoubleMaxFlexContent { grid-template: minmax(10px, 0.5fr) minmax(10px, 2fr) / 50px; }
+
+.gridMinContentAndMinMaxFixedMinContentAndFlex { grid-template-columns: min-content minmax(20px, min-content) 2fr; }
+.gridMaxContentAndMinMaxFixedMaxContentAndFlex { grid-template-columns: max-content minmax(20px, max-content) 1fr; }
+
+div.grid > div { font: 10px/1 Ahem; }
+
+.gridRowColumnGaps {
+    grid-row-gap: 33px;
+    grid-column-gap: 19px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

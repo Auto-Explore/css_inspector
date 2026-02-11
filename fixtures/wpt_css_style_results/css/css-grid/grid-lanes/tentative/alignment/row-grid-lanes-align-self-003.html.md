@@ -1,0 +1,96 @@
+# css/css-grid/grid-lanes/tentative/alignment/row-grid-lanes-align-self-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/alignment/row-grid-lanes-align-self-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .grid-lanes {
+      display: grid-lanes;
+      width: 100px;
+      height: 250px;
+      grid-template-rows: repeat(4, 1fr);
+      grid-lanes-direction: row;
+      gap: 5px;
+      border: 1px solid black;
+      margin-bottom: 20px;
+    }
+
+    .item {
+      background-color: #444;
+      color: #fff;
+      padding: 2px;
+      width: 50px;
+    }
+
+    .img-placeholder {
+      width: 48px;
+      height: 30px;
+      background: linear-gradient(45deg, #666, #999);
+      display: inline-block;
+    }
+
+    input[type="text"] {
+      background-color: #f0f0f0;
+      border: 1px solid #999;
+      padding: 2px;
+      height: 20px;
+      width: auto;
+    }
+
+    button {
+      background-color: #ddd;
+      border: 1px solid #999;
+      padding: 2px 4px;
+      cursor: pointer;
+      width: auto;
+    }
+
+    .start {
+      align-self: start;
+      background-color: red;
+    }
+
+    .end {
+      align-self: end;
+      background-color: blue;
+    }
+
+    .center {
+      align-self: center;
+      background-color: green;
+    }
+
+    .stretch {
+      align-self: stretch;
+      background-color: orange;
+    }
+  
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown property “grid-lanes-direction”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

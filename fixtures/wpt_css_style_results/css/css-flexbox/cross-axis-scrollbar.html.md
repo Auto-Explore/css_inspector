@@ -1,0 +1,73 @@
+# css/css-flexbox/cross-axis-scrollbar.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/cross-axis-scrollbar.html"
+}
+```
+
+## style[0]
+
+```css
+
+body {
+    margin: 0;
+}
+
+.flexbox {
+    position: relative;
+    background-color: green;
+}
+
+/* Don't use a red background on .flexbox as it might show behind scrollbars on platforms where the track may be transparent */
+.flexbox::before {
+    content: "";
+    background-color: red;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+}
+
+.vertical-rl {
+    writing-mode: vertical-rl;
+}
+
+.vertical-lr {
+    writing-mode: vertical-lr;
+}
+
+.column > div {
+    flex: none;
+    background-color: green;
+    width: 100px;
+    height: 10px;
+}
+
+.row > div {
+    background-color: green;
+    flex: 1;
+    height: 50px;
+    min-height: 0;
+}
+
+.vertical-lr > .column > div {
+    flex: none;
+    height: 50px;
+    width: 20px;
+}
+
+.vertical-lr > .row > div {
+    flex: 1;
+    width: 100px;
+}
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,80 @@
+# css/css-scroll-snap/scroll-snap-stop-change.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-snap/scroll-snap-stop-change.html"
+}
+```
+
+## style[0]
+
+```css
+
+div, html, body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-snap-type: x mandatory;
+  overflow: scroll;
+}
+
+#scroller {
+  scroll-snap-type: x mandatory;
+  overflow: scroll;
+  height: 400px;
+  width: 400px;
+}
+
+.large_space {
+  width: 2000px;
+  height: 2000px;
+}
+
+.snap_area {
+  scroll-snap-align: none start;
+  width: 100px;
+  height: 100px;
+
+  background-color: blue;
+}
+
+.snap_area:nth-child(1) {
+  margin-left: 0;
+}
+
+.snap_area:nth-child(2) {
+  margin-left: 100px;
+}
+
+.snap_area:nth-child(3) {
+  margin-left: 300px;
+}
+
+.snap_area:nth-child(4) {
+  margin-left: 500px;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-snap-align”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,65 @@
+# css/css-values/calc-background-linear-gradient-1-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-values/calc-background-linear-gradient-1-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+ width:100px;
+ height:100px;
+ background:red;
+ margin:5px 0 0 5px;
+ float:left;
+}
+div#one {
+ background: linear-gradient(lime 0px, lime 90px, blue 90px, blue 100%);
+}
+div#two {
+ background: linear-gradient(blue 0px ,green 30px ,red 40px ,white 60px , lime  80px);
+}
+div#three {
+ background: linear-gradient(blue 0px ,purple 20px ,red 40px ,blue 60px , lime  80px);
+}
+div#four {
+ background: linear-gradient(blue 0px ,green 30px ,red 40px ,blue 60px , yellow  80px);
+}
+div#five {
+ background: linear-gradient(red 0px ,green 30px);
+}
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,49 @@
+# css/css-anchor-position/anchor-name-005.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-name-005.html"
+}
+```
+
+## style[0]
+
+```css
+
+#anchor {
+  position: relative;
+  top: 10px;
+  left: 10px;
+
+  anchor-name: --a1, --a2;
+  width: 100px;
+  height: 100px;
+  background: red;
+}
+#target {
+  position: absolute;
+  /* if this fails, the target (green) box is displayed below the anchor (red) box */
+  top: anchor(--a1 top);
+  /* if this fails, the target box will not fully cover the anchor box */
+  left: anchor(--a2 left);
+
+  width: 100px;
+  height: 100px;
+  background: green;
+  z-index: 1;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

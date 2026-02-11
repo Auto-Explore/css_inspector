@@ -1,0 +1,57 @@
+# css/css-writing-modes/table-progression-srl-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/table-progression-srl-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .test {
+    writing-mode: sideways-rl;
+  }
+  [dir=rtl] {
+    direction: rtl;
+  }
+
+  table {
+    border-spacing: 0;
+    border: solid gray;
+    margin: 1em;
+    float: left;
+  }
+  td {
+    width: 1em;
+    height: 1em;
+  }
+
+  .navy { background: navy}
+  .blue { background: blue }
+  .aqua { background: aqua }
+  .teal { background: teal }
+
+  /* These declarations must have no effect. */
+  .test col,
+  .test colgroup {
+    writing-mode: horizontal-tb;
+    writing-mode: sideways-lr;
+    direction: rtl;
+  }
+  .test[dir=rtl] col,
+  .test[dir=rtl] colgroup {
+    writing-mode: horizontal-tb;
+    direction: ltr;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

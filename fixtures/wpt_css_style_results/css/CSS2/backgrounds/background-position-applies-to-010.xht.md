@@ -1,0 +1,34 @@
+# css/CSS2/backgrounds/background-position-applies-to-010.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/backgrounds/background-position-applies-to-010.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div
+            {
+                background-image: url('support/blue15x15.png');
+                background-position: bottom right;
+                background-repeat: no-repeat;
+                border: solid black;
+                display: list-item;
+                height: 1in;
+                margin-left: 2em;
+                width: 1in;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

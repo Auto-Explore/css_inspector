@@ -1,0 +1,78 @@
+# css/css-fonts/cjk-kerning.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/cjk-kerning.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+  font-family: test;
+  src: url('resources/NotoSansJP-Regular.subset.otf') format('opentype');
+}
+h1 {
+	font: bold 1.5em/1 sans-serif;
+}
+h2 {
+	font: 1em/1 sans-serif;
+	margin-bottom: .25em;
+}
+.test {
+	font-family: test, sans-serif;
+	font-size: 3em;
+}
+.latin {
+    background: yellow;
+}
+.cjk {
+    background: cyan;
+}
+.paltOFFkernON {
+	font-feature-settings: "palt" 0;
+	font-kerning: normal;
+}
+.kernOFF {
+	font-kerning: none;
+}
+.kernON {
+	font-kerning: normal;
+}
+.paltONkernON {
+    font-feature-settings: "palt" 1;
+    font-kerning: normal;
+}
+.paltONkernOFF {
+    font-feature-settings: "palt" 1;
+    font-kerning: none;
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-feature-settings”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-feature-settings”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-feature-settings”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

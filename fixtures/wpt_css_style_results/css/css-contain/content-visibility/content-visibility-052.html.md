@@ -1,0 +1,59 @@
+# css/css-contain/content-visibility/content-visibility-052.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-contain/content-visibility/content-visibility-052.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container {
+  width: 150px;
+  height: 150px;
+  background: lightblue;
+  contain: layout;
+}
+.hidden {
+  content-visibility: hidden;
+}
+#child {
+  width: 50px;
+  height: 50px;
+  background: lightgreen;
+}
+.abspos { position: absolute; }
+.relpos { position: relative; }
+.fixedpos { position: fixed; }
+.start { top: 0; left: 0; }
+.mid { top: 10px; left: 10px; }
+.end { bottom: 0; right: 0; }
+.zindex { z-index: 1; }
+.small { width: 10px; height: 10px; background: blue; }
+.medium { width: 20px; height: 20px; background: green; }
+.large { width: 30px; height: 30px; background: pink; }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

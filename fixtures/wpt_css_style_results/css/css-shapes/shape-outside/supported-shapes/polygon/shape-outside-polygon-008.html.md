@@ -1,0 +1,67 @@
+# css/css-shapes/shape-outside/supported-shapes/polygon/shape-outside-polygon-008.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shapes/shape-outside/supported-shapes/polygon/shape-outside-polygon-008.html"
+}
+```
+
+## style[0]
+
+```css
+
+        body {
+            margin: 0;
+        }
+        #container {
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            font-size: 20px;
+            font-family: Ahem;
+            line-height: 20px;
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            color: green;
+        }
+        #test-shape {
+            float: left;
+            width: 200px;
+            height: 200px;
+            shape-outside: polygon(0% 20%, 60% 20%, 60% 40%, 40% 40%, 40% 60%, 80% 60%, 80% 80%, 0% 80%);
+        }
+        .ref-shape {
+            position: absolute;
+            background-color: green;
+            left: 10px;
+            height: 40px;
+        }
+        #ref-1 {
+            top: 90px;
+            width: 120px;
+        }
+        #ref-2 {
+            top: 130px;
+            width: 80px;
+        }
+        #ref-3 {
+            top: 170px;
+            width: 160px;
+        }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “shape-outside”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

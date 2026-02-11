@@ -1,0 +1,24 @@
+# css/CSS2/fonts/font-family-012.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/fonts/font-family-012.xht"
+}
+```
+
+## style[0]
+
+```css
+
+   pre { font: 1em/1 monospace; color: navy; }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

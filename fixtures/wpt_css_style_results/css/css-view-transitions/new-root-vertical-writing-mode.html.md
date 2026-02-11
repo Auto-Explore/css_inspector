@@ -1,0 +1,105 @@
+# css/css-view-transitions/new-root-vertical-writing-mode.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/new-root-vertical-writing-mode.html"
+}
+```
+
+## style[0]
+
+```css
+
+html { writing-mode: vertical-lr; }
+#hidden {
+  width: 100px;
+  height: 100px;
+  background: red;
+  position: absolute;
+  top: 0;
+  left: 0;
+  contain: paint;
+  view-transition-name: hidden;
+}
+.shared {
+  margin: 2px;
+  width: 90px;
+  height: 50px;
+  background: green;
+  contain: paint;
+}
+#target {
+  background: red;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 100px;
+  height: 500px;
+  contain: paint;
+  view-transition-name: s1;
+}
+#two {
+  background: lightblue;
+}
+
+html::view-transition-group(hidden) { animation-duration: 300s; }
+html::view-transition-image-pair(hidden) { animation: unset; opacity: 0; }
+
+html::view-transition-group(s1) { animation-duration: 0s; }
+html::view-transition-new(s1) { animation: unset; opacity: 1; }
+html::view-transition-old(s1) { animation: unset; opacity: 0; }
+
+html::view-transition-new(root) { animation: unset; opacity: 1; }
+html::view-transition-old(root) { animation: unset; opacity: 0; }
+
+```
+
+```json
+{
+  "errors": 10,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,46 @@
+# css/css-backgrounds/background-origin-006.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/background-origin-006.html"
+}
+```
+
+## style[0]
+
+```css
+
+        html {
+            padding-left: 170px;
+        }
+        div {
+            left: 0px;
+            position: absolute;
+            top: 0px;
+        }
+        #ref-overlapped-red {
+            background-color: red;
+            height: 60px;
+            width: 60px;
+        }
+        #test-overlapping-green {
+            background-attachment: fixed;
+            background-image: url(support/60x60-green.png);
+            background-origin: content-box;
+            background-repeat: no-repeat;
+            border: transparent dotted 5px;
+            height: 100px;
+            padding: 25px;
+            width: 100px;
+        }
+    
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

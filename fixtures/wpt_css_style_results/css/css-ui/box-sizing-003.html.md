@@ -1,0 +1,41 @@
+# css/css-ui/box-sizing-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-ui/box-sizing-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+#cb {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+}
+#test {
+	position:absolute;
+	box-sizing: border-box;
+	margin-right: 5px;
+	margin-left: auto; /* should resolve to 25px, but would resolve to -25px if the wrong interpretation of width is used in CSS2.1 10.3.7 */
+	top: 25px;
+	left:0;
+	right:0;
+	padding-left: 25px;
+	padding-right: 25px;
+	width: 70px;
+	height: 70px;
+	background:green;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

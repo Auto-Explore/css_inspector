@@ -1,0 +1,57 @@
+# css/css-grid/grid-lanes/tentative/track-sizing/auto-repeat/column-auto-repeat-014.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/track-sizing/auto-repeat/column-auto-repeat-014.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid-lanes {
+  display: grid-lanes;
+  border: solid thick;
+  grid-template-columns: 10px 20px repeat(auto-fill, 30px 40px) 50px 60px;
+  width: 300px;
+  background: pink;
+}
+.grid-lanes > :nth-child(2n) {
+  background: sienna;
+}
+.grid-lanes > :nth-child(2n+1) {
+  background: orange;
+}
+.grid-lanes > div {
+  width: 100%;
+  height: 25px;
+}
+.holder {
+  height: 30px;
+  width: 300px;
+  border-bottom: 2px solid #cfbfcf;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

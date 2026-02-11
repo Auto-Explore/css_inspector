@@ -1,0 +1,65 @@
+# css/css-overflow/scroll-markers/scroll-marker-elementFromPoint.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/scroll-markers/scroll-marker-elementFromPoint.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0;
+  }
+
+  #scroller {
+    scroll-marker-group: before;
+    width: 600px;
+    height: 300px;
+    overflow: auto;
+    white-space: nowrap;
+  }
+
+  #scroller div {
+    display: inline-block;
+    width: 600px;
+    height: 200px;
+  }
+
+  #scroller::scroll-marker-group {
+    display: flex;
+    height: 20px;
+    width: 40px;
+  }
+
+  #scroller div::scroll-marker {
+    content: "";
+    width: 100px;
+    height: 20px;
+    display: inline-block;
+  }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown property “scroll-marker-group”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

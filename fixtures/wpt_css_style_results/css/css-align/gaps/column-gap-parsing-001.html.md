@@ -1,0 +1,43 @@
+# css/css-align/gaps/column-gap-parsing-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-align/gaps/column-gap-parsing-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .columnGapPx { column-gap: 12px; }
+  #columnGapEm { column-gap: 2em; font: 10px/1 Monospace; }
+  #columnGapVw { column-gap: 2vw; }
+  #columnGapPercent { column-gap: 15%; }
+  #columnGapCalc { column-gap: calc(10px + 4px); }
+  #columnGapCalcFixedPercent { column-gap: calc(5px + 10%); }
+  .columnGapInitial { column-gap: initial; }
+  .columnGapInherit { column-gap: inherit; }
+
+  #invalidColumnGapNegative { column-gap: -10px; }
+  #invalidColumnGapMaxContent { column-gap: max-content; }
+  #invalidColumnGapNone { column-gap: none; }
+  #invalidColumnGapMultiple { column-gap: 10px 1px; }
+  #invalidColumnGapAngle { column-gap: 3rad; }
+  #invalidColumnGapResolution { column-gap: 2dpi; }
+  #invalidColumnGapTime { column-gap: 200ms; }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “column-gap”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

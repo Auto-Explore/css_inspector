@@ -1,0 +1,90 @@
+# css/css-shapes/spec-examples/shape-outside-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shapes/spec-examples/shape-outside-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+        body {
+            margin-left: 0;
+        }
+        .container {
+          width: 400px;
+          text-align: center;
+          font-family: Ahem;
+          font-size: 20px;
+          line-height: 1em;
+        }
+        #test {
+            color: green;
+        }
+        #test-float-left {
+          shape-outside: polygon(0 0, 200px 200px, 0 200px);
+          float: left;
+          width: 200px;
+          height: 200px;
+        }
+        #test-float-right {
+          shape-outside: polygon(200px 0, -800px 1000px, 200px 1000px);
+          float: right;
+          width: 200px;
+          height: 200px;
+        }
+        #failure-container {
+            color: red;
+            z-index: -1;
+        }
+        #test, #failure-container {
+            position: absolute;
+            top: 60px;
+        }
+        .line {
+            height: 20px;
+        }
+        #bottom {
+            position: absolute;
+            top: 200px;
+        }
+        #left-triangle, #right-triangle {
+            position: absolute;
+            top: 60px;
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+        }
+        #left-triangle {
+            clip-path: polygon(0 0, 200px 200px, 0 200px);
+        }
+        #right-triangle {
+            left: 200px;
+            clip-path: polygon(200px 0, 200px 200px, 0 200px);
+        }
+    
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown property “shape-outside”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “shape-outside”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,46 @@
+# css/motion/offset-path-shape-polygon-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/motion/offset-path-shape-polygon-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+#outer {
+  top: 100px;
+  left: 100px;
+  position: relative;
+  width: 600px;
+  height: 400px;
+}
+#box {
+  background-color: green;
+  position: relative;
+  offset-path: polygon(0px 0px, 600px 0px, 300px 400px);
+  offset-distance: 90%;
+  width: 100px;
+  height: 100px;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown property “offset-path”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “offset-distance”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

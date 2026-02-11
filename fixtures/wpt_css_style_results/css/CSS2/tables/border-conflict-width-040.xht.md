@@ -1,0 +1,52 @@
+# css/CSS2/tables/border-conflict-width-040.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/tables/border-conflict-width-040.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            table
+            {
+                border-collapse: collapse;
+            }
+            td
+            {
+                border: 5px groove black;
+                height: 3em;
+            }
+            #cell3
+            {
+                border: 10px solid black;
+            }
+            #cell1
+            {
+                border-bottom-color: red;
+            }
+            #cell4
+            {
+                border-left-color: red;
+            }
+            #cell5
+            {
+                border-top-color: red;
+            }
+            #cell2
+            {
+                border-right-color: red;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

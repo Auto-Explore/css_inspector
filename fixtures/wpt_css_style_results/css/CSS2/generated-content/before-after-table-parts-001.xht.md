@@ -1,0 +1,88 @@
+# css/CSS2/generated-content/before-after-table-parts-001.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/generated-content/before-after-table-parts-001.xht"
+}
+```
+
+## style[0]
+
+```css
+
+table, div.gen { counter-reset:ctr; quotes:"\0022" "\0022" "\0022" "\0022"; }
+
+.gen:before {
+  content:counter(ctr) url(support/square-outline-32x32.png) open-quote "Before " attr(class);
+  counter-increment:ctr;
+}
+.gen:after {
+  content:counter(ctr) url(support/square-outline-32x32.png) "After " attr(class) close-quote;
+  counter-increment:ctr;
+}
+
+table { border:1px solid blue; }
+td { border:1px solid cyan; }
+td { border-spacing:0; padding:0; }
+
+tr.gen:before, tr.gen:after { display:table-cell; }
+tbody.gen:before, tbody.gen:after { display:table-row; }
+table.gen:before, table.gen:after { display:table-row-group; }
+table.col:before, table.gen.col:after { display:table-column-group; }
+/* note reordering here! */
+table.headfoot:after { display:table-header-group; }
+table.headfoot:before { display:table-footer-group; }
+
+.cell { display:table-cell; }
+.row { display:table-row; }
+.rowgroup { display:table-row-group; }
+.table { display:table; }
+div.gencell:before, div.gencell:after { display:table-cell; }
+div.genrow:before, div.genrow:after { display:table-row; }
+div.genblock:before, div.genblock:after { display:block; }
+div.geninline:before, div.geninline:after { display:inline; }
+
+div { border:1px solid green; margin:5px; }
+
+.varyheight:before { height:100px; background:yellow; }
+.varyheight &gt; div { height:80px; background:orange; }
+.varyheight:after { height:60px; background:brown; }
+
+.varywidth:before { background:yellow; }
+.varywidth &gt; div { background:orange; }
+.varywidth:after { background:brown; }
+```
+
+```json
+{
+  "errors": 6,
+  "messages": [
+    {
+      "message": "Invalid value for property “quotes”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

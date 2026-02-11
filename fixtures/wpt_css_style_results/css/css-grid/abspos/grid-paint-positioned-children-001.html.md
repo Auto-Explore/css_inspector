@@ -1,0 +1,43 @@
+# css/css-grid/abspos/grid-paint-positioned-children-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/abspos/grid-paint-positioned-children-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.grid {
+  border: 2px solid black;
+  position: relative;
+  width: 100px;
+
+  grid-template-columns: 10px 20px 30px 40px;
+
+  padding-top: 10px;
+}
+
+.abs {
+  height: 5px;
+  position: absolute;
+  width: 100%;
+}
+
+#item {
+  width: 90px;
+  height: 30px;
+}
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

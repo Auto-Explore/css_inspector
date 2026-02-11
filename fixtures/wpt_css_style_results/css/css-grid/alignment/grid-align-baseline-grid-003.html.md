@@ -1,0 +1,60 @@
+# css/css-grid/alignment/grid-align-baseline-grid-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-align-baseline-grid-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+.target {
+  display: grid;
+  grid-auto-flow: column;
+  position: relative;
+  line-height: 0;
+  font-size: 20px;
+  inline-size: 300px;
+  margin-block: 10px;
+  padding: 10px;
+  border: solid 3px;
+  writing-mode: vertical-lr;
+}
+
+.inner {
+  display: grid;
+  gap: 10px;
+  grid-template: 50px 50px / 50px 50px 50px;
+  border: solid 5px;
+  padding: 10px;
+}
+
+.inner > div:first-child,
+.inner > div:last-child {
+  align-self: start;
+}
+
+span {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  outline: solid cyan 3px;
+  outline-offset: -3px;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “outline”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

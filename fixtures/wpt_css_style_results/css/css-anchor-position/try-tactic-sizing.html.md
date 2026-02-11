@@ -1,0 +1,53 @@
+# css/css-anchor-position/try-tactic-sizing.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/try-tactic-sizing.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @position-try --pf {
+    left:50px;
+    top:50px;
+
+    min-width: 1px;
+    min-height: 2px;
+    max-width: 100px;
+    max-height: 200px;
+  }
+  #cb {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border: 1px solid black;
+  }
+  #target {
+    position: absolute;
+    left: 99999px; /* force fallback */
+    width: 30px;
+    height: 40px;
+    background-color: skyblue;
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

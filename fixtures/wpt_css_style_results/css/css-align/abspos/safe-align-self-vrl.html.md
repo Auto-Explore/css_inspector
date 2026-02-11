@@ -1,0 +1,65 @@
+# css/css-align/abspos/safe-align-self-vrl.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-align/abspos/safe-align-self-vrl.html"
+}
+```
+
+## style[0]
+
+```css
+
+body {
+  margin: 0;
+}
+
+.container {
+  writing-mode: vertical-rl;
+  direction: ltr;
+  display: inline-block;
+  position: relative;
+  margin: 20px;
+  border: solid 4px;
+  width: 40px;
+  height: 40px;
+}
+
+.item {
+  position: absolute;
+  background: green;
+  inset: 5px;
+  margin: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.safe {
+  align-self: safe end;
+}
+.unsafe {
+  align-self: unsafe end;
+}
+
+.rtl {
+  direction: rtl;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “align-self”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-self”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

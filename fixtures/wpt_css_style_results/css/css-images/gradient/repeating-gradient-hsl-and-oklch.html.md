@@ -1,0 +1,55 @@
+# css/css-images/gradient/repeating-gradient-hsl-and-oklch.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-images/gradient/repeating-gradient-hsl-and-oklch.html"
+}
+```
+
+## style[0]
+
+```css
+
+        body {
+            background: #fff;
+        }
+
+        .a {
+          width: 100px;
+          height: 100px;
+          background: repeating-linear-gradient(
+            to bottom,
+            hsl(180 50% 70%) 0px 20px,
+            hsl(0 50% 50%) 20px 40px
+          );
+        }
+
+        .b {
+          width: 100px;
+          height: 100px;
+          background: repeating-linear-gradient(
+            to bottom,
+            oklch(70% 50% 180) 0px 20px,
+            oklch(50% 50% 0) 20px 40px
+          );
+        }
+    
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

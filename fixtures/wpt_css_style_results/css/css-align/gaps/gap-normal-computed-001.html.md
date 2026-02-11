@@ -1,0 +1,49 @@
+# css/css-align/gaps/gap-normal-computed-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-align/gaps/gap-normal-computed-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+#col,
+#grid,
+#flex {
+  /* Not using the shorthand because that's not what we're interested in,
+     and there are implementations that support column-gap without supporting the shorthand */
+  colum-gap: normal;
+  row-gap: normal;
+  float: right; /* for shrinkwrap*/
+}
+#col {
+  column-count: 2;
+  column-width: 50px;
+}
+#grid {
+  display: grid;
+  grid-template-columns: 50px 50px;
+  grid-template-rows: 50px 50px;
+}
+#flex {
+  display: flex;
+}
+#flex * { width: 50px; height: 50px;}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “colum-gap”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

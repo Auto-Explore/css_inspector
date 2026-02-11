@@ -1,0 +1,73 @@
+# css/css-position/sticky/position-sticky-padding-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-position/sticky/position-sticky-padding-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .flex,
+  .block {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    padding: 10px;
+    margin: 10px;
+    float: left;
+    overflow: auto;
+    scrollbar-width: none;
+    background-color: #ddd;
+  }
+
+  .flex {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
+  }
+
+  .col {
+    width: 100px;
+    background-color: blue;
+  }
+
+  .col-1 {
+    position: sticky;
+    min-height: 300px;
+    top: 0;
+  }
+
+  .col-2 {
+    height: 20px;
+    align-self: start;
+    background-color: purple;
+  }
+  .block .col-2 {
+    float: right; /* Just make it visible */
+  }
+  .abspos {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: cyan;
+    top: 600px;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

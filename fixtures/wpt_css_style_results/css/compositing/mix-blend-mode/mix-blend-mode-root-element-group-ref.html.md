@@ -1,0 +1,40 @@
+# css/compositing/mix-blend-mode/mix-blend-mode-root-element-group-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/compositing/mix-blend-mode/mix-blend-mode-root-element-group-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+            div {
+                width: 200px;
+                height: 200px;
+            }
+            .green {
+                background: rgba(0,160,0,0.5);
+                mix-blend-mode: soft-light;
+            }
+            .blue {
+                position: absolute;
+                top: 75px;
+                left: 75px;
+                background: rgba(0,0,160,0.5)
+            }
+            .wrapper {
+                isolation: isolate;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

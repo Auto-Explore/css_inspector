@@ -1,0 +1,67 @@
+# css/css-gaps/flex/fragmentation/flex-gap-decorations-fragmentation-012.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/flex/fragmentation/flex-gap-decorations-fragmentation-012.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .multi-column {
+        columns: 3;
+        height: 47px;
+        column-width: 110px;
+        width: 330px;
+        column-fill: auto;
+    }
+
+    body {
+        margin: 0px;
+    }
+
+    #flexbox {
+        display: flex;
+        column-gap: 10px;
+        row-gap: 10px;
+        width: 110px;
+        flex-wrap: wrap;
+        height: 110px;
+        column-rule: 10px solid blue;
+        row-rule: 10px solid gold;
+    }
+
+    .items {
+        background-color: rgb(96 139 168 / 0.2);
+        width: 50px;
+        height: 55px;
+    }
+
+    #monolithic {
+       contain: size;
+    }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “column-rule”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “row-rule”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,42 @@
+# css/css-fonts/font-face-style-normal.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-face-style-normal.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+  font-family: test1;
+  font-style: normal;
+  src: url(/fonts/Ahem.ttf);
+}
+@font-face {
+  font-family: test2;
+  font-style: oblique 0deg;
+  src: url(/fonts/Ahem.ttf);
+}
+@font-face {
+  font-family: test3;
+  font-style: oblique 0deg 10deg;
+  src: url(/fonts/Ahem.ttf);
+}
+@font-face {
+  font-family: test4;
+  font-style: normal 10deg;
+  src: url(/fonts/Ahem.ttf);
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

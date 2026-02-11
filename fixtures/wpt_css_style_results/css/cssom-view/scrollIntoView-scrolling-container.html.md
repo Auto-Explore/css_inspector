@@ -1,0 +1,50 @@
+# css/cssom-view/scrollIntoView-scrolling-container.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/cssom-view/scrollIntoView-scrolling-container.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .scroller {
+    overflow: scroll;
+    position: relative;
+    border: 2px solid black;
+  }
+  #outer {
+    width: 300px;
+    height: 400px;
+    border-color: blue;
+  }
+  #inner {
+    height: 200px;
+    border-color: red;
+    background: lightgreen;
+    /* Scroll padding on the inner scroller makes the scroll into view
+     * position of content within non-zero. */
+    scroll-padding: 50px;
+    /* Scroll margin is the offset in the outer scroller to preserve. */
+    scroll-margin: 20px;
+  }
+  .spacer {
+    height: 1000px;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

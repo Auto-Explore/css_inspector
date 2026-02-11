@@ -1,0 +1,59 @@
+# css/css-break/out-of-flow-in-multicolumn-125.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-break/out-of-flow-in-multicolumn-125.html"
+}
+```
+
+## style[0]
+
+```css
+
+.flex {
+  display: flex;
+}
+
+.multicol {
+  width: 50px;
+  height: 100px;
+  column-count: 2;
+  column-fill: auto;
+  column-gap: 0;
+}
+
+.container {
+  position: relative;
+  width: 25px;
+  height: 200px;
+}
+
+.in-flow {
+  width: 25px;
+  height: 200px;
+  background: red;
+  border: 5px solid green;
+  border-width: 3px 5px 7px 9px;
+  box-sizing: border-box;
+}
+
+.abspos {
+  position: absolute;
+  inset: 3px 5px 7px 9px;
+  background: green;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “inset”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

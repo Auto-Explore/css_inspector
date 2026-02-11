@@ -1,0 +1,98 @@
+# css/css-scroll-snap/snap-area-capturing-add-scroll-container.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-scroll-snap/snap-area-capturing-add-scroll-container.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+  position: absolute;
+  margin: 0px;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  margin: 0px;
+}
+
+#middle-scroller {
+  top: 100px;
+  height: 500px;
+  width: 500px;
+  overflow: visible;
+  background-color: rgb(12, 61, 2);
+  scroll-snap-type: none;
+}
+
+#inner-scroller {
+  top: 200px;
+  height: 400px;
+  width: 400px;
+  overflow: visible;
+  background-color: rgb(65, 139, 50);
+  scroll-snap-type: y mandatory;
+}
+
+.space {
+  width: 2000px;
+  height: 2000px;
+}
+
+#inner-snap-area {
+  top: 300px;
+  width: 200px;
+  height: 200px;
+  background-color: blue;
+  scroll-snap-align: start;
+}
+
+#document-snap-area {
+  top: 500px;
+  width: 200px;
+  height: 200px;
+  background-color: lightblue;
+  scroll-snap-align: start;
+}
+
+#inserted-snap-container {
+  top: 400px;
+  height: 600px;
+  width: 400px;
+  overflow: scroll;
+  scroll-snap-type: y mandatory;
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “scroll-snap-type”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

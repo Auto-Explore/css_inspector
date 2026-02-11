@@ -1,0 +1,82 @@
+# css/css-counter-styles/counter-style-at-rule/symbols-function-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-counter-styles/counter-style-at-rule/symbols-function-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @counter-style cyclic {
+    system: cyclic;
+    symbols: '*' '\2020' '\2021' '\A7';
+    suffix: ' ';
+  }
+  @counter-style numeric {
+    system: numeric;
+    symbols: '0' '1' '2';
+    suffix: ' ';
+  }
+  @counter-style alphabetic {
+    system: alphabetic;
+    symbols: '\26AA' '\26AB';
+    suffix: ' ';
+  }
+  @counter-style symbolic {
+    system: symbolic;
+    symbols: '*' '\2020' '\2021' '\A7';
+    suffix: ' ';
+  }
+  @counter-style fixed {
+    system: fixed;
+    symbols: '\25F0' '\25F1' '\25F2' '\25F3';
+    suffix: ' ';
+  }
+  @counter-style counter {
+    symbols: '*';
+  }
+  @counter-style counters {
+    system: numeric;
+    symbols: '0' '1';
+  }
+  .counter { counter-reset: a; }
+  .counter p { counter-increment: a 1; }
+  .counter p::after {
+    content: counter(a, counter);
+  }
+  .counter, .counters {
+    list-style-type: none;
+    counter-reset: a;
+  }
+  .counter li, .counters li {
+    counter-increment: a;
+    padding-right: .5em;
+  }
+  .counter li::after {
+    content: counter(a, counter);
+  }
+  .counters .counters li::after {
+    content: counters(a, '.', counters);
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “content”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

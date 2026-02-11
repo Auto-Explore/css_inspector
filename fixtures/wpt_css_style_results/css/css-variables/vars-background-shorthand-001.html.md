@@ -1,0 +1,67 @@
+# css/css-variables/vars-background-shorthand-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-variables/vars-background-shorthand-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+    width: 50px;
+    height: 50px;
+    padding: 50px;
+    margin: 10px;
+    display: inline-block;
+    background: red;
+}
+
+div#d1 {
+    --foo: green;
+    background: var(--foo);
+}
+
+div#d2 {
+    --foo: green, green;
+    background: linear-gradient(var(--foo));
+}
+
+div#d3 {
+    --foo: linear-gradient(green, green);
+    background: var(--foo);
+}
+
+div#d4 {
+    --foo: center / 0 0;
+    background: green linear-gradient(red, red) var(--foo, );
+}
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

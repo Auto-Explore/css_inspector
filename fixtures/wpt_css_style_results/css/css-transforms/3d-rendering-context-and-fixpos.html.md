@@ -1,0 +1,56 @@
+# css/css-transforms/3d-rendering-context-and-fixpos.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/3d-rendering-context-and-fixpos.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+div {
+  width: 100px;
+  height: 100px;
+}
+
+.cb {
+  transform-style: preserve-3d;
+  transform: translateX(0);
+  background: red;
+  position: relative;
+}
+
+.parent {
+}
+
+.abspos {
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Since this element is not in the 3D Rendering Context, this translation
+     does not put it above the <div class="sibling">. */
+  transform: translateZ(20px);
+  background: red;
+}
+
+.sibling {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateZ(10px);
+  background: green;
+}
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

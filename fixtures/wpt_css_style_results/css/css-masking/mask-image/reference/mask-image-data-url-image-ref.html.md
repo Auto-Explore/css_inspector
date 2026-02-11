@@ -1,0 +1,44 @@
+# css/css-masking/mask-image/reference/mask-image-data-url-image-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-masking/mask-image/reference/mask-image-data-url-image-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+#back {
+  position: absolute;
+  box-sizing: border-box;
+  width: 200px;
+  height: 200px;
+  border: 60px solid green;
+  background: blue;
+}
+#front {
+  position: absolute;
+  box-sizing: border-box;
+  width: 200px;
+  height: 200px;
+  border: 40px solid blue;
+  background: green;
+  mask-image: url(1x1-black-30-alpha.png); /* 1x1 black with 30% transparency */
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown property “mask-image”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

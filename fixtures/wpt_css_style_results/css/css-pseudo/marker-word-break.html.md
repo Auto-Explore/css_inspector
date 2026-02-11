@@ -1,0 +1,50 @@
+# css/css-pseudo/marker-word-break.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-pseudo/marker-word-break.html"
+}
+```
+
+## style[0]
+
+```css
+
+ol {
+  float: left;
+  width: 50px;
+}
+li {
+  list-style-position: inside;
+  width: 0;
+}
+.word-break-keep-all.explicit ::marker,
+.word-break-keep-all.inherit {
+  word-break: keep-all;
+}
+.word-break-break-all.explicit ::marker,
+.word-break-break-all.inherit {
+  word-break: break-all;
+}
+.marker-disc {
+  list-style-type: disc;
+}
+.marker-decimal {
+  list-style-type: decimal;
+}
+.marker-string {
+  list-style-type: "ab";
+}
+.marker-content::marker {
+  content: "cd";
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

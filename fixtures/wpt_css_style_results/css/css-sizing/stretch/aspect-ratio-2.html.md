@@ -1,0 +1,53 @@
+# css/css-sizing/stretch/aspect-ratio-2.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-sizing/stretch/aspect-ratio-2.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container {
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    border: 1px solid black;
+}
+canvas {
+    height: -webkit-fill-available;
+    height: stretch;
+    background: purple;
+}
+
+.withBorder {
+    border: 2px solid cyan;
+    border-width: 2px 3px 4px 5px;
+}
+.withPadding {
+    padding: 2px 3px 4px 5px;
+}
+.withPxMargin {
+    margin: 1px 2px 3px 4px;
+}
+.withPctMargin {
+    /* This works out to 1px 2px 3px 4px */
+    margin: 5% 10% 15% 20%;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

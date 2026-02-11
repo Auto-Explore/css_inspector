@@ -1,0 +1,129 @@
+# css/css-align/blocks/align-content-table-cell.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-align/blocks/align-content-table-cell.html"
+}
+```
+
+## style[0]
+
+```css
+
+@import "/fonts/ahem.css";
+body {
+  font: 10px/1 Ahem;
+}
+
+td {
+  padding: 0;
+  height: 50px;
+}
+
+td:nth-child(2) {
+  font-size: 20px;
+}
+
+.valign-top td {
+  vertical-align: top;
+}
+.valign-middle td {
+  vertical-align: middle;
+}
+.valign-bottom td {
+  vertical-align: bottom;
+}
+.valign-middle-short td {
+  vertical-align: middle;
+  height: 10px;
+}
+.valign-bottom-short td {
+  vertical-align: bottom;
+  height: 10px;
+}
+.valign-baseline td {
+  vertical-align: baseline;
+}
+
+.alignc-start td {
+  align-content: start;
+}
+.alignc-center td {
+  align-content: unsafe center;
+}
+.alignc-end td {
+  align-content: unsafe end;
+}
+.alignc-center-short td {
+  align-content: unsafe center;
+  height: 10px;
+}
+.alignc-end-short td {
+  align-content: unsafe end;
+  height: 10px;
+}
+.alignc-baseline td {
+  align-content: baseline;
+}
+
+.alignc-safe-center td {
+  align-content: safe center;
+}
+.alignc-safe-end td {
+  align-content: safe end;
+}
+.alignc-safe-center-short td {
+  align-content: safe center;
+  height: 10px;
+}
+.alignc-safe-end-short td {
+  align-content: safe end;
+  height: 10px;
+}
+```
+
+```json
+{
+  "errors": 8,
+  "messages": [
+    {
+      "message": "Imported style sheets are not checked.",
+      "severity": "Warning"
+    },
+    {
+      "message": "Invalid value for property “align-content”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-content”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-content”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-content”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-content”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-content”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-content”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “align-content”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 1
+}
+```

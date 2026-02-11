@@ -1,0 +1,133 @@
+# css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-container-baseline-007b.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/baseline/column-grid-lanes-container-baseline-007b.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .container {
+      display: flex;
+      gap: 20px;
+      border: 2px solid blue;
+      width: 400px;
+      padding: 10px;
+      font-size: 16px;
+      text-decoration: underline;
+    }
+
+    .first-baseline {
+      align-items: baseline;
+    }
+
+    .last-baseline {
+      align-items: last baseline;
+    }
+
+    .grid-lanes-explicit {
+      display: grid-lanes;
+      grid-template-columns: repeat(4, 80px);
+      border: 1px solid purple;
+    }
+
+    .grid-lanes-explicit .explicit-item1 {
+      grid-column: 1 / 3;
+      background: lightsteelblue;
+      font-size: 12px;
+      height: 30px;
+    }
+
+    .grid-lanes-explicit .explicit-item2 {
+      grid-column: 3 / 5;
+      background: lightgoldenrodyellow;
+      font-size: 18px;
+      height: 30px;
+    }
+
+    .grid-lanes-explicit .explicit-item3 {
+      grid-column: 1;
+      background: lightseagreen;
+      font-size: 12px;
+      height: 20px;
+    }
+
+    .grid-lanes-explicit .explicit-item4 {
+      grid-column: 2 / 4;
+      background: lightsalmon;
+      font-size: 20px;
+      height: 35px;
+    }
+
+    .grid-lanes-explicit .explicit-item5 {
+      grid-column: 4;
+      background: lightblue;
+      font-size: 14px;
+      height: 22px;
+    }
+
+    .grid-lanes-explicit .explicit-item6 {
+      grid-column: 1 / 5;
+      background: lightcyan;
+      font-size: 22px;
+      height: 40px;
+    }
+  
+```
+
+```json
+{
+  "errors": 11,
+  "messages": [
+    {
+      "message": "Invalid value for property “align-items”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-column”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

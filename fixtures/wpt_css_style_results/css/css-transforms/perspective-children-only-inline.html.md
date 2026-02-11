@@ -1,0 +1,42 @@
+# css/css-transforms/perspective-children-only-inline.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/perspective-children-only-inline.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+div {
+  width: 100px;
+  height: 100px;
+}
+
+#outer {
+  background: red;
+  perspective: 100px;
+}
+
+#middle {
+  display: inline;
+}
+
+#inner {
+  transform: translateZ(-100px);
+  background: green;
+}
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

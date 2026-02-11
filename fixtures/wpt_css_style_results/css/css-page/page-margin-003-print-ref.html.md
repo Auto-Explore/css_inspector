@@ -1,0 +1,39 @@
+# css/css-page/page-margin-003-print-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/page-margin-003-print-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @page {
+    margin: 0;
+  }
+  :root {
+    print-color-adjust: exact;
+    writing-mode: vertical-lr;
+  }
+  body {
+    margin: 0;
+  }
+  .fullpager {
+    break-before: page;
+    margin-left: 40px;
+    margin-top: 10px;
+    width: calc(100vw - 60px);
+    height: calc(100vh - 40px);
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

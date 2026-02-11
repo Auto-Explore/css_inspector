@@ -1,0 +1,96 @@
+# css/CSS2/tables/separated-border-model-004b.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/tables/separated-border-model-004b.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  div#overlapped-red
+  {
+  background-color: red;
+  height: 100px;
+  position: absolute;
+  width: 100px;
+  z-index: -1;
+  }
+
+  div#overlapping-green-table
+  {
+  background-color: green;
+  border: green solid 10px;
+  border-collapse: separate;
+  border-spacing: 0px 5px;
+  color: green;
+  display: table;
+  font: 20px/1 serif;
+  padding-bottom: 25px;
+  table-layout: fixed;
+  width: 80px;
+  /*
+  The width of a CSS table is given by the greater of the value of
+  the 'width' property as set for the CSS table and the sum of the
+  columns width plus border spacing:
+
+  max(set width, sum of columns width plus border spacing).
+
+  The width (as set) of a CSS table is given by its content-box, not
+  by its border-box.
+
+  In this testcase, the content-box must be 100px by 100px and all
+  filled with green color.
+  In this testcase, the border-box must be 200px by 200px and all
+  filled with green color.
+
+  The set width (100px) is larger than sum of columns width plus
+  border spacing
+
+    0px  : left-most border-spacing
+ +
+   20px  : div#td's width
+ +
+    0px  : middle border-spacing between 1st and 2nd cell
+ +
+   20px  : div#td's width
+ +
+    0px  : right-most border-spacing
+  =====
+   40px  : sum of columns width plus border spacing
+
+
+    80px : set width of table
+  -
+    40px : sum of columns plus border spacing
+  ======
+    40px : the extra (exceeding) 40px width will be distributed over
+   the columns, therefore given to both cells of the table.
+  */
+  }
+
+  div.tr {display: table-row;}
+
+  div.td {display: table-cell;}
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,54 @@
+# css/css-fonts/hiragana-katakana-kerning-notref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/hiragana-katakana-kerning-notref.html"
+}
+```
+
+## style[0]
+
+```css
+
+      @font-face {
+        font-family: "Noto Sans JP";
+        src: url(resources/NotoSansJP-kana_test-subset.otf);
+      }
+
+      p {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        font-size: 6em;
+        font-family: "Noto Sans JP";
+        font-feature-settings: "palt" on;
+        font-kerning: none;
+
+        margin: 1em;
+      }
+
+      .no-kerning-red {
+        color: red;
+      }
+
+      .no-kerning-green {
+        color: green;
+        mix-blend-mode: multiply;
+      }
+    
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “font-feature-settings”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

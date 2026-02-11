@@ -1,0 +1,84 @@
+# css/css-anchor-position/position-area-inline-container.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/position-area-inline-container.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #in-flow {
+    font-family: Ahem;
+    font-size: 100px;
+    line-height: 1;
+    color: orange;
+  }
+  #inline-container {
+    position: relative;
+  }
+  #anchor {
+    position: absolute;
+    top: 25px;
+    left: 100px;
+    width: 200px;
+    height: 50px;
+    anchor-name: --anchor;
+    background-color: cyan;
+  }
+  .anchored {
+    position: absolute;
+    align-self: stretch;
+    justify-self: stretch;
+    position-anchor: --anchor;
+    background-color: blue;
+  }
+  #top-left { position-area: top left; }
+  #top-right { position-area: top right; }
+  #bottom-left { position-area: bottom left; }
+  #bottom-right { position-area: bottom right; }
+```
+
+```json
+{
+  "errors": 8,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-area”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-area”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-area”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-area”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

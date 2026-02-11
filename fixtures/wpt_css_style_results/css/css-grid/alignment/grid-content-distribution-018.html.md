@@ -1,0 +1,48 @@
+# css/css-grid/alignment/grid-content-distribution-018.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/grid-content-distribution-018.html"
+}
+```
+
+## style[0]
+
+```css
+
+.block {
+  position: absolute;
+  z-index: -1;
+  background: green;
+  width: 200px;
+  height: 200px;
+}
+.block > div {
+  position: absolute;
+  background: red;
+  width: 20px;
+  height: 20px;
+}
+.grid {
+  z-index: 1;
+  display: grid;
+  width: 200px;
+  height: 200px;
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+  grid-template-columns: 20px 20px 20px;
+  grid-template-rows: 20px 20px 20px;
+  align-content: space-around;
+  justify-content: space-around;
+}
+.grid > div { background: green; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,55 @@
+# css/css-flexbox/abspos/flexbox-abspos-child-001a.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/abspos/flexbox-abspos-child-001a.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .flexContainer {
+      display: flex;
+      height: 10px;
+      width: 10px;
+      background: purple;
+      margin-bottom: 15px;
+      position: relative;
+    }
+    .absPos {
+      position: absolute;
+      background: teal;
+    }
+    .testMinWidth {
+      width: 10px;
+      height: 20px;
+      min-width: 20px;
+    }
+    .testMaxWidth {
+      width: 50px;
+      height: 20px;
+      max-width: 20px;
+    }
+    .testMinHeight {
+      width: 20px;
+      height: 10px;
+      min-height: 20px;
+    }
+    .testMaxHeight {
+      width: 20px;
+      height: 50px;
+      max-height: 20px;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

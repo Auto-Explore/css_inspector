@@ -1,0 +1,40 @@
+# css/CSS2/generated-content/before-content-display-015.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/generated-content/before-content-display-015.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  div:before
+  {
+  content: "Filler\A0text";
+  /* Without a table box, the table-caption may shrink to minimum content
+  width (MCW), thus the no-breaking-space (in utf-8) addition between
+  "Filler" and "text" to avoid line-wrapping causing 2 lines. */
+  display: table-caption;
+  }
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

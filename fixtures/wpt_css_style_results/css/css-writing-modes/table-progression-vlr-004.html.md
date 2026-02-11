@@ -1,0 +1,46 @@
+# css/css-writing-modes/table-progression-vlr-004.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/table-progression-vlr-004.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .test {
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+  }
+  [dir=rtl] {
+    direction: rtl;
+  }
+
+
+  table {
+    border-spacing: 0;
+    border: solid gray;
+    margin: 1em;
+    float: left;
+  }
+  td {
+    width: 1em;
+    height: 1em;
+  }
+
+  .navy { background: navy}
+  .blue { background: blue }
+  .aqua { background: aqua }
+  .teal { background: teal }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

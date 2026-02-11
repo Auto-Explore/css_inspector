@@ -1,0 +1,77 @@
+# css/css-view-transitions/old-content-with-object-view-box.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/old-content-with-object-view-box.html"
+}
+```
+
+## style[0]
+
+```css
+
+#target {
+  position: relative;
+  top: 100px;
+  left: 100px;
+  background: green;
+  width: 100px;
+  height: 100px;
+  view-transition-name: target;
+}
+
+html::view-transition-group(*) { animation-duration: 300s; }
+html::view-transition-old(*) {
+  object-view-box: inset(5px 10px 15px 20px);
+  /* Need to specify explicit dimensions since view box changes intrinsic size */
+  width: 100px;
+  height: 100px;
+  animation: unset;
+  opacity: 1;
+}
+html::view-transition-new(*) { animation: unset; opacity: 0; }
+html::view-transition-group(root) { animation: unset; opacity: 0; }
+html::view-transition { background: pink; }
+```
+
+```json
+{
+  "errors": 8,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “object-view-box”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

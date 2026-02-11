@@ -1,0 +1,45 @@
+# css/mediaqueries/mq-negative-range-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/mediaqueries/mq-negative-range-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+div {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+@media
+    (min-width: -100px)
+    and
+    (min-height: -100px)
+    and
+    (min-color: -10)
+    and
+    (min-color-index: -10)
+    and
+    (min-monochrome: -10)
+    and
+    (min-device-width: -100px)
+    and
+    (min-device-height: -100px)
+{
+    div { background-color: green; }
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

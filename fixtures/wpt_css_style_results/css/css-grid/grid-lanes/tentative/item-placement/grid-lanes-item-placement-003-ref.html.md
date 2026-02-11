@@ -1,0 +1,47 @@
+# css/css-grid/grid-lanes/tentative/item-placement/grid-lanes-item-placement-003-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/grid-lanes/tentative/item-placement/grid-lanes-item-placement-003-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+html,body {
+  color:black; background-color:white; font:25px/1 monospace; padding:0; margin:0;
+}
+
+grid {
+  display: inline-grid;
+  gap: 10px 20px;
+  grid-auto-columns: 80px;
+  color: #444;
+  border: 1px solid;
+  padding: 2px;
+}
+
+item {
+  background-color: #444;
+  color: #fff;
+  padding: 20px;
+  margin: 3px;
+  border: 5px solid blue;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “gap”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,46 @@
+# css/css-page/page-left-right-002-print-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/page-left-right-002-print-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @page {
+    size: 600px 300px;
+    margin: 0;
+  }
+  :root {
+    print-color-adjust: exact;
+    direction: rtl;
+  }
+  body {
+    margin: 0;
+  }
+  div {
+    break-after: page;
+    width: 100px;
+    height: 100px;
+    overflow: clip; /* Depending on font, glyphs may overflow. */
+    background: yellow;
+  }
+  div:nth-child(odd) {
+    margin-right: 500px;
+  }
+  div:nth-child(even) {
+    margin-top: 200px;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

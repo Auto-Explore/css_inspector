@@ -1,0 +1,70 @@
+# css/css-animations/animation-important-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-animations/animation-important-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @keyframes bgcolor_animation {
+    from { background-color: rgb(10, 10, 10); }
+    to { background-color: rgb(20, 20, 20); }
+  }
+  @keyframes color_and_bg_animation {
+    from { background-color: rgb(10, 10, 10); color: rgb(10, 10, 10); }
+    to { background-color: rgb(20, 20, 20); color: rgb(20, 20, 20); }
+  }
+  a, div, ::before{
+    animation-duration: 1000s;
+    animation-delay: -500s;
+    animation-timing-function: steps(2, end);
+  }
+  #target1 {
+    animation-name: bgcolor_animation;
+  }
+  #target2 {
+    background-color: rgb(0, 128, 0) !important;
+    animation-name: bgcolor_animation;
+  }
+  #target3 {
+    color: rgb(0, 128, 0) !important;
+    animation-name: color_and_bg_animation;
+  }
+  #target4::before {
+    color: rgb(0, 128, 0) !important;
+    animation-name: color_and_bg_animation;
+    content: " ";
+  }
+  #target5 {
+    animation-name: color_and_bg_animation;
+  }
+  #target5:visited {
+    color: rgb(0, 128, 0) !important;
+  }
+  #target6 {
+    background-color: white;
+    color: white !important;
+  }
+  #target7 {
+    --length-1: 10px;
+    --length-2: 10px !important;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

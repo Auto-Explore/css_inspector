@@ -1,0 +1,67 @@
+# css/css-overflow/line-clamp/block-ellipsis-010.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/line-clamp/block-ellipsis-010.html"
+}
+```
+
+## style[0]
+
+```css
+
+/* If a line box that has Ahem as its first available font, also has a glyph
+ * from Gentium Plus, assuming no other relevant fonts and line-height: normal,
+ * the line will be ~0.3em taller than it would be if it only had glyphs from
+ * Ahem.
+ *
+ * Since we restrict the Unicode range of Ahem so it doesn't contain the
+ * ellipsis or dot code points, the line-clamp ellipsis will need to be rendered
+ * with Gentium Plus. But since the line-clamp ellipsis has line-height: 0, it
+ * should not grow the height of the line box.
+ */
+@font-face {
+  font-family: "Ahem";
+  src: url("/fonts/Ahem.ttf");
+  unicode-range: U+0000-002D, U+002F-007E;
+}
+@font-face {
+  font-family: "Gentium Plus";
+  src: url("/fonts/GentiumPlus-R.woff");
+}
+
+.container {
+  display: grid;
+  width: 500px;
+  grid-template-columns: 50% 50%;
+  align-items: end;
+  grid-gap: 40px;
+}
+
+.box {
+  background-color: pink;
+  font-family: "Ahem", "Gentium Plus";
+  font-size: 16px;
+}
+.line-clamp {
+  line-clamp: 1;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “line-clamp”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

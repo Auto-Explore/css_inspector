@@ -1,0 +1,46 @@
+# css/css-break/flexbox/multi-line-row-flex-fragmentation-090.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-break/flexbox/multi-line-row-flex-fragmentation-090.html"
+}
+```
+
+## style[0]
+
+```css
+
+  .multicol {
+    position: relative;
+    columns: 3;
+    column-fill: auto;
+    width: 100px;
+    height: 100px;
+    column-gap: 0px;
+    background: green;
+  }
+  .flex {
+    display: flex;
+    flex-wrap: wrap;
+    background: red;
+  }
+  .flex>div {
+    width: 100%;
+    height: 50px;
+    background: green;
+  }
+  .abspos {
+    position: absolute;
+    background: green;
+    width: 33.33px;
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

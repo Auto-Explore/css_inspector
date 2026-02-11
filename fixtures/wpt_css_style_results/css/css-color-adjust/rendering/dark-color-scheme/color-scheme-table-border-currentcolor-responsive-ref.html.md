@@ -1,0 +1,48 @@
+# css/css-color-adjust/rendering/dark-color-scheme/color-scheme-table-border-currentcolor-responsive-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-color-adjust/rendering/dark-color-scheme/color-scheme-table-border-currentcolor-responsive-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+  :root {
+    background-color: gray;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+  table, table * {
+    border: none;
+  }
+
+  * {
+    color-scheme: initial;
+  }
+
+  #table, #col, #tr, #th, #td, #tbody {
+    border: 5px solid currentColor;
+    color: CanvasText;
+    color-scheme: dark;
+  }
+
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,59 @@
+# css/css-values/ic-unit-009.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-values/ic-unit-009.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @font-face
+    {
+      font-family: IcTestFullWidth;
+      src: url(resources/IcTestFullWidth.woff2);
+    }
+
+  div
+    {
+      float: left;
+      font-family: IcTestFullWidth;
+      font-size: 80px; /* arbitrary font size */
+      writing-mode: vertical-rl;
+    }
+
+  div#test-blue
+    {
+      background-color: blue;
+      height: 5ic;
+      width: 1.8em;
+    }
+
+  div#reference-orange
+    {
+      background-color: orange;
+      color: orange;
+      line-height: 1.8; /* arbitrary line-height */
+    }
+  
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

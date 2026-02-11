@@ -1,0 +1,75 @@
+# css/css-flexbox/flex-container-min-content-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/flex-container-min-content-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+@import "/fonts/ahem.css"; /* optional */
+
+body {
+  /* Fit it in 800x600 pixels */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 50px 50px 50px);
+  grid-auto-rows: 50px;
+  font: 10px/1 Ahem, monospace;
+}
+
+/* impose min-content constraint, block formatting context */
+.wrap > * {
+  width: min-content;
+  height: min-content;
+  /* floating inside a zero size box for UAs that don't understand min-content */
+  float: left;
+}
+.wrap {
+  width: 0; height: 0;
+  counter-increment: test;
+}
+
+.row, .col {
+  display: flex;
+  background: blue;
+}
+.row { flex-flow: row;  }
+.col { flex-flow: column; }
+
+.item {
+  /* ensure _outer_ size is measured */
+  margin: 5px;
+  padding: 3px;
+  border: 2px solid aqua;
+  color: orange;
+}
+
+
+/* help people debugging */
+.wrap:hover::before {
+  content: counter(test, decimal-leading-zero);
+  position: absolute;
+  font: initial;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Imported style sheets are not checked.",
+      "severity": "Warning"
+    },
+    {
+      "message": "Invalid value for property “color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 1
+}
+```

@@ -1,0 +1,55 @@
+# css/css-contain/contain-paint-cell-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-contain/contain-paint-cell-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+  table
+    {
+      border-spacing: 0px;
+      /* to help reuse an already created reference file */
+      font-family: monospace;
+      font-size: 100px;
+      table-layout: fixed;
+      width: 4ch;
+    }
+
+  td
+    {
+      padding: 0px;
+      /* to help reuse an already created reference file */
+    }
+
+  col#middle-column
+    {
+      width: 4ch;
+    }
+
+  td#test
+    {
+      color: green;
+      contain: paint;
+  }
+
+  span
+    {
+      background-color: red;
+      color: yellow;
+    }
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

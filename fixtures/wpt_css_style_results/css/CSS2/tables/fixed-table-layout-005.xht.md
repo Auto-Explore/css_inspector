@@ -1,0 +1,63 @@
+# css/CSS2/tables/fixed-table-layout-005.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/tables/fixed-table-layout-005.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            table
+            {
+                border-spacing: 0;
+                table-layout: fixed;
+                width: 300px;
+            }
+            #col1
+            {
+                width: 50px;
+            }
+            td
+            {
+                padding: 0;
+            }
+            #cell1
+            {
+                width: 50px;
+            }
+            #cell2
+            {
+                width: 100px;
+            }
+            #div1
+            {
+                border-top: 1px solid black;
+                height: 100px;
+                width: 300px;
+            }
+            #div1 > div
+            {
+                float: left;
+            }
+            .px50
+            {
+                width: 50px;
+            }
+            #px100
+            {
+                width: 100px;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

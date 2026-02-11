@@ -1,0 +1,51 @@
+# css/cssom/computed-style-005.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/cssom/computed-style-005.html"
+}
+```
+
+## style[0]
+
+```css
+
+    x {
+      display: block;
+      position: relative;
+      background: grey;
+      width: 60px;
+      height: 10px;
+    }
+    y {
+      display: block;
+      background: blue;
+      width: 40px;
+      height: 10px;
+      margin: auto;
+    }
+
+    #absolute {
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+    #relative {
+      position: relative;
+    }
+  
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

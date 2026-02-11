@@ -1,0 +1,54 @@
+# css/css-pseudo/marker-line-height.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-pseudo/marker-line-height.html"
+}
+```
+
+## style[0]
+
+```css
+
+::marker { font-family: inherit; }
+ol {
+  float: left;
+  width: 50px;
+  list-style-position: inside;
+}
+ol, ol div {
+  line-height: 1;
+  font-size: 1rem;
+}
+.line-height.explicit ::marker,
+.line-height.inherit {
+  line-height: 3;
+}
+.line-height.inherit li {
+  font-size: 0; /* Remove the strut, which would defeat the test */
+}
+.line-height.inherit ::marker {
+  font-size: 1rem; /* Restore the font-size */
+}
+.marker-disc {
+  list-style-type: disc;
+}
+.marker-decimal {
+  list-style-type: decimal;
+}
+.marker-string {
+  list-style-type: "3. ";
+}
+.marker-content::marker {
+  content: "4. ";
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

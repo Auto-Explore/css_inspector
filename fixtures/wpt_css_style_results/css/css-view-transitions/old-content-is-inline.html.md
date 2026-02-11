@@ -1,0 +1,176 @@
+# css/css-view-transitions/old-content-is-inline.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/old-content-is-inline.html"
+}
+```
+
+## style[0]
+
+```css
+
+body {
+  margin : 0;
+  font: 20px/1 Ahem;
+}
+
+.container {
+  position: absolute;
+  left: 100px;
+  width: 400px;
+  height: 100px;
+  background-color: grey;
+}
+
+.container.start {
+  top: 100px;
+  view-transition-name: container-start;
+}
+
+.container.end {
+  top: 300px;
+  view-transition-name: container-end;
+}
+
+.transitioned .container {
+  left: 20px;
+  width: 600px;
+  transform: translateY(-50px);
+}
+
+.inline {
+  background-color: limegreen;
+  color: blue;
+}
+
+.start .inline {
+  view-transition-name: start;
+}
+
+.end .inline {
+  view-transition-name: end;
+}
+
+.transitioned .inline {
+  background-color: coral;
+}
+
+/* Overlay the page with purple to ensure screenshots taken are of the view
+ * transition. */
+:root {
+  view-transition-name: none;
+}
+::view-transition {
+  background-color: rebeccapurple;
+}
+
+/* This step function keeps the old snapshots in their initial state for half
+ * the duration, then the new snapshots in their final state for the last half
+ * of the duration. */
+html::view-transition-group(*),
+html::view-transition-new(*),
+html::view-transition-old(*) {
+  animation-timing-function: steps(2, jump-none);
+}
+
+/* Set different durations for start and end so the two subtrees can be
+ * differentiated. The test will manually control animation playback so
+ * duration doesn't matter. */
+html::view-transition-group(container-start),
+html::view-transition-group(start),
+html::view-transition-new(container-start),
+html::view-transition-old(container-start) {
+  animation-duration: 2s;
+}
+html::view-transition-group(container-end),
+html::view-transition-group(end),
+html::view-transition-new(container-end),
+html::view-transition-old(container-end) {
+  animation-duration: 3s;
+}
+
+/* Hide the new states for the inlines, they're tested in
+ * new-content-is-inline.html */
+html::view-transition-new(start),
+html::view-transition-new(end) {
+  animation: unset;
+  opacity: 0;
+}
+html::view-transition-old(start),
+html::view-transition-old(end) {
+  animation: unset;
+  opacity: 1;
+}
+
+```
+
+```json
+{
+  "errors": 15,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

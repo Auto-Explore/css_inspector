@@ -1,0 +1,79 @@
+# css/css-gaps/flex/flex-gap-decorations-012-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-gaps/flex/flex-gap-decorations-012-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+    body {
+        margin: 0px;
+    }
+
+    #flexbox {
+        border: 2px solid rgb(96 139 168);
+        display: flex;
+        column-gap: 10px;
+        row-gap: 10px;
+        width: 170px;
+        flex-wrap: wrap;
+    }
+
+    .items {
+        background-color: rgb(96 139 168 / 0.2);
+        flex-shrink: 1;
+        width: 50px;
+        height: 50px;
+    }
+
+    #four {
+        width: 100px;
+    }
+
+    .row-gap {
+        margin: 0px;
+        padding: 0px;
+        height: 2px;
+        background: blue;
+        width: 170px;
+        position: absolute;
+    }
+
+    .column-gap {
+        display: flex;
+        flex-direction: column;
+        row-gap: 70px;
+        height: 174px;
+        top: 2px;
+        width: 10px;
+        position: absolute;
+    }
+
+    .column {
+        background: red;
+        width: 2px;
+        height: 50px;
+    }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

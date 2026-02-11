@@ -1,0 +1,23 @@
+# css/css-pseudo/first-letter-punctuation-dynamic.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-pseudo/first-letter-punctuation-dynamic.html"
+}
+```
+
+## style[0]
+
+```css
+
+  #target::first-letter { color: green; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

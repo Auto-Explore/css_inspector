@@ -1,0 +1,127 @@
+# css/css-view-transitions/old-content-container-writing-modes.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/old-content-container-writing-modes.html"
+}
+```
+
+## style[0]
+
+```css
+
+#hidden {
+  width: 100px;
+  height: 100px;
+  background: red;
+  position: absolute;
+  top: 0;
+  left: 0;
+  contain: paint;
+  view-transition-name: hidden;
+}
+.tb { writing-mode: horizontal-tb; }
+.lr { writing-mode: vertical-lr; }
+.rl { writing-mode: vertical-rl; }
+.shared {
+  margin: 2px;
+  width: 100px;
+  height: 50px;
+  background: green;
+  contain: paint;
+  border: 1px solid black;
+}
+#target1, #target2, #target3 {
+  background: red;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 100px;
+  height: 500px;
+  contain: paint;
+}
+#one { view-transition-name: s1; }
+#two { view-transition-name: s2; }
+#three { view-transition-name: s3; }
+
+html::view-transition-group(hidden) { animation-duration: 300s; }
+html::view-transition-image-pair(hidden) { animation: unset; opacity: 0; }
+
+html::view-transition-group(s1),
+html::view-transition-group(s2),
+html::view-transition-group(s3) {
+  animation-delay: 300s;
+  animation-fill-mode: both;
+}
+
+html::view-transition-new(s1),
+html::view-transition-new(s2),
+html::view-transition-new(s3) { animation: unset; opacity: 0; }
+
+html::view-transition-old(s1),
+html::view-transition-old(s2),
+html::view-transition-old(s3) { animation: unset; opacity: 1; }
+
+/* hide the root so we show transition background to ensure we're in a transition */
+html::view-transition-group(root) { animation: unset; opacity: 0; }
+html::view-transition { background: lightpink; }
+
+```
+
+```json
+{
+  "errors": 12,
+  "messages": [
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “view-transition-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

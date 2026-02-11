@@ -1,0 +1,68 @@
+# css/css-animations/animation-base-response-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-animations/animation-base-response-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @keyframes font_size_animation {
+    from { font-size: 10px; }
+    to { font-size: 20px; }
+  }
+  @keyframes var_animation {
+    from { --x: 10px; }
+    to { --x: 20px; }
+  }
+  #targets > div {
+    animation-duration: 1000s;
+    animation-delay: -500s;
+    animation-timing-function: steps(2, end);
+  }
+
+  #target1 {
+    animation-name: font_size_animation;
+    font-size: 1px;
+    width: 1em;
+  }
+  #ref1 {
+    width: 15px;
+  }
+
+  #target2 {
+    animation-name: font_size_animation;
+    font-size: 1px;
+    width: 1ex;
+  }
+  #ref2 {
+    font-size: 15px;
+    width: 1ex;
+  }
+
+  #target3 {
+    animation-name: var_animation;
+    --x: 0px;
+    width: var(--x);
+  }
+  #ref3 {
+    width: 20px;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

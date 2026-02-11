@@ -1,0 +1,77 @@
+# css/css-anchor-position/anchor-in-css-min-max-function.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-in-css-min-max-function.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 10px;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+}
+
+.green {
+  background-color: green;
+}
+
+.red {
+  background-color: red;
+}
+
+#anchor1 {
+  anchor-name: --anchor1;
+}
+
+#anchor2 {
+  anchor-name: --anchor2;
+}
+
+#anchor3 {
+  anchor-name: --anchor3;
+}
+
+#target-fail {
+  position: relative;
+  left: 300px;
+}
+
+#target {
+  position: absolute;
+  top: min(anchor(--anchor1 bottom), anchor(--anchor2 bottom), anchor(--anchor3 top));
+  left: max(anchor(--anchor1 left), anchor(--anchor2 left), anchor(--anchor3 left));
+  z-index: 1;
+}
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

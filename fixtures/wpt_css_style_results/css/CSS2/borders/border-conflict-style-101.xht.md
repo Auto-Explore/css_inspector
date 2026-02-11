@@ -1,0 +1,49 @@
+# css/CSS2/borders/border-conflict-style-101.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/borders/border-conflict-style-101.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  table
+  {
+  border-collapse: collapse;
+  }
+
+  tr
+  {
+  border-color: red;
+  border-style: hidden;
+  }
+
+  td
+  {
+  border: red solid;
+  height: 200px;
+  width: 200px;
+  }
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

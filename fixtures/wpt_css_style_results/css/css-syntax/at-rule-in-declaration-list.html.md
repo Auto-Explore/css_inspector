@@ -1,0 +1,22 @@
+# css/css-syntax/at-rule-in-declaration-list.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-syntax/at-rule-in-declaration-list.html"
+}
+```
+
+## style[0]
+
+```css
+
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

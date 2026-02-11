@@ -1,0 +1,42 @@
+# css/CSS2/positioning/bottom-100.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/positioning/bottom-100.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div
+            {
+                position: relative;
+            }
+            #div1
+            {
+                border-top: blue solid 5px;
+                height: 1in;
+            }
+            #div2
+            {
+                border-top: orange solid 5px;
+                bottom: -0%;
+            }
+        
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

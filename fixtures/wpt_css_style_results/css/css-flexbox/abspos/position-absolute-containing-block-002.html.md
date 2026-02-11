@@ -1,0 +1,48 @@
+# css/css-flexbox/abspos/position-absolute-containing-block-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/abspos/position-absolute-containing-block-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+.parent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 180px;
+
+  /* Expand the background area to 200px, without touching the content-box,
+     which is what flex absolute children should be aligned relative to. */
+  border-top: 5px solid yellow;
+  padding-top: 15px;
+  border-left: 5px solid yellow;
+  padding-left: 15px;
+
+  background: yellow;
+}
+
+.child {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: green;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

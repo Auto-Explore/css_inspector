@@ -1,0 +1,51 @@
+# css/css-cascade/all-prop-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-cascade/all-prop-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+.test {
+  /* these must not be overridden */
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+.test, bdo {
+  /* all of these must be overridden */
+  border: solid red;
+  background: red;
+  color: red;
+  text-decoration: line-through;
+  font: bold italic small-caps 20px monospace;
+  outline: solid red;
+  float: left;
+  letter-spacing: 1em;
+  display: list-item;
+  text-align: center;
+  width: 0.5em;
+  margin: 10em;
+  overflow: scroll;
+}
+
+.test, bdo {
+  all: initial;
+  /* if incorrectly implemented, this causes direction: initial; unicode-bidi: initial;
+     which is the same as direction:ltr; unicode-bidi: normal */
+}
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

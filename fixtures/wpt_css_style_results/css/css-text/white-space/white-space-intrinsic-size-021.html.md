@@ -1,0 +1,78 @@
+# css/css-text/white-space/white-space-intrinsic-size-021.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-text/white-space/white-space-intrinsic-size-021.html"
+}
+```
+
+## style[0]
+
+```css
+
+.container {
+  font: 10px / 1 Ahem;
+  color: gray;
+}
+.container.narrow {
+  float: left;
+  width: 0;
+  margin-right: 50px;
+}
+.container.wide {
+  width: 800px;
+}
+.container > div {
+  display: inline-block;
+  border: solid black;
+}
+hr {
+  clear: both;
+}
+x-br::before {
+  content: "\a";
+  white-space: preserve-breaks;
+}
+.collapse.wrap {
+  white-space: normal;
+}
+.collapse.nowrap {
+  white-space: nowrap;
+}
+.preserve.wrap {
+  white-space: pre-wrap;
+}
+.preserve.nowrap {
+  white-space: pre;
+}
+.preserve-breaks.wrap {
+  white-space: preserve-breaks;
+}
+.preserve-breaks.nowrap {
+  white-space: preserve-breaks nowrap;
+}
+.break-spaces.wrap {
+  white-space: break-spaces;
+}
+.break-spaces.nowrap {
+  white-space: break-spaces nowrap;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “white-space”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “white-space”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

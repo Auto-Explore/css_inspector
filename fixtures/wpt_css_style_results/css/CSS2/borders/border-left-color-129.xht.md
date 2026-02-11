@@ -1,0 +1,39 @@
+# css/CSS2/borders/border-left-color-129.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/borders/border-left-color-129.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div
+            {
+                height: 1in;
+                width: 1in;
+            }
+            #test
+            {
+                border-left-style: solid;
+                border-left-width: 1in;
+                border-left-color: aqua;
+            }
+            #reference
+            {
+                background-color: aqua;
+                margin-top: 10px;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

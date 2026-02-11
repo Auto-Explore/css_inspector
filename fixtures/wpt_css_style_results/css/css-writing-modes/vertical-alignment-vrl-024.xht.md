@@ -1,0 +1,45 @@
+# css/css-writing-modes/vertical-alignment-vrl-024.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/vertical-alignment-vrl-024.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+    div#rl-mixed
+    {
+      writing-mode: vertical-rl;
+      font: 100px/3 Ahem; /* computes to 100px/300px */
+      color: blue;
+      text-orientation: mixed;
+    }
+
+    span
+    {
+      font-size: 0.2em;
+      vertical-align: middle;
+    }
+    ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

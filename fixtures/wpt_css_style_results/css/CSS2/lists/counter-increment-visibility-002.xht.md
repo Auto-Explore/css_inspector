@@ -1,0 +1,35 @@
+# css/CSS2/lists/counter-increment-visibility-002.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/lists/counter-increment-visibility-002.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div
+            {
+                counter-increment: hidden 1;
+            }
+            #div1
+            {
+                visibility: hidden;
+            }
+            div:before
+            {
+                content: counter(hidden);
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

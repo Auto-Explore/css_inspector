@@ -1,0 +1,33 @@
+# css/css-lists/list-style-type-decimal-vertical-lr.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-lists/list-style-type-decimal-vertical-lr.html"
+}
+```
+
+## style[0]
+
+```css
+
+html { writing-mode: vertical-lr; }
+ol {
+  list-style-position: inside;
+  padding: 0;
+  margin: 0;
+}
+.content::marker { content: "1. "; }
+.sz1 { font-size: 40px; }
+.sz1::marker { font-size: 20px; }
+.sz2 { font-size: 20px; }
+.sz2::marker { font-size: 40px; }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

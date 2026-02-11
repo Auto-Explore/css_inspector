@@ -1,0 +1,53 @@
+# css/filter-effects/hidpi-invert-filter-background.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/filter-effects/hidpi-invert-filter-background.html"
+}
+```
+
+## style[0]
+
+```css
+
+  html {
+    filter: invert(100%);
+    /* Ensure there's some content area for html/body to paint */
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    /* A 1x1 white PNG. When html is inverted, this should make the effective background black. */
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVQI12P4//8/AAX+Av7czFnnAAAAAElFTkSuQmCC");
+    background-attachment: fixed;
+    background-repeat: repeat;
+  }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “filter”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Missing ':' in declaration.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

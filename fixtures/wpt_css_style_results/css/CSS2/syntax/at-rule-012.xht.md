@@ -1,0 +1,41 @@
+# css/CSS2/syntax/at-rule-012.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/syntax/at-rule-012.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            @-1import "support/at-rule-red.css";
+            div
+            {
+                color: red;
+            }
+            *
+            {
+                color: green;
+            }
+            p
+            {
+                color: black;
+            }
+        
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

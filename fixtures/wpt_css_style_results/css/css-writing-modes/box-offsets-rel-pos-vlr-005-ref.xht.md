@@ -1,0 +1,92 @@
+# css/css-writing-modes/box-offsets-rel-pos-vlr-005-ref.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/box-offsets-rel-pos-vlr-005-ref.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  div > img
+    {
+      margin-left: 8px;
+      margin-right: 1em;
+    }
+
+  table
+    {
+      background-color: yellow;
+      border-spacing: 0px;
+      border: orange solid 50px;
+      display: inline-table;
+      height: 300px;
+      vertical-align: top;
+      width: 300px;
+    }
+
+  td
+    {
+      padding: 0px;
+    }
+
+  td.first-row
+    {
+      height: 29px;
+      vertical-align: top;
+    }
+
+  td#middle-row
+    {
+      text-align: center;
+    }
+
+  td.third-row
+    {
+      height: 25px;
+    }
+
+  span.blue
+    {
+      background-color: blue;
+      color: white;
+      height: 25px;
+      text-align: left;
+      width: 25px;
+    }
+
+  span#top-left, span#bottom-left
+    {
+      float: left;
+    }
+
+  span#top-right, span#bottom-right
+    {
+      float: right;
+    }
+  ]]>
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “border”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,35 @@
+# css/css-pseudo/marker-font-properties-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-pseudo/marker-font-properties-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+ol {
+    line-height: 30px;
+}
+
+li {
+    font-family: sans-serif;
+    font-size: 24px;
+    font-style: italic;
+    font-variant: small-caps;
+    font-weight: bold;
+    list-style-type: lower-alpha;
+    font-variant-numeric: tabular-nums;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

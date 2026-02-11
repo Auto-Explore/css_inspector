@@ -1,0 +1,69 @@
+# css/css-overflow/scroll-markers/scroll-marker-event-target.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-overflow/scroll-markers/scroll-marker-event-target.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    margin: 0;
+  }
+
+  #scroller {
+    position: absolute;
+    top: 100px;
+    width: 600px;
+    height: 300px;
+    overflow: auto;
+    scroll-marker-group: before;
+    white-space: nowrap;
+  }
+
+  #scroller div {
+    display: inline-block;
+    width: 600px;
+    height: 270px;
+  }
+
+  #scroller::scroll-marker-group {
+    position: absolute;
+    top: 0;
+    display: flex;
+    height: 20px;
+    width: 40px;
+  }
+
+  #scroller div::scroll-marker {
+    content: "";
+    width: 100px;
+    height: 20px;
+    display: inline-block;
+  }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown property “scroll-marker-group”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

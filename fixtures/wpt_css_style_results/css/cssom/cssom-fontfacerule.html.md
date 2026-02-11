@@ -1,0 +1,43 @@
+# css/cssom/cssom-fontfacerule.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/cssom/cssom-fontfacerule.html"
+}
+```
+
+## style[0]
+
+```css
+
+        @font-face {
+            src: url(http://foo/bar/font.ttf);
+        }
+        @font-face {
+            font-family: STIXGeneral;
+            src: local(STIXGeneral), url(/stixfonts/STIXGeneral.otf);
+            unicode-range: U+000-49F, U+2000-27FF, U+2900-2BFF, U+1D400-1D7FF;
+        }
+        @font-face {
+            font-family: MainText;
+            src: url(http://example.com/font.ttf);
+            font-variant: oldstyle-nums proportional-nums styleset(1,3);
+        }
+
+       @font-face {
+            font-family: BodyText;
+            src: local("HiraMaruPro-W4");
+            font-variant: proportional-width;
+            font-feature-settings: "ital"; /* Latin italics within CJK text feature */
+        }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

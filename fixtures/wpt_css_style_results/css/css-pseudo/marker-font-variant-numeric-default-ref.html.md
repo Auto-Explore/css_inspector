@@ -1,0 +1,43 @@
+# css/css-pseudo/marker-font-variant-numeric-default-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-pseudo/marker-font-variant-numeric-default-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+  /* This font looks different with 'font-variant-numeric: tabular-nums' */
+  font-family: 'Exo 2';
+  src: local('Exo 2'),
+       url('/css/css-fonts/support/fonts/Exo2-SemiBold.otf') format("opentype");
+}
+ol {
+  float: left;
+  width: 50px;
+  line-height: 25px;
+  list-style-position: inside;
+  font-family: "Exo 2";
+}
+li:first-child::after {
+  content: 'X X X X X X X X X';
+  display: inline-block;
+  font: 25px/1 Ahem;
+  vertical-align: top;
+  height: 0;
+  width: 25px;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

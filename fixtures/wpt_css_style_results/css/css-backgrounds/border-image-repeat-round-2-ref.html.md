@@ -1,0 +1,116 @@
+# css/css-backgrounds/border-image-repeat-round-2-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-backgrounds/border-image-repeat-round-2-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+      .outer {
+        width: 81px;
+        height: 81px;
+      }
+      .inner1 {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 27px;
+        height: 27px;
+        background-image: url("support/border.png");
+      }
+      .inner2 {
+        position: absolute;
+        top: 0px;
+        left: 27px;
+        width: 13px;
+        height: 27px;
+        background-size: 39px 81px;
+        background-image: url("support/border.png");
+        background-position: -13px 0px;
+      }
+      .inner3 {
+        position: absolute;
+        top: 0px;
+        left: 40px;
+        width: 27px;
+        height: 27px;
+        background-image: url("support/border.png");
+      }
+      .inner4 {
+        position: absolute;
+        top: 27px;
+        left: 0px;
+        width: 27px;
+        height: 13px;
+        background-size: 81px 39px;
+        background-image: url("support/border.png");
+        background-position: 0px -13px;
+      }
+      .inner5 {
+        position: absolute;
+        top: 27px;
+        left: 40px;
+        width: 27px;
+        height: 13px;
+        background-size: 81px 39px;
+        background-image: url("support/border.png");
+        background-position: -54px -13px;
+      }
+      .inner6 {
+        position: absolute;
+        top: 40px;
+        left: 0px;
+        width: 27px;
+        height: 27px;
+        background-image: url("support/border.png");
+      }
+      .inner7 {
+        position: absolute;
+        top: 40px;
+        left: 27px;
+        width: 13px;
+        height: 27px;
+        background-size: 39px 81px;
+        background-image: url("support/border.png");
+        background-position: -13px -54px;
+      }
+      .inner8 {
+        position: absolute;
+        top: 40px;
+        left: 40px;
+        width: 27px;
+        height: 27px;
+        background-image: url("support/border.png");
+      }
+    
+```
+
+```json
+{
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

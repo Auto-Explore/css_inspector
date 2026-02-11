@@ -1,0 +1,60 @@
+# css/css-page/margin-boxes/inapplicable-properties-print.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-page/margin-boxes/inapplicable-properties-print.html"
+}
+```
+
+## style[0]
+
+```css
+
+  :root {
+    print-color-adjust: exact;
+  }
+  @page {
+    size: 400px;
+    margin: 100px;
+
+    @top-left-corner {
+      text-align: left;
+      vertical-align: top;
+      white-space: pre-wrap;
+      content: "Line 1\aLine 2";
+      position: relative;
+      display: none;
+      columns: 2;
+      column-rule: solid red;
+      orphans: 1;
+      widows: 1;
+      rotate: 45deg;
+      top: 50px;
+      left: 90px;
+      width: 100px;
+      height:100px;
+      background: green;
+    }
+  }
+  body {
+    margin: 0;
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “column-rule”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

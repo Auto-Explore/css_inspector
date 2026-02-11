@@ -1,0 +1,44 @@
+# css/CSS2/tables/collapsing-border-model-002.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/tables/collapsing-border-model-002.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            table
+            {
+                border: 10px solid red;
+                border-collapse: collapse;
+                margin: 15px;
+            }
+            td
+            {
+                background: blue;
+                border: 20px solid blue;
+                padding: 20px;
+            }
+            .cell
+            {
+                border: 50px solid black;
+            }
+            div
+            {
+                background: blue;
+                position: absolute;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

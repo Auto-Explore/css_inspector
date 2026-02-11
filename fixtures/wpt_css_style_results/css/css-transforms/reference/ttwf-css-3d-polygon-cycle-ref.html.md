@@ -1,0 +1,76 @@
+# css/css-transforms/reference/ttwf-css-3d-polygon-cycle-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/reference/ttwf-css-3d-polygon-cycle-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+        #container {
+        	position: absolute;
+        	top: 100px;
+        	left: 100px;
+        }
+        .rect {
+        	position: absolute;
+        }
+        #red0 {
+        	background-color: red;
+        	left: 6px;
+        	width: 100px;
+        	height: 50px;
+        }
+        #green0 {
+        	background-color: green;
+        	top: 6px;
+        	width: 50px;
+        	height: 100px;
+        }
+        #blue0 {
+        	background-color: blue;
+        	width: 50px;
+        	height: 100px;
+        	transform: translate(40px, 81px) rotate(45deg);
+        }
+        #red1 {
+        	background-color: red;
+        	width: 100px;
+        	height: 50px;
+        	transform: translate(94px, 0px);
+        }
+        #green1 {
+        	background-color: green;
+        	width: 50px;
+        	height: 100px;
+        	transform: translate(0px, 94px);
+        }
+        #blue1 {
+        	background-color: blue;
+        	width: 50px;
+        	height: 100px;
+        	transform: translate(102px, 19px) rotate(45deg);
+        }
+    
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “transform”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “transform”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

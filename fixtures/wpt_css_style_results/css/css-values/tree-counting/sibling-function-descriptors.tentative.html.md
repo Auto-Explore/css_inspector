@@ -1,0 +1,172 @@
+# css/css-values/tree-counting/sibling-function-descriptors.tentative.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-values/tree-counting/sibling-function-descriptors.tentative.html"
+}
+```
+
+## style[0]
+
+```css
+
+  @page {
+    margin: 100px;
+    margin: calc(0px * sibling-index());
+  }
+  @page {
+    margin: 100px;
+    margin: calc(0px * sibling-count());
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```
+
+## style[1]
+
+```css
+
+  @font-face {
+    font-family: my-font;
+    font-weight: 300;
+    font-weight: calc(max(0 * sibling-index(), 400));
+    font-feature-settings: "vert" 2;
+    font-feature-settings: "vert" calc(max(sibling-index(), 1));
+  }
+  @font-face {
+    font-family: my-font;
+    font-weight: 300;
+    font-weight: calc(max(0 * sibling-count(), 400));
+    font-feature-settings: "vert" 2;
+    font-feature-settings: "vert" calc(max(sibling-count(), 1));
+  }
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```
+
+## style[2]
+
+```css
+
+  @font-palette-values --foo {
+    font-family: my-font;
+    base-palette: 1;
+    base-palette: calc(max(sibling-index(), 2));
+    override-colors: 1 green;
+    override-colors: sibling-index() red;
+  }
+  @font-palette-values --foo {
+    font-family: my-font;
+    base-palette: 1;
+    base-palette: calc(max(sibling-count(), 2));
+    override-colors: 1 green;
+    override-colors: sibling-count() red;
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[3]
+
+```css
+
+  @counter-style --foo {
+    system: fixed 1;
+    system: fixed calc(max(sibling-index(), 2));
+    negative: --pass;
+    negative: linear-gradient(red calc(20px * sibling-index()), pink);
+    prefix: --pass;
+    prefix: linear-gradient(red calc(20px * sibling-index()), pink);
+    suffix: --pass;
+    suffix: linear-gradient(red calc(20px * sibling-index()), pink);
+    range: 1 infinite;
+    range: calc(max(sibling-index(), 2)) infinite;
+    pad: 1 --pass;
+    pad: 1 linear-gradient(red calc(20px * sibling-index()), pink);
+    pad: calc(max(sibling-index(), 2)) --fail;
+    symbols: --pass;
+    symbols: linear-gradient(red calc(20px * sibling-index()), pink);
+  }
+  @counter-style --foo {
+    system: fixed 1;
+    system: fixed calc(max(sibling-count(), 2));
+    negative: --pass;
+    negative: linear-gradient(green, green);
+    negative: linear-gradient(red calc(20px * sibling-count()), pink);
+    prefix: --pass;
+    prefix: linear-gradient(red calc(20px * sibling-count()), pink);
+    suffix: --pass;
+    suffix: linear-gradient(red calc(20px * sibling-count()), pink);
+    range: 1 infinite;
+    range: calc(max(sibling-count(), 2)) infinite;
+    pad: 1 --pass;
+    pad: 1 linear-gradient(red calc(20px * sibling-count()), pink);
+    pad: calc(max(sibling-count(), 2)) --fail;
+    symbols: --pass;
+    symbols: linear-gradient(red calc(20px * sibling-count()), pink);
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```
+
+## style[4]
+
+```css
+
+  @font-feature-values foo {
+    @swash { pretty: 1; }
+    @swash { pretty: calc(max(sibling-index(), 2)); }
+  }
+  @font-feature-values bar {
+    @swash { pretty: 1; }
+    @swash { pretty: calc(max(sibling-count(), 2)); }
+  }
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

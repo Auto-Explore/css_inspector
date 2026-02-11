@@ -1,0 +1,67 @@
+# css/css-grid/abspos/grid-abspos-staticpos-align-self-rtl-last-baseline-004.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/abspos/grid-abspos-staticpos-align-self-rtl-last-baseline-004.html"
+}
+```
+
+## style[0]
+
+```css
+
+    .container {
+      display: grid;
+      direction: rtl;
+      padding: 1px 2px;
+      border: 1px solid black;
+      background: yellow;
+      margin-bottom: 5px;
+      margin-right: 5px;
+      float: left; /* For testing in "rows" of containers */
+    }
+    br { clear: both }
+
+    .big > .container {
+      height: 30px;
+      width: 22px;
+      grid: 2px 20px 2px / 3px 14px 3px;
+    }
+    .small > .container {
+      grid: 0px 2px 0px / 3px 2px 3px;
+      height: 2px;
+      width: 4px;
+    }
+
+    .container > * {
+      position: absolute;
+      direction: ltr;
+      grid-area: 2 / 2 / 3 / 3;
+      background: teal;
+      height: 6px;
+      width: 8px;
+    }
+  
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “grid-area”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

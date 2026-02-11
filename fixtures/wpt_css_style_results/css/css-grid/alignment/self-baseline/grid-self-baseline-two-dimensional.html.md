@@ -1,0 +1,53 @@
+# css/css-grid/alignment/self-baseline/grid-self-baseline-two-dimensional.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-grid/alignment/self-baseline/grid-self-baseline-two-dimensional.html"
+}
+```
+
+## style[0]
+
+```css
+
+
+body { margin: 0; }
+.grid {
+   margin: 5px;
+   font: 16px/1 Ahem;
+   -webkit-text-orientation: sideways;
+}
+.font20 { font: 20px/1 Ahem; }
+.font30 { font: 30px/1 Ahem; }
+.font40 { font: 40px/1 Ahem; }
+.font60 { font: 60px/1 Ahem; }
+span {
+   border-width: 2px 5px 8px 4px;
+   border-style: solid;
+   padding: 6px 3px 7px 8px;
+   margin: 10px 6px 4px 12px;
+}
+.grid > span { background-color: grey; }
+.extraTopPadding { padding-top: 30px; }
+.extraBottomPadding { padding-bottom: 30px; }
+.extraLeftPadding { padding-left: 30px; }
+.extraRightPadding { padding-right: 30px; }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown property “-webkit-text-orientation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

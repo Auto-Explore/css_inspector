@@ -1,0 +1,28 @@
+# css/CSS2/syntax/malformed-decl-005.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/syntax/malformed-decl-005.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div
+            {
+                color: green;
+                color{;color: red;}
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

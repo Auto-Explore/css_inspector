@@ -1,0 +1,69 @@
+# css/css-transforms/backface-visibility-hidden-animated-002.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-transforms/backface-visibility-hidden-animated-002.html"
+}
+```
+
+## style[0]
+
+```css
+
+    @keyframes show-backface {
+      0% { transform: rotateY(60deg); }
+      0.01% { transform: rotateY(180deg); }
+      100% { transform: rotateY(180deg); }
+    }
+
+    .flip {
+      animation: 10s linear 0s infinite forwards show-backface;
+      height: 100px;
+      width: 100px;
+      transform: rotateY(60deg);
+      transform-style: preserve-3d;
+    }
+
+    #back {
+      background: lightblue;
+      transform: rotateY(180deg);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 200px;
+      backface-visibility: hidden;
+    }
+
+    #posabs {
+      position: absolute;
+      /* This is the only difference from backface-visibility-hidden-animated-001.html. */
+      will-change: transform;
+      bottom: 0;
+      right: 0;
+      background: yellow;
+    }
+  
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,56 @@
+# css/css-tables/absolute-tables-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-tables/absolute-tables-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+.cb {
+  position: relative;
+  height: 200px;
+  width: 200px;
+  outline: 2px dashed lightblue;
+}
+
+.table {
+  background-color: orange;
+  position: absolute;
+  width: 50px;
+  right: 0px;
+}
+
+.cell {
+  border: 1px solid green;
+  width: 100px;
+}
+
+.cell > div {
+  width: 20px;
+}
+
+.vertical { writing-mode: vertical-lr; }
+.horizontal { writing-mode: horizontal-tb; }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “outline”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-color”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

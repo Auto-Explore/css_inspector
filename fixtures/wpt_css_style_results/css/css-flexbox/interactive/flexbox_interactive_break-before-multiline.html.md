@@ -1,0 +1,46 @@
+# css/css-flexbox/interactive/flexbox_interactive_break-before-multiline.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-flexbox/interactive/flexbox_interactive_break-before-multiline.html"
+}
+```
+
+## style[0]
+
+```css
+
+* {widows: 1; orphans: 1;}
+div {
+	border: 1px solid white;
+	width: 20em;
+
+	display: flex;
+	flex-wrap: wrap;
+}
+p {
+	background: yellow;
+	margin: 0;
+	height: 2em;
+
+	flex: 1 0 10em;
+}
+@media projection, print {
+	#test {break-before: always;}
+	#test, #test+p {background: red;}
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “flex”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

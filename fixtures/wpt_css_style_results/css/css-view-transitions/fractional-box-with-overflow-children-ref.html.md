@@ -1,0 +1,60 @@
+# css/css-view-transitions/fractional-box-with-overflow-children-ref.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-view-transitions/fractional-box-with-overflow-children-ref.html"
+}
+```
+
+## style[0]
+
+```css
+
+.box {
+  position: relative;
+  margin: 15px;
+  background: green;
+  width: 100.125px;
+  height: 50.875px;
+}
+.shift {
+  left: 0.4px;
+}
+.child1 {
+  position: absolute;
+  left: -2px;
+  width: 110px;
+  height: 25px;
+  background: darkgreen;
+}
+.child2 {
+  position: absolute;
+  top: -3px;
+  width: 50px;
+  height: 55px;
+  background: darkgreen;
+}
+body { background: lightpink }
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

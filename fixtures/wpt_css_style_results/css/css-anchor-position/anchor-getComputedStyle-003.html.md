@@ -1,0 +1,111 @@
+# css/css-anchor-position/anchor-getComputedStyle-003.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-anchor-position/anchor-getComputedStyle-003.html"
+}
+```
+
+## style[0]
+
+```css
+
+body {
+  margin: 0;
+}
+
+.cb {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  background: lightgray;
+}
+
+.anchor {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: orange;
+}
+
+.target {
+  position: absolute;
+  left: 999999px;
+  width: 100px;
+  height: 100px;
+  background: lime;
+  position-try-fallbacks: --pf, --pf2;
+}
+
+@position-try --pf {
+  top: anchor(top);
+  left: anchor(right);
+}
+@position-try --pf2 {
+  top: anchor(top);
+  right: anchor(left);
+  left: auto;
+}
+
+#anchor1 {
+  top: 0;
+  left: 0;
+  anchor-name: --a1;
+}
+
+#target1 {
+  position-anchor: --a1;
+}
+
+#anchor2 {
+  top: 200px;
+  right: 0;
+  anchor-name: --a2;
+}
+
+#target2 {
+  position-anchor: --a2;
+}
+```
+
+```json
+{
+  "errors": 8,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-try-fallbacks”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “anchor-name”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “position-anchor”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

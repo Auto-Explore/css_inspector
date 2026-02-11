@@ -1,0 +1,63 @@
+# css/filter-effects/backdrop-filter-backdrop-root-animation-in-effect.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/filter-effects/backdrop-filter-backdrop-root-animation-in-effect.html"
+}
+```
+
+## style[0]
+
+```css
+
+  body {
+    background: black;
+    color: white;
+  }
+
+  .container {
+    width: 100px;
+    height: 100px;
+    animation: fadeIn 1s steps(3, jump-none) -0.9s;
+    /* According to
+    https://drafts.csswg.org/web-animations-1/#side-effects-section, for
+    animation effects that stay in effect after finishing, the user agent must
+    act as though the target element has a corresponding will-change property.
+    In this case, that means treating it as 'will-change: opacity'. */
+    animation-fill-mode: forwards;
+  }
+
+  .filterbox {
+    width: 100%;
+    height: 100%;
+    backdrop-filter: invert(1);
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

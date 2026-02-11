@@ -1,0 +1,51 @@
+# css/css-writing-modes/different-block-flow-dir-001.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-writing-modes/different-block-flow-dir-001.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+  span#inner
+  {
+  background-color: green;
+  color: green;
+  height: 6.25em;
+  vertical-align: top;
+  width: 6.25em;
+  writing-mode: vertical-rl;
+  }
+
+  div#reference-overlapped-red
+  {
+  background-color: red;
+  bottom: 6.25em;
+  height: 6.25em;
+  position: relative;
+  width: 6.25em;
+  z-index: -1;
+  }
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

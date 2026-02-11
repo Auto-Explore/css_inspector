@@ -1,0 +1,49 @@
+# css/selectors/focus-within-006.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/selectors/focus-within-006.html"
+}
+```
+
+## style[0]
+
+```css
+
+:focus {
+  outline: none;
+
+  /* Make the caret invisible
+     since it matches the color of the text, which is transparent,
+     while keeping the text readable thanks to its shadow.
+     Not using the caret-color property as it is too new to be relied on. */
+  color: transparent; text-shadow: black 0px 0px 0px;
+}
+
+/* Use blue to indicate that the user needs to pay attention.
+   This element needs to be focused for the test to make sense. */
+#focusme:not(:focus) {
+  border: solid 15px blue;
+}
+
+#focusme:focus:not(:focus-within) {
+  background: red;
+}
+div:focus-within {
+  border: solid 5px green;
+}
+```
+
+```json
+{
+  "errors": 1,
+  "messages": [
+    {
+      "message": "Invalid value for property “text-shadow”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

@@ -1,0 +1,54 @@
+# css/CSS2/tables/table-anonymous-block-011.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/tables/table-anonymous-block-011.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            #div1
+            {
+                border-top: 1em solid black;
+                width: 10em;
+            }
+            #div2
+            {
+                background: blue;
+                height: 10em;
+                position: relative;
+                top: -4em;
+                width: 10em;
+            }
+            table
+            {
+                 border-spacing: 0;
+                 font: 1em/1 Ahem;
+                 margin-top: 2em;
+            }
+            caption
+            {
+                background: red;
+                color: red;
+                margin-top: 2em;
+            }
+            td
+            {
+                background: red;
+                color: red;
+                padding: 0;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

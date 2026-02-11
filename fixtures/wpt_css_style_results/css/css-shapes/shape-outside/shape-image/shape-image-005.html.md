@@ -1,0 +1,52 @@
+# css/css-shapes/shape-outside/shape-image/shape-image-005.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shapes/shape-outside/shape-image/shape-image-005.html"
+}
+```
+
+## style[0]
+
+```css
+
+        .container {
+          position: relative;
+          font-family: Ahem;
+          font-size: 50px;
+          line-height: 50px;
+        }
+        #test {
+            width: 100px;
+            color: rgb(0, 100, 0);
+            background-color: red;
+        }
+        #image {
+            float: left;
+            shape-outside: url('data:image/svg+xml;utf8,<svg width="100px" height="100px" style="background-color: rgba(0,0,0,0.7)" version="1.1" xmlns="http://www.w3.org/2000/svg"><path fill="%23006400" d=" M 0.00 0.00 L 50.00 0.00 C 50.00 33.33 50.00 66.67 50.00 100.00 L 0.00 100.00 L 0.00 0.00 Z" /></svg>');
+            shape-image-threshold: 0.8;
+        }
+    
+```
+
+```json
+{
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Unknown property “shape-outside”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid property name in declaration.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “shape-image-threshold”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

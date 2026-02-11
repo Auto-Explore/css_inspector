@@ -1,0 +1,67 @@
+# css/css-shapes/shape-outside/shape-image/shape-image-006.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-shapes/shape-outside/shape-image/shape-image-006.html"
+}
+```
+
+## style[0]
+
+```css
+
+        body {
+            margin: 0;
+        }
+        .container {
+          left: 10px;
+          font: 50px/1 Ahem;
+        }
+        #test {
+            width: 200px;
+            color: rgb(0,100,0);
+        }
+        #image {
+            float: left;
+            shape-outside: url("support/left-half-rectangle.png");
+            shape-margin: 10px;
+        }
+        .blue {
+            width: 2px;
+            height: 100px;
+            background-color: blue;
+        }
+        .left-line { left: 65px; }
+        .right-line { left: 125px; }
+
+        .failure {
+            left: 70px;
+            width: 50px;
+            height: 100px;
+            background-color: red;
+            z-index: -1;
+        }
+        .container, .blue, .failure {
+            position: absolute;
+            top: 70px;
+        }
+    
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Unknown property “shape-outside”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “shape-margin”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

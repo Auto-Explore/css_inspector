@@ -1,0 +1,39 @@
+# css/CSS2/tables/border-conflict-w-003.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/tables/border-conflict-w-003.xht"
+}
+```
+
+## style[0]
+
+```css
+<![CDATA[
+   table { border-collapse: collapse; }
+   td {  border: 5px dashed lime; height: 3em; }
+   .c5 { border: 10px hidden red; }
+   .c2 { border-bottom-color: red; }
+   .c6 { border-left-color: red; }
+   .c8 { border-top-color: red; }
+   .c4 { border-right-color: red; }
+  ]]>
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid input.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid selector.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

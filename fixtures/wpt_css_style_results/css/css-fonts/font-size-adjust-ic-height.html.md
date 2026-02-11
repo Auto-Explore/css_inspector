@@ -1,0 +1,54 @@
+# css/css-fonts/font-size-adjust-ic-height.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-fonts/font-size-adjust-ic-height.html"
+}
+```
+
+## style[0]
+
+```css
+
+@font-face {
+  font-family: NotoSansCJK;
+  src: url(/fonts/noto/cjk/NotoSansCJKjp-Regular-subset-chws.otf);
+}
+div {
+  font-size: 100px;
+  background: green;
+  color: green;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+.adjusted {
+  font-family: NotoSansCJK;
+  /* The NotoSansCJK font has 1.0 as an aspect value for the CJK water glyph
+     (i.e., the advance height of “水” / the font size).
+     Therefore, an ic-height 2.0 means a 200% scaling up. */
+  font-size-adjust: ic-height 2.0;
+}
+.fallback {
+  font-family: Ahem;
+  /* The Ahem font lacks vertical metrics, so a fallback is applied. */
+  font-size-adjust: ic-height 0.5;
+}
+```
+
+```json
+{
+  "errors": 2,
+  "messages": [
+    {
+      "message": "Invalid value for property “font-size-adjust”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-size-adjust”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

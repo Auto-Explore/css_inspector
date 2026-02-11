@@ -1,0 +1,35 @@
+# css/CSS2/tables/tables-001.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/tables/tables-001.xht"
+}
+```
+
+## style[0]
+
+```css
+
+
+    /* test */
+    body * { display: table-cell; } /* turn any non-existent elements into table cells */
+    .table { display: table; background: red; }
+    .row   { display: table-row; }
+    /* reset all the other properties that might give us gaps */
+    .table, .row { padding: 0; margin: 0; border: 0; border-spacing: 1em; }
+
+    /* control */
+    .table, .control { position: absolute; top: 4em; left: 2em; }
+    .control { display: block; height: 2em; width: 2em; background: green; }
+
+  
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

@@ -1,0 +1,79 @@
+# css/css-animations/inheritance-pseudo-element.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-animations/inheritance-pseudo-element.html"
+}
+```
+
+## style[0]
+
+```css
+
+body {
+  font-size: 30px;
+}
+
+.container {
+  font-size: 5px;
+  height: 40px;
+}
+
+.container::after {
+  content: "";
+  display: block;
+  border: 2px solid blue;
+  width: 1em;
+  height: 1em;
+}
+
+@keyframes kf-fs5px { from, to { font-size: 5px; } }
+.fs5px::after {
+  animation: kf-fs5px 1s infinite;
+}
+
+@keyframes kf-fs1em { from, to { font-size: 1em; } }
+.fs1em::after {
+  animation: kf-fs1em 1s infinite;
+}
+
+@keyframes kf-fs100p { from, to { font-size: 100%; } }
+.fs100p::after {
+  animation: kf-fs100p 1s infinite;
+}
+
+@keyframes kf-fsinherit { from, to { font-size: inherit; } }
+.fsinherit::after {
+  animation: kf-fsinherit 1s infinite;
+}
+```
+
+```json
+{
+  "errors": 5,
+  "messages": [
+    {
+      "message": "Unknown at-rule.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    }
+  ],
+  "warnings": 0
+}
+```

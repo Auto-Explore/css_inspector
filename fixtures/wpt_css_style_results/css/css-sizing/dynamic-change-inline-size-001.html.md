@@ -1,0 +1,39 @@
+# css/css-sizing/dynamic-change-inline-size-001.html
+
+```json
+{
+  "format_version": 3,
+  "file": "css/css-sizing/dynamic-change-inline-size-001.html"
+}
+```
+
+## style[0]
+
+```css
+
+#block {
+  inline-size: 100px;
+  block-size: 100px;
+  font: 50px/1 Ahem;
+  color: green;
+  word-break: break-all;
+}
+
+#block > div {
+  /* The following inline-size and padding will give the div a border-box
+     inline-size of 100px, both before and after this test's dynamic
+     modification. */
+  box-sizing: border-box;
+  inline-size: 100px;
+  padding-right: calc(100px - 50%);
+  background: red;
+}
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```

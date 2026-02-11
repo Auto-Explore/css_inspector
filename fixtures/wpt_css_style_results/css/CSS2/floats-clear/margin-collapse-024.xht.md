@@ -1,0 +1,46 @@
+# css/CSS2/floats-clear/margin-collapse-024.xht
+
+```json
+{
+  "format_version": 3,
+  "file": "css/CSS2/floats-clear/margin-collapse-024.xht"
+}
+```
+
+## style[0]
+
+```css
+
+            div
+            {
+                font: 20px/1em Ahem;
+                width: 5em;
+            }
+            #div1
+            {
+                background: url('support/margin-collapse-2em-space.png');
+                height: 4em;
+            }
+            #div2, #div4
+            {
+                background: green;
+                height: 1em;
+            }
+            #div3
+            {
+                background: red;
+            }
+            #div3, #div4
+            {
+                margin-top: 2em;
+            }
+        
+```
+
+```json
+{
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
+}
+```
