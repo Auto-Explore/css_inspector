@@ -5,7 +5,7 @@ Machine-readable metadata for `css_inspector_cli wpt-style` lives in the JSON bl
 ```json
 {
   "format_version": 3,
-  "wpt_commit": "5cdef06f4203faeefd3e8802b6b275cc4b97c11c",
+  "wpt_commit": "4b15691efab556f61e9869aa323a35b8a4498ff4",
   "config": {
     "profile": null,
     "medium": null,
