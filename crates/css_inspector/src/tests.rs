@@ -170,6 +170,170 @@ fn layer_statement_is_accepted() {
 }
 
 #[test]
+fn validates_ct_color_switch_stylesheet_in_css3svg_profile() {
+    let css = r#"/**
+
+v2.0.0-beta7
+Copyright (c) 2023
+Licensed GPLv2+
+*/
+[data-color-mode*=updating] *:not(.ct-color-switch *)
+{
+transition: none !important;
+}
+
+[data-color-mode*=dark] [data-color-switch=normal],[data-color-mode*=light] [data-color-switch=reversed]
+{
+--is-toggled: var(--true);
+--is-light-mode-visible: none;
+--is-toggled-path: path("M-9 3h25a1 1 0 0017 13v30H0Z");
+}
+
+[data-color-mode*=dark] [data-color-switch=reversed],[data-color-mode*=light] [data-color-switch=normal]
+{
+--is-toggled: var(--false);
+--is-dark-mode-visible: none;
+}
+
+@media(prefers-color-scheme: dark)
+{
+[data-color-mode=os-default] [data-color-switch=normal]
+{
+--is-toggled: var(--true);
+--is-light-mode-visible: none;
+--is-toggled-path: path("M-9 3h25a1 1 0 0017 13v30H0Z");
+}
+
+[data-color-mode=os-default] [data-color-switch=reversed]
+{
+--is-toggled: var(--false);
+--is-dark-mode-visible: none;
+}
+}
+
+@media(prefers-color-scheme: light)
+{
+[data-color-mode=os-default] [data-color-switch=normal]
+{
+--is-toggled: var(--false);
+--is-dark-mode-visible: none;
+}
+
+[data-color-mode=os-default] [data-color-switch=reversed]
+{
+--is-toggled: var(--true);
+--is-light-mode-visible: none;
+--is-toggled-path: path("M-9 3h25a1 1 0 0017 13v30H0Z");
+}
+}
+
+.ct-color-switch
+{
+--animation-duration: 300ms;
+}
+
+.ct-color-switch .ct-dark-mode-label
+{
+display: var(--is-dark-mode-visible, block);
+}
+
+.ct-color-switch .ct-light-mode-label
+{
+display: var(--is-light-mode-visible, block);
+}
+
+.ct-color-switch .ct-switch-type-expand :first-child path
+{
+d: var(--is-toggled-path, path("M0-11h25a1 1 0 0017 13v30H0Z"));
+transition-delay: var(--is-toggled, calc(var(--animation-duration) * 0.4));
+transition-timing-function: var(--is-toggled, cubic-bezier(0, 0, 0, 1.25));
+}
+
+.ct-color-switch .ct-switch-type-expand g path
+{
+transform: var(--is-toggled, scale(0.75));
+transition-delay: var(--is-toggled, 0s);
+}
+
+.ct-color-switch .ct-switch-type-expand g circle
+{
+transform: var(--is-toggled, scale(1.4));
+transition-delay: var(--is-toggled, 0s);
+}
+
+.ct-color-switch .ct-switch-type-within .ct-switch-type-within__circle
+{
+transform: var(--is-toggled, scale(1.5));
+}
+
+.ct-color-switch .ct-switch-type-within .ct-switch-type-within__inner
+{
+transform: var(--is-toggled, translate3d(3px, -3px, 0) scale(1.2));
+}
+
+.ct-color-switch .ct-switch-type-within g path
+{
+transform: var(--is-toggled, scale(0.65));
+}
+
+.ct-color-switch .ct-switch-type-dark-inner :first-child
+{
+transform: var(--is-toggled, rotate(180deg));
+}
+
+.ct-color-switch .ct-switch-type-dark-inner :last-child
+{
+transform: var(--is-toggled, rotate(-180deg));
+}
+
+.ct-color-switch .ct-switch-type-expand :first-child path
+{
+transition-property: transform,d;
+transition-duration: calc(var(--animation-duration)*.6);
+transition-timing-function: cubic-bezier(0, 0, 0.5, 1);
+}
+
+.ct-color-switch .ct-switch-type-expand g path,.ct-color-switch .ct-switch-type-expand g circle
+{
+transform-origin: center;
+transition: transform calc(var(--animation-duration).65) cubic-bezier(0, 0, 0, 1.25) calc(var(--animation-duration).35);
+}
+
+.ct-color-switch .ct-switch-type-within *
+{
+transform-origin: center;
+transition: transform calc(var(--animation-duration)) cubic-bezier(0, 0, 0, 1.25);
+}
+
+.ct-color-switch .ct-switch-type-dark-inner path
+{
+transform-origin: center;
+transition: transform var(--animation-duration) ease;
+}
+
+@supports not (d: path(""))
+{
+.ct-color-switch .ct-switch-type-expand :first-child path
+{
+transform: var(--is-toggled, translate3d(-9px, 14px, 0));
+}
+}"#;
+
+    let report = validate_css_text(
+        css,
+        &Config {
+            profile: Some("css3svg".to_string()),
+            ..Config::default()
+        },
+    )
+    .unwrap();
+
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
 fn font_face_allows_src_descriptor_and_page_warns_once_for_page_break_too_many_values() {
     // `src` is not a normal CSS property, but is allowed inside @font-face.
     let report = validate_css_text("a { src: url(x); }", &Config::default()).unwrap();
