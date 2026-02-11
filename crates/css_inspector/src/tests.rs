@@ -541,6 +541,19 @@
     }
 
     #[test]
+    fn supports_queries_accept_calc_nan_and_infinity() {
+        for css in [
+            "@supports (scale: calc(NaN)) {}",
+            "@supports (scale: calc(infinity)) {}",
+        ] {
+            let report = validate_css_text(css, &Config::default()).unwrap();
+            assert_eq!(report.errors, 0, "{css}: {report:?}");
+            assert_eq!(report.warnings, 0, "{css}: {report:?}");
+            assert!(report.messages.is_empty(), "{css}: {report:?}");
+        }
+    }
+
+    #[test]
     fn css_wide_keyword_helpers_are_case_insensitive_and_accept_slash_forms() {
         assert!(is_css_wide_keyword(" InHeRiT "));
         assert!(is_css_wide_keyword("revert-layer"));
