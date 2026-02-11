@@ -241,6 +241,16 @@ impl DeclValidator<'_> {
             push_error(self.report, format!("Invalid value for property “{prop}”."));
             return;
         }
+
+        if prop == "overflow-clip-margin" {
+            push_warning_level(
+                self.report,
+                self.warning_level,
+                0,
+                "“overflow-clip-margin” is not supported by Safari.",
+            );
+        }
+
         if tokens.len() == 1 && is_css_wide_keyword(tokens[0]) {
             return;
         }
@@ -313,6 +323,7 @@ impl DeclValidator<'_> {
             "azimuth" => validate_azimuth(tokens.as_slice(), self.report),
             "elevation" => validate_elevation(tokens.as_slice(), self.report),
             "filter" => validate_filter(tokens.as_slice(), self.report),
+            "overflow-clip-margin" => validate_overflow_clip_margin(tokens.as_slice(), self.report),
             _ => {}
         }
 
@@ -365,6 +376,79 @@ fn validate_zoom(tokens: &[&str], report: &mut Report) {
     }
 
     push_error(report, "Invalid value for property “zoom”.");
+}
+
+fn validate_overflow_clip_margin(tokens: &[&str], report: &mut Report) {
+    if !(1..=2).contains(&tokens.len()) {
+        push_error(report, "Invalid value for property “overflow-clip-margin”.");
+        return;
+    }
+
+    let mut has_box = false;
+    let mut has_length = false;
+
+    for &t in tokens {
+        let tl = ascii_lowercase_cow(t);
+        let t = tl.as_ref();
+
+        if is_overflow_clip_margin_visual_box(t) {
+            if has_box {
+                push_error(report, "Invalid value for property “overflow-clip-margin”.");
+                return;
+            }
+            has_box = true;
+            continue;
+        }
+
+        if is_overflow_clip_margin_lengthish_token(t) {
+            if has_length {
+                push_error(report, "Invalid value for property “overflow-clip-margin”.");
+                return;
+            }
+            has_length = true;
+            continue;
+        }
+
+        push_error(report, "Invalid value for property “overflow-clip-margin”.");
+        return;
+    }
+
+    // Disallow `foo foo` cases.
+    if tokens.len() == 2 && !(has_box && has_length) {
+        push_error(report, "Invalid value for property “overflow-clip-margin”.");
+    }
+}
+
+fn is_overflow_clip_margin_visual_box(t: &str) -> bool {
+    matches!(t, "content-box" | "padding-box" | "border-box" | "margin-box")
+}
+
+fn is_overflow_clip_margin_lengthish_token(t: &str) -> bool {
+    let t = t.trim();
+    let (n, unit) = split_number_and_unit(t);
+
+    if let Some(n) = n {
+        // CSS allows unitless zeros where lengths are expected.
+        if unit.is_empty() {
+            return n == 0.0;
+        }
+
+        if unit == "%" {
+            return false;
+        }
+
+        // Be lenient about units: accept any ASCII alphabetic unit.
+        if unit.as_bytes().iter().all(|b| b.is_ascii_alphabetic()) {
+            return true;
+        }
+    }
+
+    starts_with_ascii_ci(t, "calc(")
+        || starts_with_ascii_ci(t, "min(")
+        || starts_with_ascii_ci(t, "max(")
+        || starts_with_ascii_ci(t, "clamp(")
+        || starts_with_ascii_ci(t, "var(")
+        || starts_with_ascii_ci(t, "env(")
 }
 
 #[cfg(test)]
@@ -503,6 +587,30 @@ mod declaration_validation_tests {
         assert_eq!(report.errors, 0, "{report:?}");
         assert_eq!(report.warnings, 0, "{report:?}");
         assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
+    fn overflow_clip_margin_is_accepted_but_warns_about_safari_support() {
+        for css in [
+            "overflow-clip-margin: 20px;",
+            "overflow-clip-margin: 1em;",
+            "overflow-clip-margin: content-box 5px;",
+            "overflow-clip-margin: inherit;",
+            "overflow-clip-margin: initial;",
+            "overflow-clip-margin: revert;",
+            "overflow-clip-margin: revert-layer;",
+            "overflow-clip-margin: unset;",
+        ] {
+            let report = validate_css_declarations_text(css, &Config::default()).unwrap();
+            assert_eq!(report.errors, 0, "css={css:?} report={report:?}");
+            assert_eq!(report.warnings, 1, "css={css:?} report={report:?}");
+            assert_eq!(report.messages.len(), 1, "css={css:?} report={report:?}");
+            assert_eq!(
+                report.messages[0].message,
+                "“overflow-clip-margin” is not supported by Safari.",
+                "css={css:?} report={report:?}"
+            );
+        }
     }
 }
 
@@ -778,6 +886,7 @@ fn is_single_valued_property(prop: &str) -> bool {
             | "list-style"
             | "margin"
             | "outline"
+            | "overflow-clip-margin"
             | "pause"
             | "padding"
             | "play-during"

@@ -4,6 +4,7 @@
     "container-type",
     "scrollbar-gutter",
     "clip-path",
+    "overflow-clip-margin",
     "zoom",
     "font-optical-sizing"
   ],
