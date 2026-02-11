@@ -309,6 +309,45 @@ mod scrollbar_gutter_tests {
 }
 
 #[cfg(test)]
+mod font_optical_sizing_tests {
+    use super::{Config, validate_css_text};
+
+    #[test]
+    fn font_optical_sizing_auto_and_none_are_accepted() {
+        let css = r#"
+#mydiv {
+    font-optical-sizing: auto;
+}
+
+#mydiv2 {
+    font-optical-sizing: none;
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
+    fn font_optical_sizing_rejects_invalid_values() {
+        let css = r#"
+#mydiv {
+    font-optical-sizing: no-such-value;
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 1, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert_eq!(report.messages.len(), 1, "{report:?}");
+        assert_eq!(
+            report.messages[0].message,
+            "Invalid value for property “font-optical-sizing”."
+        );
+    }
+}
+
+#[cfg(test)]
 mod clip_path_tests {
     use super::{Config, validate_css_text};
 
@@ -420,7 +459,10 @@ mod nested_at_rule_tests {
         assert_eq!(report.errors, 1, "{report:?}");
         assert_eq!(report.warnings, 0, "{report:?}");
         assert_eq!(report.messages.len(), 1, "{report:?}");
-        assert_eq!(report.messages[0].message, "Unknown property “no-such-prop”.");
+        assert_eq!(
+            report.messages[0].message,
+            "Unknown property “no-such-prop”."
+        );
     }
 
     #[test]
@@ -489,7 +531,10 @@ mod nested_at_rule_tests {
         assert_eq!(report.errors, 1, "{report:?}");
         assert_eq!(report.warnings, 0, "{report:?}");
         assert_eq!(report.messages.len(), 1, "{report:?}");
-        assert_eq!(report.messages[0].message, "Unknown property “no-such-prop”.");
+        assert_eq!(
+            report.messages[0].message,
+            "Unknown property “no-such-prop”."
+        );
     }
 
     #[test]

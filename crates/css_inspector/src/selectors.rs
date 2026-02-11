@@ -263,7 +263,6 @@ pub(crate) fn dash_match_prefix(value: &str, dash: &str) -> bool {
         .is_some_and(|rest| rest.is_empty() || rest.starts_with('-'))
 }
 
-
 #[cfg(test)]
 mod warn_on_conflicting_attribute_selectors_tests {
     use super::{Report, Severity, warn_on_conflicting_attribute_selectors};
@@ -414,7 +413,6 @@ pub(crate) fn parse_attr_selector(content: &str) -> Option<AttrSel> {
         value: Some(value),
     })
 }
-
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(crate) enum SelectorPseudoVersion {

@@ -218,7 +218,6 @@ fn validate_imports_recursive(
     Ok(())
 }
 
-
 pub(crate) fn resolve_relative_uri(base: Option<&str>, rel: &str) -> String {
     let rel = rel.trim();
     if starts_with_ascii_ci(rel, "http://")
@@ -606,7 +605,7 @@ pub(crate) fn parse_http_url(uri: &str) -> Result<(&str, u16, &str), ValidatorEr
 
 #[cfg(test)]
 mod parse_http_url_tests {
-    use super::{parse_http_url, ValidatorError};
+    use super::{ValidatorError, parse_http_url};
 
     #[test]
     fn parses_default_port_and_root_path() {
@@ -763,7 +762,7 @@ pub(crate) fn parse_http_response(data: &[u8]) -> Result<ParsedHttpResponse, Val
 
 #[cfg(test)]
 mod parse_http_response_tests {
-    use super::{parse_http_response, ValidatorError};
+    use super::{ValidatorError, parse_http_response};
 
     #[test]
     fn parses_simple_response_with_body() {
@@ -779,15 +778,13 @@ mod parse_http_response_tests {
 
     #[test]
     fn parses_chunked_response_body_when_header_indicates_chunked() {
-        let data = b"HTTP/1.1 200 OK\r\nTransfer-Encoding: gzip, Chunked\r\n\r\n4\r\nWiki\r\n0\r\n\r\n";
+        let data =
+            b"HTTP/1.1 200 OK\r\nTransfer-Encoding: gzip, Chunked\r\n\r\n4\r\nWiki\r\n0\r\n\r\n";
         let (status, headers, body) = parse_http_response(data).unwrap();
         assert_eq!(status, 200);
         assert_eq!(
             headers,
-            vec![(
-                "Transfer-Encoding".to_string(),
-                "gzip, Chunked".to_string()
-            )]
+            vec![("Transfer-Encoding".to_string(), "gzip, Chunked".to_string())]
         );
         assert_eq!(body, b"Wiki");
     }

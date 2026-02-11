@@ -40,8 +40,8 @@ pub(crate) use known_properties::parse_properties_file;
 #[cfg(test)]
 pub(crate) use parser::{
     RuleBlockKind, at_rule_name, contains_invalid_top_level_chars, contains_unknown_at_rule,
-    count_brace_balance_errors, count_stray_top_level_declaration_errors, iter_rule_blocks,
-    is_known_at_rule_name, strip_css_comments,
+    count_brace_balance_errors, count_stray_top_level_declaration_errors, is_known_at_rule_name,
+    iter_rule_blocks, strip_css_comments,
 };
 #[cfg(test)]
 pub(crate) use selectors::{

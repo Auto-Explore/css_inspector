@@ -13,10 +13,7 @@ pub(crate) fn at_rule_name(prelude: &str) -> Option<&str> {
 }
 
 #[inline]
-pub(crate) fn at_rule_decl_list_context_flags(
-    kind: RuleBlockKind,
-    prelude: &str,
-) -> (bool, bool) {
+pub(crate) fn at_rule_decl_list_context_flags(kind: RuleBlockKind, prelude: &str) -> (bool, bool) {
     if kind != RuleBlockKind::AtRuleDeclList {
         return (false, false);
     }
@@ -88,7 +85,6 @@ mod at_rule_decl_list_context_flags_tests {
         );
     }
 }
-
 
 pub(crate) fn ends_with_stray_backslash(css: &str) -> bool {
     css.trim_end().ends_with('\\')
@@ -210,7 +206,6 @@ pub(crate) fn count_stray_top_level_declaration_errors(css: &str) -> usize {
 
     segments * 2
 }
-
 
 pub(crate) fn strip_css_comments(input: &str) -> (Cow<'_, str>, bool) {
     let bytes = input.as_bytes();

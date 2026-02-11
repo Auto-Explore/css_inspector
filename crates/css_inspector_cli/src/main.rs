@@ -366,8 +366,7 @@ mod tests {
         fs::write(&path, "a { color: red; }").expect("write css");
         let path_arg = path.to_string_lossy().into_owned();
 
-        let (result, stdout, _stderr) =
-            run_cli(vec!["file".into(), path_arg, "--nope".into()]);
+        let (result, stdout, _stderr) = run_cli(vec!["file".into(), path_arg, "--nope".into()]);
         assert!(result.is_err());
         assert!(stdout.is_empty());
         assert!(result.unwrap_err().contains("unknown arg: --nope"));
@@ -497,7 +496,11 @@ mod tests {
         assert!(result.is_err());
         assert!(stdout.is_empty());
         assert!(stderr.contains("autotest summary: total=2 passed=1 failed=1 skipped=0"));
-        assert!(result.unwrap_err().contains("autotest suite had 1 failing case(s)"));
+        assert!(
+            result
+                .unwrap_err()
+                .contains("autotest suite had 1 failing case(s)")
+        );
 
         let _ = fs::remove_file(manifest_path);
     }
@@ -516,9 +519,11 @@ mod tests {
             "nope".into(),
         ]);
         assert!(result.is_err());
-        assert!(result
-            .unwrap_err()
-            .contains("unknown --expected value: nope"));
+        assert!(
+            result
+                .unwrap_err()
+                .contains("unknown --expected value: nope")
+        );
 
         let _ = fs::remove_file(manifest_path);
     }

@@ -6,9 +6,9 @@ use crate::errors::ValidatorError;
 use crate::imports::has_top_level_import_url;
 use crate::known_properties::known_properties_for_config;
 use crate::parser::{
-    at_rule_decl_list_context_flags, contains_invalid_top_level_chars, contains_unknown_at_rule,
-    count_brace_balance_errors, count_stray_top_level_declaration_errors, ends_with_stray_backslash,
-    iter_rule_blocks, strip_css_comments, warn_on_other_media_rules, RuleBlockKind,
+    RuleBlockKind, at_rule_decl_list_context_flags, contains_invalid_top_level_chars,
+    contains_unknown_at_rule, count_brace_balance_errors, count_stray_top_level_declaration_errors,
+    ends_with_stray_backslash, iter_rule_blocks, strip_css_comments, warn_on_other_media_rules,
 };
 use crate::report::{Report, push_error, push_error_times, push_warning_level};
 use crate::selectors::{
@@ -166,7 +166,6 @@ mod strip_comments_or_push_error_tests {
     }
 }
 
-
 fn validate_css_text_internal(
     css: &str,
     config: &Config,
@@ -278,7 +277,10 @@ span.greentext {color: green;} "#;
         assert!(!report.valid(), "{report:?}");
         assert!(report.errors > 0, "{report:?}");
         assert!(
-            report.messages.iter().any(|m| m.message == "Invalid selector."),
+            report
+                .messages
+                .iter()
+                .any(|m| m.message == "Invalid selector."),
             "{report:?}"
         );
     }

@@ -263,6 +263,7 @@ impl DeclValidator<'_> {
                 validate_max_tokens(tokens.as_slice(), 2, "background-position", self.report)
             }
             "font" => validate_font(tokens.as_slice(), self.report),
+            "font-optical-sizing" => validate_font_optical_sizing(tokens.as_slice(), self.report),
             "border" => {
                 validate_border_shorthand(tokens.as_slice(), self.css1_escapes, self.report)
             }
@@ -324,6 +325,17 @@ impl DeclValidator<'_> {
         {
             push_error(self.report, format!("Invalid value for property “{prop}”."));
         }
+    }
+}
+
+fn validate_font_optical_sizing(tokens: &[&str], report: &mut Report) {
+    let [t] = tokens else {
+        push_error(report, "Invalid value for property “font-optical-sizing”.");
+        return;
+    };
+    match t.trim() {
+        t if t.eq_ignore_ascii_case("auto") || t.eq_ignore_ascii_case("none") => {}
+        _ => push_error(report, "Invalid value for property “font-optical-sizing”."),
     }
 }
 
