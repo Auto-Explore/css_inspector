@@ -134,6 +134,21 @@ fn treats_page_as_declaration_list_with_whitespace_after_at() {
 }
 
 #[test]
+fn css2_accepts_font_face_with_numeric_font_weight() {
+    let report = validate_css_text(
+        "@font-face { font-weight: 700; }",
+        &Config {
+            profile: Some("css2".to_string()),
+            ..Config::default()
+        },
+    )
+    .unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
 fn font_face_allows_src_descriptor_and_page_warns_once_for_page_break_too_many_values() {
     // `src` is not a normal CSS property, but is allowed inside @font-face.
     let report = validate_css_text("a { src: url(x); }", &Config::default()).unwrap();
