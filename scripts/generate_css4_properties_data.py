@@ -18,8 +18,10 @@ Notes:
 from __future__ import annotations
 
 import argparse
+import difflib
 import json
 from pathlib import Path
+from typing import Iterable, Optional
 
 
 def repo_root() -> Path:
@@ -67,6 +69,9 @@ def parse_level4_properties(all_properties_json: Path) -> set[str]:
         title = str(row.get("title", ""))
         if "Level 4" not in title:
             continue
+        status = str(row.get("status", "")).strip().upper()
+        if not is_status_allowed(status):
+            continue
         prop = str(row.get("property", "")).strip().lower()
         if not prop or prop == "--*":
             continue
@@ -90,6 +95,10 @@ HEADER = """# CSS4Properties.properties
 #   2) Extract unique `property` names (excluding `--*`)
 #   3) Subtract the set from `CSS3Properties.properties` (plus `color-profile`)
 #
+# Optional filters (script flags):
+# - `--min-status WD` to ignore ED/FPWD entries, etc.
+# - `--include-status WD --include-status CRD` to keep a fixed set.
+#
 # Notes:
 # - This does not imply full syntax/value validation for these properties; it
 #   only avoids “Unknown property …” errors when `--profile css4` is used.
@@ -99,7 +108,62 @@ HEADER = """# CSS4Properties.properties
 """
 
 
+STATUS_ORDER = ["NOTE", "ED", "FPWD", "WD", "CRD", "CR", "REC"]
+STATUS_RANK = {s: i for i, s in enumerate(STATUS_ORDER)}
+
+
+def normalize_status(s: str) -> str:
+    s = s.strip().upper()
+    return s
+
+
+def status_gte(a: str, b: str) -> bool:
+    a = normalize_status(a)
+    b = normalize_status(b)
+    if a not in STATUS_RANK or b not in STATUS_RANK:
+        return False
+    return STATUS_RANK[a] >= STATUS_RANK[b]
+
+
+def status_lt(a: str, b: str) -> bool:
+    a = normalize_status(a)
+    b = normalize_status(b)
+    if a not in STATUS_RANK or b not in STATUS_RANK:
+        return False
+    return STATUS_RANK[a] < STATUS_RANK[b]
+
+
+def is_status_allowed(status: str) -> bool:
+    status = normalize_status(status)
+    if not status:
+        return True
+    if status not in STATUS_RANK:
+        return True
+
+    if INCLUDE_STATUSES:
+        return status in INCLUDE_STATUSES
+    if EXCLUDE_STATUSES and status in EXCLUDE_STATUSES:
+        return False
+    if MIN_STATUS:
+        return status_gte(status, MIN_STATUS)
+    return True
+
+
+INCLUDE_STATUSES: set[str] = set()
+EXCLUDE_STATUSES: set[str] = set()
+MIN_STATUS: Optional[str] = None
+
+
+def build_output_text(names: Iterable[str]) -> str:
+    lines = [HEADER, "\n"]
+    for name in names:
+        lines.append(f"{name}:\n")
+    return "".join(lines)
+
+
 def main() -> int:
+    global INCLUDE_STATUSES, EXCLUDE_STATUSES, MIN_STATUS
+
     root = repo_root()
     ap = argparse.ArgumentParser(
         description="Generate data/css_properties/CSS4Properties.properties for the css4 profile."
@@ -122,7 +186,39 @@ def main() -> int:
         default=(root / "data" / "css_properties" / "CSS4Properties.properties"),
         help="Output file path (default: data/css_properties/CSS4Properties.properties).",
     )
+    ap.add_argument(
+        "--min-status",
+        type=str,
+        default=None,
+        choices=STATUS_ORDER,
+        help="Only include properties whose status is >= this stage (default: include all).",
+    )
+    ap.add_argument(
+        "--include-status",
+        type=str,
+        action="append",
+        default=[],
+        choices=STATUS_ORDER,
+        help="Explicitly include only these statuses (may be repeated). Overrides --min-status.",
+    )
+    ap.add_argument(
+        "--exclude-status",
+        type=str,
+        action="append",
+        default=[],
+        choices=STATUS_ORDER,
+        help="Exclude these statuses (may be repeated).",
+    )
+    ap.add_argument(
+        "--check",
+        action="store_true",
+        help="Exit non-zero if the output file is not up to date (does not write).",
+    )
     args = ap.parse_args()
+
+    INCLUDE_STATUSES = {normalize_status(s) for s in args.include_status}
+    EXCLUDE_STATUSES = {normalize_status(s) for s in args.exclude_status}
+    MIN_STATUS = None if INCLUDE_STATUSES else args.min_status
 
     css3 = parse_css_validator_properties(args.css3_properties)
     css3.add("color-profile")
@@ -130,11 +226,27 @@ def main() -> int:
     level4 = parse_level4_properties(args.all_properties_json)
     missing = sorted(level4 - css3)
 
+    out_text = build_output_text(missing)
+    if args.check:
+        on_disk = ""
+        if args.out.exists():
+            on_disk = args.out.read_text(encoding="utf-8", errors="replace")
+        if on_disk == out_text:
+            print(
+                f"ok: {args.out} is up to date (level4_props={len(level4)}, css3_props={len(css3)}, added={len(missing)})"
+            )
+            return 0
+        diff = difflib.unified_diff(
+            on_disk.splitlines(keepends=True),
+            out_text.splitlines(keepends=True),
+            fromfile=str(args.out),
+            tofile=str(args.out),
+        )
+        print("".join(diff))
+        return 1
+
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    lines = [HEADER, "\n"]
-    for name in missing:
-        lines.append(f"{name}:\n")
-    args.out.write_text("".join(lines), encoding="utf-8")
+    args.out.write_text(out_text, encoding="utf-8")
 
     print(
         f"ok: wrote {args.out} (level4_props={len(level4)}, css3_props={len(css3)}, added={len(missing)})"
@@ -144,4 +256,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

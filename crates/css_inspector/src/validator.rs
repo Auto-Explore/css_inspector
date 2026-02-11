@@ -48,6 +48,8 @@ pub(crate) fn validate_css_text_stripped(
 
     let known_properties = known_properties_for_config(config);
     let css1_escapes = css1_escapes_from_config(config);
+    let css4_profile =
+        matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
 
     warn_on_other_media_rules(css, config, warning_level, report);
 
@@ -80,6 +82,8 @@ pub(crate) fn validate_css_text_stripped(
             in_property_at_rule,
             in_font_palette_values_at_rule,
             in_counter_style_at_rule,
+            in_color_profile_at_rule,
+            in_view_transition_at_rule,
         ) =
             at_rule_decl_list_context_flags(block.kind, block.prelude);
         validate_declarations(
@@ -92,6 +96,9 @@ pub(crate) fn validate_css_text_stripped(
             in_property_at_rule,
             in_font_palette_values_at_rule,
             in_counter_style_at_rule,
+            in_color_profile_at_rule,
+            in_view_transition_at_rule,
+            css4_profile,
             report,
         );
     }
@@ -210,6 +217,8 @@ pub fn validate_css_declarations_text(
     let known_properties = known_properties_for_config(config);
     let warning_level = warning_level_from_config(config);
     let css1_escapes = css1_escapes_from_config(config);
+    let css4_profile =
+        matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
     validate_declarations(
         stripped,
         known_properties,
@@ -220,6 +229,9 @@ pub fn validate_css_declarations_text(
         false,
         false,
         false,
+        false,
+        false,
+        css4_profile,
         &mut report,
     );
     Ok(report)

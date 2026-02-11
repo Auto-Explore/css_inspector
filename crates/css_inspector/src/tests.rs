@@ -5,8 +5,8 @@ use super::{
     dash_match_prefix, ends_with_ascii_ci, find_double_crlf, for_each_affected_border_longhand,
     is_css_wide_keyword, is_css_wide_keywordish_token, is_known_at_rule_name, iter_rule_blocks,
     iter_top_level_import_urls, memchr_crlf, parse_http_response, parse_properties_file,
-    starts_with_ascii_ci, strip_css_comments, validate_css_text, validate_css_text_with_fetcher,
-    validate_css_uri_with_fetcher,
+    starts_with_ascii_ci, strip_css_comments, validate_css_declarations_text, validate_css_text,
+    validate_css_text_with_fetcher, validate_css_uri_with_fetcher,
 };
 use std::borrow::Cow;
 use std::cell::Cell;
@@ -222,6 +222,100 @@ fn css4_phase1_default_profile_rejects_css4_supplement_properties_as_unknown() {
         .messages
         .iter()
         .all(|m| matches!(m.severity, super::Severity::Error)));
+}
+
+#[test]
+fn css4_profile_relaxes_single_value_heuristic_for_multitoken_properties() {
+    let css = r#"a { contain-intrinsic-size: 10px 20px; }"#;
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+
+    let report = validate_css_declarations_text("contain-intrinsic-size: 10px 20px;", &config)
+        .unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+}
+
+#[test]
+fn css4_profile_accepts_modern_background_filter_and_content_values() {
+    let css = r#"
+:root { --c: red; --img: linear-gradient(red, blue); --txt: "x"; }
+
+a {
+  color: var(--c);
+  background-image: linear-gradient(red, blue);
+  background: linear-gradient(red, blue) center / cover no-repeat fixed;
+  filter: blur(5px) drop-shadow(0 0 10px black);
+  content: var(--txt);
+}
+"#;
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn css4_profile_accepts_modern_cursor_values() {
+    let css = r#"
+a { cursor: grab; }
+b { cursor: zoom-in; }
+c { cursor: url(foo.png) 2 2, pointer; }
+d { cursor: url(foo.png) 2 2, url(bar.png) 4 4, grabbing; }
+"#;
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn default_profile_rejects_css4_only_cursor_values() {
+    let css = r#"a { cursor: grab; }"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “cursor”."
+    );
+}
+
+#[test]
+fn default_profile_rejects_modern_background_filter_and_content_values() {
+    let css = r#"
+a {
+  background-image: linear-gradient(red, blue);
+  filter: blur(5px);
+  content: var(--txt);
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.errors, 3, "{report:?}");
+
+    let got: std::collections::BTreeSet<String> =
+        report.messages.iter().map(|m| m.message.clone()).collect();
+    let expected: std::collections::BTreeSet<String> = [
+        "Invalid value for property “background-image”.",
+        "Invalid value for property “filter”.",
+        "Invalid value for property “content”.",
+    ]
+    .into_iter()
+    .map(str::to_owned)
+    .collect();
+    assert_eq!(got, expected, "{report:?}");
 }
 
 #[test]
@@ -676,6 +770,9 @@ fn unknown_at_rule_detection_ignores_known_rules_and_strings() {
     assert!(!contains_unknown_at_rule(
         "@property --x { syntax: \"<length>\"; inherits: true; initial-value: 0px; }"
     ));
+    assert!(!contains_unknown_at_rule(
+        "@page { @bottom-left { content: \"x\"; } }"
+    ));
     assert!(!contains_unknown_at_rule("a{content:\"@three-dee\"}"));
     assert!(contains_unknown_at_rule("@three-dee { x: y }"));
 }
@@ -701,6 +798,18 @@ fn known_at_rule_names_match_case_insensitively() {
     assert!(is_known_at_rule_name("layer"));
     assert!(is_known_at_rule_name("LAYER"));
     assert!(is_known_at_rule_name("font-face"));
+    assert!(is_known_at_rule_name("top-left-corner"));
+    assert!(is_known_at_rule_name("TOP-LEFT-CORNER"));
+    assert!(is_known_at_rule_name("top-left"));
+    assert!(is_known_at_rule_name("TOP-LEFT"));
+    assert!(is_known_at_rule_name("bottom-left"));
+    assert!(is_known_at_rule_name("BOTTOM-LEFT"));
+    assert!(is_known_at_rule_name("bottom-right-corner"));
+    assert!(is_known_at_rule_name("BOTTOM-RIGHT-CORNER"));
+    assert!(is_known_at_rule_name("left-top"));
+    assert!(is_known_at_rule_name("LEFT-TOP"));
+    assert!(is_known_at_rule_name("right-bottom"));
+    assert!(is_known_at_rule_name("RIGHT-BOTTOM"));
     assert!(is_known_at_rule_name("font-feature-values"));
     assert!(is_known_at_rule_name("FONT-FEATURE-VALUES"));
     assert!(is_known_at_rule_name("stylistic"));
@@ -731,7 +840,31 @@ fn known_at_rule_names_match_case_insensitively() {
     assert!(is_known_at_rule_name("SCOPE"));
     assert!(is_known_at_rule_name("starting-style"));
     assert!(is_known_at_rule_name("STARTING-STYLE"));
+    assert!(is_known_at_rule_name("custom-media"));
+    assert!(is_known_at_rule_name("CUSTOM-MEDIA"));
+    assert!(is_known_at_rule_name("custom-selector"));
+    assert!(is_known_at_rule_name("CUSTOM-SELECTOR"));
+    assert!(is_known_at_rule_name("nest"));
+    assert!(is_known_at_rule_name("NEST"));
+    assert!(is_known_at_rule_name("view-transition"));
+    assert!(is_known_at_rule_name("VIEW-TRANSITION"));
     assert!(!is_known_at_rule_name("three-dee"));
+}
+
+#[test]
+fn modern_at_rules_custom_media_custom_selector_and_nest_are_accepted() {
+    let css = r#"
+@custom-media --narrow (max-width: 30em);
+@custom-selector :--btn button, .button;
+
+.foo {
+  @nest .bar & { color: red; }
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
 }
 
 #[test]
@@ -754,6 +887,21 @@ fn property_at_rule_descriptor_block_is_accepted() {
     syntax: "<length>";
     inherits: true;
     initial-value: 0px;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn page_margin_at_rules_are_accepted() {
+    let css = r#"
+@page {
+  size: A4;
+  @bottom-left { content: "x"; }
+  @top-right-corner { content: counter(page); }
 }
 "#;
     let report = validate_css_text(css, &Config::default()).unwrap();
@@ -841,6 +989,111 @@ fn counter_style_at_rule_rejects_unknown_descriptor() {
     assert_eq!(
         report.messages[0].message,
         "Unknown property “no-such-descriptor”."
+    );
+}
+
+#[test]
+fn color_profile_at_rule_descriptor_block_is_accepted() {
+    let css = r#"
+@color-profile --my-profile {
+    src: url("my.icc");
+    rendering-intent: relative-colorimetric;
+}
+
+a {
+    color: color(display-p3 1 0 0);
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn color_profile_at_rule_rejects_unknown_descriptor() {
+    let css = r#"
+@color-profile --my-profile {
+    no-such-descriptor: 1;
+    src: url("my.icc");
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Unknown property “no-such-descriptor”."
+    );
+}
+
+#[test]
+fn color_profile_at_rule_rejects_invalid_rendering_intent_value() {
+    let css = r#"
+@color-profile --my-profile {
+    src: url("my.icc");
+    rendering-intent: nope;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “rendering-intent”."
+    );
+}
+
+#[test]
+fn view_transition_at_rule_descriptor_block_is_accepted() {
+    let css = r#"
+@view-transition {
+    navigation: auto;
+    types: fast slow;
+}
+
+a { color: red; }
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn view_transition_at_rule_rejects_unknown_descriptor() {
+    let css = r#"
+@view-transition {
+    no-such-descriptor: 1;
+    navigation: auto;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Unknown property “no-such-descriptor”."
+    );
+}
+
+#[test]
+fn view_transition_at_rule_rejects_invalid_navigation_value() {
+    let css = r#"
+@view-transition {
+    navigation: maybe;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “navigation”."
     );
 }
 
@@ -1077,6 +1330,81 @@ fn oklch_color_function_accepts_common_valid_forms() {
             "value={value} report={report:?}"
         );
     }
+}
+
+#[test]
+fn css_color4_color_function_tokens_are_accepted() {
+    for value in [
+        "hwb(180 10% 10%)",
+        "lab(29.2345% 39.3825 20.0664)",
+        "lch(29.2345% 44.2 27)",
+        "oklab(0.7 0.1 0.2 / 0.5)",
+        "color(display-p3 1 0 0)",
+        "color-mix(in srgb, red 50%, blue)",
+        "device-cmyk(0 81% 81% 30%)",
+        "light-dark(black, white)",
+        "color-contrast(black vs white)",
+    ] {
+        let css = format!("a{{color:{value};}}");
+        let report = validate_css_text(&css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "value={value} report={report:?}");
+        assert_eq!(report.warnings, 0, "value={value} report={report:?}");
+        assert!(
+            report.messages.is_empty(),
+            "value={value} report={report:?}"
+        );
+    }
+}
+
+#[test]
+fn css_color_relative_rgb_and_hsl_syntax_is_accepted() {
+    for value in [
+        "rgb(from red r g b / 50%)",
+        "rgba(from red r g b / 0.5)",
+        "hsl(from red h s l / 50%)",
+        "hsla(from red h s l / 0.5)",
+    ] {
+        let css = format!("a{{color:{value};}}");
+        let report = validate_css_text(&css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "value={value} report={report:?}");
+        assert_eq!(report.warnings, 0, "value={value} report={report:?}");
+        assert!(
+            report.messages.is_empty(),
+            "value={value} report={report:?}"
+        );
+    }
+}
+
+#[test]
+fn css4_profile_accepts_additional_css4_selector_pseudos() {
+    let css = r#"
+a:user-valid { color: red; }
+details:open > summary { color: red; }
+dialog:modal { color: red; }
+video:picture-in-picture { color: red; }
+button:popover-open { color: red; }
+
+::view-transition { color: red; }
+::view-transition-group(foo) { color: red; }
+.x:state(foo) { color: red; }
+"#;
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn default_profile_rejects_css4_only_selector_pseudos() {
+    let css = r#"a:user-valid { color: red; }"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(report.messages[0].message, "Invalid selector.");
 }
 
 #[test]

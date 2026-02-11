@@ -23,6 +23,9 @@ pub(crate) fn validate_declarations(
     in_property_at_rule: bool,
     in_font_palette_values_at_rule: bool,
     in_counter_style_at_rule: bool,
+    in_color_profile_at_rule: bool,
+    in_view_transition_at_rule: bool,
+    css4_profile: bool,
     report: &mut Report,
 ) {
     let decl_block = strip_nested_rule_blocks_in_declaration_list(block);
@@ -30,6 +33,7 @@ pub(crate) fn validate_declarations(
         known_properties,
         warning_level,
         css1_escapes,
+        css4_profile,
         report,
         redef: BorderRedefinitionTracker::default(),
         ctx: DeclContext {
@@ -38,6 +42,8 @@ pub(crate) fn validate_declarations(
             in_property_at_rule,
             in_font_palette_values_at_rule,
             in_counter_style_at_rule,
+            in_color_profile_at_rule,
+            in_view_transition_at_rule,
             warned_pagebreak_too_many_values: false,
         },
         unknown_reported: HashSet::new(),
@@ -130,6 +136,8 @@ struct DeclContext {
     in_property_at_rule: bool,
     in_font_palette_values_at_rule: bool,
     in_counter_style_at_rule: bool,
+    in_color_profile_at_rule: bool,
+    in_view_transition_at_rule: bool,
     warned_pagebreak_too_many_values: bool,
 }
 
@@ -137,6 +145,7 @@ struct DeclValidator<'a> {
     known_properties: &'a KnownProperties,
     warning_level: i32,
     css1_escapes: bool,
+    css4_profile: bool,
     report: &'a mut Report,
     redef: BorderRedefinitionTracker,
     ctx: DeclContext,
@@ -181,6 +190,10 @@ impl DeclValidator<'_> {
             && is_font_palette_values_descriptor(prop);
         let is_counter_style_desc =
             self.ctx.in_counter_style_at_rule && is_counter_style_descriptor(prop);
+        let is_color_profile_desc =
+            self.ctx.in_color_profile_at_rule && is_color_profile_descriptor(prop);
+        let is_view_transition_desc =
+            self.ctx.in_view_transition_at_rule && is_view_transition_descriptor(prop);
         let is_custom_property = prop.starts_with("--");
 
         if prop.is_empty() {
@@ -197,6 +210,8 @@ impl DeclValidator<'_> {
                 || is_property_desc
                 || is_font_palette_values_desc
                 || is_counter_style_desc
+                || is_color_profile_desc
+                || is_view_transition_desc
             {
                 // Allowed descriptor within an at-rule descriptor list.
             } else {
@@ -281,22 +296,41 @@ impl DeclValidator<'_> {
             "inherits" if is_property_desc => {
                 validate_property_descriptor_inherits(tokens.as_slice(), self.report)
             }
+            "rendering-intent" if is_color_profile_desc => {
+                validate_color_profile_descriptor_rendering_intent(tokens.as_slice(), self.report)
+            }
+            "navigation" if is_view_transition_desc => {
+                validate_view_transition_descriptor_navigation(tokens.as_slice(), self.report)
+            }
             "float" => validate_float(tokens.as_slice(), self.report),
             "color" => validate_color(tokens.as_slice(), self.css1_escapes, self.report),
             "background-color" => {
                 validate_background_color(tokens.as_slice(), self.css1_escapes, self.report)
             }
-            "background" => validate_background(tokens.as_slice(), self.css1_escapes, self.report),
-            "background-image" => validate_background_image(tokens.as_slice(), self.report),
+            "background" => validate_background(
+                tokens.as_slice(),
+                self.css1_escapes,
+                self.css4_profile,
+                self.report,
+            ),
+            "background-image" => {
+                validate_background_image(tokens.as_slice(), self.css4_profile, self.report)
+            }
             "zoom" => validate_zoom(tokens.as_slice(), self.report),
             "background-repeat" => {
-                validate_single_token(tokens.as_slice(), "background-repeat", self.report)
+                if !self.css4_profile {
+                    validate_single_token(tokens.as_slice(), "background-repeat", self.report)
+                }
             }
             "background-attachment" => {
-                validate_single_token(tokens.as_slice(), "background-attachment", self.report)
+                if !self.css4_profile {
+                    validate_single_token(tokens.as_slice(), "background-attachment", self.report)
+                }
             }
             "background-position" => {
-                validate_max_tokens(tokens.as_slice(), 2, "background-position", self.report)
+                if !self.css4_profile {
+                    validate_max_tokens(tokens.as_slice(), 2, "background-position", self.report)
+                }
             }
             "font" => validate_font(tokens.as_slice(), self.report),
             "font-optical-sizing" => validate_font_optical_sizing(tokens.as_slice(), self.report),
@@ -330,8 +364,8 @@ impl DeclValidator<'_> {
             "list-style" => validate_list_style(tokens.as_slice(), self.report),
             "text-decoration" => validate_text_decoration(tokens.as_slice(), self.report),
             "clip" => validate_clip(tokens.as_slice(), self.report),
-            "cursor" => validate_cursor(tokens.as_slice(), self.report),
-            "content" => validate_content(tokens.as_slice(), self.report),
+            "cursor" => validate_cursor(tokens.as_slice(), self.css4_profile, self.report),
+            "content" => validate_content(tokens.as_slice(), self.css4_profile, self.report),
             "quotes" => validate_quotes(tokens.as_slice(), self.report),
             "counter-increment" => {
                 validate_counter_list(tokens.as_slice(), "counter-increment", self.report)
@@ -347,7 +381,7 @@ impl DeclValidator<'_> {
             "voice-family" => validate_voice_family(tokens.as_slice(), self.report),
             "azimuth" => validate_azimuth(tokens.as_slice(), self.report),
             "elevation" => validate_elevation(tokens.as_slice(), self.report),
-            "filter" => validate_filter(tokens.as_slice(), self.report),
+            "filter" => validate_filter(tokens.as_slice(), self.css4_profile, self.report),
             "overflow-clip-margin" => validate_overflow_clip_margin(tokens.as_slice(), self.report),
             _ => {}
         }
@@ -356,12 +390,15 @@ impl DeclValidator<'_> {
         // Avoid double-counting: only apply if no other error was raised for this declaration.
         if self.report.errors == errors_before
             && tokens.len() > 1
+            && !self.css4_profile
             && is_single_valued_property(prop)
             && !is_font_face_desc
             && !is_page_desc
             && !is_property_desc
             && !is_font_palette_values_desc
             && !is_counter_style_desc
+            && !is_color_profile_desc
+            && !is_view_transition_desc
             && !is_custom_property
         {
             push_error(self.report, format!("Invalid value for property “{prop}”."));
@@ -700,6 +737,14 @@ fn is_counter_style_descriptor(prop: &str) -> bool {
     )
 }
 
+fn is_color_profile_descriptor(prop: &str) -> bool {
+    matches!(prop, "src" | "rendering-intent")
+}
+
+fn is_view_transition_descriptor(prop: &str) -> bool {
+    matches!(prop, "navigation" | "types")
+}
+
 fn validate_property_descriptor_syntax(tokens: &[&str], report: &mut Report) {
     let [t] = tokens else {
         push_error(report, "Invalid value for property “syntax”.");
@@ -726,6 +771,37 @@ fn validate_property_descriptor_inherits(tokens: &[&str], report: &mut Report) {
         return;
     }
     push_error(report, "Invalid value for property “inherits”.");
+}
+
+fn validate_color_profile_descriptor_rendering_intent(tokens: &[&str], report: &mut Report) {
+    let [t] = tokens else {
+        push_error(report, "Invalid value for property “rendering-intent”.");
+        return;
+    };
+    let t = t.trim();
+    if matches!(
+        ascii_lowercase_cow(t).as_ref(),
+        "auto"
+            | "perceptual"
+            | "relative-colorimetric"
+            | "saturation"
+            | "absolute-colorimetric"
+    ) {
+        return;
+    }
+    push_error(report, "Invalid value for property “rendering-intent”.");
+}
+
+fn validate_view_transition_descriptor_navigation(tokens: &[&str], report: &mut Report) {
+    let [t] = tokens else {
+        push_error(report, "Invalid value for property “navigation”.");
+        return;
+    };
+    let t = t.trim();
+    if t.eq_ignore_ascii_case("auto") || t.eq_ignore_ascii_case("none") {
+        return;
+    }
+    push_error(report, "Invalid value for property “navigation”.");
 }
 
 fn find_embedded_declaration_start(value: &str) -> Option<usize> {
@@ -1429,11 +1505,11 @@ fn validate_outline(tokens: &[&str], css1_escapes: bool, report: &mut Report) {
     }
 }
 
-fn validate_cursor(tokens: &[&str], report: &mut Report) {
+fn validate_cursor(tokens: &[&str], css4_profile: bool, report: &mut Report) {
     let is_url = |t: &str| starts_with_ascii_ci(t.trim(), "url(");
     let is_keyword = |t: &str| {
         let tl = ascii_lowercase_cow(t.trim());
-        matches!(
+        let base = matches!(
             tl.as_ref(),
             "auto"
                 | "crosshair"
@@ -1452,13 +1528,66 @@ fn validate_cursor(tokens: &[&str], report: &mut Report) {
                 | "wait"
                 | "help"
                 | "progress"
-        )
+        );
+        if base {
+            return true;
+        }
+
+        css4_profile
+            && matches!(
+                tl.as_ref(),
+                "grab"
+                    | "grabbing"
+                    | "zoom-in"
+                    | "zoom-out"
+                    | "not-allowed"
+                    | "no-drop"
+                    | "context-menu"
+                    | "cell"
+                    | "vertical-text"
+                    | "alias"
+                    | "copy"
+                    | "all-scroll"
+                    | "col-resize"
+                    | "row-resize"
+                    | "n-all-scroll"
+                    | "s-all-scroll"
+                    | "e-all-scroll"
+                    | "w-all-scroll"
+                    | "nesw-resize"
+                    | "nwse-resize"
+                    | "ns-resize"
+                    | "ew-resize"
+            )
     };
 
     match tokens {
         [t] if is_keyword(t) || is_url(t) => {}
         // Autotest `properties/ok/ui.css` expects a two-URL + keyword form to be valid.
         [t0, t1, t2] if is_url(t0) && is_url(t1) && is_keyword(t2) => {}
+        _ if css4_profile && tokens.len() >= 2 && is_keyword(tokens[tokens.len() - 1]) => {
+            // Allow `url(...) x y, url(...) x y, keyword` style lists where the coordinates
+            // (and commas) get split into tokens.
+            let mut saw_url = false;
+            for &t in &tokens[..tokens.len() - 1] {
+                let raw = t.trim();
+                if raw.is_empty() {
+                    continue;
+                }
+                if is_url(raw) {
+                    saw_url = true;
+                    continue;
+                }
+                if is_integer_token(raw) {
+                    continue;
+                }
+                push_error(report, "Invalid value for property “cursor”.");
+                return;
+            }
+            if !saw_url {
+                push_error(report, "Invalid value for property “cursor”.");
+            }
+        }
         _ => push_error(report, "Invalid value for property “cursor”."),
     }
 }
@@ -1578,7 +1707,7 @@ mod validate_cursor_tests {
     fn accepts_single_keyword_or_url() {
         for tokens in [&["auto"][..], &["  url(foo)  "][..]] {
             let mut report = Report::default();
-            validate_cursor(tokens, &mut report);
+            validate_cursor(tokens, false, &mut report);
             assert_eq!(report.errors, 0, "{tokens:?}: {report:?}");
         }
     }
@@ -1586,7 +1715,7 @@ mod validate_cursor_tests {
     #[test]
     fn accepts_two_urls_plus_keyword() {
         let mut report = Report::default();
-        validate_cursor(&["url(a)", "url(b)", "pointer"], &mut report);
+        validate_cursor(&["url(a)", "url(b)", "pointer"], false, &mut report);
         assert_eq!(report.errors, 0);
     }
 
@@ -1599,7 +1728,7 @@ mod validate_cursor_tests {
             &["url(a)", "url(b)", "url(c)"][..],
         ] {
             let mut report = Report::default();
-            validate_cursor(tokens, &mut report);
+            validate_cursor(tokens, false, &mut report);
             assert_eq!(report.errors, 1, "{tokens:?}: {report:?}");
             assert_eq!(report.messages.len(), 1);
             assert_eq!(
@@ -1704,7 +1833,7 @@ mod validate_counter_list_tests {
     }
 }
 
-fn validate_content(tokens: &[&str], report: &mut Report) {
+fn validate_content(tokens: &[&str], css4_profile: bool, report: &mut Report) {
     if tokens.is_empty() {
         push_error(report, "Invalid value for property “content”.");
         return;
@@ -1728,9 +1857,20 @@ fn validate_content(tokens: &[&str], report: &mut Report) {
         }
         if starts_with_ascii_ci(raw, "url(")
             || starts_with_ascii_ci(raw, "counter(")
+            || (css4_profile && starts_with_ascii_ci(raw, "counters("))
             || starts_with_ascii_ci(raw, "attr(")
         {
             continue;
+        }
+        if css4_profile {
+            let lower = ascii_lowercase_cow(raw);
+            let lower = lower.as_ref();
+            if lower.starts_with("var(") && is_balanced_function_call_token(lower, "var") {
+                continue;
+            }
+            if lower.starts_with("env(") && is_balanced_function_call_token(lower, "env") {
+                continue;
+            }
         }
         if raw.eq_ignore_ascii_case("open-quote")
             || raw.eq_ignore_ascii_case("close-quote")
@@ -1950,10 +2090,17 @@ fn validate_voice_family(tokens: &[&str], report: &mut Report) {
     }
 }
 
-fn validate_background(tokens: &[&str], css1_escapes: bool, report: &mut Report) {
+fn validate_background(tokens: &[&str], css1_escapes: bool, css4_profile: bool, report: &mut Report) {
+    if tokens.is_empty() {
+        push_error(report, "Invalid value for property “background”.");
+        return;
+    }
+
     // Test-driven validation for the `background` shorthand (kept intentionally conservative).
+    // In the `css4` profile we relax this substantially to avoid false errors on modern shorthands
+    // (gradients, `center / cover`, etc).
     let mut colors = 0usize;
-    for t in tokens {
+    for (idx, t) in tokens.iter().enumerate() {
         let raw = t.trim();
         if raw.is_empty() {
             continue;
@@ -1963,6 +2110,9 @@ fn validate_background(tokens: &[&str], css1_escapes: bool, report: &mut Report)
             return;
         }
         if raw == "/" {
+            if css4_profile && idx > 0 && idx + 1 < tokens.len() {
+                continue;
+            }
             push_error(report, "Invalid value for property “background”.");
             return;
         }
@@ -2010,7 +2160,40 @@ fn validate_background(tokens: &[&str], css1_escapes: bool, report: &mut Report)
         ) {
             continue;
         }
+
         if lower == "0" || is_length_token(lower) || is_any_percentage_token(lower) {
+            continue;
+        }
+
+        if css4_profile {
+            if is_background_image_like_token(lower) {
+                continue;
+            }
+            if matches!(
+                lower,
+                "space"
+                    | "round"
+                    | "repeat-space"
+                    | "repeat-round"
+                    | "cover"
+                    | "contain"
+                    | "border-box"
+                    | "padding-box"
+                    | "content-box"
+                    | "text"
+            ) {
+                continue;
+            }
+            if lower.starts_with("var(") && is_balanced_function_call_token(lower, "var") {
+                continue;
+            }
+            if lower.starts_with("env(") && is_balanced_function_call_token(lower, "env") {
+                continue;
+            }
+            if lower.contains('(') && !lower.ends_with(')') {
+                push_error(report, "Invalid value for property “background”.");
+                return;
+            }
             continue;
         }
 
@@ -2035,23 +2218,82 @@ fn is_quoted_string_token(t: &str) -> bool {
     (q == b'"' || q == b'\'') && bytes[bytes.len() - 1] == q
 }
 
-fn validate_background_image(tokens: &[&str], report: &mut Report) {
-    let [raw] = tokens else {
+fn validate_background_image(tokens: &[&str], css4_profile: bool, report: &mut Report) {
+    if tokens.is_empty() {
         push_error(report, "Invalid value for property “background-image”.");
         return;
-    };
-    let raw = raw.trim();
-    let lower = ascii_lowercase_cow(raw);
-    let lower = lower.as_ref();
-    if lower == "none" || is_css_wide_keyword(lower) {
-        return;
     }
-    if lower.starts_with("url(") {
-        if is_valid_url_function_token(raw) {
+
+    if !css4_profile {
+        let [raw] = tokens else {
+            push_error(report, "Invalid value for property “background-image”.");
+            return;
+        };
+        let raw = raw.trim();
+        let lower = ascii_lowercase_cow(raw);
+        let lower = lower.as_ref();
+        if lower == "none" || is_css_wide_keyword(lower) {
             return;
         }
+        if lower.starts_with("url(") {
+            if is_valid_url_function_token(raw) {
+                return;
+            }
+        }
         push_error(report, "Invalid value for property “background-image”.");
+        return;
     }
+
+    for t in tokens {
+        let raw = t.trim();
+        if raw.is_empty() {
+            continue;
+        }
+        let lower = ascii_lowercase_cow(raw);
+        let lower = lower.as_ref();
+        if lower == "none" {
+            continue;
+        }
+        if lower.starts_with("url(") {
+            if is_valid_url_function_token(raw) {
+                continue;
+            }
+            push_error(report, "Invalid value for property “background-image”.");
+            return;
+        }
+        if lower.starts_with("var(") && is_balanced_function_call_token(lower, "var") {
+            continue;
+        }
+        if lower.starts_with("env(") && is_balanced_function_call_token(lower, "env") {
+            continue;
+        }
+        if is_background_image_like_token(lower) {
+            continue;
+        }
+        push_error(report, "Invalid value for property “background-image”.");
+        return;
+    }
+}
+
+fn is_background_image_like_token(lower: &str) -> bool {
+    // Cover common `<image>` functions used in modern CSS.
+    const FUNCTIONS: [&str; 11] = [
+        "linear-gradient",
+        "repeating-linear-gradient",
+        "radial-gradient",
+        "repeating-radial-gradient",
+        "conic-gradient",
+        "repeating-conic-gradient",
+        "image-set",
+        "-webkit-image-set",
+        "cross-fade",
+        "element",
+        "paint",
+    ];
+
+    FUNCTIONS
+        .iter()
+        .any(|name| lower.starts_with(*name) && is_balanced_function_call_token(lower, name))
 }
 
 #[cfg(test)]
@@ -2121,20 +2363,20 @@ mod validate_single_token_value_tests {
     #[test]
     fn validate_background_image_accepts_none_inherit_and_valid_url_function() {
         let mut report = Report::default();
-        validate_background_image(&["none"], &mut report);
-        validate_background_image(&["inherit"], &mut report);
-        validate_background_image(&["url(x)"], &mut report);
+        validate_background_image(&["none"], false, &mut report);
+        validate_background_image(&["inherit"], false, &mut report);
+        validate_background_image(&["url(x)"], false, &mut report);
         assert_eq!(report.errors, 0);
         assert!(report.messages.is_empty());
 
-        validate_background_image(&["url(x\\)"], &mut report);
+        validate_background_image(&["url(x\\)"], false, &mut report);
         assert_eq!(report.errors, 1);
         assert_eq!(
             report.messages.last().unwrap().message,
             "Invalid value for property “background-image”."
         );
 
-        validate_background_image(&["none", "url(x)"], &mut report);
+        validate_background_image(&["none", "url(x)"], false, &mut report);
         assert_eq!(report.errors, 2);
     }
 }
@@ -2366,6 +2608,39 @@ fn is_valid_color_token(raw: &str, css1_escapes: bool) -> bool {
     if lower_ascii.starts_with("oklch(") {
         return is_balanced_function_call_token(lower_ascii, "oklch");
     }
+    if lower_ascii.starts_with("oklab(") {
+        return is_balanced_function_call_token(lower_ascii, "oklab");
+    }
+    if lower_ascii.starts_with("hwb(") {
+        return is_balanced_function_call_token(lower_ascii, "hwb");
+    }
+    if lower_ascii.starts_with("lab(") {
+        return is_balanced_function_call_token(lower_ascii, "lab");
+    }
+    if lower_ascii.starts_with("lch(") {
+        return is_balanced_function_call_token(lower_ascii, "lch");
+    }
+    if lower_ascii.starts_with("color-mix(") {
+        return is_balanced_function_call_token(lower_ascii, "color-mix");
+    }
+    if lower_ascii.starts_with("color(") {
+        return is_balanced_function_call_token(lower_ascii, "color");
+    }
+    if lower_ascii.starts_with("device-cmyk(") {
+        return is_balanced_function_call_token(lower_ascii, "device-cmyk");
+    }
+    if lower_ascii.starts_with("light-dark(") {
+        return is_balanced_function_call_token(lower_ascii, "light-dark");
+    }
+    if lower_ascii.starts_with("color-contrast(") {
+        return is_balanced_function_call_token(lower_ascii, "color-contrast");
+    }
+    if lower_ascii.starts_with("var(") {
+        return is_balanced_function_call_token(lower_ascii, "var");
+    }
+    if lower_ascii.starts_with("env(") {
+        return is_balanced_function_call_token(lower_ascii, "env");
+    }
 
     // Ident colors (with CSS escapes).
     let ident = if css1_escapes {
@@ -2576,6 +2851,9 @@ fn is_valid_rgb_like_function(token_lower: &str, has_alpha: bool) -> bool {
         return false;
     }
     let inner = &without_close[name_len..];
+    if inner.trim_start().starts_with("from ") {
+        return is_balanced_function_call_token(token_lower, if has_alpha { "rgba" } else { "rgb" });
+    }
     if !inner.contains(',') {
         return is_valid_rgb_like_space_syntax(inner, has_alpha);
     }
@@ -2662,6 +2940,9 @@ fn is_valid_hsl_like_function(token_lower: &str, has_alpha: bool) -> bool {
         return false;
     }
     let inner = &without_close[name_len..];
+    if inner.trim_start().starts_with("from ") {
+        return is_balanced_function_call_token(token_lower, if has_alpha { "hsla" } else { "hsl" });
+    }
     if !inner.contains(',') {
         return is_valid_hsl_like_space_syntax(inner, has_alpha);
     }
@@ -2924,6 +3205,28 @@ fn is_border_width_token(t: &str) -> bool {
 }
 
 fn is_length_token(t: &str) -> bool {
+    let t = ascii_lowercase_cow(t.trim());
+    let t = t.as_ref();
+
+    if t.starts_with("var(") {
+        return is_balanced_function_call_token(t, "var");
+    }
+    if t.starts_with("env(") {
+        return is_balanced_function_call_token(t, "env");
+    }
+    if t.starts_with("calc(") {
+        return is_balanced_function_call_token(t, "calc");
+    }
+    if t.starts_with("min(") {
+        return is_balanced_function_call_token(t, "min");
+    }
+    if t.starts_with("max(") {
+        return is_balanced_function_call_token(t, "max");
+    }
+    if t.starts_with("clamp(") {
+        return is_balanced_function_call_token(t, "clamp");
+    }
+
     // Minimal length: `<number><unit>` with common units.
     let (num, unit) = split_number_and_unit(t);
     num.is_some()
@@ -3017,6 +3320,12 @@ mod is_length_token_tests {
     fn accepts_common_modern_units() {
         for t in [
             "1px", "1q", "1em", "1rem", "1ch", "1lh", "1vw", "1svh", "1dvb", "1cqi",
+            "var(--x)",
+            "calc(1px + 2px)",
+            "min(1px, 2px)",
+            "max(1px, 2px)",
+            "clamp(1px, 2px, 3px)",
+            "env(safe-area-inset-top)",
         ] {
             assert!(is_length_token(t), "{t}");
         }
@@ -3024,7 +3333,7 @@ mod is_length_token_tests {
 
     #[test]
     fn rejects_dimensionless_and_unknown_units() {
-        for t in ["1", "1nope", "px", " 1 px "] {
+        for t in ["1", "1nope", "px", " 1 px ", "calc("] {
             assert!(!is_length_token(t), "{t}");
         }
     }
@@ -3403,22 +3712,78 @@ mod validate_clip_tests {
     }
 }
 
-fn validate_filter(tokens: &[&str], report: &mut Report) {
+fn validate_filter(tokens: &[&str], css4_profile: bool, report: &mut Report) {
     // The autotest suite includes a Microsoft `progid:` filter expression that the upstream
-    // validator reports as 4 errors (bug 750). This is a pragmatic, test-driven approximation.
+    // validator reports as 4 errors (bug 750). Preserve that behavior.
     if tokens.is_empty() {
         push_error(report, "Invalid value for property “filter”.");
         return;
     }
+
     // `split_top_level_value_tokens` splits on whitespace, and the prefix contains no whitespace.
     // This makes checking only the first token equivalent to checking `tokens.join(" ")`.
-    let errors = if tokens
+    if tokens
         .first()
         .is_some_and(|t| starts_with_ascii_ci(t.trim(), "progid:dximagetransform.microsoft."))
     {
-        4
-    } else {
-        1
-    };
-    push_error_times(report, "Invalid value for property “filter”.", errors);
+        push_error_times(report, "Invalid value for property “filter”.", 4);
+        return;
+    }
+
+    if !css4_profile {
+        push_error(report, "Invalid value for property “filter”.");
+        return;
+    }
+
+    if tokens.len() == 1 && tokens[0].trim().eq_ignore_ascii_case("none") {
+        return;
+    }
+
+    const FUNCTIONS: [&str; 11] = [
+        "blur",
+        "brightness",
+        "contrast",
+        "drop-shadow",
+        "grayscale",
+        "hue-rotate",
+        "invert",
+        "opacity",
+        "saturate",
+        "sepia",
+        "url",
+    ];
+
+    for t in tokens {
+        let raw = t.trim();
+        if raw.is_empty() {
+            continue;
+        }
+        let lower = ascii_lowercase_cow(raw);
+        let lower = lower.as_ref();
+
+        if lower.starts_with("url(") {
+            if is_valid_url_function_token(raw) {
+                continue;
+            }
+            push_error(report, "Invalid value for property “filter”.");
+            return;
+        }
+
+        if lower.starts_with("var(") && is_balanced_function_call_token(lower, "var") {
+            continue;
+        }
+        if lower.starts_with("env(") && is_balanced_function_call_token(lower, "env") {
+            continue;
+        }
+
+        if FUNCTIONS
+            .iter()
+            .any(|name| lower.starts_with(*name) && is_balanced_function_call_token(lower, name))
+        {
+            continue;
+        }
+
+        push_error(report, "Invalid value for property “filter”.");
+        return;
+    }
 }
