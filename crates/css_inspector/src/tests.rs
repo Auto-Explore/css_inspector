@@ -149,6 +149,27 @@ fn css2_accepts_font_face_with_numeric_font_weight() {
 }
 
 #[test]
+fn layer_allows_nested_qualified_rules() {
+    let css = r#"@layer foo {
+  div {
+    color: red;
+  }
+}"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn layer_statement_is_accepted() {
+    let report = validate_css_text("@layer foo, bar;", &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
 fn font_face_allows_src_descriptor_and_page_warns_once_for_page_break_too_many_values() {
     // `src` is not a normal CSS property, but is allowed inside @font-face.
     let report = validate_css_text("a { src: url(x); }", &Config::default()).unwrap();
