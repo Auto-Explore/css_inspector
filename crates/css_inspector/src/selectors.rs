@@ -489,13 +489,14 @@ const PSEUDO_CLASSES_CSS3: [&str; 48] = [
 
 const PSEUDO_ELEMENTS_CSS1: [&str; 2] = ["first-line", "first-letter"];
 const PSEUDO_ELEMENTS_CSS2: [&str; 4] = ["first-line", "first-letter", "before", "after"];
-const PSEUDO_ELEMENTS_CSS3: [&str; 16] = [
+const PSEUDO_ELEMENTS_CSS3: [&str; 17] = [
     "first-line",
     "first-letter",
     "selection",
     "target-text",
     "spelling-error",
     "grammar-error",
+    "highlight",
     "before",
     "after",
     "marker",

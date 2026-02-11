@@ -593,6 +593,22 @@ zoom: unset;
     }
 
     #[test]
+    fn highlight_pseudo_element_is_accepted() {
+        let css = r#"
+::highlight(a),
+::highlight(b),
+::highlight(c) {
+  background-color: yellow;
+  color: black;
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
     fn css_wide_keyword_helpers_are_case_insensitive_and_accept_slash_forms() {
         assert!(is_css_wide_keyword(" InHeRiT "));
         assert!(is_css_wide_keyword("revert-layer"));
