@@ -390,6 +390,7 @@ impl DeclValidator<'_> {
             "background-color" => {
                 validate_background_color(tokens.as_slice(), self.css1_escapes, self.report)
             }
+            "aspect-ratio" => validate_aspect_ratio(value, self.report),
             "background" => validate_background(
                 tokens.as_slice(),
                 self.css1_escapes,
@@ -450,6 +451,9 @@ impl DeclValidator<'_> {
             "cursor" => validate_cursor(tokens.as_slice(), self.css4_profile, self.report),
             "content" => validate_content(tokens.as_slice(), self.css4_profile, self.report),
             "quotes" => validate_quotes(tokens.as_slice(), self.report),
+            "grid-template-columns" | "grid-template-rows" => {
+                validate_grid_template_tracks(value, prop, self.report)
+            }
             "counter-increment" => {
                 validate_counter_list(tokens.as_slice(), "counter-increment", self.report)
             }
@@ -514,18 +518,77 @@ fn validate_zoom(tokens: &[&str], report: &mut Report) {
     }
 
     if let Some(num) = t.strip_suffix('%') {
-        if let Ok(v) = num.trim().parse::<f64>() {
-            if v.is_finite() && v >= 0.0 {
+        if let Some(v) = parse_css_number(num) {
+            if v >= 0.0 {
                 return;
             }
         }
-    } else if let Ok(v) = t.parse::<f64>() {
-        if v.is_finite() && v >= 0.0 {
+    } else if let Some(v) = parse_css_number(t) {
+        if v >= 0.0 {
             return;
         }
     }
 
     push_error(report, "Invalid value for property “zoom”.");
+}
+
+fn validate_aspect_ratio(value: &str, report: &mut Report) {
+    let v = value.trim();
+    if v.is_empty() {
+        push_error(report, "Invalid value for property “aspect-ratio”.");
+        return;
+    }
+
+    #[inline]
+    fn skip_ws(bytes: &[u8], mut i: usize) -> usize {
+        while i < bytes.len() && bytes[i].is_ascii_whitespace() {
+            i += 1;
+        }
+        i
+    }
+
+    fn parse_positive_number_at(s: &str, bytes: &[u8], start: usize) -> Option<(f64, usize)> {
+        let start = skip_ws(bytes, start);
+        let end = start + scan_css_number_end(bytes.get(start..)?)?;
+        let n = s[start..end].parse::<f64>().ok()?;
+        (n.is_finite() && n > 0.0).then_some((n, end))
+    }
+
+    fn parse_ratio(s: &str) -> Option<()> {
+        let bytes = s.as_bytes();
+        let (_, mut i) = parse_positive_number_at(s, bytes, 0)?;
+        i = skip_ws(bytes, i);
+        if i == bytes.len() {
+            return Some(());
+        }
+        if bytes[i] != b'/' {
+            return None;
+        }
+        let (_, mut i) = parse_positive_number_at(s, bytes, i + 1)?;
+        i = skip_ws(bytes, i);
+        (i == bytes.len()).then_some(())
+    }
+
+    if starts_with_ascii_ci(v, "auto") {
+        let after = &v[4..];
+        if after.is_empty() {
+            return;
+        }
+        if after
+            .as_bytes()
+            .first()
+            .is_some_and(|b| b.is_ascii_whitespace())
+            && parse_ratio(after).is_some()
+        {
+            return;
+        }
+    }
+
+    if parse_ratio(v).is_some() {
+        return;
+    }
+
+    push_error(report, "Invalid value for property “aspect-ratio”.");
 }
 
 fn validate_overflow_clip_margin(tokens: &[&str], report: &mut Report) {
@@ -602,6 +665,385 @@ fn is_overflow_clip_margin_lengthish_token(t: &str) -> bool {
         || starts_with_ascii_ci(t, "clamp(")
         || starts_with_ascii_ci(t, "var(")
         || starts_with_ascii_ci(t, "env(")
+}
+
+fn validate_grid_template_tracks(value: &str, prop: &str, report: &mut Report) {
+    let v = value.trim();
+    if v.is_empty() || !grid_template_value_balanced(v) {
+        push_error(report, format!("Invalid value for property “{prop}”."));
+        return;
+    }
+
+    let bytes = v.as_bytes();
+    let mut i = 0usize;
+    let mut token_count = 0usize;
+    let mut keyword_only = false;
+    let mut subgrid_mode = false;
+
+    while i < bytes.len() {
+        while i < bytes.len() && bytes[i].is_ascii_whitespace() {
+            i += 1;
+        }
+        if i >= bytes.len() {
+            break;
+        }
+
+        if keyword_only {
+            push_error(report, format!("Invalid value for property “{prop}”."));
+            return;
+        }
+
+        let b = bytes[i];
+        if matches!(b, b',' | b']' | b')') {
+            push_error(report, format!("Invalid value for property “{prop}”."));
+            return;
+        }
+
+        if b == b'[' {
+            let start = i;
+            i += 1;
+            let mut depth: i32 = 1;
+            let mut in_string: Option<u8> = None;
+            let mut escape = false;
+
+            while i < bytes.len() {
+                let bi = bytes[i];
+                if step_string_state(bi, &mut in_string, &mut escape) {
+                    i += 1;
+                    continue;
+                }
+                match bi {
+                    b'[' => depth += 1,
+                    b']' => {
+                        depth -= 1;
+                        if depth == 0 {
+                            i += 1;
+                            break;
+                        }
+                    }
+                    _ => {}
+                }
+                i += 1;
+            }
+
+            if depth != 0 || in_string.is_some() {
+                push_error(report, format!("Invalid value for property “{prop}”."));
+                return;
+            }
+
+            let tok = &v[start..i];
+            if !is_valid_grid_line_name_list(tok) {
+                push_error(report, format!("Invalid value for property “{prop}”."));
+                return;
+            }
+
+            token_count += 1;
+            continue;
+        }
+
+        let start = i;
+        let mut paren_depth: i32 = 0;
+        let mut in_string: Option<u8> = None;
+        let mut escape = false;
+
+        while i < bytes.len() {
+            let bi = bytes[i];
+            if step_string_state(bi, &mut in_string, &mut escape) {
+                i += 1;
+                continue;
+            }
+            match bi {
+                b'(' => paren_depth += 1,
+                b')' => {
+                    if paren_depth == 0 {
+                        break;
+                    }
+                    paren_depth -= 1;
+                }
+                b'[' if paren_depth == 0 => break,
+                b',' if paren_depth == 0 => {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                }
+                b if b.is_ascii_whitespace() && paren_depth == 0 => break,
+                _ => {}
+            }
+            i += 1;
+        }
+
+        if paren_depth != 0 || in_string.is_some() {
+            push_error(report, format!("Invalid value for property “{prop}”."));
+            return;
+        }
+
+        let tok = v[start..i].trim();
+        if tok.is_empty() {
+            continue;
+        }
+
+        if subgrid_mode {
+            // In `subgrid` mode, only `[line-names]` are allowed after the `subgrid` keyword.
+            push_error(report, format!("Invalid value for property “{prop}”."));
+            return;
+        }
+
+        if tok.eq_ignore_ascii_case("none") || tok.eq_ignore_ascii_case("masonry") {
+            if token_count != 0 {
+                push_error(report, format!("Invalid value for property “{prop}”."));
+                return;
+            }
+            keyword_only = true;
+            token_count += 1;
+            continue;
+        }
+
+        if tok.eq_ignore_ascii_case("subgrid") {
+            if token_count != 0 {
+                push_error(report, format!("Invalid value for property “{prop}”."));
+                return;
+            }
+            subgrid_mode = true;
+            token_count += 1;
+            continue;
+        }
+
+        if tok.eq_ignore_ascii_case("auto")
+            || tok.eq_ignore_ascii_case("min-content")
+            || tok.eq_ignore_ascii_case("max-content")
+        {
+            token_count += 1;
+            continue;
+        }
+
+        if is_grid_track_breadth_token(tok) {
+            token_count += 1;
+            continue;
+        }
+
+        if let Some((name, args)) = split_function_token(tok) {
+            if name.eq_ignore_ascii_case("repeat") {
+                let Some((count, tracks)) = split_on_single_top_level_comma(args) else {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                };
+                let count = count.trim();
+                let tracks = tracks.trim();
+                if count.is_empty() || tracks.is_empty() {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                }
+                let count_ok = count.eq_ignore_ascii_case("auto-fill")
+                    || count.eq_ignore_ascii_case("auto-fit")
+                    || count.parse::<usize>().is_ok_and(|n| n > 0);
+                if !count_ok {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                }
+                token_count += 1;
+                continue;
+            }
+
+            if name.eq_ignore_ascii_case("minmax") {
+                let Some((a, b)) = split_on_single_top_level_comma(args) else {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                };
+                if a.trim().is_empty() || b.trim().is_empty() {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                }
+                token_count += 1;
+                continue;
+            }
+
+            if name.eq_ignore_ascii_case("fit-content") {
+                if args.trim().is_empty() || args_has_top_level_comma(args) {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                }
+                token_count += 1;
+                continue;
+            }
+
+            // Be permissive with math/custom-property functions commonly used in track sizing.
+            if name.eq_ignore_ascii_case("calc")
+                || name.eq_ignore_ascii_case("min")
+                || name.eq_ignore_ascii_case("max")
+                || name.eq_ignore_ascii_case("clamp")
+                || name.eq_ignore_ascii_case("var")
+                || name.eq_ignore_ascii_case("env")
+            {
+                if args.trim().is_empty() {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                }
+                token_count += 1;
+                continue;
+            }
+        }
+
+        push_error(report, format!("Invalid value for property “{prop}”."));
+        return;
+    }
+
+    if token_count == 0 {
+        push_error(report, format!("Invalid value for property “{prop}”."));
+    }
+}
+
+fn grid_template_value_balanced(s: &str) -> bool {
+    let bytes = s.as_bytes();
+    let mut paren_depth: i32 = 0;
+    let mut bracket_depth: i32 = 0;
+    let mut in_string: Option<u8> = None;
+    let mut escape = false;
+
+    for &b in bytes {
+        if step_string_state(b, &mut in_string, &mut escape) {
+            continue;
+        }
+        match b {
+            b'(' => paren_depth += 1,
+            b')' => {
+                paren_depth -= 1;
+                if paren_depth < 0 {
+                    return false;
+                }
+            }
+            b'[' => bracket_depth += 1,
+            b']' => {
+                bracket_depth -= 1;
+                if bracket_depth < 0 {
+                    return false;
+                }
+            }
+            _ => {}
+        }
+    }
+
+    in_string.is_none() && paren_depth == 0 && bracket_depth == 0
+}
+
+fn split_function_token(token: &str) -> Option<(&str, &str)> {
+    let token = token.trim();
+    if !token.ends_with(')') {
+        return None;
+    }
+    let open = token.find('(')?;
+    let (name, rest) = token.split_at(open);
+    let name = name.trim();
+    if name.is_empty() {
+        return None;
+    }
+    let args = &rest[1..rest.len() - 1];
+    Some((name, args))
+}
+
+fn split_on_single_top_level_comma(args: &str) -> Option<(&str, &str)> {
+    let bytes = args.as_bytes();
+    let mut i = 0usize;
+    let mut paren_depth: i32 = 0;
+    let mut bracket_depth: i32 = 0;
+    let mut in_string: Option<u8> = None;
+    let mut escape = false;
+    let mut comma: Option<usize> = None;
+
+    while i < bytes.len() {
+        let b = bytes[i];
+        if step_string_state(b, &mut in_string, &mut escape) {
+            i += 1;
+            continue;
+        }
+
+        match b {
+            b'(' => paren_depth += 1,
+            b')' => paren_depth = paren_depth.saturating_sub(1),
+            b'[' => bracket_depth += 1,
+            b']' => bracket_depth = bracket_depth.saturating_sub(1),
+            b',' if paren_depth == 0 && bracket_depth == 0 => {
+                if comma.is_some() {
+                    return None;
+                }
+                comma = Some(i);
+            }
+            _ => {}
+        }
+        i += 1;
+    }
+
+    let pos = comma?;
+    Some((&args[..pos], &args[pos + 1..]))
+}
+
+fn args_has_top_level_comma(args: &str) -> bool {
+    let bytes = args.as_bytes();
+    let mut i = 0usize;
+    let mut paren_depth: i32 = 0;
+    let mut bracket_depth: i32 = 0;
+    let mut in_string: Option<u8> = None;
+    let mut escape = false;
+
+    while i < bytes.len() {
+        let b = bytes[i];
+        if step_string_state(b, &mut in_string, &mut escape) {
+            i += 1;
+            continue;
+        }
+
+        match b {
+            b'(' => paren_depth += 1,
+            b')' => paren_depth = paren_depth.saturating_sub(1),
+            b'[' => bracket_depth += 1,
+            b']' => bracket_depth = bracket_depth.saturating_sub(1),
+            b',' if paren_depth == 0 && bracket_depth == 0 => return true,
+            _ => {}
+        }
+        i += 1;
+    }
+
+    false
+}
+
+fn is_valid_grid_line_name_list(tok: &str) -> bool {
+    let t = tok.trim();
+    let Some(inner) = t.strip_prefix('[').and_then(|s| s.strip_suffix(']')) else {
+        return false;
+    };
+    let inner = inner.trim();
+    if inner.is_empty() {
+        return false;
+    }
+    inner.split_whitespace().all(|name| {
+        let bytes = name.as_bytes();
+        let Some(&first) = bytes.first() else {
+            return false;
+        };
+        if !(first.is_ascii_alphabetic() || first == b'-' || first == b'_') {
+            return false;
+        }
+        bytes.iter().all(|&b| is_property_ident_char(b))
+    })
+}
+
+fn is_grid_track_breadth_token(tok: &str) -> bool {
+    let t = tok.trim();
+    let (n, unit) = split_number_and_unit(t);
+    let Some(n) = n else {
+        return false;
+    };
+    if !n.is_finite() {
+        return false;
+    }
+
+    if unit.is_empty() {
+        return n == 0.0;
+    }
+    if unit == "%" {
+        return true;
+    }
+
+    // `fr` values and lengths use ASCII alphabetic units.
+    unit.as_bytes().iter().all(|b| b.is_ascii_alphabetic())
 }
 
 #[cfg(test)]
@@ -785,6 +1227,149 @@ mod declaration_validation_tests {
             assert_eq!(report.messages.len(), 1, "css={css:?} report={report:?}");
             assert_eq!(
                 report.messages[0].message, "“overflow-clip-margin” is not supported by Safari.",
+                "css={css:?} report={report:?}"
+            );
+        }
+    }
+
+    #[test]
+    fn grid_template_rows_and_columns_accept_modern_track_syntax_examples() {
+        let css = r#"
+/* Keyword value */
+grid-template-rows: none;
+
+/* <track-list> values */
+grid-template-rows: 100px 1fr;
+grid-template-rows: [line-name] 100px;
+grid-template-rows: [line-name1] 100px [line-name2 line-name3];
+grid-template-rows: minmax(100px, 1fr);
+grid-template-rows: fit-content(40%);
+grid-template-rows: repeat(3, 200px);
+grid-template-rows: subgrid;
+grid-template-rows: masonry;
+
+/* <auto-track-list> values */
+grid-template-rows: 200px repeat(auto-fill, 100px) 300px;
+grid-template-rows:
+  minmax(100px, max-content)
+  repeat(auto-fill, 200px) 20%;
+grid-template-rows:
+  [line-name1] 100px [line-name2]
+  repeat(auto-fit, [line-name3 line-name4] 300px)
+  100px;
+grid-template-rows:
+  [line-name1 line-name2] 100px
+  repeat(auto-fit, [line-name1] 300px) [line-name3];
+
+/* Global values */
+grid-template-rows: inherit;
+grid-template-rows: initial;
+grid-template-rows: revert;
+grid-template-rows: revert-layer;
+grid-template-rows: unset;
+
+/* Keyword value */
+grid-template-columns: none;
+
+/* <track-list> values */
+grid-template-columns: 100px 1fr;
+grid-template-columns: [line-name] 100px;
+grid-template-columns: [line-name1] 100px [line-name2 line-name3];
+grid-template-columns: minmax(100px, 1fr);
+grid-template-columns: fit-content(40%);
+grid-template-columns: repeat(3, 200px);
+grid-template-columns: subgrid;
+grid-template-columns: masonry;
+
+/* <auto-track-list> values */
+grid-template-columns: 200px repeat(auto-fill, 100px) 300px;
+grid-template-columns:
+  minmax(100px, max-content)
+  repeat(auto-fill, 200px) 20%;
+grid-template-columns:
+  [line-name1] 100px [line-name2]
+  repeat(auto-fit, [line-name3 line-name4] 300px)
+  100px;
+grid-template-columns:
+  [line-name1 line-name2] 100px
+  repeat(auto-fit, [line-name1] 300px) [line-name3];
+
+/* Global values */
+grid-template-columns: inherit;
+grid-template-columns: initial;
+grid-template-columns: revert;
+grid-template-columns: revert-layer;
+grid-template-columns: unset;
+"#;
+
+        let report = validate_css_declarations_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
+    fn grid_template_rows_and_columns_reject_invalid_syntax() {
+        let css = r#"
+grid-template-rows: repeat(3 200px);
+grid-template-columns: minmax(100px 1fr);
+grid-template-rows: 100px, 1fr;
+grid-template-columns: fit-content();
+grid-template-rows: foo;
+grid-template-columns: [] 100px;
+"#;
+
+        let report = validate_css_declarations_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 6, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(
+            report
+                .messages
+                .iter()
+                .any(|m| m.message == "Invalid value for property “grid-template-rows”."),
+            "{report:?}"
+        );
+        assert!(
+            report
+                .messages
+                .iter()
+                .any(|m| m.message == "Invalid value for property “grid-template-columns”."),
+            "{report:?}"
+        );
+    }
+
+    #[test]
+    fn aspect_ratio_accepts_number_and_ratio_values() {
+        let report = validate_css_declarations_text("aspect-ratio:1;", &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+
+        let report = validate_css_declarations_text(
+            "aspect-ratio:1.5;aspect-ratio: 3000 / 3000;aspect-ratio:3e3/3e3;",
+            &Config::default(),
+        )
+        .unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
+    fn aspect_ratio_rejects_invalid_css_number_syntax() {
+        for css in [
+            "aspect-ratio:12.;",
+            "aspect-ratio:+-12.2;",
+            "aspect-ratio:12.1.1;",
+        ] {
+            let report = validate_css_declarations_text(css, &Config::default()).unwrap();
+            assert_eq!(report.errors, 1, "css={css:?} report={report:?}");
+            assert_eq!(report.warnings, 0, "css={css:?} report={report:?}");
+            assert!(
+                report
+                    .messages
+                    .iter()
+                    .any(|m| m.message == "Invalid value for property “aspect-ratio”."),
                 "css={css:?} report={report:?}"
             );
         }
@@ -1157,7 +1742,10 @@ fn is_single_valued_property(prop: &str) -> bool {
             | "box-shadow"
             | "font"
             | "font-family"
+            | "aspect-ratio"
             | "grid-template"
+            | "grid-template-columns"
+            | "grid-template-rows"
             | "list-style"
             | "margin"
             | "outline"
@@ -1166,6 +1754,11 @@ fn is_single_valued_property(prop: &str) -> bool {
             | "padding"
             | "play-during"
             | "quotes"
+            | "transition"
+            | "transition-delay"
+            | "transition-duration"
+            | "transition-property"
+            | "transition-timing-function"
             | "text-decoration"
             | "azimuth"
             | "voice-family"
@@ -2087,7 +2680,7 @@ fn is_time_token(t: &str) -> bool {
             if num.trim().is_empty() {
                 return false;
             }
-            return num.trim().parse::<f64>().is_ok();
+            return parse_css_number(num).is_some();
         }
     }
     false
@@ -2194,7 +2787,7 @@ fn is_angle_token(t: &str) -> bool {
             if num.trim().is_empty() {
                 return false;
             }
-            return num.trim().parse::<f64>().is_ok();
+            return parse_css_number(num).is_some();
         }
     }
     false
@@ -2403,7 +2996,7 @@ fn is_any_percentage_token(t: &str) -> bool {
     let Some(num) = t.trim().strip_suffix('%') else {
         return false;
     };
-    num.trim().parse::<f64>().is_ok()
+    parse_css_number(num).is_some()
 }
 
 fn is_quoted_string_token(t: &str) -> bool {
@@ -2710,7 +3303,7 @@ fn is_line_height_token(t: &str) -> bool {
     tl == "normal"
         || is_length_token(tl)
         || is_any_percentage_token(tl)
-        || tl.parse::<f64>().is_ok()
+        || parse_css_number(tl).is_some()
 }
 
 fn is_hex_color(s: &str) -> bool {
@@ -3224,10 +3817,7 @@ fn is_percentage_0_100(s: &str) -> bool {
     let Some(num) = s.strip_suffix('%') else {
         return false;
     };
-    let Ok(v) = num.trim().parse::<f64>() else {
-        return false;
-    };
-    (0.0..=100.0).contains(&v)
+    parse_css_number(num).is_some_and(|v| (0.0..=100.0).contains(&v))
 }
 
 #[cfg(test)]
@@ -3313,15 +3903,9 @@ fn is_integer_0_255(s: &str) -> bool {
 fn is_alpha_value(s: &str) -> bool {
     let t = s.trim();
     if let Some(pct) = t.strip_suffix('%') {
-        let Ok(v) = pct.trim().parse::<f64>() else {
-            return false;
-        };
-        return (0.0..=100.0).contains(&v);
+        return parse_css_number(pct).is_some_and(|v| (0.0..=100.0).contains(&v));
     }
-    let Ok(v) = t.parse::<f64>() else {
-        return false;
-    };
-    (0.0..=1.0).contains(&v)
+    parse_css_number(t).is_some_and(|v| (0.0..=1.0).contains(&v))
 }
 
 fn validate_border_shorthand(tokens: &[&str], css1_escapes: bool, report: &mut Report) {
@@ -3452,24 +4036,83 @@ fn is_length_token(t: &str) -> bool {
         )
 }
 
+fn scan_css_number_end(bytes: &[u8]) -> Option<usize> {
+    // CSS <number> grammar subset (per requested test cases):
+    //   [+|-]? (
+    //       [0-9]+ ('.' [0-9]+)?
+    //     | '.' [0-9]+
+    //   ) ([eE] [+|-]? [0-9]+)?
+    //
+    // Notably invalid:
+    // - "12." (no digits after '.')
+    // - "+-12.2" (multiple leading signs)
+    // - "12.1.1" (extra characters remain)
+    let mut i = 0usize;
+    if matches!(bytes.first(), Some(b'+' | b'-')) {
+        i += 1;
+    }
+
+    let mut saw_digit = false;
+    while i < bytes.len() && bytes[i].is_ascii_digit() {
+        saw_digit = true;
+        i += 1;
+    }
+
+    if i < bytes.len() && bytes[i] == b'.' {
+        i += 1;
+        let frac_start = i;
+        while i < bytes.len() && bytes[i].is_ascii_digit() {
+            i += 1;
+        }
+        if i == frac_start {
+            return None;
+        }
+    } else if !saw_digit {
+        return None;
+    }
+
+    if i < bytes.len() && matches!(bytes[i], b'e' | b'E') {
+        // Only treat `e`/`E` as an exponent marker if it’s followed by an exponent with at least
+        // one digit; otherwise it belongs to the unit/identifier part (e.g. `1em`).
+        let mut j = i + 1;
+        if j < bytes.len() && matches!(bytes[j], b'+' | b'-') {
+            j += 1;
+        }
+        let exp_start = j;
+        while j < bytes.len() && bytes[j].is_ascii_digit() {
+            j += 1;
+        }
+        if j != exp_start {
+            i = j;
+        }
+    }
+
+    Some(i)
+}
+
+fn parse_css_number(token: &str) -> Option<f64> {
+    let t = token.trim();
+    if t.is_empty() {
+        return None;
+    }
+    let end = scan_css_number_end(t.as_bytes())?;
+    if end != t.len() {
+        return None;
+    }
+    let v = t.parse::<f64>().ok()?;
+    v.is_finite().then_some(v)
+}
+
 fn split_number_and_unit(s: &str) -> (Option<f64>, &str) {
     let s = s.trim();
-    let bytes = s.as_bytes();
-    if bytes.is_empty() {
+    if s.is_empty() {
         return (None, "");
     }
-    let mut idx = 0usize;
-    if matches!(bytes[0], b'+' | b'-') {
-        idx = 1;
-    }
-    while idx < bytes.len() && (bytes[idx].is_ascii_digit() || bytes[idx] == b'.') {
-        idx += 1;
-    }
-    if idx == 0 {
+    let Some(end) = scan_css_number_end(s.as_bytes()) else {
         return (None, "");
-    }
-    let (n, u) = s.split_at(idx);
-    let num = n.parse::<f64>().ok();
+    };
+    let (n, u) = s.split_at(end);
+    let num = n.parse::<f64>().ok().filter(|v| v.is_finite());
     (num, u)
 }
 
@@ -3488,8 +4131,8 @@ mod split_number_and_unit_tests {
         assert_eq!(u, " px");
 
         let (n, u) = split_number_and_unit("1e2px");
-        assert_eq!(n, Some(1.0));
-        assert_eq!(u, "e2px");
+        assert_eq!(n, Some(100.0));
+        assert_eq!(u, "px");
 
         let (n, u) = split_number_and_unit("1π");
         assert_eq!(n, Some(1.0));
@@ -3501,20 +4144,54 @@ mod split_number_and_unit_tests {
         assert_eq!(split_number_and_unit(""), (None, ""));
         assert_eq!(split_number_and_unit("px"), (None, ""));
         assert_eq!(split_number_and_unit("π1"), (None, ""));
+        assert_eq!(split_number_and_unit(".px"), (None, ""));
+        assert_eq!(split_number_and_unit("+"), (None, ""));
+        assert_eq!(split_number_and_unit("-."), (None, ""));
     }
 
     #[test]
-    fn keeps_unit_even_when_number_parse_fails() {
-        assert_eq!(split_number_and_unit(".px"), (None, "px"));
-        assert_eq!(split_number_and_unit("+"), (None, ""));
-        assert_eq!(split_number_and_unit("+ 1"), (None, " 1"));
+    fn keeps_unit_even_when_number_is_not_finite() {
+        assert_eq!(split_number_and_unit("1e999px"), (None, "px"));
     }
 
     #[test]
     fn handles_optional_sign_and_decimal_points() {
         assert_eq!(split_number_and_unit("-1.5em"), (Some(-1.5), "em"));
         assert_eq!(split_number_and_unit("+.5rem"), (Some(0.5), "rem"));
-        assert_eq!(split_number_and_unit("-.px"), (None, "px"));
+        assert_eq!(split_number_and_unit("-.px"), (None, ""));
+    }
+}
+
+#[cfg(test)]
+mod css_number_tests {
+    use super::parse_css_number;
+
+    fn assert_close(a: f64, b: f64) {
+        let diff = (a - b).abs();
+        assert!(
+            diff <= 1e-12 || diff <= (a.abs().max(b.abs()) * 1e-12),
+            "a={a} b={b} diff={diff}"
+        );
+    }
+
+    #[test]
+    fn accepts_valid_css_numbers() {
+        assert_close(parse_css_number("12").unwrap(), 12.0);
+        assert_close(parse_css_number("4.01").unwrap(), 4.01);
+        assert_close(parse_css_number("-456.8").unwrap(), -456.8);
+        assert_close(parse_css_number("0.0").unwrap(), 0.0);
+        assert_close(parse_css_number("+0.0").unwrap(), 0.0);
+        assert_close(parse_css_number("-0.0").unwrap(), 0.0);
+        assert_close(parse_css_number(".60").unwrap(), 0.60);
+        assert_close(parse_css_number("10e3").unwrap(), 10e3);
+        assert_close(parse_css_number("-3.4e-2").unwrap(), -3.4e-2);
+    }
+
+    #[test]
+    fn rejects_invalid_css_numbers() {
+        for s in ["12.", "+-12.2", "12.1.1"] {
+            assert!(parse_css_number(s).is_none(), "{s}");
+        }
     }
 }
 
