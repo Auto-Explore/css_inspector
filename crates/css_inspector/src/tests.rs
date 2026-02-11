@@ -563,6 +563,36 @@
     }
 
     #[test]
+    fn zoom_property_is_allowed_with_common_values() {
+        let css = r#"
+div {
+/* <percentage> values */
+zoom: 50%;
+zoom: 200%;
+
+/* <number> values */
+zoom: 1.1;
+zoom: 0.7;
+
+/* Non-standard keyword values */
+zoom: normal;
+zoom: reset;
+
+/* Global values */
+zoom: inherit;
+zoom: initial;
+zoom: revert;
+zoom: revert-layer;
+zoom: unset;
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
     fn css_wide_keyword_helpers_are_case_insensitive_and_accept_slash_forms() {
         assert!(is_css_wide_keyword(" InHeRiT "));
         assert!(is_css_wide_keyword("revert-layer"));

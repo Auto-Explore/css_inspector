@@ -111,11 +111,11 @@ fn strip_nested_rule_blocks_in_declaration_list<'a>(block: &'a str) -> Cow<'a, s
 
 fn is_vendor_extension_property(prop: &str) -> bool {
     // Match W3C CSS validator behavior (CssPropertyFactory.isNonstandardProperty):
-    // treat leading `-`/`_` properties and `zoom` as vendor/nonstandard.
+    // treat leading `-`/`_` properties as vendor/nonstandard.
     let Some(first) = prop.as_bytes().first() else {
         return false;
     };
-    *first == b'-' || *first == b'_' || prop.eq_ignore_ascii_case("zoom")
+    *first == b'-' || *first == b'_'
 }
 
 struct DeclContext {
@@ -252,6 +252,7 @@ impl DeclValidator<'_> {
             }
             "background" => validate_background(tokens.as_slice(), self.css1_escapes, self.report),
             "background-image" => validate_background_image(tokens.as_slice(), self.report),
+            "zoom" => validate_zoom(tokens.as_slice(), self.report),
             "background-repeat" => {
                 validate_single_token(tokens.as_slice(), "background-repeat", self.report)
             }
@@ -326,6 +327,32 @@ impl DeclValidator<'_> {
     }
 }
 
+fn validate_zoom(tokens: &[&str], report: &mut Report) {
+    let [t] = tokens else {
+        push_error(report, "Invalid value for property “zoom”.");
+        return;
+    };
+    let t = t.trim();
+
+    if t.eq_ignore_ascii_case("normal") || t.eq_ignore_ascii_case("reset") {
+        return;
+    }
+
+    if let Some(num) = t.strip_suffix('%') {
+        if let Ok(v) = num.trim().parse::<f64>() {
+            if v.is_finite() && v >= 0.0 {
+                return;
+            }
+        }
+    } else if let Ok(v) = t.parse::<f64>() {
+        if v.is_finite() && v >= 0.0 {
+            return;
+        }
+    }
+
+    push_error(report, "Invalid value for property “zoom”.");
+}
+
 #[cfg(test)]
 mod declaration_validation_tests {
     use super::{Config, validate_css_declarations_text};
@@ -389,7 +416,7 @@ mod declaration_validation_tests {
         let report =
             validate_css_declarations_text("-webkit-foo: 1; _bar: 2; zoom: 3", &Config::default())
                 .unwrap();
-        assert_eq!(report.errors, 3, "{report:?}");
+        assert_eq!(report.errors, 2, "{report:?}");
         assert_eq!(report.warnings, 0, "{report:?}");
         assert!(
             report
@@ -407,7 +434,7 @@ mod declaration_validation_tests {
             report
                 .messages
                 .iter()
-                .any(|m| m.message == "Unknown property “zoom”.")
+                .all(|m| m.message != "Unknown property “zoom”.")
         );
     }
 

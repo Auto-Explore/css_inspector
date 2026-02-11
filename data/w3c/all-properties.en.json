@@ -6334,18 +6334,8 @@
   , "title": "Compositing and Blending Level 1"
   }
 , { "property": "item-cross"
-  , "url": "https://drafts.csswg.org/css-grid-3/#propdef-item-cross"
-  , "status": "ED"
-  , "title": "CSS Grid Layout Module Level 3"
-  }
-, { "property": "item-cross"
   , "url": "https://www.w3.org/TR/2026/WD-css-grid-3-20260121/#propdef-item-cross"
   , "status": "WD"
-  , "title": "CSS Grid Layout Module Level 3"
-  }
-, { "property": "item-direction"
-  , "url": "https://drafts.csswg.org/css-grid-3/#propdef-item-direction"
-  , "status": "ED"
   , "title": "CSS Grid Layout Module Level 3"
   }
 , { "property": "item-direction"
@@ -6354,18 +6344,8 @@
   , "title": "CSS Grid Layout Module Level 3"
   }
 , { "property": "item-flow"
-  , "url": "https://drafts.csswg.org/css-grid-3/#propdef-item-flow"
-  , "status": "ED"
-  , "title": "CSS Grid Layout Module Level 3"
-  }
-, { "property": "item-flow"
   , "url": "https://www.w3.org/TR/2026/WD-css-grid-3-20260121/#propdef-item-flow"
   , "status": "WD"
-  , "title": "CSS Grid Layout Module Level 3"
-  }
-, { "property": "item-pack"
-  , "url": "https://drafts.csswg.org/css-grid-3/#propdef-item-pack"
-  , "status": "ED"
   , "title": "CSS Grid Layout Module Level 3"
   }
 , { "property": "item-pack"
@@ -6374,18 +6354,8 @@
   , "title": "CSS Grid Layout Module Level 3"
   }
 , { "property": "item-track"
-  , "url": "https://drafts.csswg.org/css-grid-3/#propdef-item-track"
-  , "status": "ED"
-  , "title": "CSS Grid Layout Module Level 3"
-  }
-, { "property": "item-track"
   , "url": "https://www.w3.org/TR/2026/WD-css-grid-3-20260121/#propdef-item-track"
   , "status": "WD"
-  , "title": "CSS Grid Layout Module Level 3"
-  }
-, { "property": "item-wrap"
-  , "url": "https://drafts.csswg.org/css-grid-3/#propdef-item-wrap"
-  , "status": "ED"
   , "title": "CSS Grid Layout Module Level 3"
   }
 , { "property": "item-wrap"
@@ -6984,8 +6954,18 @@
   , "title": "CSS Box Model Module Level 4"
   }
 , { "property": "marker"
+  , "url": "https://svgwg.org/specs/markers/#MarkerProperty"
+  , "status": "ED"
+  , "title": "SVG Markers"
+  }
+, { "property": "marker"
   , "url": "https://www.w3.org/TR/2015/WD-svg-markers-20150409/#MarkerProperty"
   , "status": "FPWD"
+  , "title": "SVG Markers"
+  }
+, { "property": "marker-end"
+  , "url": "https://svgwg.org/specs/markers/#MarkerEndProperty"
+  , "status": "ED"
   , "title": "SVG Markers"
   }
 , { "property": "marker-end"
@@ -6994,8 +6974,18 @@
   , "title": "SVG Markers"
   }
 , { "property": "marker-knockout-left"
+  , "url": "https://svgwg.org/specs/markers/#MarkerKnockoutLeftProperty"
+  , "status": "ED"
+  , "title": "SVG Markers"
+  }
+, { "property": "marker-knockout-left"
   , "url": "https://www.w3.org/TR/2015/WD-svg-markers-20150409/#MarkerKnockoutLeftProperty"
   , "status": "FPWD"
+  , "title": "SVG Markers"
+  }
+, { "property": "marker-knockout-right"
+  , "url": "https://svgwg.org/specs/markers/#MarkerKnockoutRightProperty"
+  , "status": "ED"
   , "title": "SVG Markers"
   }
 , { "property": "marker-knockout-right"
@@ -7004,13 +6994,28 @@
   , "title": "SVG Markers"
   }
 , { "property": "marker-mid"
+  , "url": "https://svgwg.org/specs/markers/#MarkerMidProperty"
+  , "status": "ED"
+  , "title": "SVG Markers"
+  }
+, { "property": "marker-mid"
   , "url": "https://www.w3.org/TR/2015/WD-svg-markers-20150409/#MarkerMidProperty"
   , "status": "FPWD"
   , "title": "SVG Markers"
   }
 , { "property": "marker-pattern"
+  , "url": "https://svgwg.org/specs/markers/#MarkerPatternProperty"
+  , "status": "ED"
+  , "title": "SVG Markers"
+  }
+, { "property": "marker-pattern"
   , "url": "https://www.w3.org/TR/2015/WD-svg-markers-20150409/#MarkerPatternProperty"
   , "status": "FPWD"
+  , "title": "SVG Markers"
+  }
+, { "property": "marker-segment"
+  , "url": "https://svgwg.org/specs/markers/#MarkerSegmentProperty"
+  , "status": "ED"
   , "title": "SVG Markers"
   }
 , { "property": "marker-segment"
@@ -7027,6 +7032,11 @@
   , "url": "https://www.w3.org/TR/2020/WD-css-lists-3-20201117/#propdef-marker-side"
   , "status": "WD"
   , "title": "CSS Lists and Counters Module Level 3"
+  }
+, { "property": "marker-start"
+  , "url": "https://svgwg.org/specs/markers/#MarkerStartProperty"
+  , "status": "ED"
+  , "title": "SVG Markers"
   }
 , { "property": "marker-start"
   , "url": "https://www.w3.org/TR/2015/WD-svg-markers-20150409/#MarkerStartProperty"

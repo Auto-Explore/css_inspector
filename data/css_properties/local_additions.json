@@ -3,7 +3,8 @@
     "container-name",
     "container-type",
     "scrollbar-gutter",
-    "clip-path"
+    "clip-path",
+    "zoom"
   ],
   "SVGProperties.properties": ["x", "y", "rx", "ry", "r", "cx", "cy", "d"],
   "CSS3SVGProperties.properties": ["x", "y", "rx", "ry", "r", "cx", "cy", "d"]
