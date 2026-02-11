@@ -108,9 +108,8 @@ mod known_properties_for_config_tests {
     use super::{
         Config, KnownProperties, known_properties_css1, known_properties_css2,
         known_properties_css3, known_properties_css3svg, known_properties_css4,
-        known_properties_css21,
-        known_properties_for_config, known_properties_svg, known_properties_svg_basic,
-        known_properties_svg_tiny,
+        known_properties_css21, known_properties_for_config, known_properties_svg,
+        known_properties_svg_basic, known_properties_svg_tiny,
     };
 
     #[test]

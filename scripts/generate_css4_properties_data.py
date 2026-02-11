@@ -18,6 +18,7 @@ Notes:
 from __future__ import annotations
 
 import argparse
+import collections
 import difflib
 import json
 from pathlib import Path
@@ -57,12 +58,12 @@ def parse_css_validator_properties(path: Path) -> set[str]:
     return out
 
 
-def parse_level4_properties(all_properties_json: Path) -> set[str]:
+def parse_level4_property_rows(all_properties_json: Path) -> list[tuple[str, str, str]]:
     rows = json.loads(all_properties_json.read_text(encoding="utf-8"))
     if not isinstance(rows, list) or not rows:
         raise RuntimeError(f"unexpected JSON shape in {all_properties_json}: expected non-empty array")
 
-    out: set[str] = set()
+    out: list[tuple[str, str, str]] = []
     for row in rows:
         if not isinstance(row, dict):
             continue
@@ -75,7 +76,7 @@ def parse_level4_properties(all_properties_json: Path) -> set[str]:
         prop = str(row.get("property", "")).strip().lower()
         if not prop or prop == "--*":
             continue
-        out.add(prop)
+        out.append((prop, title, status))
     return out
 
 
@@ -214,6 +215,11 @@ def main() -> int:
         action="store_true",
         help="Exit non-zero if the output file is not up to date (does not write).",
     )
+    ap.add_argument(
+        "--report",
+        action="store_true",
+        help="Print a small summary of the generated diff (counts by status/title).",
+    )
     args = ap.parse_args()
 
     INCLUDE_STATUSES = {normalize_status(s) for s in args.include_status}
@@ -223,8 +229,36 @@ def main() -> int:
     css3 = parse_css_validator_properties(args.css3_properties)
     css3.add("color-profile")
 
-    level4 = parse_level4_properties(args.all_properties_json)
+    level4_rows = parse_level4_property_rows(args.all_properties_json)
+    level4 = {prop for (prop, _, _) in level4_rows}
     missing = sorted(level4 - css3)
+
+    if args.report:
+        first_meta: dict[str, tuple[str, str]] = {}
+        for prop, title, status in level4_rows:
+            first_meta.setdefault(prop, (title, status))
+
+        status_counts: collections.Counter[str] = collections.Counter()
+        title_counts: collections.Counter[str] = collections.Counter()
+        for prop in missing:
+            title, status = first_meta.get(prop, ("", ""))
+            title_counts[title or "<missing title>"] += 1
+            status_counts[normalize_status(status) or "<missing status>"] += 1
+
+        print(
+            f"report: level4_props={len(level4)} css3_props={len(css3)} added={len(missing)}",
+        )
+        print("report: added properties by status:")
+        for s in [*STATUS_ORDER, "<missing status>"]:
+            c = status_counts.get(s, 0)
+            if c:
+                print(f"  {s}: {c}")
+
+        top_titles = title_counts.most_common(20)
+        if top_titles:
+            print("report: added properties by module title (top 20):")
+            for title, c in top_titles:
+                print(f"  {c}: {title}")
 
     out_text = build_output_text(missing)
     if args.check:

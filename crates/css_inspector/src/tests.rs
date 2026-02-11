@@ -101,7 +101,9 @@ fn css4_phase1_properties_file_matches_w3c_level4_diff() {
     }
 
     fn parse_properties_file_names_set(s: &str) -> std::collections::BTreeSet<String> {
-        parse_properties_file_names_in_order(s).into_iter().collect()
+        parse_properties_file_names_in_order(s)
+            .into_iter()
+            .collect()
     }
 
     let root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
@@ -218,10 +220,12 @@ fn css4_phase1_default_profile_rejects_css4_supplement_properties_as_unknown() {
     let got: std::collections::BTreeSet<String> =
         report.messages.iter().map(|m| m.message.clone()).collect();
     assert_eq!(got, expected);
-    assert!(report
-        .messages
-        .iter()
-        .all(|m| matches!(m.severity, super::Severity::Error)));
+    assert!(
+        report
+            .messages
+            .iter()
+            .all(|m| matches!(m.severity, super::Severity::Error))
+    );
 }
 
 #[test]
@@ -234,8 +238,8 @@ fn css4_profile_relaxes_single_value_heuristic_for_multitoken_properties() {
     let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.errors, 0, "{report:?}");
 
-    let report = validate_css_declarations_text("contain-intrinsic-size: 10px 20px;", &config)
-        .unwrap();
+    let report =
+        validate_css_declarations_text("contain-intrinsic-size: 10px 20px;", &config).unwrap();
     assert_eq!(report.errors, 0, "{report:?}");
 }
 
@@ -316,6 +320,90 @@ a {
     .map(str::to_owned)
     .collect();
     assert_eq!(got, expected, "{report:?}");
+}
+
+#[test]
+fn value_syntax_validation_rejects_unbalanced_parentheses_for_unvalidated_properties() {
+    let css = r#"a { width: calc(1px; }"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “width”."
+    );
+}
+
+#[test]
+fn value_syntax_validation_rejects_unbalanced_brackets_for_unvalidated_properties() {
+    let css = r#"a { width: [1px; }"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “width”."
+    );
+}
+
+#[test]
+fn nested_rules_in_style_blocks_are_validated() {
+    let css = r#"
+a {
+  color: red;
+  .child { no-such-prop: 1; }
+  @media (min-width: 1px) { no-such-prop2: 2; }
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.errors, 2, "{report:?}");
+    let got: std::collections::BTreeSet<String> =
+        report.messages.iter().map(|m| m.message.clone()).collect();
+    let expected: std::collections::BTreeSet<String> = [
+        "Unknown property “no-such-prop”.",
+        "Unknown property “no-such-prop2”.",
+    ]
+    .into_iter()
+    .map(str::to_owned)
+    .collect();
+    assert_eq!(got, expected, "{report:?}");
+}
+
+#[test]
+fn style_blocks_with_only_nested_rules_produce_no_declaration_errors() {
+    let css = r#"
+a {
+  .child { color: red; }
+  @media screen { b { color: blue; } }
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn nested_blocks_do_not_hide_following_declarations_in_style_blocks() {
+    let css = r#"
+a {
+  color: red;
+  .child { color: blue; }
+  @media screen { b { color: green; } }
+  no-such-prop: 1;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Unknown property “no-such-prop”."
+    );
 }
 
 #[test]
@@ -923,7 +1011,10 @@ fn property_at_rule_rejects_invalid_inherits_descriptor_value() {
     assert_eq!(report.errors, 1, "{report:?}");
     assert_eq!(report.warnings, 0, "{report:?}");
     assert_eq!(report.messages.len(), 1, "{report:?}");
-    assert_eq!(report.messages[0].message, "Invalid value for property “inherits”.");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “inherits”."
+    );
 }
 
 #[test]
@@ -1098,6 +1189,78 @@ fn view_transition_at_rule_rejects_invalid_navigation_value() {
 }
 
 #[test]
+fn scroll_timeline_at_rule_descriptor_block_is_accepted() {
+    let css = r#"
+@scroll-timeline --my-scroll {
+    source: auto;
+    orientation: block;
+    scroll-offsets: 0%, 100%;
+    time-range: 1s;
+}
+
+a { color: red; }
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn scroll_timeline_at_rule_rejects_unknown_descriptor() {
+    let css = r#"
+@scroll-timeline --my-scroll {
+    no-such-descriptor: 1;
+    source: auto;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Unknown property “no-such-descriptor”."
+    );
+}
+
+#[test]
+fn view_timeline_at_rule_descriptor_block_is_accepted() {
+    let css = r#"
+@view-timeline --my-view {
+    subject: auto;
+    axis: block;
+    inset: auto;
+    time-range: 1s;
+}
+
+a { color: red; }
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn view_timeline_at_rule_rejects_unknown_descriptor() {
+    let css = r#"
+@view-timeline --my-view {
+    no-such-descriptor: 1;
+    subject: auto;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Unknown property “no-such-descriptor”."
+    );
+}
+
+#[test]
 fn css4_phase2_complex_stylesheet_is_accepted_under_css4_profile() {
     let css = r#"
 @property --gap {
@@ -1216,10 +1379,12 @@ fn css4_phase2_complex_stylesheet_reports_expected_errors_under_css4_profile() {
     let got: std::collections::BTreeSet<String> =
         report.messages.iter().map(|m| m.message.clone()).collect();
     assert_eq!(got, expected, "{report:?}");
-    assert!(report
-        .messages
-        .iter()
-        .all(|m| matches!(m.severity, super::Severity::Error)));
+    assert!(
+        report
+            .messages
+            .iter()
+            .all(|m| matches!(m.severity, super::Severity::Error))
+    );
 }
 
 #[test]

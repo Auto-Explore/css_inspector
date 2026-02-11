@@ -530,8 +530,13 @@ const PSEUDO_FUNCTIONS_CSS3: [&str; 16] = [
     "part",
 ];
 
-const PSEUDO_CLASSES_CSS4_EXTRA: [&str; 5] =
-    ["user-valid", "open", "modal", "picture-in-picture", "popover-open"];
+const PSEUDO_CLASSES_CSS4_EXTRA: [&str; 5] = [
+    "user-valid",
+    "open",
+    "modal",
+    "picture-in-picture",
+    "popover-open",
+];
 
 const PSEUDO_FUNCTIONS_CSS4_EXTRA: [&str; 6] = [
     "state",

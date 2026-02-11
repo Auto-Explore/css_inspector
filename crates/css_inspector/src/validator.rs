@@ -84,8 +84,9 @@ pub(crate) fn validate_css_text_stripped(
             in_counter_style_at_rule,
             in_color_profile_at_rule,
             in_view_transition_at_rule,
-        ) =
-            at_rule_decl_list_context_flags(block.kind, block.prelude);
+            in_scroll_timeline_at_rule,
+            in_view_timeline_at_rule,
+        ) = at_rule_decl_list_context_flags(block.kind, block.prelude);
         validate_declarations(
             block.body,
             known_properties,
@@ -98,6 +99,8 @@ pub(crate) fn validate_css_text_stripped(
             in_counter_style_at_rule,
             in_color_profile_at_rule,
             in_view_transition_at_rule,
+            in_scroll_timeline_at_rule,
+            in_view_timeline_at_rule,
             css4_profile,
             report,
         );
@@ -224,6 +227,8 @@ pub fn validate_css_declarations_text(
         known_properties,
         warning_level,
         css1_escapes,
+        false,
+        false,
         false,
         false,
         false,

@@ -1,4 +1,3 @@
-use std::borrow::Cow;
 use std::collections::HashSet;
 
 use crate::known_properties::KnownProperties;
@@ -25,10 +24,11 @@ pub(crate) fn validate_declarations(
     in_counter_style_at_rule: bool,
     in_color_profile_at_rule: bool,
     in_view_transition_at_rule: bool,
+    in_scroll_timeline_at_rule: bool,
+    in_view_timeline_at_rule: bool,
     css4_profile: bool,
     report: &mut Report,
 ) {
-    let decl_block = strip_nested_rule_blocks_in_declaration_list(block);
     let mut v = DeclValidator {
         known_properties,
         warning_level,
@@ -44,80 +44,151 @@ pub(crate) fn validate_declarations(
             in_counter_style_at_rule,
             in_color_profile_at_rule,
             in_view_transition_at_rule,
+            in_scroll_timeline_at_rule,
+            in_view_timeline_at_rule,
             warned_pagebreak_too_many_values: false,
         },
         unknown_reported: HashSet::new(),
     };
 
-    for raw in decl_block.as_ref().split(';') {
+    for raw in iter_declaration_statements_skipping_nested_blocks(block) {
         v.validate_raw_declaration(raw);
     }
 }
 
-fn strip_nested_rule_blocks_in_declaration_list<'a>(block: &'a str) -> Cow<'a, str> {
+fn iter_declaration_statements_skipping_nested_blocks(
+    block: &str,
+) -> impl Iterator<Item = &str> + '_ {
+    // The `validator` walks nested rule blocks separately (via `iter_rule_blocks`). Here we only
+    // want to validate *top-level declarations* in this style block, so we skip nested `{...}`
+    // blocks entirely (including their preludes).
+    //
+    // This avoids the older “blanking” approach which could accidentally erase adjacent
+    // declarations when semicolons were missing.
     let bytes = block.as_bytes();
-    let mut out: Option<Vec<u8>> = None;
-
     let mut i = 0usize;
     let mut stmt_start = 0usize;
     let mut in_string: Option<u8> = None;
     let mut escape = false;
 
-    while i < bytes.len() {
-        let b = bytes[i];
-        if step_string_state(b, &mut in_string, &mut escape) {
-            i += 1;
-            continue;
-        }
-
-        match b {
-            b';' => {
-                stmt_start = i + 1;
+    std::iter::from_fn(move || {
+        while i < bytes.len() {
+            let b = bytes[i];
+            if step_string_state(b, &mut in_string, &mut escape) {
                 i += 1;
+                continue;
             }
-            b'{' => {
-                let mut depth = 1usize;
-                let mut j = i + 1;
-                while j < bytes.len() {
-                    let bj = bytes[j];
-                    if step_string_state(bj, &mut in_string, &mut escape) {
-                        j += 1;
-                        continue;
-                    }
-                    match bj {
-                        b'{' => depth += 1,
-                        b'}' => {
-                            depth = depth.saturating_sub(1);
-                            if depth == 0 {
-                                break;
-                            }
+
+            match b {
+                b';' => {
+                    let end = i;
+                    i += 1;
+                    let raw = &block[stmt_start..end];
+                    stmt_start = i;
+                    return Some(raw);
+                }
+                b'{' => {
+                    // Skip a nested block: it starts at `stmt_start` and ends at the matching `}`.
+                    let mut depth = 1usize;
+                    i += 1;
+                    while i < bytes.len() {
+                        let bi = bytes[i];
+                        if step_string_state(bi, &mut in_string, &mut escape) {
+                            i += 1;
+                            continue;
                         }
-                        _ => {}
+                        match bi {
+                            b'{' => depth += 1,
+                            b'}' => {
+                                depth = depth.saturating_sub(1);
+                                if depth == 0 {
+                                    i += 1;
+                                    break;
+                                }
+                            }
+                            _ => {}
+                        }
+                        i += 1;
                     }
-                    j += 1;
+                    stmt_start = i;
                 }
-
-                if depth != 0 || j >= bytes.len() {
-                    break;
+                _ => {
+                    i += 1;
                 }
-
-                let out = out.get_or_insert_with(|| bytes.to_vec());
-                for b in &mut out[stmt_start..=j] {
-                    *b = b' ';
-                }
-
-                i = j + 1;
-                stmt_start = i;
-            }
-            _ => {
-                i += 1;
             }
         }
+
+        if stmt_start < bytes.len() {
+            let raw = &block[stmt_start..];
+            stmt_start = bytes.len();
+            return Some(raw);
+        }
+        None
+    })
+}
+
+#[cfg(test)]
+mod iter_declaration_statements_skipping_nested_blocks_tests {
+    use super::iter_declaration_statements_skipping_nested_blocks;
+
+    fn collect_trimmed_statements(block: &str) -> Vec<&str> {
+        iter_declaration_statements_skipping_nested_blocks(block)
+            .map(str::trim)
+            .filter(|s| !s.is_empty())
+            .collect()
     }
 
-    match out {
-        Some(out) => Cow::Owned(String::from_utf8(out).expect("valid utf-8")),
-        None => Cow::Borrowed(block),
+    #[test]
+    fn yields_declarations_before_and_after_nested_rules() {
+        let block = r#"
+color: red;
+.child { no-such-prop: 1; }
+width: 1px;
+"#;
+        assert_eq!(
+            collect_trimmed_statements(block),
+            vec!["color: red", "width: 1px"]
+        );
+    }
+
+    #[test]
+    fn skips_nested_blocks_with_internal_semicolons_and_nested_braces() {
+        let block = r#"
+color: red;
+@media screen {
+  .a { color: blue; }
+  @supports (display: grid) { b { margin: 0; } }
+}
+height: 2px;
+"#;
+        assert_eq!(
+            collect_trimmed_statements(block),
+            vec!["color: red", "height: 2px"]
+        );
+    }
+
+    #[test]
+    fn does_not_treat_braces_inside_strings_as_nested_blocks() {
+        let block = r#"content: "a{b}c"; color: red;"#;
+        assert_eq!(
+            collect_trimmed_statements(block),
+            vec![r#"content: "a{b}c""#, "color: red"]
+        );
+    }
+
+    #[test]
+    fn returns_trailing_statement_without_semicolon() {
+        assert_eq!(collect_trimmed_statements("color: red"), vec!["color: red"]);
+    }
+
+    #[test]
+    fn handles_multiple_nested_blocks_back_to_back() {
+        let block = r#"
+a { color: red; }
+@media screen { b { color: blue; } }
+width: 1px;
+"#;
+        assert_eq!(collect_trimmed_statements(block), vec!["width: 1px"]);
     }
 }
 
@@ -138,6 +209,8 @@ struct DeclContext {
     in_counter_style_at_rule: bool,
     in_color_profile_at_rule: bool,
     in_view_transition_at_rule: bool,
+    in_scroll_timeline_at_rule: bool,
+    in_view_timeline_at_rule: bool,
     warned_pagebreak_too_many_values: bool,
 }
 
@@ -186,14 +259,18 @@ impl DeclValidator<'_> {
         let is_font_face_desc = self.ctx.in_font_face_at_rule && is_font_face_descriptor(prop);
         let is_page_desc = self.ctx.in_page_at_rule && is_page_descriptor(prop);
         let is_property_desc = self.ctx.in_property_at_rule && is_property_descriptor(prop);
-        let is_font_palette_values_desc = self.ctx.in_font_palette_values_at_rule
-            && is_font_palette_values_descriptor(prop);
+        let is_font_palette_values_desc =
+            self.ctx.in_font_palette_values_at_rule && is_font_palette_values_descriptor(prop);
         let is_counter_style_desc =
             self.ctx.in_counter_style_at_rule && is_counter_style_descriptor(prop);
         let is_color_profile_desc =
             self.ctx.in_color_profile_at_rule && is_color_profile_descriptor(prop);
         let is_view_transition_desc =
             self.ctx.in_view_transition_at_rule && is_view_transition_descriptor(prop);
+        let is_scroll_timeline_desc =
+            self.ctx.in_scroll_timeline_at_rule && is_scroll_timeline_descriptor(prop);
+        let is_view_timeline_desc =
+            self.ctx.in_view_timeline_at_rule && is_view_timeline_descriptor(prop);
         let is_custom_property = prop.starts_with("--");
 
         if prop.is_empty() {
@@ -212,6 +289,8 @@ impl DeclValidator<'_> {
                 || is_counter_style_desc
                 || is_color_profile_desc
                 || is_view_transition_desc
+                || is_scroll_timeline_desc
+                || is_view_timeline_desc
             {
                 // Allowed descriptor within an at-rule descriptor list.
             } else {
@@ -239,6 +318,10 @@ impl DeclValidator<'_> {
         let value = strip_important(value_raw.trim());
         if value.is_empty() {
             push_error(self.report, format!("Missing value for property “{prop}”."));
+            return;
+        }
+        if !is_custom_property && !is_valid_css_value_syntax(value) {
+            push_error(self.report, format!("Invalid value for property “{prop}”."));
             return;
         }
 
@@ -399,6 +482,8 @@ impl DeclValidator<'_> {
             && !is_counter_style_desc
             && !is_color_profile_desc
             && !is_view_transition_desc
+            && !is_scroll_timeline_desc
+            && !is_view_timeline_desc
             && !is_custom_property
         {
             push_error(self.report, format!("Invalid value for property “{prop}”."));
@@ -485,7 +570,10 @@ fn validate_overflow_clip_margin(tokens: &[&str], report: &mut Report) {
 }
 
 fn is_overflow_clip_margin_visual_box(t: &str) -> bool {
-    matches!(t, "content-box" | "padding-box" | "border-box" | "margin-box")
+    matches!(
+        t,
+        "content-box" | "padding-box" | "border-box" | "margin-box"
+    )
 }
 
 fn is_overflow_clip_margin_lengthish_token(t: &str) -> bool {
@@ -560,6 +648,31 @@ mod declaration_validation_tests {
                 .any(|m| m.message == "Missing ';' between declarations."),
             "{report:?}"
         );
+    }
+
+    #[test]
+    fn value_syntax_validation_rejects_unbalanced_brackets_for_known_properties() {
+        let report =
+            validate_css_declarations_text("width: [1px; height: 1px;", &Config::default())
+                .unwrap();
+        assert_eq!(report.errors, 1, "{report:?}");
+        assert!(
+            report
+                .messages
+                .iter()
+                .any(|m| m.message == "Invalid value for property “width”."),
+            "{report:?}"
+        );
+    }
+
+    #[test]
+    fn value_syntax_validation_is_skipped_for_custom_properties() {
+        let report =
+            validate_css_declarations_text("--x: calc(1px; width: 1px;", &Config::default())
+                .unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
     }
 
     #[test]
@@ -671,8 +784,7 @@ mod declaration_validation_tests {
             assert_eq!(report.warnings, 1, "css={css:?} report={report:?}");
             assert_eq!(report.messages.len(), 1, "css={css:?} report={report:?}");
             assert_eq!(
-                report.messages[0].message,
-                "“overflow-clip-margin” is not supported by Safari.",
+                report.messages[0].message, "“overflow-clip-margin” is not supported by Safari.",
                 "css={css:?} report={report:?}"
             );
         }
@@ -745,6 +857,17 @@ fn is_view_transition_descriptor(prop: &str) -> bool {
     matches!(prop, "navigation" | "types")
 }
 
+fn is_scroll_timeline_descriptor(prop: &str) -> bool {
+    matches!(
+        prop,
+        "source" | "orientation" | "scroll-offsets" | "time-range"
+    )
+}
+
+fn is_view_timeline_descriptor(prop: &str) -> bool {
+    matches!(prop, "subject" | "axis" | "inset" | "time-range")
+}
+
 fn validate_property_descriptor_syntax(tokens: &[&str], report: &mut Report) {
     let [t] = tokens else {
         push_error(report, "Invalid value for property “syntax”.");
@@ -781,11 +904,7 @@ fn validate_color_profile_descriptor_rendering_intent(tokens: &[&str], report: &
     let t = t.trim();
     if matches!(
         ascii_lowercase_cow(t).as_ref(),
-        "auto"
-            | "perceptual"
-            | "relative-colorimetric"
-            | "saturation"
-            | "absolute-colorimetric"
+        "auto" | "perceptual" | "relative-colorimetric" | "saturation" | "absolute-colorimetric"
     ) {
         return;
     }
@@ -1107,6 +1226,43 @@ fn split_top_level_value_tokens(value: &str) -> Vec<&str> {
     out
 }
 
+fn is_valid_css_value_syntax(value: &str) -> bool {
+    // Validate basic CSS component-value syntax: balanced strings, parentheses, and brackets.
+    //
+    // This does *not* implement property-specific grammars; it only rejects values that are
+    // syntactically malformed at the CSS syntax level.
+    let value = value.trim();
+    if value.is_empty() {
+        return false;
+    }
+
+    let bytes = value.as_bytes();
+    let mut stack: Vec<u8> = Vec::new();
+    let mut in_string: Option<u8> = None;
+    let mut escape = false;
+
+    for &b in bytes {
+        if step_string_state(b, &mut in_string, &mut escape) {
+            continue;
+        }
+        match b {
+            b'(' => stack.push(b')'),
+            b'[' => stack.push(b']'),
+            b')' | b']' => {
+                if stack.pop() != Some(b) {
+                    return false;
+                }
+            }
+            // Curly braces in declaration values are not supported by this validator and are
+            // most commonly a sign of mis-parsing nested rule blocks.
+            b'{' | b'}' => return false,
+            _ => {}
+        }
+    }
+
+    in_string.is_none() && stack.is_empty()
+}
+
 #[cfg(test)]
 mod split_top_level_value_tokens_tests {
     use super::split_top_level_value_tokens;
@@ -1146,6 +1302,42 @@ mod split_top_level_value_tokens_tests {
             split_top_level_value_tokens("func(a, b), c"),
             vec!["func(a, b)", "c"]
         );
+    }
+}
+
+#[cfg(test)]
+mod css_value_syntax_tests {
+    use super::is_valid_css_value_syntax;
+
+    #[test]
+    fn accepts_balanced_parentheses_and_brackets() {
+        for value in [
+            "calc(1px + 2px)",
+            "rgb(0 0 0 / 50%)",
+            r#"url("a{b}c")"#,
+            r#"[a=b] (x)"#,
+        ] {
+            assert!(is_valid_css_value_syntax(value), "{value:?}");
+        }
+    }
+
+    #[test]
+    fn rejects_unbalanced_delimiters_and_strings() {
+        for value in [
+            "calc(1px",
+            "calc(1px))",
+            "rgb(0 0 0 / 50%]]",
+            r#""unterminated"#,
+        ] {
+            assert!(!is_valid_css_value_syntax(value), "{value:?}");
+        }
+    }
+
+    #[test]
+    fn rejects_curly_braces_outside_strings() {
+        for value in ["{", "}", "calc({})", "var(--x, {a})"] {
+            assert!(!is_valid_css_value_syntax(value), "{value:?}");
+        }
     }
 }
 
@@ -2090,7 +2282,12 @@ fn validate_voice_family(tokens: &[&str], report: &mut Report) {
     }
 }
 
-fn validate_background(tokens: &[&str], css1_escapes: bool, css4_profile: bool, report: &mut Report) {
+fn validate_background(
+    tokens: &[&str],
+    css1_escapes: bool,
+    css4_profile: bool,
+    report: &mut Report,
+) {
     if tokens.is_empty() {
         push_error(report, "Invalid value for property “background”.");
         return;
@@ -2852,7 +3049,10 @@ fn is_valid_rgb_like_function(token_lower: &str, has_alpha: bool) -> bool {
     }
     let inner = &without_close[name_len..];
     if inner.trim_start().starts_with("from ") {
-        return is_balanced_function_call_token(token_lower, if has_alpha { "rgba" } else { "rgb" });
+        return is_balanced_function_call_token(
+            token_lower,
+            if has_alpha { "rgba" } else { "rgb" },
+        );
     }
     if !inner.contains(',') {
         return is_valid_rgb_like_space_syntax(inner, has_alpha);
@@ -2917,7 +3117,10 @@ fn is_valid_rgb_like_space_syntax(inner: &str, has_alpha: bool) -> bool {
 
     let is_percent = comps.iter().any(|c| c.ends_with('%'));
     if is_percent {
-        if !comps.iter().all(|c| c.ends_with('%') && is_percentage_0_100(c)) {
+        if !comps
+            .iter()
+            .all(|c| c.ends_with('%') && is_percentage_0_100(c))
+        {
             return false;
         }
     } else if !comps.iter().all(|c| is_integer_0_255(c)) {
@@ -2941,7 +3144,10 @@ fn is_valid_hsl_like_function(token_lower: &str, has_alpha: bool) -> bool {
     }
     let inner = &without_close[name_len..];
     if inner.trim_start().starts_with("from ") {
-        return is_balanced_function_call_token(token_lower, if has_alpha { "hsla" } else { "hsl" });
+        return is_balanced_function_call_token(
+            token_lower,
+            if has_alpha { "hsla" } else { "hsl" },
+        );
     }
     if !inner.contains(',') {
         return is_valid_hsl_like_space_syntax(inner, has_alpha);
@@ -3319,7 +3525,16 @@ mod is_length_token_tests {
     #[test]
     fn accepts_common_modern_units() {
         for t in [
-            "1px", "1q", "1em", "1rem", "1ch", "1lh", "1vw", "1svh", "1dvb", "1cqi",
+            "1px",
+            "1q",
+            "1em",
+            "1rem",
+            "1ch",
+            "1lh",
+            "1vw",
+            "1svh",
+            "1dvb",
+            "1cqi",
             "var(--x)",
             "calc(1px + 2px)",
             "min(1px, 2px)",
