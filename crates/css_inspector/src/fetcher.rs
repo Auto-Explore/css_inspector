@@ -10,6 +10,10 @@ use crate::validator::{
     strip_comments_or_push_error, strip_comments_or_push_error_with, validate_css_text_stripped,
 };
 
+#[cfg(test)]
+static CURL_PROGRAM_OVERRIDE: std::sync::Mutex<Option<std::ffi::OsString>> =
+    std::sync::Mutex::new(None);
+
 pub trait Fetcher {
     fn fetch(&self, uri: &str) -> Result<Vec<u8>, ValidatorError>;
 }
@@ -289,13 +293,28 @@ pub(crate) fn file_url_to_path(uri: &str) -> Result<String, ValidatorError> {
 fn fetch_http_url_with_curl(fetcher: &StdFetcher, uri: &str) -> Result<Vec<u8>, ValidatorError> {
     use std::process::Command;
 
+    let curl_bin: std::ffi::OsString = {
+        #[cfg(test)]
+        {
+            CURL_PROGRAM_OVERRIDE
+                .lock()
+                .expect("curl override lock")
+                .clone()
+                .unwrap_or_else(|| "curl".into())
+        }
+        #[cfg(not(test))]
+        {
+            "curl".into()
+        }
+    };
+
     let connect_timeout = fetcher.connect_timeout.as_secs().max(1).to_string();
     let max_time = (fetcher.connect_timeout + fetcher.read_timeout)
         .as_secs()
         .max(1)
         .to_string();
 
-    let output = Command::new("curl")
+    let output = Command::new(curl_bin)
         .arg("--location")
         .arg("--silent")
         .arg("--show-error")
@@ -347,6 +366,155 @@ fn fetch_http_url_with_curl(fetcher: &StdFetcher, uri: &str) -> Result<Vec<u8>, 
     let mut data = body.to_vec();
     data.truncate(fetcher.max_bytes);
     Ok(data)
+}
+
+#[cfg(all(test, unix))]
+mod fetch_http_url_with_curl_tests {
+    use super::{Fetcher, StdFetcher, ValidatorError};
+    use std::fs;
+    use std::os::unix::fs::PermissionsExt;
+    use std::path::PathBuf;
+    use std::sync::Mutex;
+    use std::time::{SystemTime, UNIX_EPOCH};
+
+    static ENV_LOCK: Mutex<()> = Mutex::new(());
+
+    fn unique_tmp_dir(name: &str) -> PathBuf {
+        let nanos = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("time went backwards")
+            .as_nanos();
+        std::env::temp_dir().join(format!("ae-css-fetcher-{name}-{nanos}"))
+    }
+
+    fn with_fake_curl(script_body: &str, f: impl FnOnce() -> ()) {
+        let _guard = ENV_LOCK.lock().unwrap_or_else(|e| e.into_inner());
+        let dir = unique_tmp_dir("curl");
+        fs::create_dir_all(&dir).expect("create temp dir");
+        let curl_path = dir.join("curl");
+        fs::write(&curl_path, script_body).expect("write fake curl");
+        let mut perms = fs::metadata(&curl_path)
+            .expect("stat fake curl")
+            .permissions();
+        perms.set_mode(0o755);
+        fs::set_permissions(&curl_path, perms).expect("chmod fake curl");
+
+        let mut curl_override = super::CURL_PROGRAM_OVERRIDE
+            .lock()
+            .expect("curl override lock");
+        *curl_override = Some(curl_path.clone().into_os_string());
+        drop(curl_override);
+
+        struct Guard {
+            curl_path: PathBuf,
+            dir: PathBuf,
+        }
+
+        impl Drop for Guard {
+            fn drop(&mut self) {
+                let mut curl_override = super::CURL_PROGRAM_OVERRIDE
+                    .lock()
+                    .expect("curl override lock");
+                *curl_override = None;
+                drop(curl_override);
+
+                let _ = fs::remove_file(&self.curl_path);
+                let _ = fs::remove_dir(&self.dir);
+            }
+        }
+
+        let _guard = Guard {
+            curl_path: curl_path.clone(),
+            dir: dir.clone(),
+        };
+
+        f();
+    }
+
+    #[test]
+    fn returns_error_when_curl_exits_nonzero_with_message() {
+        with_fake_curl("#!/bin/sh\necho boom 1>&2\nexit 2\n", || {
+            let fetcher = StdFetcher {
+                allow_network: true,
+                ..StdFetcher::default()
+            };
+            let err = fetcher.fetch("http://example.com/x").unwrap_err();
+            assert!(matches!(
+                err,
+                ValidatorError::InvalidInput(ref s) if s == "curl failed: boom"
+            ));
+        });
+    }
+
+    #[test]
+    fn returns_generic_error_when_curl_exits_nonzero_without_message() {
+        with_fake_curl("#!/bin/sh\nexit 2\n", || {
+            let fetcher = StdFetcher {
+                allow_network: true,
+                ..StdFetcher::default()
+            };
+            let err = fetcher.fetch("http://example.com/x").unwrap_err();
+            assert!(matches!(
+                err,
+                ValidatorError::InvalidInput(ref s) if s == "curl failed"
+            ));
+        });
+    }
+
+    #[test]
+    fn rejects_success_without_status_code_marker() {
+        with_fake_curl("#!/bin/sh\nprintf 'body'\n", || {
+            let fetcher = StdFetcher {
+                allow_network: true,
+                ..StdFetcher::default()
+            };
+            let err = fetcher.fetch("https://example.com/x").unwrap_err();
+            assert!(matches!(
+                err,
+                ValidatorError::InvalidInput(ref s) if s == "curl did not provide an HTTP status code"
+            ));
+        });
+    }
+
+    #[test]
+    fn rejects_invalid_status_codes_and_non_success_http_responses() {
+        with_fake_curl("#!/bin/sh\nprintf 'body\\nabc'\n", || {
+            let fetcher = StdFetcher {
+                allow_network: true,
+                ..StdFetcher::default()
+            };
+            let err = fetcher.fetch("http://example.com/x").unwrap_err();
+            assert!(matches!(
+                err,
+                ValidatorError::InvalidInput(ref s) if s == "curl returned invalid status code: \"abc\""
+            ));
+        });
+
+        with_fake_curl("#!/bin/sh\nprintf 'body\\n404'\n", || {
+            let fetcher = StdFetcher {
+                allow_network: true,
+                ..StdFetcher::default()
+            };
+            let err = fetcher.fetch("http://example.com/x").unwrap_err();
+            assert!(matches!(
+                err,
+                ValidatorError::InvalidInput(ref s) if s == "HTTP status 404 for http://example.com/x"
+            ));
+        });
+    }
+
+    #[test]
+    fn truncates_body_when_over_max_bytes() {
+        with_fake_curl("#!/bin/sh\nprintf 'abcdef\\n200'\n", || {
+            let fetcher = StdFetcher {
+                allow_network: true,
+                max_bytes: 3,
+                ..StdFetcher::default()
+            };
+            let bytes = fetcher.fetch("http://example.com/x").unwrap();
+            assert_eq!(bytes, b"abc");
+        });
+    }
 }
 
 fn fetch_http_url(fetcher: &StdFetcher, uri: &str) -> Result<Vec<u8>, ValidatorError> {
@@ -436,6 +604,51 @@ pub(crate) fn parse_http_url(uri: &str) -> Result<(&str, u16, &str), ValidatorEr
     Ok((host, port, path))
 }
 
+#[cfg(test)]
+mod parse_http_url_tests {
+    use super::{parse_http_url, ValidatorError};
+
+    #[test]
+    fn parses_default_port_and_root_path() {
+        let (host, port, path) = parse_http_url("http://example.com").unwrap();
+        assert_eq!(host, "example.com");
+        assert_eq!(port, 80);
+        assert_eq!(path, "/");
+    }
+
+    #[test]
+    fn parses_explicit_port_and_path() {
+        let (host, port, path) = parse_http_url("http://example.com:8080/a/b").unwrap();
+        assert_eq!(host, "example.com");
+        assert_eq!(port, 8080);
+        assert_eq!(path, "/a/b");
+    }
+
+    #[test]
+    fn rejects_non_http_schemes_or_mixed_case() {
+        let err = parse_http_url("https://example.com/").unwrap_err();
+        assert!(matches!(
+            err,
+            ValidatorError::InvalidInput(ref s) if s == "not an http:// URL"
+        ));
+
+        let err = parse_http_url("HTTP://example.com/").unwrap_err();
+        assert!(matches!(
+            err,
+            ValidatorError::InvalidInput(ref s) if s == "not an http:// URL"
+        ));
+    }
+
+    #[test]
+    fn rejects_invalid_ports() {
+        let err = parse_http_url("http://example.com:nope/").unwrap_err();
+        assert!(matches!(
+            err,
+            ValidatorError::InvalidInput(ref s) if s == "invalid port in URL: http://example.com:nope/"
+        ));
+    }
+}
+
 fn http_get_bytes(
     fetcher: &StdFetcher,
     host: &str,
@@ -478,6 +691,25 @@ fn http_get_bytes(
 #[inline]
 pub(crate) fn find_double_crlf(data: &[u8]) -> Option<usize> {
     data.windows(4).position(|w| w == b"\r\n\r\n")
+}
+
+#[cfg(test)]
+mod find_double_crlf_tests {
+    use super::find_double_crlf;
+
+    #[test]
+    fn finds_first_double_crlf_sequence() {
+        assert_eq!(find_double_crlf(b"\r\n\r\n"), Some(0));
+        assert_eq!(find_double_crlf(b"a\r\n\r\nb"), Some(1));
+        assert_eq!(find_double_crlf(b"a\r\nb\r\n\r\nc"), Some(4));
+    }
+
+    #[test]
+    fn returns_none_when_missing() {
+        assert_eq!(find_double_crlf(b""), None);
+        assert_eq!(find_double_crlf(b"\r\n\r"), None);
+        assert_eq!(find_double_crlf(b"\n\n\n\n"), None);
+    }
 }
 
 pub(crate) type HttpHeaders = Vec<(String, String)>;
@@ -527,6 +759,68 @@ pub(crate) fn parse_http_response(data: &[u8]) -> Result<ParsedHttpResponse, Val
         body_raw.into_owned().into_bytes()
     };
     Ok((code, headers, body))
+}
+
+#[cfg(test)]
+mod parse_http_response_tests {
+    use super::{parse_http_response, ValidatorError};
+
+    #[test]
+    fn parses_simple_response_with_body() {
+        let data = b"HTTP/1.1 200 OK\r\nContent-Type: text/css\r\n\r\nbody";
+        let (status, headers, body) = parse_http_response(data).unwrap();
+        assert_eq!(status, 200);
+        assert_eq!(
+            headers,
+            vec![("Content-Type".to_string(), "text/css".to_string())]
+        );
+        assert_eq!(body, b"body");
+    }
+
+    #[test]
+    fn parses_chunked_response_body_when_header_indicates_chunked() {
+        let data = b"HTTP/1.1 200 OK\r\nTransfer-Encoding: gzip, Chunked\r\n\r\n4\r\nWiki\r\n0\r\n\r\n";
+        let (status, headers, body) = parse_http_response(data).unwrap();
+        assert_eq!(status, 200);
+        assert_eq!(
+            headers,
+            vec![(
+                "Transfer-Encoding".to_string(),
+                "gzip, Chunked".to_string()
+            )]
+        );
+        assert_eq!(body, b"Wiki");
+    }
+
+    #[test]
+    fn errors_on_missing_delimiter() {
+        let err = parse_http_response(b"HTTP/1.1 200 OK\r\n").unwrap_err();
+        assert!(matches!(
+            err,
+            ValidatorError::InvalidInput(ref s) if s == "invalid HTTP response"
+        ));
+    }
+
+    #[test]
+    fn errors_on_missing_or_invalid_status_code() {
+        let err = parse_http_response(b"\r\n\r\nbody").unwrap_err();
+        assert!(matches!(
+            err,
+            ValidatorError::InvalidInput(ref s) if s == "missing status line"
+        ));
+
+        let err = parse_http_response(b"HTTP/1.1\r\n\r\nbody").unwrap_err();
+        assert!(matches!(
+            err,
+            ValidatorError::InvalidInput(ref s) if s == "missing status code"
+        ));
+
+        let err = parse_http_response(b"HTTP/1.1 x\r\n\r\nbody").unwrap_err();
+        assert!(matches!(
+            err,
+            ValidatorError::InvalidInput(ref s) if s == "invalid status code"
+        ));
+    }
 }
 
 pub(crate) fn decode_chunked(data: &[u8]) -> Result<Vec<u8>, ValidatorError> {
