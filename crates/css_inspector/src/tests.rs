@@ -609,6 +609,61 @@ zoom: unset;
     }
 
     #[test]
+    fn oklch_colors_with_from_and_var_are_accepted() {
+        let css = r#"
+div {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  color: red;
+  background-color: oklch(from currentColor l c h);
+}
+
+:root {
+  --lightness: 50%;
+}
+
+html {
+  color: oklch(var(--lightness) 50% 270);
+}
+"#;
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
+    fn oklch_color_function_accepts_common_valid_forms() {
+        for value in [
+            // Absolute values.
+            "oklch(40.1% 0.123 21.57)",
+            "oklch(59.69% 0.156 49.77)",
+            "oklch(59.69% 0.156 49.77 / .5)",
+            // Relative values.
+            "oklch(from green l c h / 0.5)",
+            "oklch(from #123456 calc(l + 0.1) c h)",
+            "oklch(from hsl(180 100% 50%) calc(l - 0.1) c h)",
+            "oklch(from var(--color) l c h / calc(alpha - 0.1))",
+            "oklch(from hsl(0 100% 50%) l c h)",
+            "oklch(from hsl(0 100% 50%) 42.1% 0.25 328.363)",
+            "oklch(from hsl(0 100% 50%) 0.8 0.4 h)",
+            "oklch(from hsl(0 100% 50% / 0.8) l c h / alpha)",
+            "oklch(from hsl(0 100% 50% / 0.8) l c h / 0.5)",
+            "oklch(from hsl(0 100% 50%) calc(l + 0.2) calc(c + 0.1) calc(h - 20) / calc(alpha - 0.1))",
+        ] {
+            let css = format!("a{{color:{value};}}");
+            let report = validate_css_text(&css, &Config::default()).unwrap();
+            assert_eq!(report.errors, 0, "value={value} report={report:?}");
+            assert_eq!(report.warnings, 0, "value={value} report={report:?}");
+            assert!(
+                report.messages.is_empty(),
+                "value={value} report={report:?}"
+            );
+        }
+    }
+
+    #[test]
     fn css_wide_keyword_helpers_are_case_insensitive_and_accept_slash_forms() {
         assert!(is_css_wide_keyword(" InHeRiT "));
         assert!(is_css_wide_keyword("revert-layer"));

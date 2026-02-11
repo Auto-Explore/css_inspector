@@ -2034,6 +2034,49 @@ fn is_hex_color(s: &str) -> bool {
     matches!(hex.len(), 3 | 4 | 6 | 8) && hex.chars().all(|c| c.is_ascii_hexdigit())
 }
 
+fn is_balanced_function_call_token(token: &str, function_name: &str) -> bool {
+    if !token.starts_with(function_name) {
+        return false;
+    }
+    let bytes = token.as_bytes();
+    let after_name = function_name.len();
+    if bytes.get(after_name) != Some(&b'(') || !token.ends_with(')') {
+        return false;
+    }
+
+    let mut i = after_name + 1;
+    let mut depth: i64 = 1;
+    let mut in_string: Option<u8> = None;
+    let mut escape = false;
+    let mut has_non_ws = false;
+
+    while i < bytes.len() {
+        let b = bytes[i];
+        if step_string_state(b, &mut in_string, &mut escape) {
+            i += 1;
+            continue;
+        }
+        match b {
+            b'(' => {
+                depth += 1;
+            }
+            b')' => {
+                depth -= 1;
+                if depth == 0 {
+                    return has_non_ws && i == bytes.len() - 1;
+                }
+            }
+            b if !b.is_ascii_whitespace() => {
+                has_non_ws = true;
+            }
+            _ => {}
+        }
+        i += 1;
+    }
+
+    false
+}
+
 fn is_valid_color_token(raw: &str, css1_escapes: bool) -> bool {
     let t = raw.trim();
     if t.is_empty() {
@@ -2072,6 +2115,9 @@ fn is_valid_color_token(raw: &str, css1_escapes: bool) -> bool {
     }
     if lower_ascii.starts_with("hsla(") {
         return is_valid_hsl_like_function(lower_ascii, true);
+    }
+    if lower_ascii.starts_with("oklch(") {
+        return is_balanced_function_call_token(lower_ascii, "oklch");
     }
 
     // Ident colors (with CSS escapes).
