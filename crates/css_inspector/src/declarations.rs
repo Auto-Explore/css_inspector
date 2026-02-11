@@ -167,6 +167,7 @@ impl DeclValidator<'_> {
         let errors_before = self.report.errors;
         let is_font_face_desc = self.ctx.in_font_face_at_rule && is_font_face_descriptor(prop);
         let is_page_desc = self.ctx.in_page_at_rule && is_page_descriptor(prop);
+        let is_custom_property = prop.starts_with("--");
 
         if prop.is_empty() {
             push_error(self.report, "Missing property name in declaration.");
@@ -236,7 +237,7 @@ impl DeclValidator<'_> {
             );
             self.ctx.warned_pagebreak_too_many_values = true;
         }
-        if has_css_wide_keyword_mixed(&tokens) {
+        if !is_custom_property && has_css_wide_keyword_mixed(&tokens) {
             push_error(self.report, format!("Invalid value for property “{prop}”."));
             return;
         }
@@ -322,6 +323,7 @@ impl DeclValidator<'_> {
             && is_single_valued_property(prop)
             && !is_font_face_desc
             && !is_page_desc
+            && !is_custom_property
         {
             push_error(self.report, format!("Invalid value for property “{prop}”."));
         }
@@ -421,6 +423,48 @@ mod declaration_validation_tests {
             .count();
         assert_eq!(unknown, 1, "{report:?}");
         assert_eq!(report.errors, 1);
+    }
+
+    #[test]
+    fn box_shadow_accepts_none_and_multi_token_values() {
+        let report = validate_css_declarations_text(
+            "box-shadow: none; box-shadow: 0 0 0 #419;",
+            &Config::default(),
+        )
+        .unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
+    fn custom_properties_can_store_multi_token_box_shadow_values() {
+        let report = validate_css_declarations_text(
+            "--primary_buttons_box_shadow: none; box-shadow: var(--primary_buttons_box_shadow);",
+            &Config::default(),
+        )
+        .unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+
+        let report = validate_css_declarations_text(
+            "--primary_buttons_box_shadow: 0 0 0 #419; box-shadow: var(--primary_buttons_box_shadow);",
+            &Config::default(),
+        )
+        .unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
+    }
+
+    #[test]
+    fn custom_properties_allow_css_wide_keywords_as_plain_tokens() {
+        let report =
+            validate_css_declarations_text("--foo: inherit 1;", &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
+        assert_eq!(report.warnings, 0, "{report:?}");
+        assert!(report.messages.is_empty(), "{report:?}");
     }
 
     #[test]
@@ -727,6 +771,7 @@ fn is_single_valued_property(prop: &str) -> bool {
             | "counter-reset"
             | "cue"
             | "cursor"
+            | "box-shadow"
             | "font"
             | "font-family"
             | "grid-template"
