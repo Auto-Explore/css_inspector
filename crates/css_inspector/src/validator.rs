@@ -74,7 +74,13 @@ pub(crate) fn validate_css_text_stripped(
             validate_selector_prelude(block.prelude, pseudo_version, warning_level, report);
             warn_on_conflicting_attribute_selectors(block.prelude, warning_level, report);
         }
-        let (in_page_at_rule, in_font_face_at_rule) =
+        let (
+            in_page_at_rule,
+            in_font_face_at_rule,
+            in_property_at_rule,
+            in_font_palette_values_at_rule,
+            in_counter_style_at_rule,
+        ) =
             at_rule_decl_list_context_flags(block.kind, block.prelude);
         validate_declarations(
             block.body,
@@ -83,6 +89,9 @@ pub(crate) fn validate_css_text_stripped(
             css1_escapes,
             in_page_at_rule,
             in_font_face_at_rule,
+            in_property_at_rule,
+            in_font_palette_values_at_rule,
+            in_counter_style_at_rule,
             report,
         );
     }
@@ -206,6 +215,9 @@ pub fn validate_css_declarations_text(
         known_properties,
         warning_level,
         css1_escapes,
+        false,
+        false,
+        false,
         false,
         false,
         &mut report,

@@ -20,6 +20,9 @@ pub(crate) fn validate_declarations(
     css1_escapes: bool,
     in_page_at_rule: bool,
     in_font_face_at_rule: bool,
+    in_property_at_rule: bool,
+    in_font_palette_values_at_rule: bool,
+    in_counter_style_at_rule: bool,
     report: &mut Report,
 ) {
     let decl_block = strip_nested_rule_blocks_in_declaration_list(block);
@@ -32,6 +35,9 @@ pub(crate) fn validate_declarations(
         ctx: DeclContext {
             in_page_at_rule,
             in_font_face_at_rule,
+            in_property_at_rule,
+            in_font_palette_values_at_rule,
+            in_counter_style_at_rule,
             warned_pagebreak_too_many_values: false,
         },
         unknown_reported: HashSet::new(),
@@ -121,6 +127,9 @@ fn is_vendor_extension_property(prop: &str) -> bool {
 struct DeclContext {
     in_page_at_rule: bool,
     in_font_face_at_rule: bool,
+    in_property_at_rule: bool,
+    in_font_palette_values_at_rule: bool,
+    in_counter_style_at_rule: bool,
     warned_pagebreak_too_many_values: bool,
 }
 
@@ -167,6 +176,11 @@ impl DeclValidator<'_> {
         let errors_before = self.report.errors;
         let is_font_face_desc = self.ctx.in_font_face_at_rule && is_font_face_descriptor(prop);
         let is_page_desc = self.ctx.in_page_at_rule && is_page_descriptor(prop);
+        let is_property_desc = self.ctx.in_property_at_rule && is_property_descriptor(prop);
+        let is_font_palette_values_desc = self.ctx.in_font_palette_values_at_rule
+            && is_font_palette_values_descriptor(prop);
+        let is_counter_style_desc =
+            self.ctx.in_counter_style_at_rule && is_counter_style_descriptor(prop);
         let is_custom_property = prop.starts_with("--");
 
         if prop.is_empty() {
@@ -177,9 +191,14 @@ impl DeclValidator<'_> {
             push_error(self.report, "Invalid property name in declaration.");
             return;
         }
-        if !prop.starts_with("--") && !self.known_properties.contains(prop) {
-            if is_font_face_desc || is_page_desc {
-                // Allowed descriptor within @font-face.
+        if !is_custom_property && !self.known_properties.contains(prop) {
+            if is_font_face_desc
+                || is_page_desc
+                || is_property_desc
+                || is_font_palette_values_desc
+                || is_counter_style_desc
+            {
+                // Allowed descriptor within an at-rule descriptor list.
             } else {
                 // Keep error counts closer to the upstream validator by reporting each unknown
                 // property name at most once per declaration block.
@@ -256,6 +275,12 @@ impl DeclValidator<'_> {
         }
 
         match prop {
+            "syntax" if is_property_desc => {
+                validate_property_descriptor_syntax(tokens.as_slice(), self.report)
+            }
+            "inherits" if is_property_desc => {
+                validate_property_descriptor_inherits(tokens.as_slice(), self.report)
+            }
             "float" => validate_float(tokens.as_slice(), self.report),
             "color" => validate_color(tokens.as_slice(), self.css1_escapes, self.report),
             "background-color" => {
@@ -334,6 +359,9 @@ impl DeclValidator<'_> {
             && is_single_valued_property(prop)
             && !is_font_face_desc
             && !is_page_desc
+            && !is_property_desc
+            && !is_font_palette_values_desc
+            && !is_counter_style_desc
             && !is_custom_property
         {
             push_error(self.report, format!("Invalid value for property “{prop}”."));
@@ -646,6 +674,58 @@ fn is_font_face_descriptor(prop: &str) -> bool {
 
 fn is_page_descriptor(prop: &str) -> bool {
     matches!(prop, "size" | "marks" | "bleed")
+}
+
+fn is_property_descriptor(prop: &str) -> bool {
+    matches!(prop, "syntax" | "inherits" | "initial-value")
+}
+
+fn is_font_palette_values_descriptor(prop: &str) -> bool {
+    matches!(prop, "font-family" | "base-palette" | "override-colors")
+}
+
+fn is_counter_style_descriptor(prop: &str) -> bool {
+    matches!(
+        prop,
+        "system"
+            | "symbols"
+            | "additive-symbols"
+            | "negative"
+            | "prefix"
+            | "suffix"
+            | "range"
+            | "pad"
+            | "speak-as"
+            | "fallback"
+    )
+}
+
+fn validate_property_descriptor_syntax(tokens: &[&str], report: &mut Report) {
+    let [t] = tokens else {
+        push_error(report, "Invalid value for property “syntax”.");
+        return;
+    };
+    let t = t.trim();
+    if t.len() >= 2 {
+        let bytes = t.as_bytes();
+        let q = bytes[0];
+        if (q == b'"' || q == b'\'') && bytes[bytes.len() - 1] == q {
+            return;
+        }
+    }
+    push_error(report, "Invalid value for property “syntax”.");
+}
+
+fn validate_property_descriptor_inherits(tokens: &[&str], report: &mut Report) {
+    let [t] = tokens else {
+        push_error(report, "Invalid value for property “inherits”.");
+        return;
+    };
+    let t = t.trim();
+    if t.eq_ignore_ascii_case("true") || t.eq_ignore_ascii_case("false") {
+        return;
+    }
+    push_error(report, "Invalid value for property “inherits”.");
 }
 
 fn find_embedded_declaration_start(value: &str) -> Option<usize> {
@@ -2496,6 +2576,9 @@ fn is_valid_rgb_like_function(token_lower: &str, has_alpha: bool) -> bool {
         return false;
     }
     let inner = &without_close[name_len..];
+    if !inner.contains(',') {
+        return is_valid_rgb_like_space_syntax(inner, has_alpha);
+    }
     let mut args = iter_function_args(inner);
     let (Some(c1), Some(c2), Some(c3)) = (args.next(), args.next(), args.next()) else {
         return false;
@@ -2525,6 +2608,51 @@ fn is_valid_rgb_like_function(token_lower: &str, has_alpha: bool) -> bool {
     }
 }
 
+fn is_valid_rgb_like_space_syntax(inner: &str, has_alpha: bool) -> bool {
+    let mut parts = inner.split('/');
+    let before = parts.next().unwrap_or("");
+    let after = parts.next();
+    if parts.next().is_some() {
+        return false;
+    }
+
+    let comps: Vec<&str> = before
+        .split_ascii_whitespace()
+        .filter(|s| !s.is_empty())
+        .collect();
+    if comps.len() != 3 {
+        return false;
+    }
+
+    let alpha = if let Some(s) = after {
+        let tokens: Vec<&str> = s
+            .split_ascii_whitespace()
+            .filter(|t| !t.is_empty())
+            .collect();
+        if tokens.len() != 1 {
+            return false;
+        }
+        Some(tokens[0])
+    } else {
+        None
+    };
+
+    let is_percent = comps.iter().any(|c| c.ends_with('%'));
+    if is_percent {
+        if !comps.iter().all(|c| c.ends_with('%') && is_percentage_0_100(c)) {
+            return false;
+        }
+    } else if !comps.iter().all(|c| is_integer_0_255(c)) {
+        return false;
+    }
+
+    if has_alpha {
+        alpha.is_some_and(is_alpha_value)
+    } else {
+        alpha.map_or(true, is_alpha_value)
+    }
+}
+
 fn is_valid_hsl_like_function(token_lower: &str, has_alpha: bool) -> bool {
     let name_len = if has_alpha { 5 } else { 4 }; // "hsla(" or "hsl("
     let Some(without_close) = token_lower.strip_suffix(")") else {
@@ -2534,6 +2662,9 @@ fn is_valid_hsl_like_function(token_lower: &str, has_alpha: bool) -> bool {
         return false;
     }
     let inner = &without_close[name_len..];
+    if !inner.contains(',') {
+        return is_valid_hsl_like_space_syntax(inner, has_alpha);
+    }
     let mut args = iter_function_args(inner);
     let (Some(_h), Some(s), Some(l)) = (args.next(), args.next(), args.next()) else {
         return false;
@@ -2557,6 +2688,51 @@ fn is_valid_hsl_like_function(token_lower: &str, has_alpha: bool) -> bool {
     }
 }
 
+fn is_valid_hsl_like_space_syntax(inner: &str, has_alpha: bool) -> bool {
+    let mut parts = inner.split('/');
+    let before = parts.next().unwrap_or("");
+    let after = parts.next();
+    if parts.next().is_some() {
+        return false;
+    }
+
+    let comps: Vec<&str> = before
+        .split_ascii_whitespace()
+        .filter(|s| !s.is_empty())
+        .collect();
+    if comps.len() != 3 {
+        return false;
+    }
+
+    let alpha = if let Some(s) = after {
+        let tokens: Vec<&str> = s
+            .split_ascii_whitespace()
+            .filter(|t| !t.is_empty())
+            .collect();
+        if tokens.len() != 1 {
+            return false;
+        }
+        Some(tokens[0])
+    } else {
+        None
+    };
+
+    let s = comps[1];
+    let l = comps[2];
+    if !(s.ends_with('%') && l.ends_with('%')) {
+        return false;
+    }
+    if !is_percentage_0_100(s) || !is_percentage_0_100(l) {
+        return false;
+    }
+
+    if has_alpha {
+        alpha.is_some_and(is_alpha_value)
+    } else {
+        alpha.map_or(true, is_alpha_value)
+    }
+}
+
 fn is_percentage_0_100(s: &str) -> bool {
     let Some(num) = s.strip_suffix('%') else {
         return false;
@@ -2574,28 +2750,36 @@ mod color_function_arg_tests {
     #[test]
     fn rgb_like_requires_exact_nonempty_argument_count() {
         assert!(is_valid_rgb_like_function("rgb(1,2,3)", false));
+        assert!(is_valid_rgb_like_function("rgb(1 2 3)", false));
+        assert!(is_valid_rgb_like_function("rgb(1 2 3 / 0.5)", false));
         assert!(!is_valid_rgb_like_function("rgb()", false));
         assert!(!is_valid_rgb_like_function("rgb(1,2,3", false));
         assert!(!is_valid_rgb_like_function("rgb(1,2)", false));
         assert!(!is_valid_rgb_like_function("rgb(1,2,3,4)", false));
         assert!(is_valid_rgb_like_function("rgba(1,2,3,0.5)", true));
+        assert!(is_valid_rgb_like_function("rgba(1 2 3 / 0.5)", true));
         assert!(!is_valid_rgb_like_function("rgba()", true));
         assert!(!is_valid_rgb_like_function("rgba(1,2,3,0.5", true));
         assert!(!is_valid_rgb_like_function("rgba(1,2,3)", true));
+        assert!(!is_valid_rgb_like_function("rgba(1 2 3)", true));
         assert!(!is_valid_rgb_like_function("rgba(1,2,3,0.5,0.6)", true));
     }
 
     #[test]
     fn hsl_like_requires_percent_saturation_and_lightness() {
         assert!(is_valid_hsl_like_function("hsl(0,0%,0%)", false));
+        assert!(is_valid_hsl_like_function("hsl(0 0% 0%)", false));
+        assert!(is_valid_hsl_like_function("hsl(0 0% 0% / 50%)", false));
         assert!(!is_valid_hsl_like_function("hsl()", false));
         assert!(!is_valid_hsl_like_function("hsl(0,0%,0%", false));
         assert!(!is_valid_hsl_like_function("hsl(0,0,0%)", false));
         assert!(!is_valid_hsl_like_function("hsl(0,0%,0)", false));
         assert!(is_valid_hsl_like_function("hsla(0,0%,0%,0.5)", true));
+        assert!(is_valid_hsl_like_function("hsla(0 0% 0% / 0.5)", true));
         assert!(!is_valid_hsl_like_function("hsla()", true));
         assert!(!is_valid_hsl_like_function("hsla(0,0%,0%,0.5", true));
         assert!(!is_valid_hsl_like_function("hsla(0,0%,0%)", true));
+        assert!(!is_valid_hsl_like_function("hsla(0 0% 0%)", true));
     }
 
     #[test]
@@ -2742,7 +2926,21 @@ fn is_border_width_token(t: &str) -> bool {
 fn is_length_token(t: &str) -> bool {
     // Minimal length: `<number><unit>` with common units.
     let (num, unit) = split_number_and_unit(t);
-    num.is_some() && matches!(unit, "px" | "pt" | "pc" | "cm" | "mm" | "in" | "em" | "rem")
+    num.is_some()
+        && matches!(
+            unit,
+            // Absolute.
+            "px" | "pt" | "pc" | "cm" | "mm" | "in" | "q"
+            // Font-relative.
+            | "em" | "rem" | "ex" | "ch" | "lh" | "rlh"
+            // Viewport-relative.
+            | "vw" | "vh" | "vi" | "vb" | "vmin" | "vmax"
+            | "svw" | "svh" | "svi" | "svb" | "svmin" | "svmax"
+            | "lvw" | "lvh" | "lvi" | "lvb" | "lvmin" | "lvmax"
+            | "dvw" | "dvh" | "dvi" | "dvb" | "dvmin" | "dvmax"
+            // Container query.
+            | "cqw" | "cqh" | "cqi" | "cqb" | "cqmin" | "cqmax"
+        )
 }
 
 fn split_number_and_unit(s: &str) -> (Option<f64>, &str) {
@@ -2808,6 +3006,27 @@ mod split_number_and_unit_tests {
         assert_eq!(split_number_and_unit("-1.5em"), (Some(-1.5), "em"));
         assert_eq!(split_number_and_unit("+.5rem"), (Some(0.5), "rem"));
         assert_eq!(split_number_and_unit("-.px"), (None, "px"));
+    }
+}
+
+#[cfg(test)]
+mod is_length_token_tests {
+    use super::is_length_token;
+
+    #[test]
+    fn accepts_common_modern_units() {
+        for t in [
+            "1px", "1q", "1em", "1rem", "1ch", "1lh", "1vw", "1svh", "1dvb", "1cqi",
+        ] {
+            assert!(is_length_token(t), "{t}");
+        }
+    }
+
+    #[test]
+    fn rejects_dimensionless_and_unknown_units() {
+        for t in ["1", "1nope", "px", " 1 px "] {
+            assert!(!is_length_token(t), "{t}");
+        }
     }
 }
 

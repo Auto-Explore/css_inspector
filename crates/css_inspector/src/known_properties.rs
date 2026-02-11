@@ -15,6 +15,7 @@ pub(crate) fn known_properties_for_config(config: &Config) -> &'static KnownProp
         Some(p) if p.eq_ignore_ascii_case("css1") => known_properties_css1(),
         Some(p) if p.eq_ignore_ascii_case("css2") => known_properties_css2(),
         Some(p) if p.eq_ignore_ascii_case("css21") => known_properties_css21(),
+        Some(p) if p.eq_ignore_ascii_case("css4") => known_properties_css4(),
         Some(p) if p.eq_ignore_ascii_case("css3svg") => known_properties_css3svg(),
         Some(p) if p.eq_ignore_ascii_case("svg") => known_properties_svg(),
         Some(p) if p.eq_ignore_ascii_case("svgbasic") => known_properties_svg_basic(),
@@ -106,7 +107,8 @@ mod parse_properties_file_tests {
 mod known_properties_for_config_tests {
     use super::{
         Config, KnownProperties, known_properties_css1, known_properties_css2,
-        known_properties_css3, known_properties_css3svg, known_properties_css21,
+        known_properties_css3, known_properties_css3svg, known_properties_css4,
+        known_properties_css21,
         known_properties_for_config, known_properties_svg, known_properties_svg_basic,
         known_properties_svg_tiny,
     };
@@ -119,6 +121,7 @@ mod known_properties_for_config_tests {
             ("CSS2", known_properties_css2 as SetFn),
             ("cSs21", known_properties_css21 as SetFn),
             ("CSS3", known_properties_css3 as SetFn),
+            ("css4", known_properties_css4 as SetFn),
             ("", known_properties_css3 as SetFn),
             ("css", known_properties_css3 as SetFn),
             ("CSS", known_properties_css3 as SetFn),
@@ -193,11 +196,34 @@ mod known_properties_for_config_tests {
         assert!(known_properties_css1().contains("font-style"));
         assert!(known_properties_css2().contains("font-stretch"));
         assert!(known_properties_css21().contains("background-color"));
+        assert!(known_properties_css4().contains("line-clamp"));
         assert!(known_properties_css3svg().contains("font-style"));
         assert!(known_properties_css3svg().contains("fill-opacity"));
         assert!(known_properties_svg().contains("alignment-baseline"));
         assert!(known_properties_svg_basic().contains("fill"));
         assert!(known_properties_svg_tiny().contains("stroke"));
+    }
+}
+
+#[cfg(test)]
+mod css4_profile_tests {
+    use super::{Config, validate_css_text};
+
+    #[test]
+    fn css4_profile_accepts_level4_properties_as_known_names() {
+        let css = r#"
+a {
+  line-clamp: inherit;
+  margin-trim: inherit;
+  contain-intrinsic-size: inherit;
+}
+"#;
+        let config = Config {
+            profile: Some("css4".to_string()),
+            ..Config::default()
+        };
+        let report = validate_css_text(css, &config).unwrap();
+        assert_eq!(report.errors, 0, "{report:?}");
     }
 }
 
@@ -616,6 +642,16 @@ fn known_properties_css3() -> &'static KnownProperties {
         // Upstream deploys have historically treated `color-profile` as a CSS3 property even when
         // validating with the `css3` profile (see autotest `propertiesCSS3.css`).
         set.insert(Cow::Borrowed("color-profile"));
+        set
+    })
+}
+
+fn known_properties_css4() -> &'static KnownProperties {
+    static ONCE: OnceLock<KnownProperties> = OnceLock::new();
+    ONCE.get_or_init(|| {
+        let mut set = parse_properties_file(css_properties_file!("CSS3Properties.properties"));
+        set.insert(Cow::Borrowed("color-profile"));
+        parse_properties_file_into(css_properties_file!("CSS4Properties.properties"), &mut set);
         set
     })
 }

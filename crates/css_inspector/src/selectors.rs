@@ -508,7 +508,7 @@ const PSEUDO_ELEMENTS_CSS3: [&str; 17] = [
 ];
 
 const PSEUDO_FUNCTIONS_CSS2: [&str; 1] = ["lang"];
-const PSEUDO_FUNCTIONS_CSS3: [&str; 15] = [
+const PSEUDO_FUNCTIONS_CSS3: [&str; 16] = [
     "nth-child",
     "nth-last-child",
     "nth-of-type",
@@ -524,6 +524,7 @@ const PSEUDO_FUNCTIONS_CSS3: [&str; 15] = [
     "host",
     "host-context",
     "slotted",
+    "part",
 ];
 
 fn is_allowed_pseudo_name(name: &str, version: SelectorPseudoVersion) -> bool {
@@ -654,6 +655,7 @@ mod validate_selector_prelude_tests {
             "a:not(.x)",
             "a::before",
             "a:before",
+            "a::part(foo)",
         ] {
             let mut report = Report::default();
             validate_selector_prelude(prelude, SelectorPseudoVersion::Css3, 0, &mut report);
