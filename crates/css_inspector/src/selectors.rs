@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use crate::config::Config;
-use crate::report::{Report, Severity, push_error, push_warning_level};
+use crate::report::{Report, push_error, push_warning_level};
 use crate::strutil::{scan_quoted_string_end, split_top_level_commas, step_string_state};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -265,7 +265,8 @@ pub(crate) fn dash_match_prefix(value: &str, dash: &str) -> bool {
 
 #[cfg(test)]
 mod warn_on_conflicting_attribute_selectors_tests {
-    use super::{Report, Severity, warn_on_conflicting_attribute_selectors};
+    use super::{Report, warn_on_conflicting_attribute_selectors};
+    use crate::report::Severity;
 
     #[test]
     fn warns_on_conflicting_exact_constraints() {
@@ -419,6 +420,7 @@ pub(crate) enum SelectorPseudoVersion {
     Css1,
     Css2,
     Css3,
+    Css4,
 }
 
 pub(crate) fn selector_pseudo_version_from_config(config: &Config) -> SelectorPseudoVersion {
@@ -427,6 +429,7 @@ pub(crate) fn selector_pseudo_version_from_config(config: &Config) -> SelectorPs
         Some(p) if p.eq_ignore_ascii_case("css2") || p.eq_ignore_ascii_case("css21") => {
             SelectorPseudoVersion::Css2
         }
+        Some(p) if p.eq_ignore_ascii_case("css4") => SelectorPseudoVersion::Css4,
         _ => SelectorPseudoVersion::Css3,
     }
 }
@@ -508,7 +511,7 @@ const PSEUDO_ELEMENTS_CSS3: [&str; 17] = [
 ];
 
 const PSEUDO_FUNCTIONS_CSS2: [&str; 1] = ["lang"];
-const PSEUDO_FUNCTIONS_CSS3: [&str; 15] = [
+const PSEUDO_FUNCTIONS_CSS3: [&str; 16] = [
     "nth-child",
     "nth-last-child",
     "nth-of-type",
@@ -524,27 +527,50 @@ const PSEUDO_FUNCTIONS_CSS3: [&str; 15] = [
     "host",
     "host-context",
     "slotted",
+    "part",
+];
+
+const PSEUDO_CLASSES_CSS4_EXTRA: [&str; 5] = [
+    "user-valid",
+    "open",
+    "modal",
+    "picture-in-picture",
+    "popover-open",
+];
+
+const PSEUDO_FUNCTIONS_CSS4_EXTRA: [&str; 6] = [
+    "state",
+    "view-transition",
+    "view-transition-group",
+    "view-transition-image-pair",
+    "view-transition-old",
+    "view-transition-new",
 ];
 
 fn is_allowed_pseudo_name(name: &str, version: SelectorPseudoVersion) -> bool {
-    let (classes, elements, funcs): (&[&str], &[&str], &[&str]) = match version {
-        SelectorPseudoVersion::Css1 => (&PSEUDO_CLASSES_CSS1, &PSEUDO_ELEMENTS_CSS1, &[]),
-        SelectorPseudoVersion::Css2 => (
-            &PSEUDO_CLASSES_CSS2,
-            &PSEUDO_ELEMENTS_CSS2,
-            &PSEUDO_FUNCTIONS_CSS2,
-        ),
-        SelectorPseudoVersion::Css3 => (
-            &PSEUDO_CLASSES_CSS3,
-            &PSEUDO_ELEMENTS_CSS3,
-            &PSEUDO_FUNCTIONS_CSS3,
-        ),
-    };
-    classes
-        .iter()
-        .chain(elements)
-        .chain(funcs)
-        .any(|allowed| name.eq_ignore_ascii_case(allowed))
+    match version {
+        SelectorPseudoVersion::Css1 => PSEUDO_CLASSES_CSS1
+            .iter()
+            .chain(PSEUDO_ELEMENTS_CSS1.iter())
+            .any(|allowed| name.eq_ignore_ascii_case(allowed)),
+        SelectorPseudoVersion::Css2 => PSEUDO_CLASSES_CSS2
+            .iter()
+            .chain(PSEUDO_ELEMENTS_CSS2.iter())
+            .chain(PSEUDO_FUNCTIONS_CSS2.iter())
+            .any(|allowed| name.eq_ignore_ascii_case(allowed)),
+        SelectorPseudoVersion::Css3 => PSEUDO_CLASSES_CSS3
+            .iter()
+            .chain(PSEUDO_ELEMENTS_CSS3.iter())
+            .chain(PSEUDO_FUNCTIONS_CSS3.iter())
+            .any(|allowed| name.eq_ignore_ascii_case(allowed)),
+        SelectorPseudoVersion::Css4 => PSEUDO_CLASSES_CSS3
+            .iter()
+            .chain(PSEUDO_CLASSES_CSS4_EXTRA.iter())
+            .chain(PSEUDO_ELEMENTS_CSS3.iter())
+            .chain(PSEUDO_FUNCTIONS_CSS3.iter())
+            .chain(PSEUDO_FUNCTIONS_CSS4_EXTRA.iter())
+            .any(|allowed| name.eq_ignore_ascii_case(allowed)),
+    }
 }
 
 pub(crate) fn validate_selector_prelude(
@@ -654,6 +680,7 @@ mod validate_selector_prelude_tests {
             "a:not(.x)",
             "a::before",
             "a:before",
+            "a::part(foo)",
         ] {
             let mut report = Report::default();
             validate_selector_prelude(prelude, SelectorPseudoVersion::Css3, 0, &mut report);

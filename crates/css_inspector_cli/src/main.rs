@@ -213,6 +213,7 @@ where
                 stderr,
                 "  css_inspector_cli autotest --manifest <path> [--strict] [--allow-network] [--max-failures N] [--id-contains STR] [--print-failures N] [--expected valid|invalid|any]"
             )?;
+            writeln!(stderr, "profiles: css1, css2/css21, css3 (default), css4")?;
             Ok(())
         }
     }

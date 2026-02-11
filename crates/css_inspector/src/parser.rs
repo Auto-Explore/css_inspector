@@ -13,16 +13,30 @@ pub(crate) fn at_rule_name(prelude: &str) -> Option<&str> {
 }
 
 #[inline]
-pub(crate) fn at_rule_decl_list_context_flags(kind: RuleBlockKind, prelude: &str) -> (bool, bool) {
+pub(crate) fn at_rule_decl_list_context_flags(
+    kind: RuleBlockKind,
+    prelude: &str,
+) -> (bool, bool, bool, bool, bool, bool, bool, bool, bool) {
     if kind != RuleBlockKind::AtRuleDeclList {
-        return (false, false);
+        return (
+            false, false, false, false, false, false, false, false, false,
+        );
     }
     let Some(name) = at_rule_name(prelude) else {
-        return (false, false);
+        return (
+            false, false, false, false, false, false, false, false, false,
+        );
     };
     (
         name.eq_ignore_ascii_case("page"),
         name.eq_ignore_ascii_case("font-face"),
+        name.eq_ignore_ascii_case("property"),
+        name.eq_ignore_ascii_case("font-palette-values"),
+        name.eq_ignore_ascii_case("counter-style"),
+        name.eq_ignore_ascii_case("color-profile"),
+        name.eq_ignore_ascii_case("view-transition"),
+        name.eq_ignore_ascii_case("scroll-timeline"),
+        name.eq_ignore_ascii_case("view-timeline"),
     )
 }
 
@@ -53,7 +67,9 @@ mod at_rule_decl_list_context_flags_tests {
     fn returns_false_outside_at_rule_decl_lists() {
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::QualifiedRule, "@page"),
-            (false, false)
+            (
+                false, false, false, false, false, false, false, false, false
+            )
         );
     }
 
@@ -61,15 +77,48 @@ mod at_rule_decl_list_context_flags_tests {
     fn detects_page_and_font_face_case_insensitively() {
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@page"),
-            (true, false)
+            (true, false, false, false, false, false, false, false, false)
         );
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, " @FONT-FACE "),
-            (false, true)
+            (false, true, false, false, false, false, false, false, false)
+        );
+        assert_eq!(
+            at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@property --x"),
+            (false, false, true, false, false, false, false, false, false)
+        );
+        assert_eq!(
+            at_rule_decl_list_context_flags(
+                RuleBlockKind::AtRuleDeclList,
+                "@font-palette-values --x"
+            ),
+            (false, false, false, true, false, false, false, false, false)
+        );
+        assert_eq!(
+            at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@counter-style x"),
+            (false, false, false, false, true, false, false, false, false)
+        );
+        assert_eq!(
+            at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@color-profile --x"),
+            (false, false, false, false, false, true, false, false, false)
+        );
+        assert_eq!(
+            at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@view-transition"),
+            (false, false, false, false, false, false, true, false, false)
+        );
+        assert_eq!(
+            at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@scroll-timeline --x"),
+            (false, false, false, false, false, false, false, true, false)
+        );
+        assert_eq!(
+            at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@view-timeline --x"),
+            (false, false, false, false, false, false, false, false, true)
         );
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@media screen"),
-            (false, false)
+            (
+                false, false, false, false, false, false, false, false, false
+            )
         );
     }
 
@@ -77,11 +126,13 @@ mod at_rule_decl_list_context_flags_tests {
     fn returns_false_when_at_rule_name_is_missing_and_accepts_paren_suffix() {
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "page"),
-            (false, false)
+            (
+                false, false, false, false, false, false, false, false, false
+            )
         );
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@page("),
-            (true, false)
+            (true, false, false, false, false, false, false, false, false)
         );
     }
 }
@@ -91,19 +142,54 @@ pub(crate) fn ends_with_stray_backslash(css: &str) -> bool {
 }
 
 pub(crate) fn is_known_at_rule_name(name: &str) -> bool {
-    const KNOWN: [&str; 12] = [
+    const KNOWN: [&str; 47] = [
         "import",
         "media",
         "page",
+        "top-left-corner",
+        "top-left",
+        "top-center",
+        "top-right",
+        "top-right-corner",
+        "bottom-left-corner",
+        "bottom-left",
+        "bottom-center",
+        "bottom-right",
+        "bottom-right-corner",
+        "left-top",
+        "left-middle",
+        "left-bottom",
+        "right-top",
+        "right-middle",
+        "right-bottom",
         "font-face",
         "font-feature-values",
+        "stylistic",
+        "styleset",
         "character-variant",
+        "swash",
+        "ornaments",
+        "annotation",
+        "font-palette-values",
         "container",
         "charset",
         "namespace",
         "supports",
         "layer",
+        "nest",
+        "custom-media",
+        "custom-selector",
         "document",
+        "keyframes",
+        "counter-style",
+        "property",
+        "color-profile",
+        "scope",
+        "starting-style",
+        "view-transition",
+        "scroll-timeline",
+        "view-timeline",
+        "timeline-scope",
         // Keep in sync with upstream expectations in `contains_unknown_at_rule`.
     ];
     if name.bytes().any(|b| b.is_ascii_uppercase()) {
@@ -570,6 +656,13 @@ pub(crate) fn iter_rule_blocks<'a>(css: &'a str) -> impl Iterator<Item = RuleBlo
                             Some(name)
                                 if name.eq_ignore_ascii_case("font-face")
                                     || name.eq_ignore_ascii_case("page")
+                                    || name.eq_ignore_ascii_case("property")
+                                    || name.eq_ignore_ascii_case("font-palette-values")
+                                    || name.eq_ignore_ascii_case("counter-style")
+                                    || name.eq_ignore_ascii_case("color-profile")
+                                    || name.eq_ignore_ascii_case("view-transition")
+                                    || name.eq_ignore_ascii_case("scroll-timeline")
+                                    || name.eq_ignore_ascii_case("view-timeline")
                         ) || in_decl_context;
                         is_decl_list.then_some(DeclBlock {
                             kind: RuleBlockKind::AtRuleDeclList,
