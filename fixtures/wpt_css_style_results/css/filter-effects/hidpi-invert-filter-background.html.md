@@ -33,18 +33,10 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 1,
   "messages": [
     {
       "message": "Invalid value for property “filter”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
       "severity": "Error"
     }
   ],

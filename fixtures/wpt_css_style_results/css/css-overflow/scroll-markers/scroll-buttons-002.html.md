@@ -36,22 +36,14 @@
 
 ```json
 {
-  "errors": 4,
+  "errors": 2,
   "messages": [
     {
       "message": "Invalid selector.",
       "severity": "Error"
     },
     {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
       "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
       "severity": "Error"
     }
   ],

@@ -23,14 +23,10 @@ p {
 
 ```json
 {
-  "errors": 3,
+  "errors": 2,
   "messages": [
     {
       "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
       "severity": "Error"
     },
     {

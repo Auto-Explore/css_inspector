@@ -20,7 +20,7 @@ div {
 
 ```json
 {
-  "errors": 3,
+  "errors": 2,
   "messages": [
     {
       "message": "Invalid value for property “background-color”.",
@@ -28,10 +28,6 @@ div {
     },
     {
       "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border”.",
       "severity": "Error"
     }
   ],

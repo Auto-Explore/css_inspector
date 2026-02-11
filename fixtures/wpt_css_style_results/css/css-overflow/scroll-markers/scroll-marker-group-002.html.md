@@ -30,7 +30,7 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 2,
   "messages": [
     {
       "message": "Unknown property “scroll-marker-group”.",
@@ -38,10 +38,6 @@
     },
     {
       "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
       "severity": "Error"
     }
   ],

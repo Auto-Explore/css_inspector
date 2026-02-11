@@ -39,12 +39,8 @@ html::view-transition-group(party.red) {
 
 ```json
 {
-  "errors": 9,
+  "errors": 8,
   "messages": [
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
     {
       "message": "Unknown property “view-transition-name”.",
       "severity": "Error"

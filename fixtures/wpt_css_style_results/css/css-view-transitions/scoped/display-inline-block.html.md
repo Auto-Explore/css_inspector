@@ -32,12 +32,8 @@
 
 ```json
 {
-  "errors": 5,
+  "errors": 4,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Unknown property “view-transition-name”.",
       "severity": "Error"

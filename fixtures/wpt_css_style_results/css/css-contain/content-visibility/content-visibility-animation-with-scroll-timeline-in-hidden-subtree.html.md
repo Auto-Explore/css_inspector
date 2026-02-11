@@ -43,12 +43,8 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 2,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Unknown property “scroll-timeline-name”.",
       "severity": "Error"

@@ -23,14 +23,10 @@
 
 ```json
 {
-  "errors": 2,
+  "errors": 1,
   "messages": [
     {
       "message": "Invalid value for property “border-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
       "severity": "Error"
     }
   ],

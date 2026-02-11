@@ -31,17 +31,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```
@@ -62,12 +53,8 @@
 
 ```json
 {
-  "errors": 2,
+  "errors": 1,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “animation”.",
       "severity": "Error"

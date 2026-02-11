@@ -22,14 +22,10 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 2,
   "messages": [
     {
       "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown at-rule.",
       "severity": "Error"
     },
     {

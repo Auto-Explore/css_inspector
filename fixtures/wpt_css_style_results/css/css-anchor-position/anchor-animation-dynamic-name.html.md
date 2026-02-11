@@ -44,12 +44,8 @@
 
 ```json
 {
-  "errors": 7,
+  "errors": 6,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “background”.",
       "severity": "Error"

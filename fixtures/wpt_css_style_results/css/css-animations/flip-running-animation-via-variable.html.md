@@ -47,12 +47,8 @@ html.tweaked {
 
 ```json
 {
-  "errors": 4,
+  "errors": 3,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “transform”.",
       "severity": "Error"

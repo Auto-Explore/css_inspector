@@ -44,10 +44,14 @@
 
 ```json
 {
-  "errors": 4,
+  "errors": 5,
   "messages": [
     {
       "message": "Missing value for property “--space”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-image”.",
       "severity": "Error"
     },
     {

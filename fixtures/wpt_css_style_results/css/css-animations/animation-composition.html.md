@@ -49,12 +49,8 @@
 
 ```json
 {
-  "errors": 9,
+  "errors": 8,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “filter”.",
       "severity": "Error"

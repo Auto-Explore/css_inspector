@@ -48,12 +48,8 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 2,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “background-color”.",
       "severity": "Error"
@@ -87,12 +83,8 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 2,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “background-color”.",
       "severity": "Error"
@@ -122,12 +114,8 @@
 
 ```json
 {
-  "errors": 2,
+  "errors": 1,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “background-color”.",
       "severity": "Error"

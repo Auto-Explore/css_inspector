@@ -39,7 +39,7 @@
 
 ```json
 {
-  "errors": 5,
+  "errors": 4,
   "messages": [
     {
       "message": "Unknown property “column-height”.",
@@ -55,10 +55,6 @@
     },
     {
       "message": "Unknown property “column-wrap”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
       "severity": "Error"
     }
   ],

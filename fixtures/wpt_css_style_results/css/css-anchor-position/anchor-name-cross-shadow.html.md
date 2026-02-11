@@ -27,12 +27,8 @@
 
 ```json
 {
-  "errors": 2,
+  "errors": 1,
   "messages": [
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
     {
       "message": "Unknown property “anchor-name”.",
       "severity": "Error"

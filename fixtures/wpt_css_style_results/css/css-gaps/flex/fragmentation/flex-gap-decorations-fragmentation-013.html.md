@@ -50,12 +50,8 @@
 
 ```json
 {
-  "errors": 6,
+  "errors": 4,
   "messages": [
-    {
-      "message": "Invalid value for property “border”.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “column-rule”.",
       "severity": "Error"
@@ -70,10 +66,6 @@
     },
     {
       "message": "Unknown property “row-rule-inset”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
       "severity": "Error"
     }
   ],

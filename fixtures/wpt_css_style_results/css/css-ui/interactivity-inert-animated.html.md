@@ -25,12 +25,8 @@
 
 ```json
 {
-  "errors": 4,
+  "errors": 3,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Unknown property “interactivity”.",
       "severity": "Error"

@@ -46,26 +46,10 @@
 
 ```json
 {
-  "errors": 6,
+  "errors": 2,
   "messages": [
     {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
       "message": "Invalid property name in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “syntax”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “inherits”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “initial-value”.",
       "severity": "Error"
     },
     {

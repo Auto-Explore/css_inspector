@@ -121,12 +121,8 @@ div { margin: 0 20px; }
 
 ```json
 {
-  "errors": 4,
+  "errors": 3,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Unknown property “-moz-font-feature-settings”.",
       "severity": "Error"

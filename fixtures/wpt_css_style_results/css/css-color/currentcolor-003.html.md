@@ -39,10 +39,14 @@
 
 ```json
 {
-  "errors": 4,
+  "errors": 5,
   "messages": [
     {
       "message": "Unknown property “-webkit-box-decoration-break”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-image”.",
       "severity": "Error"
     },
     {

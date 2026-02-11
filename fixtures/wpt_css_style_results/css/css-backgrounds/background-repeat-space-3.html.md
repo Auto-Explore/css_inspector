@@ -51,7 +51,7 @@
 
 ```json
 {
-  "errors": 6,
+  "errors": 8,
   "messages": [
     {
       "message": "Invalid value for property “background-repeat”.",
@@ -66,11 +66,19 @@
       "severity": "Error"
     },
     {
+      "message": "Invalid value for property “background-image”.",
+      "severity": "Error"
+    },
+    {
       "message": "Invalid value for property “background-repeat”.",
       "severity": "Error"
     },
     {
       "message": "Invalid value for property “background-size”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-image”.",
       "severity": "Error"
     },
     {

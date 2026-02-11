@@ -39,12 +39,8 @@
 
 ```json
 {
-  "errors": 5,
+  "errors": 3,
   "messages": [
-    {
-      "message": "Invalid value for property “border”.",
-      "severity": "Error"
-    },
     {
       "message": "Unknown property “row-rule-color”.",
       "severity": "Error"
@@ -55,10 +51,6 @@
     },
     {
       "message": "Unknown property “row-rule-style”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
       "severity": "Error"
     }
   ],

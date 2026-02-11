@@ -29,12 +29,8 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 2,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “animation”.",
       "severity": "Error"

@@ -22,7 +22,7 @@
   "errors": 1,
   "messages": [
     {
-      "message": "Unknown at-rule.",
+      "message": "Invalid value for property “symbols”.",
       "severity": "Error"
     }
   ],

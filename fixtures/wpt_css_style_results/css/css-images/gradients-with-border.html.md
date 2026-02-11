@@ -36,8 +36,21 @@
 
 ```json
 {
-  "errors": 0,
-  "messages": [],
+  "errors": 3,
+  "messages": [
+    {
+      "message": "Invalid value for property “background-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-image”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-image”.",
+      "severity": "Error"
+    }
+  ],
   "warnings": 0
 }
 ```

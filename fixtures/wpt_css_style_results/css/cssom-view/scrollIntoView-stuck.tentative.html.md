@@ -31,10 +31,14 @@ body { margin: 0 }
 
 ```json
 {
-  "errors": 1,
+  "errors": 2,
   "messages": [
     {
       "message": "Invalid value for property “background”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-image”.",
       "severity": "Error"
     }
   ],

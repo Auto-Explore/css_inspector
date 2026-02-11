@@ -152,10 +152,18 @@
 
 ```json
 {
-  "errors": 1,
+  "errors": 3,
   "messages": [
     {
-      "message": "Unknown at-rule.",
+      "message": "Missing value for property “base-palette”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Missing value for property “override-colors”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Unknown property “override-color”.",
       "severity": "Error"
     }
   ],

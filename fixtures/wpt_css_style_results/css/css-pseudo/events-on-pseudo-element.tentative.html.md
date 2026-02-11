@@ -53,12 +53,8 @@
 
 ```json
 {
-  "errors": 6,
+  "errors": 5,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “transform”.",
       "severity": "Error"

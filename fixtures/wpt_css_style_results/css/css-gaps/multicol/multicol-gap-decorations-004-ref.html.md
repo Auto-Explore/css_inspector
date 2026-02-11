@@ -72,20 +72,8 @@
 
 ```json
 {
-  "errors": 4,
+  "errors": 1,
   "messages": [
-    {
-      "message": "Invalid value for property “border”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “background”.",
       "severity": "Error"

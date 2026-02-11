@@ -56,12 +56,8 @@
 
 ```json
 {
-  "errors": 12,
+  "errors": 10,
   "messages": [
-    {
-      "message": "Invalid value for property “border”.",
-      "severity": "Error"
-    },
     {
       "message": "Unknown property “column-height”.",
       "severity": "Error"
@@ -96,10 +92,6 @@
     },
     {
       "message": "Unknown property “column-wrap”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
       "severity": "Error"
     },
     {

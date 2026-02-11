@@ -67,7 +67,7 @@
   "errors": 2,
   "messages": [
     {
-      "message": "Invalid value for property “background-color”.",
+      "message": "Invalid value for property “background-image”.",
       "severity": "Error"
     },
     {

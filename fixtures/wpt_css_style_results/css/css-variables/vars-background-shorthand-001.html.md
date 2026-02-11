@@ -43,16 +43,8 @@ div#d4 {
 
 ```json
 {
-  "errors": 4,
+  "errors": 2,
   "messages": [
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “background”.",
       "severity": "Error"

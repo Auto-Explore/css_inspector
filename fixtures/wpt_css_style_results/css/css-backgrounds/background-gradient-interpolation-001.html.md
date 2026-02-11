@@ -39,10 +39,14 @@ div {
 
 ```json
 {
-  "errors": 1,
+  "errors": 2,
   "messages": [
     {
       "message": "Missing value for property “--space”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-image”.",
       "severity": "Error"
     }
   ],

@@ -26,20 +26,8 @@
 
 ```json
 {
-  "errors": 7,
+  "errors": 4,
   "messages": [
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “background-color”.",
       "severity": "Error"

@@ -52,12 +52,8 @@
 
 ```json
 {
-  "errors": 12,
+  "errors": 11,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Unknown property “animation-composition”.",
       "severity": "Error"

@@ -20,15 +20,11 @@
 
 ```json
 {
-  "errors": 1,
+  "errors": 0,
   "messages": [
     {
       "message": "Imported style sheets are not checked.",
       "severity": "Warning"
-    },
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
     }
   ],
   "warnings": 1

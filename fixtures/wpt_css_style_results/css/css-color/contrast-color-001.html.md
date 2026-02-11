@@ -57,7 +57,7 @@ p.test10 {
 
 ```json
 {
-  "errors": 4,
+  "errors": 3,
   "messages": [
     {
       "message": "Invalid value for property “background”.",
@@ -65,10 +65,6 @@ p.test10 {
     },
     {
       "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
       "severity": "Error"
     },
     {

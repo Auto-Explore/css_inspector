@@ -47,7 +47,7 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 2,
   "messages": [
     {
       "message": "Invalid value for property “column-rule”.",
@@ -55,10 +55,6 @@
     },
     {
       "message": "Unknown property “row-rule”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
       "severity": "Error"
     }
   ],

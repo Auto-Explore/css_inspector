@@ -48,12 +48,8 @@ html::view-transition-new(target) {
 
 ```json
 {
-  "errors": 6,
+  "errors": 5,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Unknown property “view-transition-name”.",
       "severity": "Error"

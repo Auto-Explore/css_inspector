@@ -27,8 +27,12 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 4,
   "messages": [
+    {
+      "message": "Invalid value for property “src”.",
+      "severity": "Error"
+    },
     {
       "message": "Missing ':' in declaration.",
       "severity": "Error"

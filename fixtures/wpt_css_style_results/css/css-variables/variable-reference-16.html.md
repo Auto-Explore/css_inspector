@@ -22,12 +22,8 @@ p {
 
 ```json
 {
-  "errors": 2,
+  "errors": 1,
   "messages": [
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “color”.",
       "severity": "Error"

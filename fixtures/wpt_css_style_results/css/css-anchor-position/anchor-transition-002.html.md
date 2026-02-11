@@ -38,7 +38,7 @@ body {
 
 ```json
 {
-  "errors": 4,
+  "errors": 3,
   "messages": [
     {
       "message": "Invalid value for property “background”.",
@@ -50,10 +50,6 @@ body {
     },
     {
       "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
       "severity": "Error"
     }
   ],

@@ -22,14 +22,18 @@
 
 ```json
 {
-  "errors": 1,
+  "errors": 2,
   "messages": [
     {
       "message": "Imported style sheets are not checked.",
       "severity": "Warning"
     },
     {
-      "message": "Unknown at-rule.",
+      "message": "Missing ':' in declaration.",
+      "severity": "Error"
+    },
+    {
+      "message": "Missing ':' in declaration.",
       "severity": "Error"
     }
   ],

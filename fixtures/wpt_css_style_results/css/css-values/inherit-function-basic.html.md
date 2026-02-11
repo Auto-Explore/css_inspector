@@ -105,13 +105,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```
@@ -132,8 +127,12 @@
 
 ```json
 {
-  "errors": 1,
+  "errors": 2,
   "messages": [
+    {
+      "message": "Invalid value for property “z-index”.",
+      "severity": "Error"
+    },
     {
       "message": "Unknown property “else”.",
       "severity": "Error"

@@ -55,12 +55,8 @@
 
 ```json
 {
-  "errors": 11,
+  "errors": 10,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “background-image”.",
       "severity": "Error"

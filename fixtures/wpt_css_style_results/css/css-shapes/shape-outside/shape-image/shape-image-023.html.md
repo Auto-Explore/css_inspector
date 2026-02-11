@@ -42,14 +42,10 @@
 
 ```json
 {
-  "errors": 4,
+  "errors": 3,
   "messages": [
     {
       "message": "Unknown property “shape-outside”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid property name in declaration.",
       "severity": "Error"
     },
     {

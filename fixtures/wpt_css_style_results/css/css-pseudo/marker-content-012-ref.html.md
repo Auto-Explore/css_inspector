@@ -40,16 +40,8 @@ ul {
 
 ```json
 {
-  "errors": 3,
+  "errors": 1,
   "messages": [
-    {
-      "message": "Invalid property name in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid property name in declaration.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “content”.",
       "severity": "Error"

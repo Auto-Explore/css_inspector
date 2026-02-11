@@ -39,12 +39,8 @@
 
 ```json
 {
-  "errors": 4,
+  "errors": 3,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Missing ':' in declaration.",
       "severity": "Error"

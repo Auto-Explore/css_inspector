@@ -46,14 +46,18 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 4,
   "messages": [
     {
-      "message": "Unknown at-rule.",
+      "message": "Invalid value for property “background-image”.",
       "severity": "Error"
     },
     {
       "message": "Invalid value for property “animation”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “background-image”.",
       "severity": "Error"
     },
     {

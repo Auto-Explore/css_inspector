@@ -49,7 +49,7 @@
   "errors": 3,
   "messages": [
     {
-      "message": "Unknown at-rule.",
+      "message": "Invalid value for property “overflow”.",
       "severity": "Error"
     },
     {

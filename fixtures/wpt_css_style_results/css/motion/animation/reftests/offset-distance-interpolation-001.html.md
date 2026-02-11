@@ -31,12 +31,8 @@
 
 ```json
 {
-  "errors": 6,
+  "errors": 5,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Unknown property “offset-distance”.",
       "severity": "Error"

@@ -75,14 +75,10 @@
 
 ```json
 {
-  "errors": 4,
+  "errors": 3,
   "messages": [
     {
       "message": "Unbalanced braces.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown at-rule.",
       "severity": "Error"
     },
     {

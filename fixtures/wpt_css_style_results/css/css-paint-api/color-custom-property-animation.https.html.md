@@ -39,7 +39,7 @@
   "errors": 2,
   "messages": [
     {
-      "message": "Unknown at-rule.",
+      "message": "Invalid value for property “background-image”.",
       "severity": "Error"
     },
     {

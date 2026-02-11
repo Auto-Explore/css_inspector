@@ -17,12 +17,8 @@ body:before { animation-name: test; }
 
 ```json
 {
-  "errors": 2,
+  "errors": 1,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Unknown property “marker”.",
       "severity": "Error"

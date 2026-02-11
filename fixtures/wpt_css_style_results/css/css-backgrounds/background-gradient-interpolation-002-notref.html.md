@@ -32,8 +32,12 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 4,
   "messages": [
+    {
+      "message": "Invalid value for property “background-image”.",
+      "severity": "Error"
+    },
     {
       "message": "Unknown property “-webkit-background-clip”.",
       "severity": "Error"

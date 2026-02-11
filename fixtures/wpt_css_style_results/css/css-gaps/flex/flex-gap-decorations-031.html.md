@@ -44,12 +44,8 @@
 
 ```json
 {
-  "errors": 7,
+  "errors": 6,
   "messages": [
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “column-rule”.",
       "severity": "Error"

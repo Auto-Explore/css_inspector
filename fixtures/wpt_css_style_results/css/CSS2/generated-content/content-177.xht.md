@@ -20,7 +20,7 @@
 
 ```json
 {
-  "errors": 7,
+  "errors": 2,
   "messages": [
     {
       "message": "Invalid input.",
@@ -28,26 +28,6 @@
     },
     {
       "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “content”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
       "severity": "Error"
     }
   ],

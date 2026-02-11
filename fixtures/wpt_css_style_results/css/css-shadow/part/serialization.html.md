@@ -19,16 +19,8 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 1,
   "messages": [
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid selector.",
       "severity": "Error"

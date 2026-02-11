@@ -57,7 +57,7 @@
 
 ```json
 {
-  "errors": 6,
+  "errors": 5,
   "messages": [
     {
       "message": "Unknown property “row-rule-width”.",
@@ -77,10 +77,6 @@
     },
     {
       "message": "Unknown property “column-height”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
       "severity": "Error"
     }
   ],

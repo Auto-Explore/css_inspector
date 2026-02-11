@@ -45,12 +45,8 @@ div {
 
 ```json
 {
-  "errors": 8,
+  "errors": 7,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Unknown property “view-transition-name”.",
       "severity": "Error"

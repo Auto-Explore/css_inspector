@@ -65,14 +65,10 @@ html::view-transition-new(*) { animation: unset; opacity: 1 }
 
 ```json
 {
-  "errors": 11,
+  "errors": 10,
   "messages": [
     {
       "message": "Unknown property “view-transition-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
       "severity": "Error"
     },
     {

@@ -43,12 +43,8 @@ html.incoming {
 
 ```json
 {
-  "errors": 8,
+  "errors": 7,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “background-color”.",
       "severity": "Error"

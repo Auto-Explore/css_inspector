@@ -29,7 +29,7 @@ body {
 
 ```json
 {
-  "errors": 3,
+  "errors": 2,
   "messages": [
     {
       "message": "Invalid value for property “background”.",
@@ -37,10 +37,6 @@ body {
     },
     {
       "message": "Unknown property “anchor-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
       "severity": "Error"
     }
   ],

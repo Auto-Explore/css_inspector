@@ -52,7 +52,7 @@ So here, top and bottom offset properties are input into the §9.4.3 algorithms 
 
 ```json
 {
-  "errors": 3,
+  "errors": 2,
   "messages": [
     {
       "message": "Invalid input.",
@@ -60,10 +60,6 @@ So here, top and bottom offset properties are input into the §9.4.3 algorithms 
     },
     {
       "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
       "severity": "Error"
     }
   ],

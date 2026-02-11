@@ -39,8 +39,12 @@
 
 ```json
 {
-  "errors": 1,
+  "errors": 2,
   "messages": [
+    {
+      "message": "Invalid value for property “background-image”.",
+      "severity": "Error"
+    },
     {
       "message": "Unknown property “mask-image”.",
       "severity": "Error"

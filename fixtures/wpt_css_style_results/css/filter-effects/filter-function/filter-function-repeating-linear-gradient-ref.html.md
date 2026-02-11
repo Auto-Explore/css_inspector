@@ -32,8 +32,12 @@
 
 ```json
 {
-  "errors": 1,
+  "errors": 2,
   "messages": [
+    {
+      "message": "Invalid value for property “background-image”.",
+      "severity": "Error"
+    },
     {
       "message": "Invalid value for property “filter”.",
       "severity": "Error"

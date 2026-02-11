@@ -158,14 +158,10 @@
 
 ```json
 {
-  "errors": 6,
+  "errors": 5,
   "messages": [
     {
       "message": "Unbalanced braces.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown at-rule.",
       "severity": "Error"
     },
     {

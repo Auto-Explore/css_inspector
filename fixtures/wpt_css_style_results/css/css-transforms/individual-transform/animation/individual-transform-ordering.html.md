@@ -103,12 +103,8 @@
 
 ```json
 {
-  "errors": 17,
+  "errors": 16,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “transform-origin”.",
       "severity": "Error"

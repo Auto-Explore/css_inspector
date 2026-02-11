@@ -88,12 +88,8 @@
 
 ```json
 {
-  "errors": 13,
+  "errors": 12,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “transform-origin”.",
       "severity": "Error"

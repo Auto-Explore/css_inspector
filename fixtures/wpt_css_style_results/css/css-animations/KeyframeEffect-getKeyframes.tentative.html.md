@@ -209,12 +209,8 @@
 
 ```json
 {
-  "errors": 18,
+  "errors": 16,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
     {
       "message": "Unknown property “animation-composition”.",
       "severity": "Error"
@@ -277,10 +273,6 @@
     },
     {
       "message": "Invalid value for property “background-size”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
       "severity": "Error"
     }
   ],
