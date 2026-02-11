@@ -40,6 +40,8 @@ High-level checks (errors unless noted):
 Configuration knobs:
 
 - `profile`: selects the “known properties” set from `data/css_properties/*.properties`.
+- `profile=css4`: uses the CSS3 profile plus a small Level 4 property-name supplement
+  (`data/css_properties/CSS4Properties.properties`). Details: `css4.md`.
 - `medium`: if set, warns if an `@media ... {` block doesn’t match the configured medium.
 - `warning`: numeric warning threshold; `0` is the default, and `-1` suppresses all warnings.
 
@@ -52,6 +54,10 @@ The validator uses "known CSS properties" lists per profile, vendored under:
 Update them with:
 
 `python3 scripts/update_css_properties_data.py`
+
+Regenerate the `css4` supplement with:
+
+`python3 scripts/generate_css4_properties_data.py`
 
 ## Regenerate manifest
 

@@ -5,8 +5,8 @@ use super::{
     dash_match_prefix, ends_with_ascii_ci, find_double_crlf, for_each_affected_border_longhand,
     is_css_wide_keyword, is_css_wide_keywordish_token, is_known_at_rule_name, iter_rule_blocks,
     iter_top_level_import_urls, memchr_crlf, parse_http_response, parse_properties_file,
-    starts_with_ascii_ci, strip_css_comments, validate_css_text, validate_css_text_with_fetcher,
-    validate_css_uri_with_fetcher,
+    starts_with_ascii_ci, strip_css_comments, validate_css_declarations_text, validate_css_text,
+    validate_css_text_with_fetcher, validate_css_uri_with_fetcher,
 };
 use std::borrow::Cow;
 use std::cell::Cell;
@@ -62,6 +62,348 @@ fn parse_properties_file_trims_ignores_comments_and_normalizes_ascii_case() {
     assert!(props.contains("font-size"));
     assert!(!props.contains("Color"));
     assert!(!props.contains("MARGIN"));
+}
+
+#[test]
+fn css4_phase1_properties_file_matches_w3c_level4_diff() {
+    #[derive(serde::Deserialize)]
+    struct W3cPropertyRow {
+        #[serde(default)]
+        property: String,
+        #[serde(default)]
+        title: String,
+    }
+
+    fn parse_properties_file_names_in_order(s: &str) -> Vec<String> {
+        let mut out = Vec::new();
+        for raw in s.lines() {
+            let line = raw.trim();
+            if line.is_empty() || line.starts_with('#') {
+                continue;
+            }
+            let name = if let Some((name, _)) = line.split_once(':') {
+                name.trim()
+            } else {
+                let mut parts = line.split_whitespace();
+                let Some(first) = parts.next() else {
+                    continue;
+                };
+                if parts.next().is_none() {
+                    continue;
+                }
+                first
+            };
+            if !name.is_empty() {
+                out.push(name.to_ascii_lowercase());
+            }
+        }
+        out
+    }
+
+    fn parse_properties_file_names_set(s: &str) -> std::collections::BTreeSet<String> {
+        parse_properties_file_names_in_order(s)
+            .into_iter()
+            .collect()
+    }
+
+    let root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+
+    let w3c_path = root.join("data/w3c/all-properties.en.json");
+    let css3_path = root.join("data/css_properties/CSS3Properties.properties");
+    let css4_path = root.join("data/css_properties/CSS4Properties.properties");
+
+    let w3c_text = std::fs::read_to_string(&w3c_path).expect("read all-properties.en.json");
+    let rows: Vec<W3cPropertyRow> =
+        serde_json::from_str(&w3c_text).expect("parse all-properties.en.json");
+
+    let mut level4 = std::collections::BTreeSet::new();
+    for r in rows {
+        if !r.title.contains("Level 4") {
+            continue;
+        }
+        let prop = r.property.trim().to_ascii_lowercase();
+        if prop.is_empty() || prop == "--*" {
+            continue;
+        }
+        level4.insert(prop);
+    }
+
+    let css3_text = std::fs::read_to_string(&css3_path).expect("read CSS3Properties.properties");
+    let mut css3 = parse_properties_file_names_set(&css3_text);
+    css3.insert("color-profile".to_string());
+
+    let expected_css4: std::collections::BTreeSet<String> =
+        level4.difference(&css3).cloned().collect();
+
+    let css4_text = std::fs::read_to_string(&css4_path).expect("read CSS4Properties.properties");
+    let css4_in_order = parse_properties_file_names_in_order(&css4_text);
+    let css4_set = parse_properties_file_names_set(&css4_text);
+
+    assert_eq!(css4_set, expected_css4);
+
+    let mut sorted = css4_in_order.clone();
+    sorted.sort();
+    sorted.dedup();
+    assert_eq!(
+        css4_in_order, sorted,
+        "CSS4Properties.properties should be sorted and de-duplicated; regenerate with `python3 scripts/generate_css4_properties_data.py`"
+    );
+}
+
+#[test]
+fn css4_phase1_profile_accepts_all_css4_supplement_property_names() {
+    fn css4_props() -> Vec<String> {
+        let s = include_str!(concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/../../data/css_properties/CSS4Properties.properties"
+        ));
+        let mut out: Vec<String> = parse_properties_file(s)
+            .into_iter()
+            .map(|p| p.into_owned())
+            .collect();
+        out.sort();
+        out
+    }
+
+    let props = css4_props();
+    assert!(!props.is_empty(), "expected css4 supplement properties");
+
+    let mut css = String::from("a{\n");
+    for p in &props {
+        css.push_str(p);
+        css.push_str(": inherit;\n");
+    }
+    css.push_str("}\n");
+
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(&css, &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+}
+
+#[test]
+fn css4_phase1_default_profile_rejects_css4_supplement_properties_as_unknown() {
+    fn css4_props() -> Vec<String> {
+        let s = include_str!(concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/../../data/css_properties/CSS4Properties.properties"
+        ));
+        let mut out: Vec<String> = parse_properties_file(s)
+            .into_iter()
+            .map(|p| p.into_owned())
+            .collect();
+        out.sort();
+        out
+    }
+
+    let props = css4_props();
+    assert!(!props.is_empty(), "expected css4 supplement properties");
+
+    let mut css = String::from("a{\n");
+    for p in &props {
+        css.push_str(p);
+        css.push_str(": inherit;\n");
+    }
+    css.push_str("}\n");
+
+    let report = validate_css_text(&css, &Config::default()).unwrap();
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.errors, props.len(), "{report:?}");
+    assert_eq!(report.messages.len(), props.len(), "{report:?}");
+
+    let expected: std::collections::BTreeSet<String> = props
+        .iter()
+        .map(|p| format!("Unknown property “{p}”."))
+        .collect();
+    let got: std::collections::BTreeSet<String> =
+        report.messages.iter().map(|m| m.message.clone()).collect();
+    assert_eq!(got, expected);
+    assert!(
+        report
+            .messages
+            .iter()
+            .all(|m| matches!(m.severity, super::Severity::Error))
+    );
+}
+
+#[test]
+fn css4_profile_relaxes_single_value_heuristic_for_multitoken_properties() {
+    let css = r#"a { contain-intrinsic-size: 10px 20px; }"#;
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+
+    let report =
+        validate_css_declarations_text("contain-intrinsic-size: 10px 20px;", &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+}
+
+#[test]
+fn css4_profile_accepts_modern_background_filter_and_content_values() {
+    let css = r#"
+:root { --c: red; --img: linear-gradient(red, blue); --txt: "x"; }
+
+a {
+  color: var(--c);
+  background-image: linear-gradient(red, blue);
+  background: linear-gradient(red, blue) center / cover no-repeat fixed;
+  filter: blur(5px) drop-shadow(0 0 10px black);
+  content: var(--txt);
+}
+"#;
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn css4_profile_accepts_modern_cursor_values() {
+    let css = r#"
+a { cursor: grab; }
+b { cursor: zoom-in; }
+c { cursor: url(foo.png) 2 2, pointer; }
+d { cursor: url(foo.png) 2 2, url(bar.png) 4 4, grabbing; }
+"#;
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn default_profile_rejects_css4_only_cursor_values() {
+    let css = r#"a { cursor: grab; }"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “cursor”."
+    );
+}
+
+#[test]
+fn default_profile_rejects_modern_background_filter_and_content_values() {
+    let css = r#"
+a {
+  background-image: linear-gradient(red, blue);
+  filter: blur(5px);
+  content: var(--txt);
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.errors, 3, "{report:?}");
+
+    let got: std::collections::BTreeSet<String> =
+        report.messages.iter().map(|m| m.message.clone()).collect();
+    let expected: std::collections::BTreeSet<String> = [
+        "Invalid value for property “background-image”.",
+        "Invalid value for property “filter”.",
+        "Invalid value for property “content”.",
+    ]
+    .into_iter()
+    .map(str::to_owned)
+    .collect();
+    assert_eq!(got, expected, "{report:?}");
+}
+
+#[test]
+fn value_syntax_validation_rejects_unbalanced_parentheses_for_unvalidated_properties() {
+    let css = r#"a { width: calc(1px; }"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “width”."
+    );
+}
+
+#[test]
+fn value_syntax_validation_rejects_unbalanced_brackets_for_unvalidated_properties() {
+    let css = r#"a { width: [1px; }"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “width”."
+    );
+}
+
+#[test]
+fn nested_rules_in_style_blocks_are_validated() {
+    let css = r#"
+a {
+  color: red;
+  .child { no-such-prop: 1; }
+  @media (min-width: 1px) { no-such-prop2: 2; }
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.errors, 2, "{report:?}");
+    let got: std::collections::BTreeSet<String> =
+        report.messages.iter().map(|m| m.message.clone()).collect();
+    let expected: std::collections::BTreeSet<String> = [
+        "Unknown property “no-such-prop”.",
+        "Unknown property “no-such-prop2”.",
+    ]
+    .into_iter()
+    .map(str::to_owned)
+    .collect();
+    assert_eq!(got, expected, "{report:?}");
+}
+
+#[test]
+fn style_blocks_with_only_nested_rules_produce_no_declaration_errors() {
+    let css = r#"
+a {
+  .child { color: red; }
+  @media screen { b { color: blue; } }
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn nested_blocks_do_not_hide_following_declarations_in_style_blocks() {
+    let css = r#"
+a {
+  color: red;
+  .child { color: blue; }
+  @media screen { b { color: green; } }
+  no-such-prop: 1;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Unknown property “no-such-prop”."
+    );
 }
 
 #[test]
@@ -726,7 +1068,19 @@ fn unknown_at_rule_detection_ignores_known_rules_and_strings() {
         "@font-feature-values Fira Code { @character-variant { alt-a: 1; } }"
     ));
     assert!(!contains_unknown_at_rule(
+        "@font-feature-values Fira Code { @stylistic { alt-a: 1; } }"
+    ));
+    assert!(!contains_unknown_at_rule(
         "@container test (max-width: 300px) { p { color: red } }"
+    ));
+    assert!(!contains_unknown_at_rule(
+        "@keyframes spin { from { color: red } to { color: blue } }"
+    ));
+    assert!(!contains_unknown_at_rule(
+        "@property --x { syntax: \"<length>\"; inherits: true; initial-value: 0px; }"
+    ));
+    assert!(!contains_unknown_at_rule(
+        "@page { @bottom-left { content: \"x\"; } }"
     ));
     assert!(!contains_unknown_at_rule("a{content:\"@three-dee\"}"));
     assert!(contains_unknown_at_rule("@three-dee { x: y }"));
@@ -753,13 +1107,73 @@ fn known_at_rule_names_match_case_insensitively() {
     assert!(is_known_at_rule_name("layer"));
     assert!(is_known_at_rule_name("LAYER"));
     assert!(is_known_at_rule_name("font-face"));
+    assert!(is_known_at_rule_name("top-left-corner"));
+    assert!(is_known_at_rule_name("TOP-LEFT-CORNER"));
+    assert!(is_known_at_rule_name("top-left"));
+    assert!(is_known_at_rule_name("TOP-LEFT"));
+    assert!(is_known_at_rule_name("bottom-left"));
+    assert!(is_known_at_rule_name("BOTTOM-LEFT"));
+    assert!(is_known_at_rule_name("bottom-right-corner"));
+    assert!(is_known_at_rule_name("BOTTOM-RIGHT-CORNER"));
+    assert!(is_known_at_rule_name("left-top"));
+    assert!(is_known_at_rule_name("LEFT-TOP"));
+    assert!(is_known_at_rule_name("right-bottom"));
+    assert!(is_known_at_rule_name("RIGHT-BOTTOM"));
     assert!(is_known_at_rule_name("font-feature-values"));
     assert!(is_known_at_rule_name("FONT-FEATURE-VALUES"));
+    assert!(is_known_at_rule_name("stylistic"));
+    assert!(is_known_at_rule_name("STYLISTIC"));
+    assert!(is_known_at_rule_name("styleset"));
+    assert!(is_known_at_rule_name("STYLESET"));
+    assert!(is_known_at_rule_name("font-palette-values"));
+    assert!(is_known_at_rule_name("FONT-PALETTE-VALUES"));
     assert!(is_known_at_rule_name("character-variant"));
     assert!(is_known_at_rule_name("CHARACTER-VARIANT"));
+    assert!(is_known_at_rule_name("swash"));
+    assert!(is_known_at_rule_name("SWASH"));
+    assert!(is_known_at_rule_name("ornaments"));
+    assert!(is_known_at_rule_name("ORNAMENTS"));
+    assert!(is_known_at_rule_name("annotation"));
+    assert!(is_known_at_rule_name("ANNOTATION"));
     assert!(is_known_at_rule_name("container"));
     assert!(is_known_at_rule_name("CONTAINER"));
+    assert!(is_known_at_rule_name("keyframes"));
+    assert!(is_known_at_rule_name("KEYFRAMES"));
+    assert!(is_known_at_rule_name("counter-style"));
+    assert!(is_known_at_rule_name("COUNTER-STYLE"));
+    assert!(is_known_at_rule_name("property"));
+    assert!(is_known_at_rule_name("PROPERTY"));
+    assert!(is_known_at_rule_name("color-profile"));
+    assert!(is_known_at_rule_name("COLOR-PROFILE"));
+    assert!(is_known_at_rule_name("scope"));
+    assert!(is_known_at_rule_name("SCOPE"));
+    assert!(is_known_at_rule_name("starting-style"));
+    assert!(is_known_at_rule_name("STARTING-STYLE"));
+    assert!(is_known_at_rule_name("custom-media"));
+    assert!(is_known_at_rule_name("CUSTOM-MEDIA"));
+    assert!(is_known_at_rule_name("custom-selector"));
+    assert!(is_known_at_rule_name("CUSTOM-SELECTOR"));
+    assert!(is_known_at_rule_name("nest"));
+    assert!(is_known_at_rule_name("NEST"));
+    assert!(is_known_at_rule_name("view-transition"));
+    assert!(is_known_at_rule_name("VIEW-TRANSITION"));
     assert!(!is_known_at_rule_name("three-dee"));
+}
+
+#[test]
+fn modern_at_rules_custom_media_custom_selector_and_nest_are_accepted() {
+    let css = r#"
+@custom-media --narrow (max-width: 30em);
+@custom-selector :--btn button, .button;
+
+.foo {
+  @nest .bar & { color: red; }
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
 }
 
 #[test]
@@ -773,6 +1187,425 @@ fn supports_queries_accept_calc_nan_and_infinity() {
         assert_eq!(report.warnings, 0, "{css}: {report:?}");
         assert!(report.messages.is_empty(), "{css}: {report:?}");
     }
+}
+
+#[test]
+fn property_at_rule_descriptor_block_is_accepted() {
+    let css = r#"
+@property --x {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0px;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn page_margin_at_rules_are_accepted() {
+    let css = r#"
+@page {
+  size: A4;
+  @bottom-left { content: "x"; }
+  @top-right-corner { content: counter(page); }
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn property_at_rule_rejects_invalid_inherits_descriptor_value() {
+    let css = r#"
+@property --x {
+    syntax: "<length>";
+    inherits: nope;
+    initial-value: 0px;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “inherits”."
+    );
+}
+
+#[test]
+fn font_palette_values_at_rule_descriptor_block_is_accepted() {
+    let css = r#"
+@font-palette-values --my-palette {
+    font-family: "My Font";
+    base-palette: 1;
+    override-colors: 0 #00f, 1 #f00;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn font_palette_values_at_rule_rejects_unknown_descriptor() {
+    let css = r#"
+@font-palette-values --my-palette {
+    no-such-descriptor: 1;
+    font-family: "My Font";
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Unknown property “no-such-descriptor”."
+    );
+}
+
+#[test]
+fn counter_style_at_rule_descriptor_block_is_accepted() {
+    let css = r#"
+@counter-style thumbs {
+    system: fixed 1;
+    symbols: "👍" "👎";
+    suffix: " ";
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn counter_style_at_rule_rejects_unknown_descriptor() {
+    let css = r#"
+@counter-style thumbs {
+    no-such-descriptor: 1;
+    system: cyclic;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Unknown property “no-such-descriptor”."
+    );
+}
+
+#[test]
+fn color_profile_at_rule_descriptor_block_is_accepted() {
+    let css = r#"
+@color-profile --my-profile {
+    src: url("my.icc");
+    rendering-intent: relative-colorimetric;
+}
+
+a {
+    color: color(display-p3 1 0 0);
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn color_profile_at_rule_rejects_unknown_descriptor() {
+    let css = r#"
+@color-profile --my-profile {
+    no-such-descriptor: 1;
+    src: url("my.icc");
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Unknown property “no-such-descriptor”."
+    );
+}
+
+#[test]
+fn color_profile_at_rule_rejects_invalid_rendering_intent_value() {
+    let css = r#"
+@color-profile --my-profile {
+    src: url("my.icc");
+    rendering-intent: nope;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “rendering-intent”."
+    );
+}
+
+#[test]
+fn view_transition_at_rule_descriptor_block_is_accepted() {
+    let css = r#"
+@view-transition {
+    navigation: auto;
+    types: fast slow;
+}
+
+a { color: red; }
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn view_transition_at_rule_rejects_unknown_descriptor() {
+    let css = r#"
+@view-transition {
+    no-such-descriptor: 1;
+    navigation: auto;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Unknown property “no-such-descriptor”."
+    );
+}
+
+#[test]
+fn view_transition_at_rule_rejects_invalid_navigation_value() {
+    let css = r#"
+@view-transition {
+    navigation: maybe;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “navigation”."
+    );
+}
+
+#[test]
+fn scroll_timeline_at_rule_descriptor_block_is_accepted() {
+    let css = r#"
+@scroll-timeline --my-scroll {
+    source: auto;
+    orientation: block;
+    scroll-offsets: 0%, 100%;
+    time-range: 1s;
+}
+
+a { color: red; }
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn scroll_timeline_at_rule_rejects_unknown_descriptor() {
+    let css = r#"
+@scroll-timeline --my-scroll {
+    no-such-descriptor: 1;
+    source: auto;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Unknown property “no-such-descriptor”."
+    );
+}
+
+#[test]
+fn view_timeline_at_rule_descriptor_block_is_accepted() {
+    let css = r#"
+@view-timeline --my-view {
+    subject: auto;
+    axis: block;
+    inset: auto;
+    time-range: 1s;
+}
+
+a { color: red; }
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn view_timeline_at_rule_rejects_unknown_descriptor() {
+    let css = r#"
+@view-timeline --my-view {
+    no-such-descriptor: 1;
+    subject: auto;
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Unknown property “no-such-descriptor”."
+    );
+}
+
+#[test]
+fn css4_phase2_complex_stylesheet_is_accepted_under_css4_profile() {
+    let css = r#"
+@property --gap {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 1cqi;
+}
+
+@font-palette-values --my-palette {
+    font-family: "My Font";
+    base-palette: 1;
+    override-colors: 0 #00f, 1 #f00;
+}
+
+@counter-style thumbs {
+    system: fixed 1;
+    symbols: "👍" "👎";
+    suffix: " ";
+}
+
+@font-feature-values My Font {
+    @stylistic { alt-a: 1; }
+    @annotation { note: 2; }
+}
+
+@keyframes fade {
+    from {
+        color: rgb(0 0 0 / 50%);
+        outline-width: 1cqi;
+    }
+    to { color: #000; }
+}
+
+@starting-style {
+    .card { opacity: 0; }
+}
+
+@scope (.card) to (.card .content) {
+    .card {
+        margin-trim: inherit;
+        font-palette: --my-palette;
+        line-clamp: inherit;
+    }
+    .card::part(button) { color: rgb(0 0 0 / 50%); }
+
+    .card {
+        @media (width >= 1024px) {
+            reading-order: inherit;
+            outline-width: 1cqi;
+        }
+    }
+}
+"#;
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn css4_phase2_complex_stylesheet_reports_expected_errors_under_css4_profile() {
+    let css = r#"
+@property --x {
+    syntax: "<length>";
+    inherits: maybe;
+    initial-value: 0px;
+}
+
+@font-palette-values --p {
+    no-such-descriptor: 1;
+    font-family: "My Font";
+}
+
+@counter-style x {
+    no-such-descriptor: 1;
+    system: cyclic;
+}
+
+@nope { a { color: red; } }
+
+.bad::unknown(foo) { color: red; }
+
+.bad {
+    color: rgb(0 0 / 50%);
+    outline-width: 1nope;
+    no-such-prop: 1;
+}
+"#;
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.errors, 8, "{report:?}");
+    assert_eq!(report.messages.len(), 8, "{report:?}");
+
+    let expected: std::collections::BTreeSet<String> = [
+        "Unknown at-rule.",
+        "Invalid selector.",
+        "Invalid value for property “inherits”.",
+        "Invalid value for property “color”.",
+        "Invalid value for property “outline-width”.",
+        "Unknown property “no-such-descriptor”.",
+        "Unknown property “no-such-descriptor”.",
+        "Unknown property “no-such-prop”.",
+    ]
+    .into_iter()
+    .map(str::to_owned)
+    .collect();
+
+    let got: std::collections::BTreeSet<String> =
+        report.messages.iter().map(|m| m.message.clone()).collect();
+    assert_eq!(got, expected, "{report:?}");
+    assert!(
+        report
+            .messages
+            .iter()
+            .all(|m| matches!(m.severity, super::Severity::Error))
+    );
 }
 
 #[test]
@@ -883,6 +1716,81 @@ fn oklch_color_function_accepts_common_valid_forms() {
             "value={value} report={report:?}"
         );
     }
+}
+
+#[test]
+fn css_color4_color_function_tokens_are_accepted() {
+    for value in [
+        "hwb(180 10% 10%)",
+        "lab(29.2345% 39.3825 20.0664)",
+        "lch(29.2345% 44.2 27)",
+        "oklab(0.7 0.1 0.2 / 0.5)",
+        "color(display-p3 1 0 0)",
+        "color-mix(in srgb, red 50%, blue)",
+        "device-cmyk(0 81% 81% 30%)",
+        "light-dark(black, white)",
+        "color-contrast(black vs white)",
+    ] {
+        let css = format!("a{{color:{value};}}");
+        let report = validate_css_text(&css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "value={value} report={report:?}");
+        assert_eq!(report.warnings, 0, "value={value} report={report:?}");
+        assert!(
+            report.messages.is_empty(),
+            "value={value} report={report:?}"
+        );
+    }
+}
+
+#[test]
+fn css_color_relative_rgb_and_hsl_syntax_is_accepted() {
+    for value in [
+        "rgb(from red r g b / 50%)",
+        "rgba(from red r g b / 0.5)",
+        "hsl(from red h s l / 50%)",
+        "hsla(from red h s l / 0.5)",
+    ] {
+        let css = format!("a{{color:{value};}}");
+        let report = validate_css_text(&css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "value={value} report={report:?}");
+        assert_eq!(report.warnings, 0, "value={value} report={report:?}");
+        assert!(
+            report.messages.is_empty(),
+            "value={value} report={report:?}"
+        );
+    }
+}
+
+#[test]
+fn css4_profile_accepts_additional_css4_selector_pseudos() {
+    let css = r#"
+a:user-valid { color: red; }
+details:open > summary { color: red; }
+dialog:modal { color: red; }
+video:picture-in-picture { color: red; }
+button:popover-open { color: red; }
+
+::view-transition { color: red; }
+::view-transition-group(foo) { color: red; }
+.x:state(foo) { color: red; }
+"#;
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn default_profile_rejects_css4_only_selector_pseudos() {
+    let css = r#"a:user-valid { color: red; }"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(report.messages[0].message, "Invalid selector.");
 }
 
 #[test]
