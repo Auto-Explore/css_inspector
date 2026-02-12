@@ -15,12 +15,13 @@ pub(crate) fn known_properties_for_config(config: &Config) -> &'static KnownProp
         Some(p) if p.eq_ignore_ascii_case("css1") => known_properties_css1(),
         Some(p) if p.eq_ignore_ascii_case("css2") => known_properties_css2(),
         Some(p) if p.eq_ignore_ascii_case("css21") => known_properties_css21(),
+        Some(p) if p.eq_ignore_ascii_case("css3") => known_properties_css3(),
         Some(p) if p.eq_ignore_ascii_case("css4") => known_properties_css4(),
         Some(p) if p.eq_ignore_ascii_case("css3svg") => known_properties_css3svg(),
         Some(p) if p.eq_ignore_ascii_case("svg") => known_properties_svg(),
         Some(p) if p.eq_ignore_ascii_case("svgbasic") => known_properties_svg_basic(),
         Some(p) if p.eq_ignore_ascii_case("svgtiny") => known_properties_svg_tiny(),
-        _ => known_properties_css3(),
+        _ => known_properties_css4(),
     }
 }
 
@@ -121,16 +122,16 @@ mod known_properties_for_config_tests {
             ("cSs21", known_properties_css21 as SetFn),
             ("CSS3", known_properties_css3 as SetFn),
             ("css4", known_properties_css4 as SetFn),
-            ("", known_properties_css3 as SetFn),
-            ("css", known_properties_css3 as SetFn),
-            ("CSS", known_properties_css3 as SetFn),
-            ("css-2015", known_properties_css3 as SetFn),
-            ("cSs-2015", known_properties_css3 as SetFn),
+            ("", known_properties_css4 as SetFn),
+            ("css", known_properties_css4 as SetFn),
+            ("CSS", known_properties_css4 as SetFn),
+            ("css-2015", known_properties_css4 as SetFn),
+            ("cSs-2015", known_properties_css4 as SetFn),
             ("CSS3SVG", known_properties_css3svg as SetFn),
             ("SvG", known_properties_svg as SetFn),
             ("SvGBasic", known_properties_svg_basic as SetFn),
             ("SvGTiny", known_properties_svg_tiny as SetFn),
-            ("unknown-profile", known_properties_css3 as SetFn),
+            ("unknown-profile", known_properties_css4 as SetFn),
         ];
 
         for (profile, expected) in cases {
@@ -146,50 +147,50 @@ mod known_properties_for_config_tests {
     }
 
     #[test]
-    fn defaults_to_css3_when_profile_is_none() {
+    fn defaults_to_css4_when_profile_is_none() {
         let config = Config {
             profile: None,
             ..Config::default()
         };
         assert!(std::ptr::eq(
             known_properties_for_config(&config),
-            known_properties_css3()
+            known_properties_css4()
         ));
     }
 
     #[test]
-    fn defaults_to_css3_when_profile_is_empty_string() {
+    fn defaults_to_css4_when_profile_is_empty_string() {
         let config = Config {
             profile: Some(String::new()),
             ..Config::default()
         };
         assert!(std::ptr::eq(
             known_properties_for_config(&config),
-            known_properties_css3()
+            known_properties_css4()
         ));
     }
 
     #[test]
-    fn defaults_to_css3_when_profile_is_not_trimmed() {
+    fn defaults_to_css4_when_profile_is_not_trimmed() {
         let config = Config {
             profile: Some(" css1 ".to_string()),
             ..Config::default()
         };
         assert!(std::ptr::eq(
             known_properties_for_config(&config),
-            known_properties_css3()
+            known_properties_css4()
         ));
     }
 
     #[test]
-    fn defaults_to_css3_when_profile_has_non_space_whitespace_prefix() {
+    fn defaults_to_css4_when_profile_has_non_space_whitespace_prefix() {
         let config = Config {
             profile: Some("\tcss1".to_string()),
             ..Config::default()
         };
         assert!(std::ptr::eq(
             known_properties_for_config(&config),
-            known_properties_css3()
+            known_properties_css4()
         ));
     }
 
