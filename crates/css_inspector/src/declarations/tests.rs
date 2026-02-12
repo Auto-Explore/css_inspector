@@ -659,7 +659,7 @@ mod token_predicate_tests {
     use super::{is_css_identifier_token, is_integer_token};
 
     #[test]
-    fn is_css_identifier_token_matches_ascii_tokens_conservatively() {
+    fn is_css_identifier_token_matches_tokens_conservatively() {
         assert!(is_css_identifier_token("a"));
         assert!(is_css_identifier_token("abc"));
         assert!(is_css_identifier_token("-"));
@@ -674,7 +674,8 @@ mod token_predicate_tests {
         assert!(!is_css_identifier_token("   "));
         assert!(!is_css_identifier_token("1a"));
         assert!(!is_css_identifier_token("a b"));
-        assert!(!is_css_identifier_token("aé"));
+        assert!(is_css_identifier_token("aé"));
+        assert!(is_css_identifier_token("\u{0081}\u{0082}\u{0083}"));
     }
 
     #[test]
@@ -691,6 +692,32 @@ mod token_predicate_tests {
         assert!(!is_integer_token("-"));
         assert!(!is_integer_token("1.0"));
         assert!(!is_integer_token("1a"));
+    }
+}
+
+mod validate_voice_family_tests {
+    use super::{Report, validate_voice_family};
+
+    #[test]
+    fn accepts_generic_voice_with_integer_index() {
+        for tokens in [&["female", "1"][..], &["male", "2"][..], &["\"alice\"", "3"][..]] {
+            let mut report = Report::default();
+            validate_voice_family(tokens, &mut report);
+            assert_eq!(report.errors, 0, "{tokens:?}: {report:?}");
+        }
+    }
+
+    #[test]
+    fn rejects_unattached_integers() {
+        for tokens in [&["1"][..], &["female", "1", "2"][..]] {
+            let mut report = Report::default();
+            validate_voice_family(tokens, &mut report);
+            assert_eq!(report.errors, 1, "{tokens:?}: {report:?}");
+            assert_eq!(
+                report.messages.last().unwrap().message,
+                "Invalid value for property “voice-family”."
+            );
+        }
     }
 }
 
@@ -739,6 +766,15 @@ mod validate_quotes_tests {
     #[test]
     fn accepts_none_case_insensitively() {
         for tokens in [&["none"][..], &[" NONE "][..]] {
+            let mut report = Report::default();
+            validate_quotes(tokens, &mut report);
+            assert_eq!(report.errors, 0, "{tokens:?}: {report:?}");
+        }
+    }
+
+    #[test]
+    fn accepts_auto_case_insensitively() {
+        for tokens in [&["auto"][..], &[" AUTO "][..]] {
             let mut report = Report::default();
             validate_quotes(tokens, &mut report);
             assert_eq!(report.errors, 0, "{tokens:?}: {report:?}");

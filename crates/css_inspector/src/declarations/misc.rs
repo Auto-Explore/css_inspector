@@ -292,6 +292,7 @@ fn is_string_token(t: &str) -> bool {
 pub(super) fn validate_quotes(tokens: &[&str], report: &mut Report) {
     match tokens {
         [t] if t.trim().eq_ignore_ascii_case("none") => (),
+        [t] if t.trim().eq_ignore_ascii_case("auto") => (),
         [t0, t1] if is_string_token(t0) && is_string_token(t1) => (),
         _ if tokens.len() >= 2
             && tokens.len() % 2 == 0
@@ -301,15 +302,7 @@ pub(super) fn validate_quotes(tokens: &[&str], report: &mut Report) {
 }
 
 pub(super) fn is_css_identifier_token(t: &str) -> bool {
-    let t = t.trim().as_bytes();
-    let Some((&first, rest)) = t.split_first() else {
-        return false;
-    };
-    if !(first.is_ascii_alphabetic() || first == b'-' || first == b'_') {
-        return false;
-    }
-    rest.iter()
-        .all(|&b| b.is_ascii_alphanumeric() || b == b'-' || b == b'_')
+    is_valid_property_name(t)
 }
 
 pub(super) fn is_integer_token(t: &str) -> bool {
@@ -650,9 +643,19 @@ pub(super) fn validate_voice_family(tokens: &[&str], report: &mut Report) {
         push_error(report, "Invalid value for property “voice-family”.");
         return;
     }
+    let mut can_take_integer = false;
     for t in tokens {
         let t = t.trim();
+        if is_integer_token(t) {
+            if !can_take_integer {
+                push_error(report, "Invalid value for property “voice-family”.");
+                return;
+            }
+            can_take_integer = false;
+            continue;
+        }
         if is_string_token(t) || is_css_identifier_token(t) {
+            can_take_integer = true;
             continue;
         }
         push_error(report, "Invalid value for property “voice-family”.");

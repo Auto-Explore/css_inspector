@@ -774,6 +774,7 @@ fn is_css_type_annotation(name: &str) -> bool {
         || n.eq_ignore_ascii_case("color")
         || n.eq_ignore_ascii_case("custom-ident")
         || n.eq_ignore_ascii_case("dashed-ident")
+        || n.eq_ignore_ascii_case("ident")
         || n.eq_ignore_ascii_case("image")
         || n.eq_ignore_ascii_case("integer")
         || n.eq_ignore_ascii_case("length")

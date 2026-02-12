@@ -41,9 +41,7 @@
         background: orange;
         float: right;
       }
-      <!-- We center shrinkwrapped text by putting it into an inline-block, and
-           then wrapping that inline-block in a helper-div that has
-           "text-align:center" set. -->
+      
       .centerParent {
         text-align: center;
       }

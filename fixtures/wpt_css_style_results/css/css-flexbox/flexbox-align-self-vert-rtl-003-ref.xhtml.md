@@ -34,12 +34,7 @@
         background: orange;
         float: left;
       }
-      <!-- We center shrinkwrapped text by putting it into an inline-block, and
-           then wrapping that inline-block in a helper-div that has
-           "text-align:center" set. For this to work, the parent has to be at
-           least as wide as the centered content inside of it, so we make it
-           large with a negative margin such that its center aligns with the
-           4px-wide container's center. -->
+      
       .centerParent {
         text-align: center;
         width: 100px;
@@ -66,13 +61,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Unbalanced braces.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

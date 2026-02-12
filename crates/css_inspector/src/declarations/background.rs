@@ -199,7 +199,7 @@ pub(super) fn validate_background_image(tokens: &[&str], css4_profile: bool, rep
 
 pub(super) fn is_background_image_like_token(lower: &str) -> bool {
     // Cover common `<image>` functions used in modern CSS.
-    const FUNCTIONS: [&str; 13] = [
+    const FUNCTIONS: [&str; 14] = [
         "linear-gradient",
         "repeating-linear-gradient",
         "radial-gradient",
@@ -208,6 +208,7 @@ pub(super) fn is_background_image_like_token(lower: &str) -> bool {
         "repeating-conic-gradient",
         "image-set",
         "-webkit-image-set",
+        "-webkit-cross-fade",
         "cross-fade",
         "filter",
         "element",

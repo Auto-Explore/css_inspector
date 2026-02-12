@@ -19,7 +19,7 @@
         margin-bottom: 2px;
       }
 
-      <!-- customizations for flex container border/padding -->
+      
       .borderA {
         border-style: dashed;
         border-color: purple;

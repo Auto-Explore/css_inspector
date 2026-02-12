@@ -33,14 +33,12 @@
         display: inline-block;
       }
 
-      <!-- These classes allow us to conveniently/concisely specify margin
-           values below, for exact positioning of the items on each reference
-           line. ("l" = "margin-_l_eft", and the number = number of pixels) -->
+      
       div.l180 { margin-left: 180px }
       div.l90  { margin-left:  90px }
       div.l80  { margin-left:  80px }
       div.l70  { margin-left:  70px }
-      div.l53  { margin-left: calc(160px / 3) } <!-- == 53.33333px -->
+      div.l53  { margin-left: calc(160px / 3) } 
       div.l35  { margin-left:  35px }
     
 ```

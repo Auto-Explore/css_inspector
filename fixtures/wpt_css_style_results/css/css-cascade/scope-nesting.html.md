@@ -100,12 +100,7 @@
 ## style[4]
 
 ```css
- select inclusive descendants of the scope root');
-</script>
 
-<template id=test_parent_in_pseudo_scope>
-  <div>
-    <style>
       @scope (#div) {
         :scope {
           z-index: 1;
@@ -119,13 +114,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Unbalanced braces.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

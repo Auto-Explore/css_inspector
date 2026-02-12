@@ -1,5 +1,11 @@
 # WPT CSS <style> results
 
+Totals:
+- files_with_style_blocks: 38919
+- style_blocks: 40146
+- errors: 372
+- warnings: 0
+
 Machine-readable metadata for `css_inspector_cli wpt-style` lives in the JSON block below.
 
 ```json
@@ -10,6 +16,12 @@ Machine-readable metadata for `css_inspector_cli wpt-style` lives in the JSON bl
     "profile": "css4",
     "medium": null,
     "warning": null
+  },
+  "totals": {
+    "files_with_style_blocks": 38919,
+    "style_blocks": 40146,
+    "errors": 372,
+    "warnings": 0
   }
 }
 ```

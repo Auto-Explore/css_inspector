@@ -16,13 +16,8 @@ body { font: 32px Arial, Helvetica, Noto Sans, DejaVu Sans, FreeSans, sans-serif
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Invalid value for property “quotes”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

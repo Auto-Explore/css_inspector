@@ -14,11 +14,21 @@ use crate::{Config as SuiteConfig, SuiteError};
 pub const WPT_CSS_STYLE_RESULTS_FORMAT_VERSION: u32 = 3;
 pub const WPT_CSS_STYLE_RESULTS_META_FILE: &str = "_meta.md";
 
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub struct WptCssStyleResultsTotals {
+    pub files_with_style_blocks: usize,
+    pub style_blocks: usize,
+    pub errors: usize,
+    pub warnings: usize,
+}
+
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct WptCssStyleResultsMeta {
     pub format_version: u32,
     pub wpt_commit: String,
     pub config: SuiteConfig,
+    #[serde(default)]
+    pub totals: WptCssStyleResultsTotals,
 }
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
@@ -103,6 +113,37 @@ pub fn git_head_commit(dir: &Path) -> Result<String, SuiteError> {
     Ok(String::from_utf8_lossy(&output.stdout).trim().to_string())
 }
 
+fn is_xmlish_markup_rel(path: &str) -> bool {
+    let Some((_, ext)) = path.rsplit_once('.') else {
+        return false;
+    };
+    matches!(ext.to_ascii_lowercase().as_str(), "xhtml" | "xht" | "xml" | "svg")
+}
+
+fn strip_xml_comments_if_applicable(css: &str) -> String {
+    // In XML, comment nodes are not part of a style element’s text content, but our extractor
+    // slices raw bytes from the markup. Strip `<!-- ... -->` blocks for XML-ish documents *unless*
+    // the stylesheet appears to be wrapped in a CDATA section, where `<!--` is just literal text.
+    if find_ascii_ci(css.as_bytes(), b"<![cdata[", 0).is_some() {
+        return css.to_string();
+    }
+
+    let mut out = String::new();
+    let mut i = 0usize;
+    let bytes = css.as_bytes();
+    while let Some(start) = find_ascii_ci(bytes, b"<!--", i) {
+        out.push_str(&css[i..start]);
+        let Some(end) = find_ascii_ci(bytes, b"-->", start + 4) else {
+            // Unterminated comment: leave the rest as-is.
+            out.push_str(&css[start..]);
+            return out;
+        };
+        i = end + 3;
+    }
+    out.push_str(&css[i..]);
+    out
+}
+
 pub fn wpt_css_style_results_meta_path(results_root: &Path) -> PathBuf {
     results_root.join(WPT_CSS_STYLE_RESULTS_META_FILE)
 }
@@ -163,23 +204,33 @@ pub fn write_wpt_css_style_results_tree(
         )));
     }
 
+    // Track existing result files so we can remove stale ones after writing.
+    let mut existing_results_files: HashSet<PathBuf> = HashSet::new();
+    if results_root.is_dir() {
+        let mut md_files: Vec<PathBuf> = Vec::new();
+        collect_markdown_files_rec(results_root, &mut md_files)?;
+        existing_results_files.extend(md_files);
+    }
+    let meta_path = wpt_css_style_results_meta_path(results_root);
+
     let mut files: Vec<(String, PathBuf)> = Vec::new();
     collect_markup_files_rec(&css_root, &mut files, wpt_root)?;
     files.sort_by(|a, b| a.0.cmp(&b.0));
 
-    let meta = WptCssStyleResultsMeta {
-        format_version: WPT_CSS_STYLE_RESULTS_FORMAT_VERSION,
-        wpt_commit: wpt_commit.to_string(),
-        config: suite_config_from_validator_config(config),
-    };
-    write_wpt_css_style_results_meta_atomic(results_root, &meta)?;
+    let mut totals = WptCssStyleResultsTotals::default();
 
+    let mut written_results_files: HashSet<PathBuf> = HashSet::new();
     let mut summary = WptCssStyleWriteSummary::default();
 
     for (rel, path) in files {
         let bytes = fs::read(&path)?;
         let doc = String::from_utf8_lossy(&bytes);
         let mut blocks = extract_style_blocks(&doc);
+        if is_xmlish_markup_rel(&rel) {
+            for b in &mut blocks {
+                *b = strip_xml_comments_if_applicable(b);
+            }
+        }
         for b in &mut blocks {
             ensure_trailing_newline(b);
         }
@@ -187,11 +238,15 @@ pub fn write_wpt_css_style_results_tree(
             continue;
         }
 
+        totals.files_with_style_blocks += 1;
+        totals.style_blocks += blocks.len();
+
         let mut styles: Vec<WptCssStyleBlockResult> = Vec::with_capacity(blocks.len());
         for (idx, mut css) in blocks.into_iter().enumerate() {
             ensure_trailing_newline(&mut css);
-            let report =
-                report_from_validator_result(css_inspector::validate_css_text(&css, config));
+            let report = report_from_validator_result(css_inspector::validate_css_text(&css, config));
+            totals.errors += report.errors;
+            totals.warnings += report.warnings;
             styles.push(WptCssStyleBlockResult {
                 index: idx,
                 css,
@@ -206,10 +261,28 @@ pub fn write_wpt_css_style_results_tree(
         };
         let out_path = wpt_css_style_results_file_path(results_root, &rel)?;
         write_wpt_css_style_file_results_atomic(&out_path, &results)?;
+        written_results_files.insert(out_path);
 
         summary.files_written += 1;
         summary.blocks_written += results.styles.len();
     }
+
+    for path in existing_results_files {
+        if path == meta_path || written_results_files.contains(&path) {
+            continue;
+        }
+        if path.extension().and_then(|s| s.to_str()) == Some("md") {
+            fs::remove_file(&path)?;
+        }
+    }
+
+    let meta = WptCssStyleResultsMeta {
+        format_version: WPT_CSS_STYLE_RESULTS_FORMAT_VERSION,
+        wpt_commit: wpt_commit.to_string(),
+        config: suite_config_from_validator_config(config),
+        totals,
+    };
+    write_wpt_css_style_results_meta_atomic(results_root, &meta)?;
 
     Ok(summary)
 }
@@ -270,6 +343,11 @@ pub fn check_wpt_css_style_results_tree(
         let bytes = fs::read(&path)?;
         let doc = String::from_utf8_lossy(&bytes);
         let mut blocks = extract_style_blocks(&doc);
+        if is_xmlish_markup_rel(&rel) {
+            for b in &mut blocks {
+                *b = strip_xml_comments_if_applicable(b);
+            }
+        }
         for b in &mut blocks {
             ensure_trailing_newline(b);
         }
@@ -639,6 +717,14 @@ fn render_results_meta_markdown(meta: &WptCssStyleResultsMeta) -> Result<String,
     let json = serde_json::to_string_pretty(meta)?;
     let mut out = String::new();
     out.push_str("# WPT CSS <style> results\n\n");
+    out.push_str("Totals:\n");
+    out.push_str(&format!(
+        "- files_with_style_blocks: {}\n- style_blocks: {}\n- errors: {}\n- warnings: {}\n\n",
+        meta.totals.files_with_style_blocks,
+        meta.totals.style_blocks,
+        meta.totals.errors,
+        meta.totals.warnings
+    ));
     out.push_str(
         "Machine-readable metadata for `css_inspector_cli wpt-style` lives in the JSON block below.\n\n",
     );
@@ -852,28 +938,138 @@ fn safe_rel_path_from_slash(path: &str) -> Result<PathBuf, SuiteError> {
 }
 
 pub fn extract_style_blocks(document: &str) -> Vec<String> {
+    fn is_tag_boundary(b: Option<u8>) -> bool {
+        matches!(b, None | Some(b'>' | b'/' | b'\t' | b'\n' | b'\r' | b' '))
+    }
+
+    fn starts_with_ascii_ci(bytes: &[u8], at: usize, needle: &[u8]) -> bool {
+        bytes.get(at..at + needle.len()).is_some_and(|h| {
+            h.iter()
+                .zip(needle.iter())
+                .all(|(&h, &n)| h.to_ascii_lowercase() == n.to_ascii_lowercase())
+        })
+    }
+
+    fn find_tag_end(bytes: &[u8], from: usize) -> Option<usize> {
+        let mut i = from;
+        let mut quote: Option<u8> = None;
+        while i < bytes.len() {
+            let b = bytes[i];
+            if let Some(q) = quote {
+                if b == q {
+                    quote = None;
+                }
+                i += 1;
+                continue;
+            }
+            if b == b'"' || b == b'\'' {
+                quote = Some(b);
+                i += 1;
+                continue;
+            }
+            if b == b'>' {
+                return Some(i);
+            }
+            i += 1;
+        }
+        None
+    }
+
+    fn extract_style_blocks_from_raw_text(text: &str) -> Vec<String> {
+        let bytes = text.as_bytes();
+        let mut out = Vec::new();
+        let mut pos = 0usize;
+
+        while let Some(open_start) = find_ascii_ci(bytes, b"<style", pos) {
+            if !is_tag_boundary(bytes.get(open_start + 6).copied()) {
+                pos = open_start + 1;
+                continue;
+            }
+
+            let Some(open_end) = find_tag_end(bytes, open_start + 6) else {
+                break;
+            };
+            let content_start = open_end + 1;
+
+            let Some(close_start) = find_ascii_ci(bytes, b"</style", content_start) else {
+                break;
+            };
+            out.push(text[content_start..close_start].to_string());
+
+            let Some(close_end) = find_tag_end(bytes, close_start + 7) else {
+                break;
+            };
+            pos = close_end + 1;
+        }
+
+        out
+    }
+
     let bytes = document.as_bytes();
     let mut out = Vec::new();
     let mut pos = 0usize;
 
-    while let Some(open_start) = find_ascii_ci(bytes, b"<style", pos) {
-        let Some(open_end_rel) = bytes[open_start..].iter().position(|&b| b == b'>') else {
+    while pos < bytes.len() {
+        let Some(lt_rel) = bytes[pos..].iter().position(|&b| b == b'<') else {
             break;
         };
-        let open_end = open_start + open_end_rel;
+        let lt = pos + lt_rel;
+
+        // Skip HTML comments (`<!-- ... -->`) so `<style` inside them doesn't confuse extraction.
+        if matches!(bytes.get(lt..lt + 4), Some([b'<', b'!', b'-', b'-'])) {
+            if let Some(end_rel) = find_ascii_ci(bytes, b"-->", lt + 4) {
+                pos = end_rel + 3;
+                continue;
+            }
+            // Malformed comment; don't give up on the whole document.
+            pos = lt + 4;
+            continue;
+        }
+
+        // For `<script>...</script>`, extract style tags that appear in literal JS string content
+        // (e.g. Shadow DOM `innerHTML = "<style>...</style>"`), but do not treat tags inside the
+        // script as markup for the purposes of matching the closing `</script>`.
+        if starts_with_ascii_ci(bytes, lt, b"<script")
+            && is_tag_boundary(bytes.get(lt + 7).copied())
+        {
+            let Some(open_end) = find_tag_end(bytes, lt + 7) else {
+                break;
+            };
+            let content_start = open_end + 1;
+            let Some(close_start) = find_ascii_ci(bytes, b"</script", content_start) else {
+                break;
+            };
+            out.extend(extract_style_blocks_from_raw_text(
+                &document[content_start..close_start],
+            ));
+            let Some(close_end) = find_tag_end(bytes, close_start + 8) else {
+                break;
+            };
+            pos = close_end + 1;
+            continue;
+        }
+
+        if !starts_with_ascii_ci(bytes, lt, b"<style")
+            || !is_tag_boundary(bytes.get(lt + 6).copied())
+        {
+            pos = lt + 1;
+            continue;
+        }
+
+        let Some(open_end) = find_tag_end(bytes, lt + 6) else {
+            break;
+        };
         let content_start = open_end + 1;
 
         let Some(close_start) = find_ascii_ci(bytes, b"</style", content_start) else {
             break;
         };
+        out.push(document[content_start..close_start].to_string());
 
-        let content = &document[content_start..close_start];
-        out.push(content.to_string());
-
-        let Some(close_end_rel) = bytes[close_start..].iter().position(|&b| b == b'>') else {
+        let Some(close_end) = find_tag_end(bytes, close_start + 7) else {
             break;
         };
-        pos = close_start + close_end_rel + 1;
+        pos = close_end + 1;
     }
 
     out
@@ -1009,6 +1205,30 @@ mod tests {
     }
 
     #[test]
+    fn extract_style_blocks_ignores_style_like_text_in_scripts() {
+        let html = r#"<script>const x = "<stylesheet>";</script><style>a{}</style>"#;
+        assert_eq!(extract_style_blocks(html), vec!["a{}".to_string()]);
+    }
+
+    #[test]
+    fn extract_style_blocks_extracts_style_blocks_embedded_in_scripts() {
+        let html = r#"<script>const x = `<style>a{}</style>`;</script>"#;
+        assert_eq!(extract_style_blocks(html), vec!["a{}".to_string()]);
+    }
+
+    #[test]
+    fn extract_style_blocks_ignores_style_like_text_in_comments() {
+        let html = r#"<!-- <style>a{}</style> --><style>b{}</style>"#;
+        assert_eq!(extract_style_blocks(html), vec!["b{}".to_string()]);
+    }
+
+    #[test]
+    fn extract_style_blocks_does_not_abort_on_malformed_html_comments() {
+        let html = r#"<!-- oops --!><style>a{}</style>"#;
+        assert_eq!(extract_style_blocks(html), vec!["a{}".to_string()]);
+    }
+
+    #[test]
     fn wpt_style_id_includes_index() {
         assert_eq!(wpt_style_id("css/x.html", 2), "css/x.html#style[2]");
     }
@@ -1030,6 +1250,12 @@ mod tests {
             format_version: super::WPT_CSS_STYLE_RESULTS_FORMAT_VERSION,
             wpt_commit: "abc123".to_string(),
             config: suite_config_from_validator_config(&config),
+            totals: super::WptCssStyleResultsTotals {
+                files_with_style_blocks: 1,
+                style_blocks: 2,
+                errors: 3,
+                warnings: 4,
+            },
         };
         let md = render_results_meta_markdown(&meta).unwrap();
         let parsed = parse_results_meta_markdown(std::path::Path::new("meta.md"), &md).unwrap();

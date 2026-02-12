@@ -17,7 +17,7 @@
         margin-bottom: 2px;
       }
 
-      <!-- customizations for flexbox border/padding -->
+      
       .borderA {
         border-style: dashed;
         border-color: purple;
