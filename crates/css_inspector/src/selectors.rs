@@ -450,9 +450,7 @@ pub(crate) fn selector_pseudo_version_from_config(config: &Config) -> SelectorPs
         Some(p) if p.eq_ignore_ascii_case("css3") || p.eq_ignore_ascii_case("css3svg") => {
             SelectorPseudoVersion::Css3
         }
-        Some(p) if p.eq_ignore_ascii_case("css4") => {
-            SelectorPseudoVersion::Css4
-        }
+        Some(p) if p.eq_ignore_ascii_case("css4") => SelectorPseudoVersion::Css4,
         _ => SelectorPseudoVersion::Css4,
     }
 }

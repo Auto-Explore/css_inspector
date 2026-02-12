@@ -57,7 +57,8 @@ pub(crate) fn validate_css_text_stripped(
 
     let known_properties = known_properties_for_config(config);
     let css1_escapes = css1_escapes_from_config(config);
-    let css4_profile = matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
+    let css4_profile =
+        matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
 
     warn_on_other_media_rules(css, config, warning_level, report);
 
@@ -258,9 +259,10 @@ pub fn validate_css_declarations_text(
     let known_properties = known_properties_for_config(config);
     let warning_level = warning_level_from_config(config);
     let css1_escapes = css1_escapes_from_config(config);
-    let css4_profile = matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
+    let css4_profile =
+        matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
     let lenient = matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
-    
+
     validate_declarations(
         stripped,
         known_properties,
