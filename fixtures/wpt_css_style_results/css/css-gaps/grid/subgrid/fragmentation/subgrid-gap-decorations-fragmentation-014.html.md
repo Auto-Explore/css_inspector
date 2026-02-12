@@ -53,53 +53,8 @@
 
 ```json
 {
-  "errors": 11,
-  "messages": [
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “column-rule”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-rule-break”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-break”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-inset”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-row”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “column-rule”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

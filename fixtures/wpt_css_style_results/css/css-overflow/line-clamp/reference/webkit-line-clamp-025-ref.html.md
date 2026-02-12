@@ -28,17 +28,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-box-orient”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

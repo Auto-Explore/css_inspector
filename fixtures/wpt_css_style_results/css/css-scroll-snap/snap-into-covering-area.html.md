@@ -43,17 +43,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid value for property “scroll-snap-type”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

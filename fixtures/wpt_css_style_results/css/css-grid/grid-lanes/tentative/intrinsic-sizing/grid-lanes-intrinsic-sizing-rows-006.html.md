@@ -27,21 +27,8 @@ grid {
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Imported style sheets are not checked.",
-      "severity": "Warning"
-    },
-    {
-      "message": "Unknown property “grid-lanes-direction”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “gap”.",
-      "severity": "Error"
-    }
-  ],
-  "warnings": 1
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
 }
 ```

@@ -42,37 +42,8 @@
 
 ```json
 {
-  "errors": 7,
-  "messages": [
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “font-size-adjust”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “font-size-adjust”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “font-size-adjust”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -20,13 +20,8 @@ p {
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Invalid property name in declaration.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

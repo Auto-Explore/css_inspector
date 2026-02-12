@@ -36,17 +36,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “column-height”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-wrap”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

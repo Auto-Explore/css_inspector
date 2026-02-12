@@ -41,49 +41,8 @@
 
 ```json
 {
-  "errors": 10,
-  "messages": [
-    {
-      "message": "Unknown property “x”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “y”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “stroke”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “fill”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “fill”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-position”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-repeat”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-repeat”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-repeat”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

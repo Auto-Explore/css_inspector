@@ -25,25 +25,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Invalid value for property “transform-origin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “fill”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “stroke”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “stroke-width”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

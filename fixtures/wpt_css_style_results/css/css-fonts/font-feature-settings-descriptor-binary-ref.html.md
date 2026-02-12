@@ -27,25 +27,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Invalid value for property “src”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “font-feature-settings”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “font-feature-settings”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

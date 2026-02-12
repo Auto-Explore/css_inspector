@@ -43,37 +43,8 @@
 
 ```json
 {
-  "errors": 7,
-  "messages": [
-    {
-      "message": "Invalid value for property “columns”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “columns”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “columns”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “contain-intrinsic-size”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “contain-intrinsic-size”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “contain-intrinsic-size”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “contain-intrinsic-size”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

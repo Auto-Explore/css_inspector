@@ -333,6 +333,68 @@ pub(crate) fn strip_css_comments(input: &str) -> (Cow<'_, str>, bool) {
     }
 }
 
+pub(crate) fn strip_css_line_comments_lenient(input: &str) -> Cow<'_, str> {
+    let bytes = input.as_bytes();
+    let mut i = 0usize;
+    let mut last = 0usize;
+    let mut out: Option<String> = None;
+    let mut in_string: Option<u8> = None;
+    let mut escape = false;
+    let mut at_line_start = true;
+    let mut prev_non_ws: u8 = b'\n';
+
+    while i + 1 < bytes.len() {
+        let b = bytes[i];
+
+        if step_string_state(b, &mut in_string, &mut escape) {
+            i += 1;
+            continue;
+        }
+
+        // `//` comments are not part of the CSS spec, but some test suites and author stylesheets
+        // use them as single-line comments. Keep this heuristic conservative:
+        // - Only recognize them at the beginning of a statement/line, or immediately after
+        //   `;`, `{`, or `}`.
+        // - Do not treat protocol-relative URLs (`url(//...)`) or `http://` as comments.
+        if b == b'/'
+            && bytes[i + 1] == b'/'
+            && (at_line_start || matches!(prev_non_ws, b';' | b'{' | b'}'))
+        {
+            let out_buf = out.get_or_insert_with(|| String::with_capacity(input.len()));
+            out_buf.push_str(&input[last..i]);
+
+            // Skip until line break (or end).
+            i += 2;
+            while i < bytes.len() && !matches!(bytes[i], b'\n' | b'\r' | b'\x0C') {
+                i += 1;
+            }
+            last = i;
+            at_line_start = true;
+            prev_non_ws = b'\n';
+            continue;
+        }
+
+        if matches!(b, b'\n' | b'\r' | b'\x0C') {
+            at_line_start = true;
+            prev_non_ws = b'\n';
+        } else if b.is_ascii_whitespace() {
+            // Keep `at_line_start` as-is.
+        } else {
+            at_line_start = false;
+            prev_non_ws = b;
+        }
+
+        i += 1;
+    }
+
+    if let Some(mut out_buf) = out {
+        out_buf.push_str(&input[last..]);
+        Cow::Owned(out_buf)
+    } else {
+        Cow::Borrowed(input)
+    }
+}
+
 #[cfg(test)]
 mod strip_css_comments_tests {
     use super::strip_css_comments;
@@ -553,14 +615,70 @@ mod strip_css_comments_tests {
     }
 }
 
+#[cfg(test)]
+mod strip_css_line_comments_lenient_tests {
+    use super::strip_css_line_comments_lenient;
+    use std::borrow::Cow;
+
+    #[test]
+    fn returns_borrowed_when_no_line_comments_present() {
+        let out = strip_css_line_comments_lenient("a { color: red }");
+        assert!(matches!(out, Cow::Borrowed(_)));
+        assert_eq!(out.as_ref(), "a { color: red }");
+    }
+
+    #[test]
+    fn strips_comment_at_start_of_line() {
+        let out = strip_css_line_comments_lenient("//x\na { color: red }");
+        assert_eq!(out.as_ref(), "\na { color: red }");
+    }
+
+    #[test]
+    fn strips_comment_after_semicolon() {
+        let out = strip_css_line_comments_lenient("a { color: red; //x\n width: 1px; }");
+        assert_eq!(out.as_ref(), "a { color: red; \n width: 1px; }");
+    }
+
+    #[test]
+    fn does_not_strip_protocol_relative_urls() {
+        let css = "a{background:url(//example.com/a.png);}";
+        let out = strip_css_line_comments_lenient(css);
+        assert_eq!(out.as_ref(), css);
+    }
+
+    #[test]
+    fn does_not_strip_http_urls() {
+        let css = "a{background:url(http://example.com/a.png);}";
+        let out = strip_css_line_comments_lenient(css);
+        assert_eq!(out.as_ref(), css);
+    }
+}
+
 pub(crate) fn count_brace_balance_errors(css: &str) -> usize {
     let bytes = css.as_bytes();
+    let mut i = 0usize;
     let mut depth: usize = 0;
     let mut errors: usize = 0;
     let mut in_string: Option<u8> = None;
     let mut escape = false;
-    for &b in bytes {
+
+    while i < bytes.len() {
+        let b = bytes[i];
         if step_string_state(b, &mut in_string, &mut escape) {
+            i += 1;
+            continue;
+        }
+        if b == b'\\' {
+            // Skip escaped characters outside strings so sequences like `\'` or `\{` do not
+            // confuse brace/string tracking.
+            i += 1;
+            if i < bytes.len() {
+                if bytes[i] == b'\r' && bytes.get(i + 1) == Some(&b'\n') {
+                    i += 2;
+                } else {
+                    i += 1;
+                }
+            }
             continue;
         }
         match b {
@@ -574,6 +692,7 @@ pub(crate) fn count_brace_balance_errors(css: &str) -> usize {
             }
             _ => {}
         }
+        i += 1;
     }
     // Avoid double-counting: once we're inside an unterminated string, braces are ignored by the
     // tokenizer, so any remaining `depth` is likely a consequence of the same issue.
@@ -581,18 +700,90 @@ pub(crate) fn count_brace_balance_errors(css: &str) -> usize {
 }
 
 pub(crate) fn contains_invalid_top_level_chars(css: &str) -> bool {
+    // A conservative “HTML in CSS” guard, but avoid false positives for modern CSS syntax that
+    // legitimately uses `<` (e.g. range syntax in media queries: `(width < 10px)`, `<=`).
+    //
+    // Treat `<` as invalid only when it looks like the start of markup.
     let bytes = css.as_bytes();
+    let mut i = 0usize;
     let mut in_string: Option<u8> = None;
     let mut escape = false;
-    for &b in bytes {
+
+    while i < bytes.len() {
+        let b = bytes[i];
         if step_string_state(b, &mut in_string, &mut escape) {
+            i += 1;
             continue;
         }
         if b == b'<' {
-            return true;
+            if matches!(bytes.get(i + 1..i + 4), Some([b'!', b'-', b'-'])) {
+                // Allow the CSS CDO token (`<!--`), which is valid in stylesheets and is used
+                // by legacy HTML wrappers and WPT syntax tests.
+                i += 1;
+                continue;
+            }
+            match bytes.get(i + 1) {
+                Some(next) if next.is_ascii_alphabetic() => {
+                    // Allow CSS type annotations like `<length>` and `<color>`, used by modern
+                    // `@function` and related specs, while still rejecting markup-like `<tag>`.
+                    let mut j = i + 1;
+                    while j < bytes.len() && (bytes[j].is_ascii_alphanumeric() || bytes[j] == b'-')
+                    {
+                        j += 1;
+                    }
+                    if bytes.get(j) == Some(&b'>') {
+                        let name = &css[i + 1..j];
+                        if is_css_type_annotation(name) {
+                            i = j + 1;
+                            continue;
+                        }
+                    }
+                    return true;
+                }
+                Some(next) if matches!(next, b'!' | b'/' | b'?') => return true,
+                Some(b'\\') => {
+                    // Handle escaped markup/comment openers like `<\\!--` from the autotest suite.
+                    let mut j = i + 1;
+                    while j < bytes.len() && (bytes[j] == b'\\' || bytes[j].is_ascii_whitespace()) {
+                        j += 1;
+                    }
+                    match bytes.get(j) {
+                        Some(next)
+                            if next.is_ascii_alphabetic() || matches!(next, b'!' | b'/' | b'?') =>
+                        {
+                            return true;
+                        }
+                        None => return true,
+                        _ => {}
+                    }
+                }
+                None => return true,
+                _ => {}
+            }
         }
+        i += 1;
     }
+
     false
+}
+
+fn is_css_type_annotation(name: &str) -> bool {
+    // Spec-ish set used in WPT fixtures for `@function`/`attr()` typing and similar annotations.
+    let n = name.trim();
+    n.eq_ignore_ascii_case("angle")
+        || n.eq_ignore_ascii_case("color")
+        || n.eq_ignore_ascii_case("custom-ident")
+        || n.eq_ignore_ascii_case("dashed-ident")
+        || n.eq_ignore_ascii_case("image")
+        || n.eq_ignore_ascii_case("integer")
+        || n.eq_ignore_ascii_case("length")
+        || n.eq_ignore_ascii_case("length-percentage")
+        || n.eq_ignore_ascii_case("number")
+        || n.eq_ignore_ascii_case("percentage")
+        || n.eq_ignore_ascii_case("resolution")
+        || n.eq_ignore_ascii_case("string")
+        || n.eq_ignore_ascii_case("time")
+        || n.eq_ignore_ascii_case("url")
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -616,6 +807,10 @@ struct DeclBlock {
 struct Frame<'a> {
     decl: Option<DeclBlock>,
     prelude: &'a str,
+    saved_prelude_start: usize,
+    saved_paren_depth: usize,
+    saved_bracket_depth: usize,
+    in_value_block: bool,
 }
 
 pub(crate) fn iter_rule_blocks<'a>(css: &'a str) -> impl Iterator<Item = RuleBlock<'a>> + 'a {
@@ -632,6 +827,8 @@ pub(crate) fn iter_rule_blocks<'a>(css: &'a str) -> impl Iterator<Item = RuleBlo
     let bytes = css.as_bytes();
     let mut in_string: Option<u8> = None;
     let mut escape = false;
+    let mut paren_depth: usize = 0;
+    let mut bracket_depth: usize = 0;
 
     std::iter::from_fn(move || {
         while i < bytes.len() {
@@ -642,15 +839,55 @@ pub(crate) fn iter_rule_blocks<'a>(css: &'a str) -> impl Iterator<Item = RuleBlo
                 continue;
             }
 
+            if b == b'\\' {
+                // Skip escaped characters in identifiers/values so delimiters like `\{` or `\;`
+                // do not affect block detection.
+                i += 1;
+                if i < bytes.len() {
+                    i += 1;
+                }
+                continue;
+            }
+
             match b {
-                b';' => {
+                b'(' => {
+                    paren_depth += 1;
+                    i += 1;
+                }
+                b')' => {
+                    paren_depth = paren_depth.saturating_sub(1);
+                    i += 1;
+                }
+                b'[' => {
+                    bracket_depth += 1;
+                    i += 1;
+                }
+                b']' => {
+                    bracket_depth = bracket_depth.saturating_sub(1);
+                    i += 1;
+                }
+                b';' if paren_depth == 0 && bracket_depth == 0 => {
                     prelude_start = i + 1;
                     i += 1;
                 }
                 b'{' => {
                     let prelude = css[prelude_start..i].trim();
                     let in_decl_context = stack.iter().any(|f| f.decl.is_some());
-                    let decl = if prelude.starts_with('@') {
+                    let in_value_block = stack.iter().any(|f| f.in_value_block);
+                    let is_value_block = in_value_block
+                        || paren_depth > 0
+                        || bracket_depth > 0
+                        || (in_decl_context && looks_like_property_prefix(prelude));
+
+                    let saved_prelude_start = prelude_start;
+                    let saved_paren_depth = paren_depth;
+                    let saved_bracket_depth = bracket_depth;
+                    paren_depth = 0;
+                    bracket_depth = 0;
+
+                    let (decl, in_value_block) = if is_value_block {
+                        (None, true)
+                    } else if prelude.starts_with('@') {
                         let is_decl_list = matches!(
                             at_rule_name(prelude),
                             Some(name)
@@ -664,17 +901,30 @@ pub(crate) fn iter_rule_blocks<'a>(css: &'a str) -> impl Iterator<Item = RuleBlo
                                     || name.eq_ignore_ascii_case("scroll-timeline")
                                     || name.eq_ignore_ascii_case("view-timeline")
                         ) || in_decl_context;
-                        is_decl_list.then_some(DeclBlock {
-                            kind: RuleBlockKind::AtRuleDeclList,
-                            body_start: i + 1,
-                        })
+                        (
+                            is_decl_list.then_some(DeclBlock {
+                                kind: RuleBlockKind::AtRuleDeclList,
+                                body_start: i + 1,
+                            }),
+                            false,
+                        )
                     } else {
-                        Some(DeclBlock {
-                            kind: RuleBlockKind::QualifiedRule,
-                            body_start: i + 1,
-                        })
+                        (
+                            Some(DeclBlock {
+                                kind: RuleBlockKind::QualifiedRule,
+                                body_start: i + 1,
+                            }),
+                            false,
+                        )
                     };
-                    let frame = Frame { decl, prelude };
+                    let frame = Frame {
+                        decl,
+                        prelude,
+                        saved_prelude_start,
+                        saved_paren_depth,
+                        saved_bracket_depth,
+                        in_value_block,
+                    };
 
                     stack.push(frame);
                     prelude_start = i + 1;
@@ -688,7 +938,13 @@ pub(crate) fn iter_rule_blocks<'a>(css: &'a str) -> impl Iterator<Item = RuleBlo
                     };
                     let end = i;
                     i += 1;
-                    prelude_start = i;
+                    prelude_start = if frame.in_value_block {
+                        frame.saved_prelude_start
+                    } else {
+                        i
+                    };
+                    paren_depth = frame.saved_paren_depth;
+                    bracket_depth = frame.saved_bracket_depth;
 
                     if let Some(decl) = frame.decl {
                         return Some(RuleBlock {
@@ -703,6 +959,25 @@ pub(crate) fn iter_rule_blocks<'a>(css: &'a str) -> impl Iterator<Item = RuleBlo
         }
         None
     })
+}
+
+fn looks_like_property_prefix(prelude: &str) -> bool {
+    let trimmed = prelude.trim_start();
+    if trimmed.is_empty() || trimmed.starts_with('@') {
+        return false;
+    }
+    let Some((name, _)) = trimmed.split_once(':') else {
+        return false;
+    };
+    let name = name.trim();
+    let mut bytes = name.bytes();
+    let Some(first) = bytes.next() else {
+        return false;
+    };
+    if !(first.is_ascii_alphabetic() || matches!(first, b'-' | b'_' | b'\\')) {
+        return false;
+    }
+    bytes.all(|b| b.is_ascii_alphanumeric() || matches!(b, b'-' | b'_' | b'\\'))
 }
 pub(crate) fn warn_on_other_media_rules(
     css: &str,

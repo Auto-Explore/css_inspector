@@ -36,17 +36,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-box-decoration-break”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-box-decoration-break”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

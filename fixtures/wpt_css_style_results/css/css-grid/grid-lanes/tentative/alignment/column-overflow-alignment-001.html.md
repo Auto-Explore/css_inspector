@@ -40,37 +40,8 @@
 
 ```json
 {
-  "errors": 7,
-  "messages": [
-    {
-      "message": "Unknown property “flow-tolerance”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “justify-items”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “justify-self”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “justify-self”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

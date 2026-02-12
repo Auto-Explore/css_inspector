@@ -24,17 +24,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “flow-tolerance”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “grid-lanes-pack”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

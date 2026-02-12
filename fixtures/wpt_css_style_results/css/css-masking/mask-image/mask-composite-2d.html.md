@@ -48,53 +48,8 @@
 
 ```json
 {
-  "errors": 11,
-  "messages": [
-    {
-      "message": "Unknown property “fill”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “y”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “x”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-composite”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “x”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-composite”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “x”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-composite”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “x”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-composite”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

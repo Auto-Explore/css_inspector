@@ -56,41 +56,8 @@ html::view-transition-new(root) { animation: unset; opacity: 1; height: 100%; }
 
 ```json
 {
-  "errors": 8,
-  "messages": [
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “view-transition-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

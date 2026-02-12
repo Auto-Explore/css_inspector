@@ -62,25 +62,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

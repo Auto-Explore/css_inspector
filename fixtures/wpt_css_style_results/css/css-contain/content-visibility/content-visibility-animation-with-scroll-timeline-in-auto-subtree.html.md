@@ -43,17 +43,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “scroll-timeline-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “animation-timeline”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

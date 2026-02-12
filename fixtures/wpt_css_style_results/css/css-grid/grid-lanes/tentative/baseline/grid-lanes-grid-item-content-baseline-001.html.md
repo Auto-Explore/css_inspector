@@ -53,25 +53,8 @@ span:nth-child(3) { font-size:10px; }
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Invalid value for property “grid”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “grid-lanes-direction”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-content”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -30,25 +30,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Unknown property “offset-path”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “offset-path”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “transform-origin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “animation”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

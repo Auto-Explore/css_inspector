@@ -16,17 +16,8 @@ svg { font: bold 64px Arial, sans-serif; stroke: black; stroke-width: 4px; }
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “stroke”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “stroke-width”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -61,23 +61,23 @@
       "severity": "Error"
     },
     {
-      "message": "Invalid input.",
+      "message": "Missing ';' between declarations.",
       "severity": "Error"
     },
     {
-      "message": "Invalid selector.",
+      "message": "Invalid value for property “font-family”.",
       "severity": "Error"
     },
     {
-      "message": "Missing ':' in declaration.",
+      "message": "Missing ';' between declarations.",
       "severity": "Error"
     },
     {
-      "message": "Missing ':' in declaration.",
+      "message": "Invalid value for property “background”.",
       "severity": "Error"
     },
     {
-      "message": "Missing ':' in declaration.",
+      "message": "Invalid value for property “background”.",
       "severity": "Error"
     }
   ],

@@ -31,29 +31,8 @@
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Unknown property “offset-distance”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “offset-distance”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “transform-origin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “offset-path”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “animation”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

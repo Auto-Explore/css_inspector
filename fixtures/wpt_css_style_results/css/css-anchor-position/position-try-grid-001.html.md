@@ -70,41 +70,8 @@
 
 ```json
 {
-  "errors": 8,
-  "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “anchor-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-row”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “position-try-fallbacks”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “position-anchor”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

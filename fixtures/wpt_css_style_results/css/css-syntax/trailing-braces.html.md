@@ -23,11 +23,11 @@
   "errors": 2,
   "messages": [
     {
-      "message": "Invalid selector.",
+      "message": "Invalid value for property “color”.",
       "severity": "Error"
     },
     {
-      "message": "Invalid selector.",
+      "message": "Invalid value for property “color”.",
       "severity": "Error"
     }
   ],

@@ -34,17 +34,8 @@ u.green {
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “text-decoration-inset”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-inset”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

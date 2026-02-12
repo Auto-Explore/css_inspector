@@ -34,25 +34,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Unknown property “offset-path”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “offset-distance”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “offset-position”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -24,21 +24,8 @@ p {
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Missing value for property “--b”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

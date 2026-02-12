@@ -38,13 +38,8 @@ text-decoration-line:underline overline;
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Invalid value for property “text-decoration-line”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

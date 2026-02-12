@@ -34,25 +34,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Unknown property “offset-path”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “offset-distance”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “offset-rotate”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “offset-anchor”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

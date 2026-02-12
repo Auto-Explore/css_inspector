@@ -56,77 +56,8 @@
 
 ```json
 {
-  "errors": 17,
-  "messages": [
-    {
-      "message": "Unknown property “fill”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “y”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “x”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-mode”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “x”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-mode”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “x”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-mode”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “x”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-mode”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “x”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-mode”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-image”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

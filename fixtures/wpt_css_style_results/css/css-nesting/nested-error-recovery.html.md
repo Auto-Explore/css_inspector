@@ -46,7 +46,7 @@
 
 ```json
 {
-  "errors": 6,
+  "errors": 5,
   "messages": [
     {
       "message": "Invalid property name in declaration.",
@@ -54,10 +54,6 @@
     },
     {
       "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
       "severity": "Error"
     },
     {

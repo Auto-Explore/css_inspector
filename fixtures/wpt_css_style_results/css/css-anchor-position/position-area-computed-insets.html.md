@@ -19,13 +19,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Unknown property “position-area”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

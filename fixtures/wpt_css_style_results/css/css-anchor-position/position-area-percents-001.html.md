@@ -42,33 +42,8 @@
 
 ```json
 {
-  "errors": 6,
-  "messages": [
-    {
-      "message": "Invalid value for property “inset”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “anchor-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “position-anchor”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “position-area”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “inset”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

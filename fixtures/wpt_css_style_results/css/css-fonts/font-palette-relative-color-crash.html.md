@@ -27,13 +27,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Unknown property “font-palette”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

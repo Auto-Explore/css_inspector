@@ -35,21 +35,8 @@
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “ascent-override”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “descent-override”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “line-gap-override”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

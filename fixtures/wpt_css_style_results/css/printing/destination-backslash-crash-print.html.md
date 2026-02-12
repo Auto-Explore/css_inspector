@@ -22,17 +22,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid value for property “will-change”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “offset”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

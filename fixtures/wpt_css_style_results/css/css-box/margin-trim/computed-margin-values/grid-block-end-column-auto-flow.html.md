@@ -51,25 +51,8 @@ item:nth-child(5) {
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Unknown property “margin-trim”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-row”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

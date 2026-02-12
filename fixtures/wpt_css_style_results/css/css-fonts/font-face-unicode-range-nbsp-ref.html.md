@@ -33,25 +33,8 @@ span {
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Unknown property “ascent-override”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “descent-override”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “ascent-override”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “descent-override”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

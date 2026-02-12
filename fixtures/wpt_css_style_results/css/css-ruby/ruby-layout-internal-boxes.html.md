@@ -42,13 +42,8 @@ input {
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-appearance”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

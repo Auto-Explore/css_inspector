@@ -35,37 +35,8 @@
 
 ```json
 {
-  "errors": 7,
-  "messages": [
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

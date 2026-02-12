@@ -22,25 +22,8 @@
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Imported style sheets are not checked.",
-      "severity": "Warning"
-    },
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    }
-  ],
-  "warnings": 1
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
 }
 ```

@@ -25,13 +25,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Missing value for property “initial-value”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

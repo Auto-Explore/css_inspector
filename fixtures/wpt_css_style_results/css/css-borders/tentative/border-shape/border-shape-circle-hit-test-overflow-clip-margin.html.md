@@ -28,17 +28,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "“overflow-clip-margin” is not supported by Safari.",
-      "severity": "Warning"
-    },
-    {
-      "message": "Unknown property “border-shape”.",
-      "severity": "Error"
-    }
-  ],
-  "warnings": 1
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
 }
 ```

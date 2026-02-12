@@ -39,13 +39,8 @@ item:nth-child(4) {
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Unknown property “margin-trim”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

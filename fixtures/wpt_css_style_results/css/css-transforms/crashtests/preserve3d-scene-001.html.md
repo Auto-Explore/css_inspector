@@ -37,17 +37,8 @@ tbody {
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-mask-box-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-transform-style”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

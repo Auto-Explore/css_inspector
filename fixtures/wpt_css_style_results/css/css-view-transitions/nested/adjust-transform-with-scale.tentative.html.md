@@ -39,25 +39,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Invalid value for property “transform-origin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “view-transition-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “view-transition-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “view-transition-group”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -21,13 +21,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-line-clamp”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

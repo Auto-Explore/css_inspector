@@ -19,13 +19,8 @@ body { color: red; }
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

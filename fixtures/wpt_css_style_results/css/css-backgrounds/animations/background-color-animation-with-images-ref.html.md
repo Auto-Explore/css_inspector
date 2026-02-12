@@ -35,29 +35,8 @@
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Invalid value for property “background-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-size”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-size”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-image”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

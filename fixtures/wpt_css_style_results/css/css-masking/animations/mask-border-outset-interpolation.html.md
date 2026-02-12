@@ -33,25 +33,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Unknown property “mask-border-outset”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-border-slice”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-border-source”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-border-outset”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

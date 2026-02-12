@@ -20,13 +20,8 @@ table { margin: 1em 1em 2em 1em; border-collapse: collapse; }
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Invalid value for property “border-block-end”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

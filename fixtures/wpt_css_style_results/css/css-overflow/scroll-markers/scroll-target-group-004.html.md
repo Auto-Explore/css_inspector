@@ -43,21 +43,8 @@
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “container”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “scroll-target-group”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

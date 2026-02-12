@@ -19,21 +19,8 @@ table.t2 td:nth-child(3n+1) { background-color : red }]]>
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

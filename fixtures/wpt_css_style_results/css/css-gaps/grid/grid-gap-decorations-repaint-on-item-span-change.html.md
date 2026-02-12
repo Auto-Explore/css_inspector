@@ -35,33 +35,8 @@
 
 ```json
 {
-  "errors": 6,
-  "messages": [
-    {
-      "message": "Invalid value for property “column-rule”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “rule-break”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “rule-interior-inset”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “rule-visibility-items”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

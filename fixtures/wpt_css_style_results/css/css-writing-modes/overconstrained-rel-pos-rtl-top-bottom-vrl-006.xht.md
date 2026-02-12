@@ -52,17 +52,8 @@ So here, top and bottom offset properties are input into the §9.4.3 algorithms 
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

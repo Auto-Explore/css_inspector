@@ -23,17 +23,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-text-stroke-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-text-stroke-width”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

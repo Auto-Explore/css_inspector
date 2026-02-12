@@ -26,29 +26,8 @@
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Invalid value for property “columns”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-wrap”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “columns”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “columns”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-wrap”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -57,45 +57,8 @@ html::view-transition-old(target) {
 
 ```json
 {
-  "errors": 9,
-  "messages": [
-    {
-      "message": "Unknown property “view-transition-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “view-transition-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “object-view-box”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “object-position”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -19,25 +19,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```
@@ -63,7 +46,7 @@
 
 ```json
 {
-  "errors": 9,
+  "errors": 7,
   "messages": [
     {
       "message": "Unbalanced braces.",
@@ -74,10 +57,6 @@
       "severity": "Error"
     },
     {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
       "message": "Stray declaration outside a rule.",
       "severity": "Error"
     },
@@ -91,10 +70,6 @@
     },
     {
       "message": "Stray declaration outside a rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
       "severity": "Error"
     },
     {

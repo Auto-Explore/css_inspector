@@ -102,73 +102,8 @@
 
 ```json
 {
-  "errors": 16,
-  "messages": [
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

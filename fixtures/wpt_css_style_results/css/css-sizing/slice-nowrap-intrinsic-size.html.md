@@ -42,13 +42,8 @@ f { margin-right: 30px; float: left; }
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-box-decoration-break”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

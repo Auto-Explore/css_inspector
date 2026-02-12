@@ -22,17 +22,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “offset-anchor”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “offset-anchor”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

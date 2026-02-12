@@ -40,17 +40,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “mask-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-image”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

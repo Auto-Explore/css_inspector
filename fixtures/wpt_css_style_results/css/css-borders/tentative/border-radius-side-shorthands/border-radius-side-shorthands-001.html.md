@@ -77,57 +77,8 @@ div {
 
 ```json
 {
-  "errors": 12,
-  "messages": [
-    {
-      "message": "Invalid value for property “border-top-left-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-top-right-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-bottom-right-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-bottom-left-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-top-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-bottom-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-top-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-bottom-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-left-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-right-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-left-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-right-radius”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

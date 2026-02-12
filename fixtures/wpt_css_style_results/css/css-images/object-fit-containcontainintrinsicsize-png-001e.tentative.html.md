@@ -42,29 +42,8 @@
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Invalid value for property “object-position”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “contain-intrinsic-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “contain-intrinsic-height”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “contain-intrinsic-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “contain-intrinsic-height”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

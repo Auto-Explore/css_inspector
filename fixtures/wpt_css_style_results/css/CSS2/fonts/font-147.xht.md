@@ -20,12 +20,8 @@
 
 ```json
 {
-  "errors": 2,
+  "errors": 1,
   "messages": [
-    {
-      "message": "Unbalanced braces.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “font”.",
       "severity": "Error"
@@ -57,18 +53,14 @@
 
 ```json
 {
-  "errors": 4,
+  "errors": 3,
   "messages": [
     {
+      "message": "Unbalanced braces.",
+      "severity": "Error"
+    },
+    {
       "message": "Invalid value for property “font”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
       "severity": "Error"
     },
     {
@@ -117,13 +109,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Unknown property “-moz-opacity”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

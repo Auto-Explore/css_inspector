@@ -38,13 +38,8 @@ item {
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Invalid value for property “grid-row”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

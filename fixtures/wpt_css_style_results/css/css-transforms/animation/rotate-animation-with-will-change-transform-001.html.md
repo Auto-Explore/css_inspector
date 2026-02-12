@@ -31,25 +31,8 @@ div {
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Invalid value for property “rotate”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “rotate”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “animation”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “transform-origin”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

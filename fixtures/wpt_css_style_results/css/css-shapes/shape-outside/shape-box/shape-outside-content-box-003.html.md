@@ -50,17 +50,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “shape-margin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “shape-outside”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

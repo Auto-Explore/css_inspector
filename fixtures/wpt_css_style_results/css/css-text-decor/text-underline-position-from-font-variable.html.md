@@ -37,17 +37,8 @@ font-variation-settings: 'UNDO' 1000;
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid value for property “font-variation-settings”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “font-variation-settings”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -26,25 +26,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Conflicting attribute selector constraints.",
-      "severity": "Warning"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Conflicting attribute selector constraints.",
-      "severity": "Warning"
-    },
-    {
-      "message": "Conflicting attribute selector constraints.",
-      "severity": "Warning"
-    }
-  ],
-  "warnings": 3
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
 }
 ```

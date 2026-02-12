@@ -36,13 +36,8 @@ if-zh { display: none; }
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Invalid value for property “font-feature-settings”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -61,37 +61,8 @@ span:nth-child(4) { font-size:20px; }
 
 ```json
 {
-  "errors": 7,
-  "messages": [
-    {
-      "message": "Invalid value for property “grid”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “place-content”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “place-content”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-content”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-self”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

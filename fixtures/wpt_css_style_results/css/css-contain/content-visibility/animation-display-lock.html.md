@@ -35,22 +35,10 @@
 
 ```json
 {
-  "errors": 4,
+  "errors": 1,
   "messages": [
     {
-      "message": "Invalid value for property “contain”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “contain-intrinsic-size”.",
-      "severity": "Error"
-    },
-    {
       "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “animation”.",
       "severity": "Error"
     }
   ],

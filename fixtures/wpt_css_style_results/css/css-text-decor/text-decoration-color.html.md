@@ -46,29 +46,8 @@
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-text-fill-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-text-stroke-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-text-stroke-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-text-stroke-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-text-stroke-color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

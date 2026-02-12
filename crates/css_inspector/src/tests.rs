@@ -184,7 +184,7 @@ fn css4_phase1_profile_accepts_all_css4_supplement_property_names() {
 }
 
 #[test]
-fn css4_phase1_default_profile_rejects_css4_supplement_properties_as_unknown() {
+fn css3_profile_rejects_css4_supplement_properties_as_unknown() {
     fn css4_props() -> Vec<String> {
         let s = include_str!(concat!(
             env!("CARGO_MANIFEST_DIR"),
@@ -208,7 +208,11 @@ fn css4_phase1_default_profile_rejects_css4_supplement_properties_as_unknown() {
     }
     css.push_str("}\n");
 
-    let report = validate_css_text(&css, &Config::default()).unwrap();
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(&css, &config).unwrap();
     assert_eq!(report.warnings, 0, "{report:?}");
     assert_eq!(report.errors, props.len(), "{report:?}");
     assert_eq!(report.messages.len(), props.len(), "{report:?}");
@@ -267,6 +271,54 @@ a {
 }
 
 #[test]
+fn css4_profile_accepts_var_in_known_property_values() {
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text("a { outline-style: var(--x); }", &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn css4_profile_accepts_single_curly_block_value_containing_var() {
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text("a { color: {var(--x)}; }", &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn custom_properties_accept_empty_and_comma_only_values() {
+    let css = r#"a { --x: ; --y: ,; color: red; }"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn custom_property_names_allow_unicode_and_escapes() {
+    let css = r#"
+a {
+  --\fffd: green;
+  --a-长-name-that-might-be-longer-than-you\27 d-normally-use: green;
+  color: var(--a-长-name-that-might-be-longer-than-you\27 d-normally-use);
+}
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
 fn css4_profile_accepts_modern_cursor_values() {
     let css = r#"
 a { cursor: grab; }
@@ -285,9 +337,25 @@ d { cursor: url(foo.png) 2 2, url(bar.png) 4 4, grabbing; }
 }
 
 #[test]
-fn default_profile_rejects_css4_only_cursor_values() {
+fn css4_profile_accepts_cursor_none_keyword() {
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text("a { cursor: none; }", &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn css3_profile_rejects_css4_only_cursor_values() {
     let css = r#"a { cursor: grab; }"#;
-    let report = validate_css_text(css, &Config::default()).unwrap();
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.errors, 1, "{report:?}");
     assert_eq!(report.messages.len(), 1, "{report:?}");
     assert_eq!(
@@ -297,7 +365,7 @@ fn default_profile_rejects_css4_only_cursor_values() {
 }
 
 #[test]
-fn default_profile_rejects_modern_background_filter_and_content_values() {
+fn css3_profile_rejects_modern_background_filter_and_content_values() {
     let css = r#"
 a {
   background-image: linear-gradient(red, blue);
@@ -305,7 +373,11 @@ a {
   content: var(--txt);
 }
 "#;
-    let report = validate_css_text(css, &Config::default()).unwrap();
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.warnings, 0, "{report:?}");
     assert_eq!(report.errors, 3, "{report:?}");
 
@@ -355,9 +427,13 @@ a {
   color: red;
   .child { no-such-prop: 1; }
   @media (min-width: 1px) { no-such-prop2: 2; }
-}
-"#;
-    let report = validate_css_text(css, &Config::default()).unwrap();
+	}
+	"#;
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.warnings, 0, "{report:?}");
     assert_eq!(report.errors, 2, "{report:?}");
     let got: std::collections::BTreeSet<String> =
@@ -394,9 +470,13 @@ a {
   .child { color: blue; }
   @media screen { b { color: green; } }
   no-such-prop: 1;
-}
-"#;
-    let report = validate_css_text(css, &Config::default()).unwrap();
+	}
+	"#;
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.errors, 1, "{report:?}");
     assert_eq!(report.warnings, 0, "{report:?}");
     assert_eq!(report.messages.len(), 1, "{report:?}");
@@ -427,6 +507,58 @@ fn extracts_decls_inside_media_nested_rules() {
     assert_eq!(blocks[0].kind, RuleBlockKind::QualifiedRule);
     assert_eq!(blocks[0].prelude, "p");
     assert_eq!(blocks[0].body, " margin: 0; ");
+}
+
+#[test]
+fn iter_rule_blocks_ignores_semicolons_inside_parens() {
+    let css = "@supports (--a: var(--b);) { p { color: red; } }";
+    let blocks: Vec<_> = iter_rule_blocks(css).collect();
+    assert_eq!(blocks.len(), 1);
+    assert_eq!(blocks[0].kind, RuleBlockKind::QualifiedRule);
+    assert_eq!(blocks[0].prelude, "p");
+    assert_eq!(blocks[0].body.trim(), "color: red;");
+}
+
+#[test]
+fn iter_rule_blocks_ignores_value_blocks_inside_supports_prelude() {
+    let css = "@supports not ({ color: green; }) { html { color: red; } }";
+    let blocks: Vec<_> = iter_rule_blocks(css).collect();
+    assert_eq!(blocks.len(), 1);
+    assert_eq!(blocks[0].kind, RuleBlockKind::QualifiedRule);
+    assert_eq!(blocks[0].prelude, "html");
+    assert_eq!(blocks[0].body.trim(), "color: red;");
+}
+
+#[test]
+fn escaped_delimiters_in_at_rule_preludes_do_not_confuse_block_parsing() {
+    let css = r#"
+@import 'abc' layer(\{\});
+@counter-style abc\{\}oops {}
+@font-feature-values abc\{\}oops {}
+@font-palette-values --abc\{\}oops {}
+@keyframes abc\{\}oops {}
+@layer abc\;oops\!;
+"#;
+    let report = validate_css_text(
+        css,
+        &Config {
+            ..Config::default()
+        },
+    )
+    .unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn iter_rule_blocks_does_not_yield_blocks_inside_values() {
+    let css = ".a { color:{var(--x)}; }";
+    let blocks: Vec<_> = iter_rule_blocks(css).collect();
+    assert_eq!(blocks.len(), 1);
+    assert_eq!(blocks[0].kind, RuleBlockKind::QualifiedRule);
+    assert_eq!(blocks[0].prelude, ".a");
+    assert_eq!(blocks[0].body.trim(), "color:{var(--x)};");
 }
 
 #[test]
@@ -678,7 +810,11 @@ transform: var(--is-toggled, translate3d(-9px, 14px, 0));
 #[test]
 fn font_face_allows_src_descriptor_and_page_warns_once_for_page_break_too_many_values() {
     // `src` is not a normal CSS property, but is allowed inside @font-face.
-    let report = validate_css_text("a { src: url(x); }", &Config::default()).unwrap();
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text("a { src: url(x); }", &config).unwrap();
     assert!(
         report
             .messages
@@ -687,7 +823,7 @@ fn font_face_allows_src_descriptor_and_page_warns_once_for_page_break_too_many_v
         "{report:?}"
     );
 
-    let report = validate_css_text("@FoNt-FaCe { src: url(x); }", &Config::default()).unwrap();
+    let report = validate_css_text("@FoNt-FaCe { src: url(x); }", &config).unwrap();
     assert!(
         !report
             .messages
@@ -696,7 +832,7 @@ fn font_face_allows_src_descriptor_and_page_warns_once_for_page_break_too_many_v
         "{report:?}"
     );
 
-    let report = validate_css_text("@page { src: url(x); }", &Config::default()).unwrap();
+    let report = validate_css_text("@page { src: url(x); }", &config).unwrap();
     assert!(
         report
             .messages
@@ -708,7 +844,7 @@ fn font_face_allows_src_descriptor_and_page_warns_once_for_page_break_too_many_v
     // Page-break warnings should only be emitted inside @page.
     let report = validate_css_text(
         "@font-face { page-break-before: always always; }",
-        &Config::default(),
+        &config,
     )
     .unwrap();
     assert!(
@@ -722,7 +858,7 @@ fn font_face_allows_src_descriptor_and_page_warns_once_for_page_break_too_many_v
     // In @page, too many values on page-break-* triggers a single warning per declaration list.
     let report = validate_css_text(
         "@page { page-break-before: always always; page-break-after: always always; }",
-        &Config::default(),
+        &config,
     )
     .unwrap();
     let warnings = report
@@ -893,6 +1029,43 @@ fn contains_invalid_top_level_chars_ignores_strings() {
     assert!(contains_invalid_top_level_chars("a<b"));
     assert!(!contains_invalid_top_level_chars(r#"a{"<"}"#));
     assert!(contains_invalid_top_level_chars(r#"a{"<"}<"#));
+}
+
+#[test]
+fn validate_css_text_strips_cdata_wrappers() {
+    let css = r#"
+<![CDATA[
+  a { color: red; }
+]]>
+"#;
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn css4_profile_strips_double_slash_line_comments() {
+    let css = "a { color: red; // comment\n width: 1px; }";
+
+    let strict = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &strict).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert!(
+        report
+            .messages
+            .iter()
+            .any(|m| m.message == "Invalid property name in declaration."),
+            "{report:?}"
+    );
+
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
 }
 
 #[test]
@@ -1100,6 +1273,92 @@ fn unknown_at_rule_detection_matches_known_names_without_whitespace() {
 }
 
 #[test]
+fn css4_profile_demotes_unknown_at_rules_to_warnings() {
+    let css = "@three-dee { a { color: red; } }";
+
+    let strict = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &strict).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(
+        report
+            .messages
+            .iter()
+            .any(|m| m.message == "Unknown at-rule."),
+            "{report:?}"
+    );
+
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+
+    let report = validate_css_text(
+        css,
+        &Config {
+            warning: Some("1".to_string()),
+            ..Config::default()
+        },
+    )
+    .unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 1, "{report:?}");
+    assert!(
+        report
+            .messages
+            .iter()
+            .any(|m| m.message == "Unknown at-rule."),
+        "{report:?}"
+    );
+}
+
+#[test]
+fn css4_profile_demotes_unknown_properties_to_warnings() {
+    let css = "a { no-such-prop: 1; }";
+
+    let strict = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &strict).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(
+        report
+            .messages
+            .iter()
+            .any(|m| m.message == "Unknown property “no-such-prop”."),
+        "{report:?}"
+    );
+
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+
+    let report = validate_css_text(
+        css,
+        &Config {
+            warning: Some("1".to_string()),
+            ..Config::default()
+        },
+    )
+    .unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 1, "{report:?}");
+    assert!(
+        report
+            .messages
+            .iter()
+            .any(|m| m.message == "Unknown property “no-such-prop”."),
+        "{report:?}"
+    );
+}
+
+#[test]
 fn known_at_rule_names_match_case_insensitively() {
     assert!(is_known_at_rule_name("MEDIA"));
     assert!(is_known_at_rule_name("media"));
@@ -1205,6 +1464,27 @@ fn property_at_rule_descriptor_block_is_accepted() {
 }
 
 #[test]
+fn css4_profile_accepts_empty_initial_value_in_property_at_rule() {
+    let css = r#"
+@property --x {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: ;
+}
+"#;
+    let report = validate_css_text(
+        css,
+        &Config {
+            ..Config::default()
+        },
+    )
+    .unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
 fn page_margin_at_rules_are_accepted() {
     let css = r#"
 @page {
@@ -1261,7 +1541,11 @@ fn font_palette_values_at_rule_rejects_unknown_descriptor() {
     font-family: "My Font";
 }
 "#;
-    let report = validate_css_text(css, &Config::default()).unwrap();
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.errors, 1, "{report:?}");
     assert_eq!(report.warnings, 0, "{report:?}");
     assert_eq!(report.messages.len(), 1, "{report:?}");
@@ -1294,7 +1578,11 @@ fn counter_style_at_rule_rejects_unknown_descriptor() {
     system: cyclic;
 }
 "#;
-    let report = validate_css_text(css, &Config::default()).unwrap();
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.errors, 1, "{report:?}");
     assert_eq!(report.warnings, 0, "{report:?}");
     assert_eq!(report.messages.len(), 1, "{report:?}");
@@ -1330,7 +1618,11 @@ fn color_profile_at_rule_rejects_unknown_descriptor() {
     src: url("my.icc");
 }
 "#;
-    let report = validate_css_text(css, &Config::default()).unwrap();
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.errors, 1, "{report:?}");
     assert_eq!(report.warnings, 0, "{report:?}");
     assert_eq!(report.messages.len(), 1, "{report:?}");
@@ -1382,7 +1674,11 @@ fn view_transition_at_rule_rejects_unknown_descriptor() {
     navigation: auto;
 }
 "#;
-    let report = validate_css_text(css, &Config::default()).unwrap();
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.errors, 1, "{report:?}");
     assert_eq!(report.warnings, 0, "{report:?}");
     assert_eq!(report.messages.len(), 1, "{report:?}");
@@ -1435,7 +1731,11 @@ fn scroll_timeline_at_rule_rejects_unknown_descriptor() {
     source: auto;
 }
 "#;
-    let report = validate_css_text(css, &Config::default()).unwrap();
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.errors, 1, "{report:?}");
     assert_eq!(report.warnings, 0, "{report:?}");
     assert_eq!(report.messages.len(), 1, "{report:?}");
@@ -1471,7 +1771,11 @@ fn view_timeline_at_rule_rejects_unknown_descriptor() {
     subject: auto;
 }
 "#;
-    let report = validate_css_text(css, &Config::default()).unwrap();
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.errors, 1, "{report:?}");
     assert_eq!(report.warnings, 0, "{report:?}");
     assert_eq!(report.messages.len(), 1, "{report:?}");
@@ -1580,18 +1884,12 @@ fn css4_phase2_complex_stylesheet_reports_expected_errors_under_css4_profile() {
     };
     let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.warnings, 0, "{report:?}");
-    assert_eq!(report.errors, 8, "{report:?}");
-    assert_eq!(report.messages.len(), 8, "{report:?}");
+    assert_eq!(report.errors, 2, "{report:?}");
+    assert_eq!(report.messages.len(), 2, "{report:?}");
 
     let expected: std::collections::BTreeSet<String> = [
-        "Unknown at-rule.",
-        "Invalid selector.",
         "Invalid value for property “inherits”.",
-        "Invalid value for property “color”.",
         "Invalid value for property “outline-width”.",
-        "Unknown property “no-such-descriptor”.",
-        "Unknown property “no-such-descriptor”.",
-        "Unknown property “no-such-prop”.",
     ]
     .into_iter()
     .map(str::to_owned)
@@ -1785,9 +2083,13 @@ button:popover-open { color: red; }
 }
 
 #[test]
-fn default_profile_rejects_css4_only_selector_pseudos() {
+fn css3_profile_rejects_css4_only_selector_pseudos() {
     let css = r#"a:user-valid { color: red; }"#;
-    let report = validate_css_text(css, &Config::default()).unwrap();
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.errors, 1, "{report:?}");
     assert_eq!(report.messages.len(), 1, "{report:?}");
     assert_eq!(report.messages[0].message, "Invalid selector.");
@@ -2543,7 +2845,11 @@ fn warns_on_border_redefinition_per_affected_longhand_at_level_2() {
 
 #[test]
 fn warns_on_top_level_import_in_text_mode() {
-    let report = validate_css_text("@import url(x); a{color:red}", &Config::default()).unwrap();
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text("@import url(x); a{color:red}", &config).unwrap();
     assert_eq!(report.errors, 0);
     assert_eq!(report.warnings, 1);
     assert!(
@@ -2955,6 +3261,15 @@ fn strips_important_case_insensitively() {
 }
 
 #[test]
+fn validate_css_declarations_text_ignores_at_rule_statements() {
+    let report = super::validate_css_declarations_text("@apply --m1; color: red;", &Config::default())
+        .unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
 fn outline_shorthand_accepts_case_insensitive_keywords_and_rejects_duplicates() {
     let report =
         super::validate_css_declarations_text("outline: THIN SoLiD red;", &Config::default())
@@ -2994,9 +3309,24 @@ fn can_validate_file_url() {
 
 #[test]
 fn filter_reports_single_error_for_generic_values() {
-    let report =
-        super::validate_css_declarations_text("filter: blur(1px);", &Config::default()).unwrap();
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = super::validate_css_declarations_text("filter: blur(1px);", &config).unwrap();
     assert_eq!(report.errors, 1);
+}
+
+#[test]
+fn css4_profile_accepts_filter_functions_with_optional_empty_args() {
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = super::validate_css_declarations_text("filter: grayscale();", &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
 }
 
 #[test]

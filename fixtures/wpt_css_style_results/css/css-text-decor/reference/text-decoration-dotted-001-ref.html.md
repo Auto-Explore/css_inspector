@@ -32,17 +32,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-text-decoration”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-decoration”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

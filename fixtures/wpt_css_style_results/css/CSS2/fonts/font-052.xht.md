@@ -89,16 +89,8 @@
 
 ```json
 {
-  "errors": 5,
+  "errors": 3,
   "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “font”.",
       "severity": "Error"

@@ -16,13 +16,8 @@ svg { font: bold 64px Arial, sans-serif; text-shadow: grey 10px 10px }
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Invalid value for property “text-shadow”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

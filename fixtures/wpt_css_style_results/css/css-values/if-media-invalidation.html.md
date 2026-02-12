@@ -37,21 +37,8 @@
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “else”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

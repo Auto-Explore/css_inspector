@@ -28,13 +28,8 @@ pre { font-family: ezra_silregular, serif; width: 100%; border: 0; margin: 0; fo
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Invalid value for property “border”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

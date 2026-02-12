@@ -30,17 +30,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “container”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```
@@ -71,17 +62,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “container”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```
@@ -103,17 +85,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “container”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```
@@ -140,17 +113,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “container”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```
@@ -181,17 +145,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “container”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

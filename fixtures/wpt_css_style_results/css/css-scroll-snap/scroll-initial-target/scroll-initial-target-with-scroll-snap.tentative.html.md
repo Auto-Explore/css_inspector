@@ -57,21 +57,8 @@
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Invalid value for property “scroll-snap-type”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “scroll-initial-target”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “scroll-snap-align”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

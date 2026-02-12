@@ -32,21 +32,8 @@
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “mask-border-slice”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-border-source”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-border-width”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

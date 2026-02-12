@@ -22,17 +22,8 @@ selector is used, the words in the value must not contain spaces
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

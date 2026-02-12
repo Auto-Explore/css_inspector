@@ -22,25 +22,8 @@ div.stub html|*:not([*|lang|="en"]),
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Stray declaration outside a rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Stray declaration outside a rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

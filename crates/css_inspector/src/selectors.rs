@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 use crate::config::Config;
+use crate::parser::contains_invalid_top_level_chars;
 use crate::report::{Report, push_error, push_warning_level};
 use crate::strutil::{scan_quoted_string_end, split_top_level_commas, step_string_state};
 
@@ -319,16 +320,31 @@ fn extract_attr_selectors(selector: &str) -> Vec<AttrSel> {
     let mut out = Vec::new();
     let mut in_string: Option<u8> = None;
     let mut escape = false;
+    let mut paren_depth: i64 = 0;
     while i < bytes.len() {
         let b = bytes[i];
         if step_string_state(b, &mut in_string, &mut escape) {
             i += 1;
             continue;
         }
+        match b {
+            b'(' => {
+                paren_depth += 1;
+                i += 1;
+                continue;
+            }
+            b')' => {
+                paren_depth -= 1;
+                i += 1;
+                continue;
+            }
+            _ => {}
+        }
         if b != b'[' {
             i += 1;
             continue;
         }
+        let should_capture = paren_depth == 0;
         let start = i + 1;
         i += 1;
         let mut depth = 1u32;
@@ -345,8 +361,10 @@ fn extract_attr_selectors(selector: &str) -> Vec<AttrSel> {
                 if depth == 0 {
                     let end = i;
                     let content = &selector[start..end];
-                    if let Some(sel) = parse_attr_selector(content) {
-                        out.push(sel);
+                    if should_capture {
+                        if let Some(sel) = parse_attr_selector(content) {
+                            out.push(sel);
+                        }
                     }
                 }
             }
@@ -429,8 +447,13 @@ pub(crate) fn selector_pseudo_version_from_config(config: &Config) -> SelectorPs
         Some(p) if p.eq_ignore_ascii_case("css2") || p.eq_ignore_ascii_case("css21") => {
             SelectorPseudoVersion::Css2
         }
-        Some(p) if p.eq_ignore_ascii_case("css4") => SelectorPseudoVersion::Css4,
-        _ => SelectorPseudoVersion::Css3,
+        Some(p) if p.eq_ignore_ascii_case("css3") || p.eq_ignore_ascii_case("css3svg") => {
+            SelectorPseudoVersion::Css3
+        }
+        Some(p) if p.eq_ignore_ascii_case("css4") => {
+            SelectorPseudoVersion::Css4
+        }
+        _ => SelectorPseudoVersion::Css4,
     }
 }
 
@@ -530,12 +553,13 @@ const PSEUDO_FUNCTIONS_CSS3: [&str; 16] = [
     "part",
 ];
 
-const PSEUDO_CLASSES_CSS4_EXTRA: [&str; 5] = [
+const PSEUDO_CLASSES_CSS4_EXTRA: [&str; 6] = [
     "user-valid",
     "open",
     "modal",
     "picture-in-picture",
     "popover-open",
+    "animated-image",
 ];
 
 const PSEUDO_FUNCTIONS_CSS4_EXTRA: [&str; 6] = [
@@ -577,15 +601,11 @@ pub(crate) fn validate_selector_prelude(
     prelude: &str,
     version: SelectorPseudoVersion,
     warning_level: i32,
+    lenient: bool,
     report: &mut Report,
 ) {
     // Basic sanity checks to catch obviously non-CSS input that appears in the autotest suite.
-    if prelude.contains('<') {
-        push_error(report, "Invalid selector.");
-        return;
-    }
-    // Autotest `bugs/3099.css`: escaped colons in pseudo position are rejected.
-    if prelude.contains("\\:") {
+    if contains_invalid_top_level_chars(prelude) {
         push_error(report, "Invalid selector.");
         return;
     }
@@ -602,13 +622,23 @@ pub(crate) fn validate_selector_prelude(
             i += 1;
             continue;
         }
+        if b == b'\\' {
+            // Ignore escaped characters so delimiters like `\'`, `\(`, or `\:` don't affect
+            // string/paren/pseudo tracking.
+            i += 1;
+            if i < bytes.len() {
+                i += 1;
+            }
+            continue;
+        }
         match b {
             b'[' => bracket_depth += 1,
             b']' => bracket_depth -= 1,
             b'(' => paren_depth += 1,
             b')' => paren_depth -= 1,
             b':' if bracket_depth == 0 => {
-                // Simple pseudo validation for the suite: unknown pseudo names are errors.
+                // Pseudo validation: in strict mode, unknown pseudo names are selector errors; in
+                // lenient mode, they're reported as low-priority warnings.
                 if i > 0 && bytes[i - 1] == b'\\' {
                     // escaped colon (already handled above)
                     i += 1;
@@ -620,35 +650,74 @@ pub(crate) fn validate_selector_prelude(
                 }
                 let colon_count = j - i;
                 let start = j;
-                while j < bytes.len() && (bytes[j].is_ascii_alphanumeric() || bytes[j] == b'-') {
-                    j += 1;
+                while j < bytes.len() {
+                    let bj = bytes[j];
+                    if bj.is_ascii_alphanumeric() || bj == b'-' {
+                        j += 1;
+                        continue;
+                    }
+                    if bj == b'\\' {
+                        // Pseudos are CSS identifiers; allow escapes in the name so we can treat
+                        // unknown escaped pseudos as selector errors (autotest `bugs/3099.css`).
+                        if j + 1 >= bytes.len() {
+                            break;
+                        }
+                        j += 2;
+                        continue;
+                    }
+                    break;
                 }
                 if start != j {
                     let name = &prelude[start..j];
-                    // For vnu.jar parity: vendor pseudos are accepted as warnings and vnu.jar
-                    // disables warnings by default (warningLevel=-1), so only allow them when
-                    // warnings are disabled.
-                    if name.starts_with('-')
-                        && version != SelectorPseudoVersion::Css1
-                        && warning_level < 0
-                    {
+                    // Vendor pseudos: accept them, but only warn in lenient mode (or when warnings
+                    // are explicitly enabled in strict mode, matching historical behavior).
+                    if name.starts_with('-') && version != SelectorPseudoVersion::Css1 {
                         let (prefix, kind) = if colon_count >= 2 {
                             ("::", "element")
                         } else {
                             (":", "class")
                         };
-                        push_warning_level(
-                            report,
-                            warning_level,
-                            0,
-                            format!("“{prefix}{name}” is a vendor extended pseudo-{kind}."),
-                        );
-                        i = j;
-                        continue;
+                        if lenient {
+                            push_warning_level(
+                                report,
+                                warning_level,
+                                1,
+                                format!("“{prefix}{name}” is a vendor extended pseudo-{kind}."),
+                            );
+                            i = j;
+                            continue;
+                        }
+                        // For vnu.jar parity: vendor pseudos are accepted as warnings and vnu.jar
+                        // disables warnings by default (warningLevel=-1), so only allow them when
+                        // warnings are disabled.
+                        if warning_level < 0 {
+                            push_warning_level(
+                                report,
+                                warning_level,
+                                0,
+                                format!("“{prefix}{name}” is a vendor extended pseudo-{kind}."),
+                            );
+                            i = j;
+                            continue;
+                        }
                     }
                     if !is_allowed_pseudo_name(name, version) {
-                        push_error(report, "Invalid selector.");
-                        return;
+                        let (prefix, kind) = if colon_count >= 2 {
+                            ("::", "element")
+                        } else {
+                            (":", "class")
+                        };
+                        if lenient {
+                            push_warning_level(
+                                report,
+                                warning_level,
+                                1,
+                                format!("Unknown pseudo-{kind} “{prefix}{name}”."),
+                            );
+                        } else {
+                            push_error(report, "Invalid selector.");
+                            return;
+                        }
                     }
                     i = j;
                     continue;
@@ -683,7 +752,7 @@ mod validate_selector_prelude_tests {
             "a::part(foo)",
         ] {
             let mut report = Report::default();
-            validate_selector_prelude(prelude, SelectorPseudoVersion::Css3, 0, &mut report);
+            validate_selector_prelude(prelude, SelectorPseudoVersion::Css3, 0, false, &mut report);
             assert_eq!(report.errors, 0, "{prelude}: {report:?}");
         }
     }
@@ -692,7 +761,7 @@ mod validate_selector_prelude_tests {
     fn ignores_colons_inside_attribute_selectors() {
         for prelude in [r#"[foo=a:b]"#, r#"a[foo=a:b]"#] {
             let mut report = Report::default();
-            validate_selector_prelude(prelude, SelectorPseudoVersion::Css3, 0, &mut report);
+            validate_selector_prelude(prelude, SelectorPseudoVersion::Css3, 0, false, &mut report);
             assert_eq!(report.errors, 0, "{prelude}: {report:?}");
         }
     }
@@ -700,7 +769,7 @@ mod validate_selector_prelude_tests {
     #[test]
     fn rejects_unknown_pseudo_classes() {
         let mut report = Report::default();
-        validate_selector_prelude("a:nope", SelectorPseudoVersion::Css3, 0, &mut report);
+        validate_selector_prelude("a:nope", SelectorPseudoVersion::Css3, 0, false, &mut report);
         assert_eq!(report.errors, 1);
         assert_eq!(report.messages.len(), 1);
         assert_eq!(report.messages[0].message, "Invalid selector.");
@@ -713,6 +782,7 @@ mod validate_selector_prelude_tests {
             "a::-webkit-scrollbar",
             SelectorPseudoVersion::Css3,
             -1,
+            false,
             &mut report,
         );
         assert_eq!(report.errors, 0, "{report:?}");

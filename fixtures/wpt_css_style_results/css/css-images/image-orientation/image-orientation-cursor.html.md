@@ -18,17 +18,8 @@ div { width: 100px; height: 100px; border: solid blue; margin-left: 64px; }
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid value for property “cursor”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “cursor”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

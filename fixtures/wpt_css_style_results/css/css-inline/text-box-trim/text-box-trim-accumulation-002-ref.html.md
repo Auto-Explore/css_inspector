@@ -25,21 +25,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Imported style sheets are not checked.",
-      "severity": "Warning"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “margin-block”.",
-      "severity": "Error"
-    }
-  ],
-  "warnings": 1
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
 }
 ```

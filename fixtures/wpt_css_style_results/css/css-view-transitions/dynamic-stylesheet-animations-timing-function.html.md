@@ -44,21 +44,8 @@ html::view-transition-new(*) {
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “view-transition-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “view-transition-name”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

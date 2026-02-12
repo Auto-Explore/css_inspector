@@ -17,13 +17,8 @@ html,body,ol { -webkit-column-count: 2; }
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-column-count”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

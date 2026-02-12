@@ -23,17 +23,8 @@ span.sf::before { content: "s-f"; }
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-text-stroke”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-text-stroke”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

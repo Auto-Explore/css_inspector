@@ -30,25 +30,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-box-orient”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “line-clamp”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-box-align”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-box-pack”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

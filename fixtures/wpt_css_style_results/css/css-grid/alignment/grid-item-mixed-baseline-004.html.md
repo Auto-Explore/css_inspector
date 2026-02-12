@@ -70,37 +70,8 @@ span:nth-child(4) { font-size:20px; }
 
 ```json
 {
-  "errors": 7,
-  "messages": [
-    {
-      "message": "Unknown property “-ms-columns”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-columns”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-ms-column-fill”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-column-fill”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-content”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-self”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

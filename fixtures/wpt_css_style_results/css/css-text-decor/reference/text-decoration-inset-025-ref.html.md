@@ -31,25 +31,8 @@ u {
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Invalid value for property “text-decoration”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-inset”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-decoration”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-inset”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

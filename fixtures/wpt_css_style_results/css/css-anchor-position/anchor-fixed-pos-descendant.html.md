@@ -41,29 +41,8 @@ p > span {
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Unknown property “anchor-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “anchor-scope”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “anchor-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “pointer-events”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

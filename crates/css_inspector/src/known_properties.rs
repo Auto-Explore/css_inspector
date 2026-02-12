@@ -147,7 +147,10 @@ mod known_properties_for_config_tests {
 
     #[test]
     fn defaults_to_css3_when_profile_is_none() {
-        let config = Config::default();
+        let config = Config {
+            profile: None,
+            ..Config::default()
+        };
         assert!(std::ptr::eq(
             known_properties_for_config(&config),
             known_properties_css3()
@@ -495,7 +498,11 @@ mod nested_at_rule_tests {
     }
 }
 "#;
-        let report = validate_css_text(css, &Config::default()).unwrap();
+        let config = Config {
+            profile: Some("css3".to_string()),
+            ..Config::default()
+        };
+        let report = validate_css_text(css, &config).unwrap();
         assert_eq!(report.errors, 1, "{report:?}");
         assert_eq!(report.warnings, 0, "{report:?}");
         assert_eq!(report.messages.len(), 1, "{report:?}");
@@ -567,7 +574,11 @@ mod nested_at_rule_tests {
     }
 }
 "#;
-        let report = validate_css_text(css, &Config::default()).unwrap();
+        let config = Config {
+            profile: Some("css3".to_string()),
+            ..Config::default()
+        };
+        let report = validate_css_text(css, &config).unwrap();
         assert_eq!(report.errors, 1, "{report:?}");
         assert_eq!(report.warnings, 0, "{report:?}");
         assert_eq!(report.messages.len(), 1, "{report:?}");

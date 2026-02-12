@@ -105,45 +105,8 @@
 
 ```json
 {
-  "errors": 9,
-  "messages": [
-    {
-      "message": "Unknown property “grid-lanes-direction”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-row”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-row”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-row”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-row”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-row”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-row”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-row”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

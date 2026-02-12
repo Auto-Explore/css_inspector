@@ -26,17 +26,8 @@ body { margin: 20px; font: 18pt monospace; line-height: 30px; }
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid value for property “border”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -56,17 +56,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “scroll-start”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “scroll-initial-target”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

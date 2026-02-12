@@ -28,17 +28,8 @@ item {
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “margin-trim”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “flex”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

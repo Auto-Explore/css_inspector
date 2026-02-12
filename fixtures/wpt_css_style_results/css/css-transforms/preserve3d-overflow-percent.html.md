@@ -49,17 +49,8 @@ body {
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid value for property “transform-origin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “transform”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

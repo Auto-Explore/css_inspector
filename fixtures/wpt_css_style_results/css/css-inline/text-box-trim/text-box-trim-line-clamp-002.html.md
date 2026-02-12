@@ -35,33 +35,8 @@
 
 ```json
 {
-  "errors": 6,
-  "messages": [
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-box-trim”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-box-edge”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “line-clamp”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-line-clamp”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-box-orient”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

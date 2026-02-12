@@ -110,16 +110,8 @@
 
 ```json
 {
-  "errors": 14,
+  "errors": 12,
   "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “color”.",
       "severity": "Error"

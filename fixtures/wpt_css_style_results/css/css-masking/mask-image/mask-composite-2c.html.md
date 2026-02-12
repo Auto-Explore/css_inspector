@@ -47,29 +47,8 @@
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Unknown property “mask-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-composite”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-composite”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-composite”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-composite”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

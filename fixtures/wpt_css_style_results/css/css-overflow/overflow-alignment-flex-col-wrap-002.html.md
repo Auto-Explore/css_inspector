@@ -102,41 +102,8 @@
 
 ```json
 {
-  "errors": 8,
-  "messages": [
-    {
-      "message": "Invalid value for property “border”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “flex-flow”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “place-content”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “place-content”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

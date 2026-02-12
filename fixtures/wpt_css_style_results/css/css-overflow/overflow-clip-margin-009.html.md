@@ -29,21 +29,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "“overflow-clip-margin” is not supported by Safari.",
-      "severity": "Warning"
-    },
-    {
-      "message": "“overflow-clip-margin” is not supported by Safari.",
-      "severity": "Warning"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    }
-  ],
-  "warnings": 2
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
 }
 ```

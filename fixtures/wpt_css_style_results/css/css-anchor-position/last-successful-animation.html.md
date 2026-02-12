@@ -48,29 +48,8 @@
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Unknown property “anchor-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “position-anchor”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “position-try-fallbacks”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “position-area”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “animation”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

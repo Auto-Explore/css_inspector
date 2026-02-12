@@ -40,21 +40,8 @@
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “anchor-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “position-anchor”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “outline”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

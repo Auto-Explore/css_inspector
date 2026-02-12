@@ -46,25 +46,8 @@ x {
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Invalid value for property “grid”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “xposition”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -33,37 +33,8 @@
 
 ```json
 {
-  "errors": 7,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-mask-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-mask-size”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-mask-repeat”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-size”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-repeat”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “animation”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

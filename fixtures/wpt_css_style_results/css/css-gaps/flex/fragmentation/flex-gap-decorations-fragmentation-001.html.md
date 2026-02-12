@@ -58,49 +58,8 @@
 
 ```json
 {
-  "errors": 10,
-  "messages": [
-    {
-      "message": "Unknown property “row-rule-style”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-break”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-edge-inset-end”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-edge-inset-start”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-rule-break”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-rule-edge-inset-start”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-rule-edge-inset-end”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-rule-interior-inset-start”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

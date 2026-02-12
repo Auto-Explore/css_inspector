@@ -35,17 +35,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “position-anchor”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “anchor-name”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

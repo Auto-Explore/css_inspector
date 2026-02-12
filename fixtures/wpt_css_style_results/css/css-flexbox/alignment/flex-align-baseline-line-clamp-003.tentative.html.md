@@ -45,29 +45,8 @@ span {
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-box-orient”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-line-clamp”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “outline”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

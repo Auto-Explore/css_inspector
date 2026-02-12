@@ -78,37 +78,8 @@
 
 ```json
 {
-  "errors": 7,
-  "messages": [
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “scroll-snap-type”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “counter-set”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “scroll-marker-group”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

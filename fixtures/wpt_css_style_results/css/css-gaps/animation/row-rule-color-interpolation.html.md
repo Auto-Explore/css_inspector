@@ -30,30 +30,10 @@
 
 ```json
 {
-  "errors": 6,
+  "errors": 1,
   "messages": [
     {
-      "message": "Unknown property “row-rule-color”.",
-      "severity": "Error"
-    },
-    {
       "message": "Missing ';' between declarations.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-style”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-color”.",
       "severity": "Error"
     }
   ],

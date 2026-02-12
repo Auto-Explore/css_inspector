@@ -8,7 +8,8 @@ use crate::known_properties::known_properties_for_config;
 use crate::parser::{
     RuleBlockKind, at_rule_decl_list_context_flags, contains_invalid_top_level_chars,
     contains_unknown_at_rule, count_brace_balance_errors, count_stray_top_level_declaration_errors,
-    ends_with_stray_backslash, iter_rule_blocks, strip_css_comments, warn_on_other_media_rules,
+    ends_with_stray_backslash, iter_rule_blocks, strip_css_comments,
+    strip_css_line_comments_lenient, warn_on_other_media_rules,
 };
 use crate::report::{Report, push_error, push_error_times, push_warning_level};
 use crate::selectors::{
@@ -34,10 +35,18 @@ pub(crate) fn validate_css_text_stripped(
 ) {
     let warning_level = warning_level_from_config(config);
     let pseudo_version = selector_pseudo_version_from_config(config);
+    let lenient = matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
+    let css_cdata = strip_cdata_wrappers(css);
+    let css_line = if lenient {
+        strip_css_line_comments_lenient(css_cdata.as_ref())
+    } else {
+        Cow::Borrowed(css_cdata.as_ref())
+    };
+    let css = css_line.as_ref();
 
     // The upstream autotest suite treats top-level `@import` as producing a single warning in
     // text-validation mode (i.e., when not validating via URI with fetching enabled).
-    if warn_on_top_level_imports && has_top_level_import_url(css) {
+    if warn_on_top_level_imports && !lenient && has_top_level_import_url(css) {
         push_warning_level(
             report,
             warning_level,
@@ -48,8 +57,7 @@ pub(crate) fn validate_css_text_stripped(
 
     let known_properties = known_properties_for_config(config);
     let css1_escapes = css1_escapes_from_config(config);
-    let css4_profile =
-        matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
+    let css4_profile = matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
 
     warn_on_other_media_rules(css, config, warning_level, report);
 
@@ -62,7 +70,11 @@ pub(crate) fn validate_css_text_stripped(
         push_error(report, "Invalid escape at end of input.");
     }
     if contains_unknown_at_rule(css) {
-        push_error(report, "Unknown at-rule.");
+        if lenient {
+            push_warning_level(report, warning_level, 1, "Unknown at-rule.");
+        } else {
+            push_error(report, "Unknown at-rule.");
+        }
     }
     let stray_decl_errors = count_stray_top_level_declaration_errors(css);
     push_error_times(
@@ -73,7 +85,13 @@ pub(crate) fn validate_css_text_stripped(
 
     for block in iter_rule_blocks(css) {
         if block.kind == RuleBlockKind::QualifiedRule {
-            validate_selector_prelude(block.prelude, pseudo_version, warning_level, report);
+            validate_selector_prelude(
+                block.prelude,
+                pseudo_version,
+                warning_level,
+                lenient,
+                report,
+            );
             warn_on_conflicting_attribute_selectors(block.prelude, warning_level, report);
         }
         let (
@@ -102,9 +120,29 @@ pub(crate) fn validate_css_text_stripped(
             in_scroll_timeline_at_rule,
             in_view_timeline_at_rule,
             css4_profile,
+            lenient,
             report,
         );
     }
+}
+
+fn strip_cdata_wrappers<'a>(css: &'a str) -> Cow<'a, str> {
+    // XHTML `<style>` blocks commonly wrap CSS in a CDATA section. Keep validation focused on
+    // the CSS content rather than the surrounding XML markers.
+    //
+    // Example:
+    //   <![CDATA[
+    //     a { color: red }
+    //   ]]>
+    let trimmed = css.trim_start();
+    let Some(after_start) = trimmed.strip_prefix("<![CDATA[") else {
+        return Cow::Borrowed(css);
+    };
+    let inner = after_start.trim_end();
+    let Some(before_end) = inner.strip_suffix("]]>") else {
+        return Cow::Borrowed(css);
+    };
+    Cow::Owned(before_end.to_owned())
 }
 
 pub(crate) fn strip_comments_or_push_error<'a>(
@@ -220,8 +258,9 @@ pub fn validate_css_declarations_text(
     let known_properties = known_properties_for_config(config);
     let warning_level = warning_level_from_config(config);
     let css1_escapes = css1_escapes_from_config(config);
-    let css4_profile =
-        matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
+    let css4_profile = matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
+    let lenient = matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
+    
     validate_declarations(
         stripped,
         known_properties,
@@ -237,6 +276,7 @@ pub fn validate_css_declarations_text(
         false,
         false,
         css4_profile,
+        lenient,
         &mut report,
     );
     Ok(report)

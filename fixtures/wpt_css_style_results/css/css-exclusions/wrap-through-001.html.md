@@ -37,17 +37,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “wrap-flow”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “wrap-through”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -88,57 +88,8 @@
 
 ```json
 {
-  "errors": 12,
-  "messages": [
-    {
-      "message": "Invalid value for property “transform-origin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “scale”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “scale”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “scale”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “scale”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “scale”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “translate”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “transform-origin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “scale”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “translate”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “transform-origin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “scale”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

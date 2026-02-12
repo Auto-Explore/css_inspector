@@ -19,13 +19,8 @@ html { font-kerning: none; font-feature-settings: "kern" off; }
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Invalid value for property “font-feature-settings”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

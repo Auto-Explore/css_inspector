@@ -17,16 +17,8 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 1,
   "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “cursor”.",
       "severity": "Error"

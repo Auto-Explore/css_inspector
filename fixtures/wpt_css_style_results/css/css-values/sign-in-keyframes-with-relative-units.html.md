@@ -59,33 +59,8 @@
 
 ```json
 {
-  "errors": 6,
-  "messages": [
-    {
-      "message": "Invalid value for property “font-style”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “font-palette”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “font-variation-settings”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “font-style”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “font-palette”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “font-variation-settings”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

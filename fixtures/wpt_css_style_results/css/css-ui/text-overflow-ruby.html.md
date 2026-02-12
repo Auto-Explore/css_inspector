@@ -32,13 +32,8 @@ input { width: 40px; -webkit-appearance: none; border: 1px solid black; }
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-appearance”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

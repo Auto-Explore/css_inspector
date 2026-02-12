@@ -30,18 +30,10 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 1,
   "messages": [
     {
       "message": "Invalid property name in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
       "severity": "Error"
     }
   ],

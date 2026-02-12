@@ -24,17 +24,8 @@ li::marker { content: counters(list-item, ".") " "; }
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid value for property “display”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “content”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

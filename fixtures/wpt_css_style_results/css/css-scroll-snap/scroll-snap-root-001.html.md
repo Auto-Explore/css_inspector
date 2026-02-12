@@ -36,12 +36,8 @@ html, body { margin: 0; padding: 0; }
 
 ```json
 {
-  "errors": 2,
+  "errors": 1,
   "messages": [
-    {
-      "message": "Invalid value for property “scroll-snap-type”.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “font”.",
       "severity": "Error"

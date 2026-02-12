@@ -34,13 +34,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Invalid value for property “transform-origin”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```
@@ -59,21 +54,8 @@
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “stroke-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “stroke”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “fill”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

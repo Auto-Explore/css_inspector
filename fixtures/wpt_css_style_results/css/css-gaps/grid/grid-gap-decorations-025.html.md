@@ -40,25 +40,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Unknown property “row-rule-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-style”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “column-rule-color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

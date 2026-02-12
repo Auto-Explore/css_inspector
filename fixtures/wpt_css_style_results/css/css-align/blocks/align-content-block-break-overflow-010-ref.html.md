@@ -18,13 +18,8 @@
 ```json
 {
   "errors": 0,
-  "messages": [
-    {
-      "message": "Imported style sheets are not checked.",
-      "severity": "Warning"
-    }
-  ],
-  "warnings": 1
+  "messages": [],
+  "warnings": 0
 }
 ```
 
@@ -69,17 +64,8 @@ switch back once fixed */
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid value for property “border-inline”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

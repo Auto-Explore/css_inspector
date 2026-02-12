@@ -54,25 +54,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Invalid value for property “margin-inline”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “margin-block”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “margin-inline”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “margin-block”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -24,26 +24,14 @@
 
 ```json
 {
-  "errors": 5,
+  "errors": 2,
   "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    },
     {
       "message": "Missing ':' in declaration.",
       "severity": "Error"
     },
     {
       "message": "Invalid property name in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
       "severity": "Error"
     }
   ],

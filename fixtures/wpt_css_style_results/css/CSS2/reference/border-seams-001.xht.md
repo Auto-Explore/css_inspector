@@ -24,16 +24,8 @@
 
 ```json
 {
-  "errors": 4,
+  "errors": 2,
   "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
     {
       "message": "Missing ':' in declaration.",
       "severity": "Error"

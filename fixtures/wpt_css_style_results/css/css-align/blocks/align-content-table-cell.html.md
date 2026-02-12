@@ -85,45 +85,8 @@ td:nth-child(2) {
 
 ```json
 {
-  "errors": 8,
-  "messages": [
-    {
-      "message": "Imported style sheets are not checked.",
-      "severity": "Warning"
-    },
-    {
-      "message": "Invalid value for property “align-content”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-content”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-content”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-content”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-content”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-content”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-content”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-content”.",
-      "severity": "Error"
-    }
-  ],
-  "warnings": 1
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
 }
 ```

@@ -28,21 +28,8 @@
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “offset-path”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “offset-anchor”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-radius”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

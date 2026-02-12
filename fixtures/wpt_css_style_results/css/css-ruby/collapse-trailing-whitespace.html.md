@@ -23,21 +23,8 @@ rt { color: orange; }
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “xtext-align”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “xtext-align-last”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

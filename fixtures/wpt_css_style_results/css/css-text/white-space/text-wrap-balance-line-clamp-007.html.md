@@ -46,25 +46,8 @@ div span {
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Unknown property “line-clamp”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-line-clamp”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-box-orient”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

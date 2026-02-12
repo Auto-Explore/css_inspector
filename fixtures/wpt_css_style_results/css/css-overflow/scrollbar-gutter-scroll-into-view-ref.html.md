@@ -39,22 +39,10 @@
 
 ```json
 {
-  "errors": 4,
+  "errors": 1,
   "messages": [
     {
-      "message": "Invalid value for property “scrollbar-gutter”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
-    {
       "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
       "severity": "Error"
     }
   ],

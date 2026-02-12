@@ -37,29 +37,8 @@ rect {
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Invalid value for property “translate”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “transform-origin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “translate”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “transform-origin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “translate”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

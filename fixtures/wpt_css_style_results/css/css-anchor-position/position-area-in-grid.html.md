@@ -45,29 +45,8 @@
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Invalid value for property “grid”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “anchor-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-row-end”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “position-anchor”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

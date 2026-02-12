@@ -104,41 +104,8 @@
 
 ```json
 {
-  "errors": 8,
-  "messages": [
-    {
-      "message": "Invalid value for property “border-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

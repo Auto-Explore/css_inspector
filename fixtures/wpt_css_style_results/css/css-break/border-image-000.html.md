@@ -22,17 +22,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid value for property “border-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-box-decoration-break”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

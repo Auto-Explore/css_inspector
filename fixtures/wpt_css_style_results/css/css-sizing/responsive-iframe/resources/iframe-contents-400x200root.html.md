@@ -24,18 +24,10 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 1,
   "messages": [
     {
       "message": "Unbalanced braces.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border”.",
       "severity": "Error"
     }
   ],

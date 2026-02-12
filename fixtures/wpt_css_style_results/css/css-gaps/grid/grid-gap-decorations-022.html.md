@@ -30,21 +30,8 @@
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “rule-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “rule-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “rule-style”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

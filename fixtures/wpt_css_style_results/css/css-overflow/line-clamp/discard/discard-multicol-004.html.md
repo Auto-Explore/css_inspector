@@ -30,21 +30,8 @@ div {
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “continue”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “block-overflow”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “max-lines”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

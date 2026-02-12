@@ -29,17 +29,8 @@ iframe {
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid value for property “display”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “block-step-size”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

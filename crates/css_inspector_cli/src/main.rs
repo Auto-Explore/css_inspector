@@ -6,7 +6,7 @@ use css_inspector::{
     Config, Message, Report, Severity, StdFetcher, ValidatorError, starts_with_ascii_ci,
 };
 use css_inspector_suite::{
-    WptCssStyleFailureKind, WptCssStyleCheckOptions, check_wpt_css_style_results_tree,
+    WptCssStyleCheckOptions, WptCssStyleFailureKind, check_wpt_css_style_results_tree,
     git_head_commit, workspace_root, write_wpt_css_style_results_tree,
 };
 
@@ -88,8 +88,7 @@ where
             while let Some(arg) = args.next() {
                 match arg.as_str() {
                     "--wpt-root" => {
-                        wpt_root =
-                            PathBuf::from(args.next().ok_or("missing value for --wpt-root")?)
+                        wpt_root = PathBuf::from(args.next().ok_or("missing value for --wpt-root")?)
                     }
                     "--results" => {
                         results_root =
@@ -129,8 +128,12 @@ where
             let wpt_commit = git_head_commit(&wpt_root)?;
 
             if write_results {
-                let summary =
-                    write_wpt_css_style_results_tree(&wpt_root, &wpt_commit, &results_root, &config)?;
+                let summary = write_wpt_css_style_results_tree(
+                    &wpt_root,
+                    &wpt_commit,
+                    &results_root,
+                    &config,
+                )?;
                 writeln!(
                     stderr,
                     "wpt-style wrote {} file(s) / {} style block(s) under {} (wpt_commit={})",
@@ -146,8 +149,13 @@ where
                 id_contains,
                 max_failures,
             };
-            let (summary, failures) =
-                check_wpt_css_style_results_tree(&wpt_root, &wpt_commit, &results_root, &config, options)?;
+            let (summary, failures) = check_wpt_css_style_results_tree(
+                &wpt_root,
+                &wpt_commit,
+                &results_root,
+                &config,
+                options,
+            )?;
 
             writeln!(
                 stderr,
@@ -201,14 +209,14 @@ where
                     }
                 }
             }
-            if strict && (!failures.is_empty() || summary.files_failed != 0 || summary.blocks_failed != 0) {
-                return Err(
-                    format!(
-                        "wpt-style had failures: files_failed={} blocks_failed={}",
-                        summary.files_failed, summary.blocks_failed
-                    )
-                    .into(),
-                );
+            if strict
+                && (!failures.is_empty() || summary.files_failed != 0 || summary.blocks_failed != 0)
+            {
+                return Err(format!(
+                    "wpt-style had failures: files_failed={} blocks_failed={}",
+                    summary.files_failed, summary.blocks_failed
+                )
+                .into());
             }
             Ok(())
         }
@@ -360,7 +368,7 @@ where
                 stderr,
                 "  css_inspector_cli autotest --manifest <path> [--strict] [--allow-network] [--max-failures N] [--id-contains STR] [--print-failures N] [--expected valid|invalid|any]"
             )?;
-            writeln!(stderr, "profiles: css1, css2/css21, css3 (default), css4")?;
+            writeln!(stderr, "profiles: css1, css2/css21, css3, css4 (default)")?;
             Ok(())
         }
     }

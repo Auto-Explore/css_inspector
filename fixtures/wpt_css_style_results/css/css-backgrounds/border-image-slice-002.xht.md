@@ -61,29 +61,8 @@
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-image-slice”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-image-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-image-repeat”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

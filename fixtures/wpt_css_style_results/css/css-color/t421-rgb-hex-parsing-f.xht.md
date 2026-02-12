@@ -23,16 +23,8 @@
 
 ```json
 {
-  "errors": 8,
+  "errors": 6,
   "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “color”.",
       "severity": "Error"

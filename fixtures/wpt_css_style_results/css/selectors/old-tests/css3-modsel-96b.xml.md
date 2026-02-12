@@ -19,25 +19,8 @@ div.test |* { background-color : red }]]>
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Stray declaration outside a rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Stray declaration outside a rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

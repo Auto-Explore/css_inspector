@@ -20,14 +20,10 @@
 
 ```json
 {
-  "errors": 2,
+  "errors": 1,
   "messages": [
     {
       "message": "Invalid property name in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
       "severity": "Error"
     }
   ],

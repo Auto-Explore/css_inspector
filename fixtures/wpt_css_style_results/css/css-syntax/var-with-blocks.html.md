@@ -39,13 +39,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```
@@ -63,13 +58,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```
@@ -90,7 +80,7 @@
   "errors": 1,
   "messages": [
     {
-      "message": "Invalid selector.",
+      "message": "Invalid value for property “color”.",
       "severity": "Error"
     }
   ],
@@ -114,7 +104,7 @@
   "errors": 1,
   "messages": [
     {
-      "message": "Missing ':' in declaration.",
+      "message": "Invalid value for property “color”.",
       "severity": "Error"
     }
   ],
@@ -135,14 +125,10 @@
 
 ```json
 {
-  "errors": 2,
+  "errors": 1,
   "messages": [
     {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
+      "message": "Invalid value for property “color”.",
       "severity": "Error"
     }
   ],
@@ -163,14 +149,10 @@
 
 ```json
 {
-  "errors": 2,
+  "errors": 1,
   "messages": [
     {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
+      "message": "Invalid value for property “color”.",
       "severity": "Error"
     }
   ],
@@ -206,13 +188,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```
@@ -228,13 +205,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```
@@ -250,13 +222,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```
@@ -272,13 +239,8 @@
 
 ```json
 {
-  "errors": 1,
-  "messages": [
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```
@@ -294,17 +256,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```
@@ -320,17 +273,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

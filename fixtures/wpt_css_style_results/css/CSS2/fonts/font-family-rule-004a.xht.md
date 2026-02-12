@@ -84,16 +84,8 @@
 
 ```json
 {
-  "errors": 7,
+  "errors": 5,
   "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “font-family”.",
       "severity": "Error"

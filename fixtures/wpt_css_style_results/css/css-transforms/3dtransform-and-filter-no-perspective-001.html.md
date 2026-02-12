@@ -60,21 +60,8 @@ matrix3d(0.939693, -0.34202, 0, 0, 0.196175, 0.538986, 0.819152, 0, -0.280166, -
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Invalid value for property “transform-origin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “transform”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “filter”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

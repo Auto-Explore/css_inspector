@@ -27,17 +27,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “text-box-trim”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-box-edge”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

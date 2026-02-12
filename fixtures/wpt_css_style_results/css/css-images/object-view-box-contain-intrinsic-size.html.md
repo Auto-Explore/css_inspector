@@ -25,17 +25,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “object-view-box”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “contain-intrinsic-size”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

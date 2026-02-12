@@ -42,29 +42,8 @@
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Invalid value for property “background-size”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-repeat”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-size”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-repeat”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-size”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

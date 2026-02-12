@@ -28,7 +28,7 @@
 
 ```json
 {
-  "errors": 9,
+  "errors": 7,
   "messages": [
     {
       "message": "Unbalanced braces.",
@@ -39,10 +39,6 @@
       "severity": "Error"
     },
     {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
       "message": "Stray declaration outside a rule.",
       "severity": "Error"
     },
@@ -56,10 +52,6 @@
     },
     {
       "message": "Stray declaration outside a rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
       "severity": "Error"
     },
     {

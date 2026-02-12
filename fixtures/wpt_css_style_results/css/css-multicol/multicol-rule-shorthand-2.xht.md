@@ -36,29 +36,8 @@ body>div {
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “column-rule”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “column-rule”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

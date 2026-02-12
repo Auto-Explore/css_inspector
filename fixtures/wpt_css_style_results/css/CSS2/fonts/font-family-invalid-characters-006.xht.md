@@ -29,14 +29,10 @@
 
 ```json
 {
-  "errors": 2,
+  "errors": 1,
   "messages": [
     {
       "message": "Unbalanced braces.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid input.",
       "severity": "Error"
     }
   ],

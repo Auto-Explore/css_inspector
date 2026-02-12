@@ -77,57 +77,8 @@ div {
 
 ```json
 {
-  "errors": 12,
-  "messages": [
-    {
-      "message": "Invalid value for property “border-top-left-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-top-right-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-bottom-right-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-bottom-left-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-block-start-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-block-end-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-block-start-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-block-end-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-inline-start-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-inline-end-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-inline-start-radius”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “border-inline-end-radius”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

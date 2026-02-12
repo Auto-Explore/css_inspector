@@ -39,21 +39,8 @@
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-box-align”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “translate”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-self”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

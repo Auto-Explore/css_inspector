@@ -48,21 +48,8 @@
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “position-try-fallbacks”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “position-try-fallbacks”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

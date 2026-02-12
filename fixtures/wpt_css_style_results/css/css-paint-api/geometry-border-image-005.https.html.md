@@ -26,17 +26,8 @@ html, body { margin: 0; padding: 0; }
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid value for property “border”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-image”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

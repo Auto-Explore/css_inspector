@@ -52,53 +52,8 @@ html::view-transition-old(target) {
 
 ```json
 {
-  "errors": 9,
-  "messages": [
-    {
-      "message": "Unknown property “view-transition-name”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "“overflow-clip-margin” is not supported by Safari.",
-      "severity": "Warning"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "“overflow-clip-margin” is not supported by Safari.",
-      "severity": "Warning"
-    }
-  ],
-  "warnings": 2
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
 }
 ```

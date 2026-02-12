@@ -21,33 +21,8 @@ span.sf { paint-order: stroke fill; }
 
 ```json
 {
-  "errors": 6,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-text-stroke”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “paint-order”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “paint-order”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “paint-order”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “paint-order”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “paint-order”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

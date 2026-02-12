@@ -54,17 +54,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “anchor-scope”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -46,26 +46,10 @@
 
 ```json
 {
-  "errors": 5,
+  "errors": 1,
   "messages": [
     {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
       "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
       "severity": "Error"
     }
   ],

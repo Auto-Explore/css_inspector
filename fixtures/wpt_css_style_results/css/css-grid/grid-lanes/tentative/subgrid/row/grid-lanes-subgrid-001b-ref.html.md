@@ -85,49 +85,8 @@ grid-lanes-track > subgrid {
 
 ```json
 {
-  "errors": 10,
-  "messages": [
-    {
-      "message": "Invalid value for property “gap”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “gap”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-row”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-gap”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-row”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -22,25 +22,8 @@ text {
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Invalid value for property “text-shadow”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “fill”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “stroke”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “stroke-width”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

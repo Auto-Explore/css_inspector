@@ -23,17 +23,8 @@ div > div { margin: .5em; padding: .5em; background: yellow; }
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid value for property “float”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “float”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

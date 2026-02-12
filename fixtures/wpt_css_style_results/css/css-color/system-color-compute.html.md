@@ -59,45 +59,8 @@
 
 ```json
 {
-  "errors": 9,
-  "messages": [
-    {
-      "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-shadow”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “outline-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “fill”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “stroke”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “fill”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “stroke”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

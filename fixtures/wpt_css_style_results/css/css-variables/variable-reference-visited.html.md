@@ -84,41 +84,8 @@
 
 ```json
 {
-  "errors": 8,
-  "messages": [
-    {
-      "message": "Invalid value for property “border”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-inline”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-block”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-decoration”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “column-rule”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “stroke”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “fill”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “fill”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

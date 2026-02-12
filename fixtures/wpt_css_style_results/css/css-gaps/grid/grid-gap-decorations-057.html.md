@@ -34,29 +34,8 @@
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Unknown property “row-rule”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “column-rule”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-rule-visibility-items”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-visibility-items”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -42,18 +42,10 @@
 
 ```json
 {
-  "errors": 5,
+  "errors": 3,
   "messages": [
     {
       "message": "Unbalanced braces.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
       "severity": "Error"
     },
     {

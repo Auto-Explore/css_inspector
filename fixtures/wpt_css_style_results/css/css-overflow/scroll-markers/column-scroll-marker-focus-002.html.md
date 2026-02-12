@@ -44,41 +44,8 @@
 
 ```json
 {
-  "errors": 8,
-  "messages": [
-    {
-      "message": "Unknown property “scroll-marker-group”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-wrap”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-height”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

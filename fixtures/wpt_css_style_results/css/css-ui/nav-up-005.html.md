@@ -32,14 +32,10 @@
 
 ```json
 {
-  "errors": 2,
+  "errors": 1,
   "messages": [
     {
       "message": "Invalid value for property “float”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “margin-up”.",
       "severity": "Error"
     }
   ],

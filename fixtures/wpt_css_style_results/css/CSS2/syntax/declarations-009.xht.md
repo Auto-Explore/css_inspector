@@ -43,26 +43,10 @@
 
 ```json
 {
-  "errors": 6,
+  "errors": 2,
   "messages": [
     {
       "message": "Unbalanced braces.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid property name in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid property name in declaration.",
       "severity": "Error"
     },
     {

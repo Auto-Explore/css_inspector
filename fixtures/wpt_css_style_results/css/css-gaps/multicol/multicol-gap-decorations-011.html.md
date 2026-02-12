@@ -56,49 +56,8 @@
 
 ```json
 {
-  "errors": 10,
-  "messages": [
-    {
-      "message": "Unknown property “column-height”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-style”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-break”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-rule-break”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-rule-inset”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-inset”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-wrap”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

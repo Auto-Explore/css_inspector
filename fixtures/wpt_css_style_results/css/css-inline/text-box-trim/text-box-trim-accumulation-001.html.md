@@ -42,41 +42,8 @@
 
 ```json
 {
-  "errors": 7,
-  "messages": [
-    {
-      "message": "Imported style sheets are not checked.",
-      "severity": "Warning"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-box-trim”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-box-edge”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-box-trim”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-box-edge”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-box-edge”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-box-edge”.",
-      "severity": "Error"
-    }
-  ],
-  "warnings": 1
+  "errors": 0,
+  "messages": [],
+  "warnings": 0
 }
 ```

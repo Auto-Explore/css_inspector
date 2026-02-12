@@ -32,29 +32,8 @@ svg {
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Unknown property “stroke-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “stroke-dasharray”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “stroke-dashoffset”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “stroke”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “fill”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

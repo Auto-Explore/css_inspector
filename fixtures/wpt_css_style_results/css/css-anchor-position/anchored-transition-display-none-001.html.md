@@ -22,17 +22,8 @@ div {
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “position-area”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “transition-behavior”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -33,33 +33,8 @@ ol {
 
 ```json
 {
-  "errors": 6,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-text-emphasis”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-emphasis”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-text-emphasis-style”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-text-emphasis-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-text-emphasis-position”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-emphasis-position”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

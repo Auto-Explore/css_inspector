@@ -44,17 +44,8 @@ p:dir(rtl) {
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “text-decoration-inset”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-indent”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -56,41 +56,8 @@
 
 ```json
 {
-  "errors": 8,
-  "messages": [
-    {
-      "message": "Invalid value for property “text-combine-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-combine-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-combine-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-combine-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-combine-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-combine-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-combine-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-combine-upright”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

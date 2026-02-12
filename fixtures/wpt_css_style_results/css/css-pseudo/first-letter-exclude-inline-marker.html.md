@@ -21,17 +21,8 @@ ibo { display:inline flow-root list-item; list-style-position: outside; }
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid value for property “display”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “display”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

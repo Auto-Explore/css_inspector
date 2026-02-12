@@ -61,21 +61,8 @@
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “shape-outside”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “shape-margin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “shape-image-threshold”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

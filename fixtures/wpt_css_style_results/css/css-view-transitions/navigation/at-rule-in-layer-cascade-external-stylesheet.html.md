@@ -32,13 +32,8 @@
 ```json
 {
   "errors": 0,
-  "messages": [
-    {
-      "message": "Imported style sheets are not checked.",
-      "severity": "Warning"
-    }
-  ],
-  "warnings": 1
+  "messages": [],
+  "warnings": 0
 }
 ```
 
@@ -52,13 +47,8 @@
 ```json
 {
   "errors": 0,
-  "messages": [
-    {
-      "message": "Imported style sheets are not checked.",
-      "severity": "Warning"
-    }
-  ],
-  "warnings": 1
+  "messages": [],
+  "warnings": 0
 }
 ```
 
@@ -72,12 +62,7 @@
 ```json
 {
   "errors": 0,
-  "messages": [
-    {
-      "message": "Imported style sheets are not checked.",
-      "severity": "Warning"
-    }
-  ],
-  "warnings": 1
+  "messages": [],
+  "warnings": 0
 }
 ```

@@ -31,25 +31,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Unknown property “polar-origin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “polar-anchor”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “polar-distance”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “polar-angle”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

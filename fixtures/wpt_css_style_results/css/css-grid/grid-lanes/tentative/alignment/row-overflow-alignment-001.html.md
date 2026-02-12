@@ -41,41 +41,8 @@
 
 ```json
 {
-  "errors": 8,
-  "messages": [
-    {
-      "message": "Unknown property “grid-lanes-direction”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “flow-tolerance”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-items”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-self”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “align-self”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

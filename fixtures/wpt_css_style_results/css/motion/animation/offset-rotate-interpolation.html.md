@@ -31,17 +31,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “offset-rotate”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “offset-rotate”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

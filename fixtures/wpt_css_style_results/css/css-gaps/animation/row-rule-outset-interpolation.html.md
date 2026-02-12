@@ -36,57 +36,8 @@
 
 ```json
 {
-  "errors": 12,
-  "messages": [
-    {
-      "message": "Unknown property “row-rule-style”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-edge-inset-start”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-edge-inset-end”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-interior-inset-start”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-interior-inset-end”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “column-rule”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-break”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-edge-inset-start”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-edge-inset-end”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-interior-inset-start”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-interior-inset-end”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

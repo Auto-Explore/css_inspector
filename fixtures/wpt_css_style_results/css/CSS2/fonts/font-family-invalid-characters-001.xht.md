@@ -94,20 +94,8 @@
 
 ```json
 {
-  "errors": 4,
+  "errors": 1,
   "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
     {
       "message": "Missing ':' in declaration.",
       "severity": "Error"

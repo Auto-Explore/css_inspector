@@ -30,46 +30,10 @@
 
 ```json
 {
-  "errors": 10,
+  "errors": 1,
   "messages": [
     {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “rotation”.",
-      "severity": "Error"
-    },
-    {
       "message": "Invalid value for property “color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “rotation-code”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “rotation-code”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “rotation-code”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “rotation-code”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “rotation-code”.",
       "severity": "Error"
     }
   ],

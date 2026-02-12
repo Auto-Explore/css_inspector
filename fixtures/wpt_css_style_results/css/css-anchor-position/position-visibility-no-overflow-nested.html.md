@@ -36,17 +36,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “position-visibility”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “position-visibility”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -22,21 +22,8 @@
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-writing-mode”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-writing-mode”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “animation”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

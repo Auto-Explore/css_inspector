@@ -21,12 +21,7 @@
 ```json
 {
   "errors": 0,
-  "messages": [
-    {
-      "message": "“overflow-clip-margin” is not supported by Safari.",
-      "severity": "Warning"
-    }
-  ],
-  "warnings": 1
+  "messages": [],
+  "warnings": 0
 }
 ```

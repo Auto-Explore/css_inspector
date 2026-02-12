@@ -53,25 +53,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Unknown property “contain-intrinsic-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “contain-intrinsic-height”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “contain-intrinsic-size”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “columns”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -22,25 +22,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Invalid value for property “background-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-indent”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-indent”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-indent”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

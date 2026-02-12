@@ -21,10 +21,6 @@
   "errors": 6,
   "messages": [
     {
-      "message": "Imported style sheets are not checked.",
-      "severity": "Warning"
-    },
-    {
       "message": "Stray declaration outside a rule.",
       "severity": "Error"
     },
@@ -49,6 +45,6 @@
       "severity": "Error"
     }
   ],
-  "warnings": 1
+  "warnings": 0
 }
 ```

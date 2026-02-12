@@ -31,17 +31,8 @@ item {
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Unknown property “margin-trim”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “margin-block”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

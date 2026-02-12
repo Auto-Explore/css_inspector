@@ -147,26 +147,10 @@
 
 ```json
 {
-  "errors": 5,
+  "errors": 1,
   "messages": [
     {
       "message": "Unbalanced braces.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
       "severity": "Error"
     }
   ],

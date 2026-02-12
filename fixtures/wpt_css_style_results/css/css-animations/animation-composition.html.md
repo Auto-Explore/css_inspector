@@ -49,41 +49,8 @@
 
 ```json
 {
-  "errors": 8,
-  "messages": [
-    {
-      "message": "Invalid value for property “filter”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “filter”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “filter”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “animation”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “filter”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “animation-composition”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “animation-composition”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “animation-composition”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

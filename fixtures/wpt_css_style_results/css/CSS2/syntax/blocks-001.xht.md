@@ -37,12 +37,8 @@
 
 ```json
 {
-  "errors": 5,
+  "errors": 4,
   "messages": [
-    {
-      "message": "Unbalanced braces.",
-      "severity": "Error"
-    },
     {
       "message": "Unbalanced braces.",
       "severity": "Error"

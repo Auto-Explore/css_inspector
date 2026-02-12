@@ -18,21 +18,8 @@ div.stub *|*:not([test="1"]) { color : lime }]]>
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Stray declaration outside a rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Stray declaration outside a rule.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

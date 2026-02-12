@@ -29,14 +29,10 @@
 
 ```json
 {
-  "errors": 2,
+  "errors": 1,
   "messages": [
     {
       "message": "Missing ':' in declaration.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “font-variation-settings”.",
       "severity": "Error"
     }
   ],

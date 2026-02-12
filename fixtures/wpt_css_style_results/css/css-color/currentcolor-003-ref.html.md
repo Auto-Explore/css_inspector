@@ -36,29 +36,8 @@
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-box-decoration-break”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-size”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “text-shadow”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “filter”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

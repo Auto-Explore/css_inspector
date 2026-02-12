@@ -40,53 +40,8 @@
 
 ```json
 {
-  "errors": 11,
-  "messages": [
-    {
-      "message": "Unknown property “row-rule”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-break”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-interior-inset-start”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “row-rule-interior-inset-end”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “column-rule”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-rule-break”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-rule-interior-inset-start”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-rule-interior-inset-end”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-rule-edge-inset-start”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “column-rule-edge-inset-end”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

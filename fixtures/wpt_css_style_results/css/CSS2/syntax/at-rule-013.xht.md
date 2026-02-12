@@ -59,7 +59,7 @@
 
 ```json
 {
-  "errors": 7,
+  "errors": 3,
   "messages": [
     {
       "message": "Unbalanced braces.",
@@ -71,22 +71,6 @@
     },
     {
       "message": "Unbalanced braces.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid input.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown at-rule.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid selector.",
       "severity": "Error"
     }
   ],

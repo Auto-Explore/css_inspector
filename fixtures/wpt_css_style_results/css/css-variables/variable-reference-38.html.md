@@ -18,17 +18,8 @@ p { padding-left: 1em; }
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid value for property “border-style”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-style”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

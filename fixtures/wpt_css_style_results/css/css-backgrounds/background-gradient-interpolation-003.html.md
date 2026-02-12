@@ -44,29 +44,8 @@
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Missing value for property “--space”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-background-clip”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-webkit-text-fill-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-fill-color”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

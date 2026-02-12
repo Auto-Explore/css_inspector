@@ -52,16 +52,8 @@
 
 ```json
 {
-  "errors": 11,
+  "errors": 9,
   "messages": [
-    {
-      "message": "Invalid value for property “border”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “list-style”.",
-      "severity": "Error"
-    },
     {
       "message": "Invalid value for property “list-style”.",
       "severity": "Error"

@@ -209,73 +209,8 @@
 
 ```json
 {
-  "errors": 16,
-  "messages": [
-    {
-      "message": "Unknown property “animation-composition”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “animation-composition”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “animation-composition”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “animation-composition”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “animation-composition”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “animation-composition”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “animation-composition”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “animation-composition”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “animation-composition”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “animation-composition”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “animation-composition”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “animation-composition”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “filter”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “filter”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “filter”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background-size”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

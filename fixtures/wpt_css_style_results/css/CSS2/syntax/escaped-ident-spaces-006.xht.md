@@ -23,7 +23,7 @@
   "errors": 1,
   "messages": [
     {
-      "message": "Invalid property name in declaration.",
+      "message": "Invalid value for property “color”.",
       "severity": "Error"
     }
   ],

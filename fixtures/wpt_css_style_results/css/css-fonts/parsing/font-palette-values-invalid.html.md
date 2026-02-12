@@ -152,7 +152,7 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 2,
   "messages": [
     {
       "message": "Missing value for property “base-palette”.",
@@ -160,10 +160,6 @@
     },
     {
       "message": "Missing value for property “override-colors”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “override-color”.",
       "severity": "Error"
     }
   ],

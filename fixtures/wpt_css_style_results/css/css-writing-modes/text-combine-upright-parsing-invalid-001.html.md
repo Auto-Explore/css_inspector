@@ -74,69 +74,8 @@
 
 ```json
 {
-  "errors": 15,
-  "messages": [
-    {
-      "message": "Unknown property “text-decoration-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-upright”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “text-decoration-upright”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

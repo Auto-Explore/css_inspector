@@ -20,17 +20,8 @@
 
 ```json
 {
-  "errors": 2,
-  "messages": [
-    {
-      "message": "Invalid value for property “text-indent”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “caret-animation”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

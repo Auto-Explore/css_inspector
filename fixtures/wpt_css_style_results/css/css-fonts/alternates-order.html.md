@@ -121,21 +121,8 @@ div { margin: 0 20px; }
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “-moz-font-feature-settings”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “font-feature-settings”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “-moz-font-feature-settings”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

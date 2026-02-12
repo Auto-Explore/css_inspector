@@ -38,18 +38,10 @@ body {
 
 ```json
 {
-  "errors": 3,
+  "errors": 1,
   "messages": [
     {
-      "message": "Invalid value for property “scroll-snap-type”.",
-      "severity": "Error"
-    },
-    {
       "message": "Invalid value for property “font”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border”.",
       "severity": "Error"
     }
   ],

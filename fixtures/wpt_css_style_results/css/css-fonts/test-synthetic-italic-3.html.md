@@ -57,25 +57,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Unknown property “-webkit-text-orientation”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “font-style”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “transform”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “transform”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

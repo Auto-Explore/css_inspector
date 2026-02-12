@@ -50,21 +50,8 @@
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “corner-shape”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “corner-shape”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “corner-shape”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

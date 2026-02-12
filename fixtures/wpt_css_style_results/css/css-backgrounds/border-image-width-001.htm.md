@@ -75,25 +75,8 @@
 
 ```json
 {
-  "errors": 4,
-  "messages": [
-    {
-      "message": "Invalid value for property “border-image-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-image-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-image-width”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-image-slice”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

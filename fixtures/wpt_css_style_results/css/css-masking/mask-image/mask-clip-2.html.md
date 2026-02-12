@@ -40,37 +40,8 @@
 
 ```json
 {
-  "errors": 7,
-  "messages": [
-    {
-      "message": "Unknown property “fill”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-origin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-repeat”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-clip”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-clip”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-clip”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

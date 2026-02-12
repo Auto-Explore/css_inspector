@@ -50,37 +50,8 @@
 
 ```json
 {
-  "errors": 7,
-  "messages": [
-    {
-      "message": "Unknown property “math-depth”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “math-depth”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “math-depth”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “math-depth”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “math-depth”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “math-depth”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “math-depth”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

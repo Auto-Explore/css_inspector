@@ -12,9 +12,9 @@ pub use wpt_style::{
     WptCssStyleCheckOptions, WptCssStyleCheckSummary, WptCssStyleFailure, WptCssStyleFailureKind,
     WptCssStyleFileResults, WptCssStyleResultsMeta, WptCssStyleWriteSummary,
     check_wpt_css_style_results_tree, extract_style_blocks, git_head_commit,
-    load_wpt_css_style_results_meta, write_wpt_css_style_file_results_atomic,
+    load_wpt_css_style_results_meta, wpt_css_style_results_file_path,
+    wpt_css_style_results_meta_path, write_wpt_css_style_file_results_atomic,
     write_wpt_css_style_results_meta_atomic, write_wpt_css_style_results_tree,
-    wpt_css_style_results_file_path, wpt_css_style_results_meta_path,
 };
 
 #[derive(Debug, Error)]

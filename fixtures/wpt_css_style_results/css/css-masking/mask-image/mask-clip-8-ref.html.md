@@ -51,29 +51,8 @@
 
 ```json
 {
-  "errors": 5,
-  "messages": [
-    {
-      "message": "Unknown property “mask-size”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-image”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-origin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-origin”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “mask-origin”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

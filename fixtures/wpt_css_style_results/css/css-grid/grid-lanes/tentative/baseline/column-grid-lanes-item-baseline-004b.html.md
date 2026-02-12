@@ -114,69 +114,8 @@
 
 ```json
 {
-  "errors": 15,
-  "messages": [
-    {
-      "message": "Unknown property “grid-lanes-pack”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “border-color”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “justify-items”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “justify-items”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “justify-items”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “grid-column”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

@@ -32,21 +32,8 @@ rect {
 
 ```json
 {
-  "errors": 3,
-  "messages": [
-    {
-      "message": "Unknown property “fill”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “pointer-events”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Unknown property “pointer-events”.",
-      "severity": "Error"
-    }
-  ],
+  "errors": 0,
+  "messages": [],
   "warnings": 0
 }
 ```

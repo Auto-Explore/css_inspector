@@ -55,10 +55,21 @@ pub struct WptCssStyleCheckSummary {
 pub enum WptCssStyleFailureKind {
     MissingResultsFile,
     UnexpectedResultsFile,
-    InvalidResultsFile { message: String },
-    StyleBlockCountMismatch { wpt: usize, stored: usize },
-    StyleTextMismatch { expected_len: usize, actual_len: usize },
-    ReportMismatch { expected: Value, actual: Value },
+    InvalidResultsFile {
+        message: String,
+    },
+    StyleBlockCountMismatch {
+        wpt: usize,
+        stored: usize,
+    },
+    StyleTextMismatch {
+        expected_len: usize,
+        actual_len: usize,
+    },
+    ReportMismatch {
+        expected: Value,
+        actual: Value,
+    },
 }
 
 #[derive(Clone, Debug, PartialEq)]
@@ -915,10 +926,7 @@ fn collect_markup_files_rec(
         if !ft.is_file() || !is_markup_file(&path) {
             continue;
         }
-        let rel = path
-            .strip_prefix(wpt_root)
-            .unwrap_or(&path)
-            .to_path_buf();
+        let rel = path.strip_prefix(wpt_root).unwrap_or(&path).to_path_buf();
         out.push((path_to_slash(&rel), path));
     }
     Ok(())
@@ -972,10 +980,10 @@ fn find_ascii_ci(haystack: &[u8], needle: &[u8], from: usize) -> Option<usize> {
 #[cfg(test)]
 mod tests {
     use super::{
-        WptCssStyleBlockResult, WptCssStyleFileResults, WptCssStyleResultsMeta, ensure_trailing_newline,
-        extract_style_blocks, find_ascii_ci, parse_file_results_markdown, parse_results_meta_markdown,
-        render_file_results_markdown, render_results_meta_markdown, safe_rel_path_from_slash,
-        suite_config_from_validator_config, wpt_style_id,
+        WptCssStyleBlockResult, WptCssStyleFileResults, WptCssStyleResultsMeta,
+        ensure_trailing_newline, extract_style_blocks, find_ascii_ci, parse_file_results_markdown,
+        parse_results_meta_markdown, render_file_results_markdown, render_results_meta_markdown,
+        safe_rel_path_from_slash, suite_config_from_validator_config, wpt_style_id,
     };
     use css_inspector::Config as ValidatorConfig;
     use serde_json::json;
@@ -988,7 +996,10 @@ mod tests {
     #[test]
     fn extract_style_blocks_extracts_multiple_blocks() {
         let html = "<style>a{}</style><div></div><STYLE>b{}</STYLE>";
-        assert_eq!(extract_style_blocks(html), vec!["a{}".to_string(), "b{}".to_string()]);
+        assert_eq!(
+            extract_style_blocks(html),
+            vec!["a{}".to_string(), "b{}".to_string()]
+        );
     }
 
     #[test]
