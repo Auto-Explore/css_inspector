@@ -2,7 +2,7 @@ use std::borrow::Cow;
 
 use crate::known_properties::KnownProperties;
 use crate::report::{Report, push_error};
-use crate::strutil::{ascii_lowercase_cow, ends_with_ascii_ci, step_string_state};
+use crate::strutil::{ascii_lowercase_cow, ends_with_ascii_ci, skip_css_escape, step_string_state};
 
 pub(super) fn iter_declaration_statements_skipping_nested_blocks<'a, 'b>(
     block: &'a str,
@@ -23,6 +23,7 @@ where
     let mut in_string: Option<u8> = None;
     let mut escape = false;
     let mut paren_depth: usize = 0;
+    let mut bracket_depth: usize = 0;
     let mut value_brace_depth: usize = 0;
 
     std::iter::from_fn(move || {
@@ -30,6 +31,12 @@ where
             let b = bytes[i];
             if step_string_state(b, &mut in_string, &mut escape) {
                 i += 1;
+                continue;
+            }
+            if b == b'\\' {
+                // Skip CSS escapes outside strings so escaped semicolons/brackets stay within a
+                // single statement (and whitespace terminators after hex escapes don't split).
+                skip_css_escape(bytes, &mut i);
                 continue;
             }
 
@@ -42,14 +49,22 @@ where
                     paren_depth = paren_depth.saturating_sub(1);
                     i += 1;
                 }
-                b';' if paren_depth == 0 && value_brace_depth == 0 => {
+                b'[' => {
+                    bracket_depth += 1;
+                    i += 1;
+                }
+                b']' => {
+                    bracket_depth = bracket_depth.saturating_sub(1);
+                    i += 1;
+                }
+                b';' if paren_depth == 0 && bracket_depth == 0 && value_brace_depth == 0 => {
                     let end = i;
                     i += 1;
                     let raw = &block[stmt_start..end];
                     stmt_start = i;
                     return Some(raw);
                 }
-                b'{' if paren_depth == 0 => {
+                b'{' if paren_depth == 0 && bracket_depth == 0 => {
                     if value_brace_depth > 0 {
                         value_brace_depth += 1;
                         i += 1;
@@ -72,6 +87,10 @@ where
                             i += 1;
                             continue;
                         }
+                        if bi == b'\\' {
+                            skip_css_escape(bytes, &mut i);
+                            continue;
+                        }
                         match bi {
                             b'{' => depth += 1,
                             b'}' => {
@@ -87,7 +106,7 @@ where
                     }
                     stmt_start = i;
                 }
-                b'}' if paren_depth == 0 && value_brace_depth > 0 => {
+                b'}' if paren_depth == 0 && bracket_depth == 0 && value_brace_depth > 0 => {
                     value_brace_depth = value_brace_depth.saturating_sub(1);
                     i += 1;
                 }
@@ -162,10 +181,12 @@ pub(super) fn is_vendor_extension_property(prop: &str) -> bool {
 }
 
 pub(super) fn find_embedded_declaration_start(value: &str) -> Option<usize> {
-    // Look for `<whitespace><ident>:\u{20}` at top-level (not in strings/parentheses).
+    // Look for `<whitespace><ident>:\u{20}` at top-level.
     let bytes = value.as_bytes();
     let mut i = 0usize;
     let mut paren_depth: usize = 0;
+    let mut bracket_depth: usize = 0;
+    let mut brace_depth: usize = 0;
     let mut in_string: Option<u8> = None;
     let mut escape = false;
 
@@ -173,6 +194,10 @@ pub(super) fn find_embedded_declaration_start(value: &str) -> Option<usize> {
         let b = bytes[i];
         if step_string_state(b, &mut in_string, &mut escape) {
             i += 1;
+            continue;
+        }
+        if b == b'\\' {
+            skip_css_escape(bytes, &mut i);
             continue;
         }
 
@@ -183,7 +208,19 @@ pub(super) fn find_embedded_declaration_start(value: &str) -> Option<usize> {
             b')' => {
                 paren_depth = paren_depth.saturating_sub(1);
             }
-            b':' if paren_depth == 0 => {
+            b'[' => {
+                bracket_depth += 1;
+            }
+            b']' => {
+                bracket_depth = bracket_depth.saturating_sub(1);
+            }
+            b'{' => {
+                brace_depth += 1;
+            }
+            b'}' => {
+                brace_depth = brace_depth.saturating_sub(1);
+            }
+            b':' if paren_depth == 0 && bracket_depth == 0 && brace_depth == 0 => {
                 if i + 1 >= bytes.len() || !bytes[i + 1].is_ascii_whitespace() {
                     i += 1;
                     continue;
@@ -306,6 +343,13 @@ pub(super) fn split_top_level_value_tokens(value: &str) -> Vec<&str> {
                 start.get_or_insert(i);
             }
             i += 1;
+            continue;
+        }
+        if b == b'\\' {
+            // Skip CSS escapes outside strings so escaped commas/spaces stay within a single
+            // token, and whitespace terminators after hex escapes don't split.
+            start.get_or_insert(i);
+            skip_css_escape(bytes, &mut i);
             continue;
         }
 

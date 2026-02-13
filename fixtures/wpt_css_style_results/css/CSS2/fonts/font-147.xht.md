@@ -53,10 +53,38 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 10,
   "messages": [
     {
       "message": "Unbalanced braces.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font”.",
       "severity": "Error"
     },
     {

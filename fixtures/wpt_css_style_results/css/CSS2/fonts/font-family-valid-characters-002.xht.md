@@ -60,8 +60,25 @@
 
 ```json
 {
-  "errors": 0,
-  "messages": [],
+  "errors": 4,
+  "messages": [
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    }
+  ],
   "warnings": 0
 }
 ```

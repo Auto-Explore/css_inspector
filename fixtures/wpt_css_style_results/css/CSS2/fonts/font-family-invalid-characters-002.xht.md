@@ -42,10 +42,14 @@
 
 ```json
 {
-  "errors": 3,
+  "errors": 4,
   "messages": [
     {
       "message": "Unbalanced braces.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
       "severity": "Error"
     },
     {

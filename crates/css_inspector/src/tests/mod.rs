@@ -90,7 +90,9 @@ fn contains_invalid_top_level_chars_ignores_strings() {
 
 #[test]
 fn contains_invalid_top_level_chars_allows_css_type_annotations() {
-    assert!(!contains_invalid_top_level_chars(r#"@function foo(<ident>) {}"#));
+    assert!(!contains_invalid_top_level_chars(
+        r#"@function foo(<ident>) {}"#
+    ));
     assert!(!contains_invalid_top_level_chars(
         r#"#div { --prop: attr(data-foo type(<ident>)); }"#
     ));

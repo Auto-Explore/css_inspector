@@ -117,7 +117,10 @@ fn is_xmlish_markup_rel(path: &str) -> bool {
     let Some((_, ext)) = path.rsplit_once('.') else {
         return false;
     };
-    matches!(ext.to_ascii_lowercase().as_str(), "xhtml" | "xht" | "xml" | "svg")
+    matches!(
+        ext.to_ascii_lowercase().as_str(),
+        "xhtml" | "xht" | "xml" | "svg"
+    )
 }
 
 fn strip_xml_comments_if_applicable(css: &str) -> String {
@@ -244,7 +247,8 @@ pub fn write_wpt_css_style_results_tree(
         let mut styles: Vec<WptCssStyleBlockResult> = Vec::with_capacity(blocks.len());
         for (idx, mut css) in blocks.into_iter().enumerate() {
             ensure_trailing_newline(&mut css);
-            let report = report_from_validator_result(css_inspector::validate_css_text(&css, config));
+            let report =
+                report_from_validator_result(css_inspector::validate_css_text(&css, config));
             totals.errors += report.errors;
             totals.warnings += report.warnings;
             styles.push(WptCssStyleBlockResult {
@@ -942,6 +946,11 @@ pub fn extract_style_blocks(document: &str) -> Vec<String> {
         matches!(b, None | Some(b'>' | b'/' | b'\t' | b'\n' | b'\r' | b' '))
     }
 
+    fn is_pure_template_placeholder(css: &str) -> bool {
+        let t = css.trim();
+        t.starts_with("${") && t.ends_with('}') && t.len() >= 3
+    }
+
     fn starts_with_ascii_ci(bytes: &[u8], at: usize, needle: &[u8]) -> bool {
         bytes.get(at..at + needle.len()).is_some_and(|h| {
             h.iter()
@@ -994,7 +1003,13 @@ pub fn extract_style_blocks(document: &str) -> Vec<String> {
             let Some(close_start) = find_ascii_ci(bytes, b"</style", content_start) else {
                 break;
             };
-            out.push(text[content_start..close_start].to_string());
+            let content = &text[content_start..close_start];
+            // When extracting `<style>` blocks embedded in `<script>` strings, ignore template
+            // placeholders like `<style>${styleText}</style>`, where the actual stylesheet is
+            // computed at runtime and not present in the static markup.
+            if !is_pure_template_placeholder(content) {
+                out.push(content.to_string());
+            }
 
             let Some(close_end) = find_tag_end(bytes, close_start + 7) else {
                 break;
@@ -1214,6 +1229,12 @@ mod tests {
     fn extract_style_blocks_extracts_style_blocks_embedded_in_scripts() {
         let html = r#"<script>const x = `<style>a{}</style>`;</script>"#;
         assert_eq!(extract_style_blocks(html), vec!["a{}".to_string()]);
+    }
+
+    #[test]
+    fn extract_style_blocks_ignores_placeholder_style_blocks_embedded_in_scripts() {
+        let html = r#"<script>iframe.srcdoc = `<style>${styleText}</style>`;</script>"#;
+        assert!(extract_style_blocks(html).is_empty());
     }
 
     #[test]

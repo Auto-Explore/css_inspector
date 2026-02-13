@@ -90,6 +90,18 @@ background-color:red;
             ]
         );
     }
+
+    #[test]
+    fn does_not_split_on_semicolons_inside_brackets() {
+        let block = r#"
+color: [;] var(--a);
+background-color: red;
+"#;
+        assert_eq!(
+            collect_trimmed_statements(block),
+            vec!["color: [;] var(--a)", "background-color: red"]
+        );
+    }
 }
 
 mod declaration_validation_tests {
@@ -479,6 +491,14 @@ mod split_top_level_value_tokens_tests {
     }
 
     #[test]
+    fn does_not_split_on_hex_escape_whitespace_terminators() {
+        assert_eq!(
+            split_top_level_value_tokens(r"\67 \72 \65 \65 \6E"),
+            vec![r"\67 \72 \65 \65 \6E"]
+        );
+    }
+
+    #[test]
     fn splits_on_commas_outside_parentheses() {
         assert_eq!(
             split_top_level_value_tokens("func(a, b), c"),
@@ -700,7 +720,11 @@ mod validate_voice_family_tests {
 
     #[test]
     fn accepts_generic_voice_with_integer_index() {
-        for tokens in [&["female", "1"][..], &["male", "2"][..], &["\"alice\"", "3"][..]] {
+        for tokens in [
+            &["female", "1"][..],
+            &["male", "2"][..],
+            &["\"alice\"", "3"][..],
+        ] {
             let mut report = Report::default();
             validate_voice_family(tokens, &mut report);
             assert_eq!(report.errors, 0, "{tokens:?}: {report:?}");

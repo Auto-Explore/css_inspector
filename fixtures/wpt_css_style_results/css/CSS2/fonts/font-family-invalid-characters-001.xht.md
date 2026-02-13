@@ -94,10 +94,82 @@
 
 ```json
 {
-  "errors": 1,
+  "errors": 19,
   "messages": [
     {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
       "message": "Missing ':' in declaration.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
+    {
+      "message": "Invalid value for property “font-family”.",
       "severity": "Error"
     }
   ],

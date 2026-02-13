@@ -237,6 +237,51 @@ pub(crate) fn step_string_state(b: u8, in_string: &mut Option<u8>, escape: &mut 
     }
 }
 
+pub(crate) fn skip_css_escape(bytes: &[u8], i: &mut usize) {
+    // CSS escapes:
+    // - `\\` followed by a newline (line continuation, consumed)
+    // - `\\` followed by 1-6 hex digits (optionally followed by a single whitespace terminator)
+    // - `\\` followed by any single character
+    //
+    // `*i` is expected to point at the backslash.
+    debug_assert_eq!(bytes.get(*i), Some(&b'\\'));
+
+    *i += 1;
+    let Some(&b2) = bytes.get(*i) else {
+        return;
+    };
+
+    // Line continuation escape (`\\\n` etc).
+    if matches!(b2, b'\n' | b'\r' | b'\x0C') {
+        if b2 == b'\r' && bytes.get(*i + 1) == Some(&b'\n') {
+            *i += 2;
+        } else {
+            *i += 1;
+        }
+        return;
+    }
+
+    // Hex escape.
+    if b2.is_ascii_hexdigit() {
+        let mut digits = 0usize;
+        while *i < bytes.len() && digits < 6 && bytes[*i].is_ascii_hexdigit() {
+            *i += 1;
+            digits += 1;
+        }
+        if *i < bytes.len() && bytes[*i].is_ascii_whitespace() {
+            if bytes[*i] == b'\r' && bytes.get(*i + 1) == Some(&b'\n') {
+                *i += 2;
+            } else {
+                *i += 1;
+            }
+        }
+        return;
+    }
+
+    // Single-character escape.
+    *i += 1;
+}
+
 #[cfg(test)]
 mod step_string_state_tests {
     use super::step_string_state;

@@ -227,21 +227,30 @@ pub(super) fn is_length_token(t: &str) -> bool {
 
     // Minimal length: `<number><unit>` with common units.
     let (num, unit) = split_number_and_unit(t);
-    num.is_some()
-        && matches!(
-            unit,
-            // Absolute.
-            "px" | "pt" | "pc" | "cm" | "mm" | "in" | "q"
-            // Font-relative.
-            | "em" | "rem" | "ex" | "ch" | "lh" | "rlh"
-            // Viewport-relative.
-            | "vw" | "vh" | "vi" | "vb" | "vmin" | "vmax"
-            | "svw" | "svh" | "svi" | "svb" | "svmin" | "svmax"
-            | "lvw" | "lvh" | "lvi" | "lvb" | "lvmin" | "lvmax"
-            | "dvw" | "dvh" | "dvi" | "dvb" | "dvmin" | "dvmax"
-            // Container query.
-            | "cqw" | "cqh" | "cqi" | "cqb" | "cqmin" | "cqmax"
-        )
+    let Some(num) = num else {
+        return false;
+    };
+
+    // CSS allows unitless zeros for lengths (including signed/decimal zeros like `-0`, `+0`,
+    // `0.0`, etc).
+    if unit.is_empty() {
+        return num == 0.0;
+    }
+
+    matches!(
+        unit,
+        // Absolute.
+        "px" | "pt" | "pc" | "cm" | "mm" | "in" | "q"
+        // Font-relative.
+        | "em" | "rem" | "ex" | "ch" | "lh" | "rlh"
+        // Viewport-relative.
+        | "vw" | "vh" | "vi" | "vb" | "vmin" | "vmax"
+        | "svw" | "svh" | "svi" | "svb" | "svmin" | "svmax"
+        | "lvw" | "lvh" | "lvi" | "lvb" | "lvmin" | "lvmax"
+        | "dvw" | "dvh" | "dvi" | "dvb" | "dvmin" | "dvmax"
+        // Container query.
+        | "cqw" | "cqh" | "cqi" | "cqb" | "cqmin" | "cqmax"
+    )
 }
 
 pub(super) fn is_border_style_token(t: &str) -> bool {

@@ -43,7 +43,7 @@ use colors::{
 };
 #[cfg(test)]
 use colors::{is_valid_hsl_like_function, is_valid_rgb_like_function};
-use fonts::{validate_font, validate_font_optical_sizing};
+use fonts::{validate_font, validate_font_family, validate_font_optical_sizing};
 use grid::validate_grid_template_tracks;
 #[cfg(test)]
 use misc::{is_css_identifier_token, is_integer_token};
@@ -290,7 +290,12 @@ impl DeclValidator<'_> {
             push_error(self.report, format!("Missing value for property “{prop}”."));
             return;
         }
-        if !is_custom_property && has_css_wide_keyword_mixed(&tokens) {
+        let skip_css_wide_keyword_mixed =
+            !is_custom_property && self.css4_profile && matches!(prop, "font" | "font-family");
+        if !skip_css_wide_keyword_mixed
+            && !is_custom_property
+            && has_css_wide_keyword_mixed(&tokens)
+        {
             push_error(self.report, format!("Invalid value for property “{prop}”."));
             return;
         }
@@ -431,7 +436,8 @@ impl DeclValidator<'_> {
                     validate_max_tokens(tokens.as_slice(), 2, "background-position", self.report)
                 }
             }
-            "font" => validate_font(tokens.as_slice(), self.css4_profile, self.report),
+            "font" => validate_font(value, self.css4_profile, self.report),
+            "font-family" => validate_font_family(value, self.css4_profile, self.report),
             "font-optical-sizing" => validate_font_optical_sizing(tokens.as_slice(), self.report),
             "border" => validate_border_shorthand(
                 tokens.as_slice(),

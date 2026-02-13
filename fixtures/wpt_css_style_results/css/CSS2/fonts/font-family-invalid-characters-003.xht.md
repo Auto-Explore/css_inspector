@@ -54,14 +54,10 @@
 
 ```json
 {
-  "errors": 6,
+  "errors": 3,
   "messages": [
     {
       "message": "Unbalanced braces.",
-      "severity": "Error"
-    },
-    {
-      "message": "Missing ';' between declarations.",
       "severity": "Error"
     },
     {
@@ -69,15 +65,7 @@
       "severity": "Error"
     },
     {
-      "message": "Missing ';' between declarations.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
-      "severity": "Error"
-    },
-    {
-      "message": "Invalid value for property “background”.",
+      "message": "Invalid value for property “font-family”.",
       "severity": "Error"
     }
   ],

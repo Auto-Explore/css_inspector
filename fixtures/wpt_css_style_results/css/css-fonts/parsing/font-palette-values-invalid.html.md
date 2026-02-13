@@ -152,8 +152,12 @@
 
 ```json
 {
-  "errors": 2,
+  "errors": 3,
   "messages": [
+    {
+      "message": "Invalid value for property “font-family”.",
+      "severity": "Error"
+    },
     {
       "message": "Missing value for property “base-palette”.",
       "severity": "Error"
