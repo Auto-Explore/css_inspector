@@ -361,10 +361,9 @@ fn extract_attr_selectors(selector: &str) -> Vec<AttrSel> {
                 if depth == 0 {
                     let end = i;
                     let content = &selector[start..end];
-                    if should_capture
-                        && let Some(sel) = parse_attr_selector(content) {
-                            out.push(sel);
-                        }
+                    if should_capture && let Some(sel) = parse_attr_selector(content) {
+                        out.push(sel);
+                    }
                 }
             }
             i += 1;

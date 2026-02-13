@@ -239,10 +239,11 @@ pub(crate) fn resolve_relative_uri(base: Option<&str>, rel: &str) -> String {
         return format!("{scheme_host}{dir}/{rel}");
     }
     if base.starts_with("file://")
-        && let Ok(path) = file_url_to_path(base) {
-            let dir = path.rsplit_once('/').map_or("", |(d, _)| d);
-            return format!("file://{dir}/{rel}");
-        }
+        && let Ok(path) = file_url_to_path(base)
+    {
+        let dir = path.rsplit_once('/').map_or("", |(d, _)| d);
+        return format!("file://{dir}/{rel}");
+    }
     rel.to_owned()
 }
 
@@ -522,10 +523,11 @@ fn fetch_http_url(fetcher: &StdFetcher, uri: &str) -> Result<Vec<u8>, ValidatorE
         let data = http_get_bytes(fetcher, host, port, path)?;
         let (status, headers, body) = parse_http_response(&data)?;
         if matches!(status, 301 | 302 | 303 | 307 | 308)
-            && let Some(loc) = header_value_ascii_ci(&headers, "location") {
-                current = resolve_relative_uri(Some(&current), loc);
-                continue;
-            }
+            && let Some(loc) = header_value_ascii_ci(&headers, "location")
+        {
+            current = resolve_relative_uri(Some(&current), loc);
+            continue;
+        }
         if !(200..300).contains(&status) {
             return Err(ValidatorError::InvalidInput(format!(
                 "HTTP status {status} for {current}"

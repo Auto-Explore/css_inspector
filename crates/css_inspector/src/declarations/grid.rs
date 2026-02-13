@@ -124,27 +124,28 @@ pub(super) fn validate_grid_template_tracks(
 
         if subgrid_mode {
             if let Some((name, args)) = split_function_token(tok)
-                && name.eq_ignore_ascii_case("repeat") {
-                    let Some((count, tracks)) = split_on_single_top_level_comma(args) else {
-                        push_error(report, format!("Invalid value for property “{prop}”."));
-                        return;
-                    };
-                    let count = count.trim();
-                    let tracks = tracks.trim();
-                    if count.is_empty() || tracks.is_empty() {
-                        push_error(report, format!("Invalid value for property “{prop}”."));
-                        return;
-                    }
-                    let count_ok = count.eq_ignore_ascii_case("auto-fill")
-                        || count.eq_ignore_ascii_case("auto-fit")
-                        || count.parse::<usize>().is_ok_and(|n| n > 0);
-                    if !count_ok || !is_valid_subgrid_line_name_sequence(tracks, lenient) {
-                        push_error(report, format!("Invalid value for property “{prop}”."));
-                        return;
-                    }
-                    token_count += 1;
-                    continue;
+                && name.eq_ignore_ascii_case("repeat")
+            {
+                let Some((count, tracks)) = split_on_single_top_level_comma(args) else {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                };
+                let count = count.trim();
+                let tracks = tracks.trim();
+                if count.is_empty() || tracks.is_empty() {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
                 }
+                let count_ok = count.eq_ignore_ascii_case("auto-fill")
+                    || count.eq_ignore_ascii_case("auto-fit")
+                    || count.parse::<usize>().is_ok_and(|n| n > 0);
+                if !count_ok || !is_valid_subgrid_line_name_sequence(tracks, lenient) {
+                    push_error(report, format!("Invalid value for property “{prop}”."));
+                    return;
+                }
+                token_count += 1;
+                continue;
+            }
 
             // In `subgrid` mode, only `[line-names]` or `repeat(<count>, [line-names])` are
             // allowed after the `subgrid` keyword.

@@ -166,14 +166,16 @@ pub(super) fn is_valid_color_token(raw: &str, css1_escapes: bool, lenient: bool)
     if lenient && lower_ascii.starts_with("if(") {
         return is_balanced_function_call_token(lower_ascii, "if");
     }
-    if lenient && lower_ascii.starts_with("--") && lower_ascii.ends_with(')')
-        && let Some(open) = lower_ascii.find('(') {
-            let name = lower_ascii[..open].trim();
-            if name.starts_with("--") && name.as_bytes().iter().all(|&b| is_property_ident_char(b))
-            {
-                return true;
-            }
+    if lenient
+        && lower_ascii.starts_with("--")
+        && lower_ascii.ends_with(')')
+        && let Some(open) = lower_ascii.find('(')
+    {
+        let name = lower_ascii[..open].trim();
+        if name.starts_with("--") && name.as_bytes().iter().all(|&b| is_property_ident_char(b)) {
+            return true;
         }
+    }
 
     // Ident colors (with CSS escapes).
     let ident = if css1_escapes {

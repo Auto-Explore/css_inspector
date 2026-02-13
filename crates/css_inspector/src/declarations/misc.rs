@@ -20,13 +20,15 @@ pub(super) fn validate_zoom(tokens: &[&str], report: &mut Report) {
 
     if let Some(num) = t.strip_suffix('%') {
         if let Some(v) = parse_css_number(num)
-            && v >= 0.0 {
-                return;
-            }
-    } else if let Some(v) = parse_css_number(t)
-        && v >= 0.0 {
+            && v >= 0.0
+        {
             return;
         }
+    } else if let Some(v) = parse_css_number(t)
+        && v >= 0.0
+    {
+        return;
+    }
 
     push_error(report, "Invalid value for property “zoom”.");
 }
@@ -319,9 +321,10 @@ pub(super) fn validate_counter_list(
     report: &mut Report,
 ) {
     if let [t] = tokens
-        && t.trim().eq_ignore_ascii_case("none") {
-            return;
-        }
+        && t.trim().eq_ignore_ascii_case("none")
+    {
+        return;
+    }
 
     let invalid_value = |report: &mut Report| {
         push_error(report, format!("Invalid value for property “{prop}”."));
@@ -728,18 +731,24 @@ pub(super) fn validate_list_style(tokens: &[&str], lenient: bool, report: &mut R
         }
         let token = tokens[idx];
 
-        if !have_position && is_position_token(token)
-            && search(idx + 1, tokens, lenient, have_type, true, have_image) {
-                return true;
-            }
-        if !have_image && is_image_token(token)
-            && search(idx + 1, tokens, lenient, have_type, have_position, true) {
-                return true;
-            }
-        if !have_type && is_type_token(token, lenient)
-            && search(idx + 1, tokens, lenient, true, have_position, have_image) {
-                return true;
-            }
+        if !have_position
+            && is_position_token(token)
+            && search(idx + 1, tokens, lenient, have_type, true, have_image)
+        {
+            return true;
+        }
+        if !have_image
+            && is_image_token(token)
+            && search(idx + 1, tokens, lenient, have_type, have_position, true)
+        {
+            return true;
+        }
+        if !have_type
+            && is_type_token(token, lenient)
+            && search(idx + 1, tokens, lenient, true, have_position, have_image)
+        {
+            return true;
+        }
 
         false
     }

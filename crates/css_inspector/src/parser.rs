@@ -233,13 +233,14 @@ pub(crate) fn contains_unknown_at_rule(css: &str) -> bool {
         }
 
         if b == b'@'
-            && let Some((name, next_i)) = scan_at_rule_name(css, bytes, i) {
-                if !is_known_at_rule_name(name) {
-                    return true;
-                }
-                i = next_i;
-                continue;
+            && let Some((name, next_i)) = scan_at_rule_name(css, bytes, i)
+        {
+            if !is_known_at_rule_name(name) {
+                return true;
             }
+            i = next_i;
+            continue;
+        }
 
         i += 1;
     }
