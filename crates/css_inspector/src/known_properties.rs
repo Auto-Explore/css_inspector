@@ -627,7 +627,7 @@ macro_rules! css_properties_file {
     ($file:literal) => {
         include_str!(concat!(
             env!("CARGO_MANIFEST_DIR"),
-            "/../../data/css_properties/",
+            "/data/css_properties/",
             $file
         ))
     };

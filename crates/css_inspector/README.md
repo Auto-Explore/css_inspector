@@ -1,8 +1,14 @@
 # `css_inspector`
 
-Rust CSS validator (work in progress). This crate is primarily “suite-driven”: it implements the
+Rust CSS validator. This crate is primarily “suite-driven”: it implements the
 checks needed to match the upstream W3C CSS Validator autotest fixtures, rather than a complete
 CSS parser.
+
+MSRV: Rust 1.93 (Edition 2024).
+
+## Install
+
+`cargo add css_inspector`
 
 ## Entry points
 
@@ -18,7 +24,7 @@ CSS parser.
 
 `Config` currently supports:
 
-- `profile`: selects the “known properties” set (defaults to CSS3) from `data/css_properties/*.properties`.
+- `profile`: selects the “known properties” set (defaults to CSS4) from `data/css_properties/*.properties`.
 - `medium`: if set, warns when an `@media ... {` block doesn’t match the configured medium.
 - `warning`: numeric warning threshold (default `0`); `-1` suppresses all warnings.
 
@@ -65,4 +71,3 @@ This crate defines `Fetcher` and a default `StdFetcher`:
 
 Note: `StdFetcher` is intended for test harnesses / controlled usage. If you validate untrusted CSS
 with fetching enabled, treat the fetcher configuration as part of your security boundary.
-

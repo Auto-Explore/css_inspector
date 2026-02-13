@@ -10,7 +10,7 @@ This script can either:
   - download the files from the upstream GitHub repo at a specific ref (commit/tag/branch).
 
 It writes into:
-  css_inspector/data/css_properties/
+  crates/css_inspector/data/css_properties/
 """
 
 from __future__ import annotations
@@ -43,7 +43,7 @@ def repo_root() -> Path:
     raise RuntimeError(f"could not find repo root from {here}")
 
 def local_additions_path(root: Path) -> Path:
-    return root / "data" / "css_properties" / "local_additions.json"
+    return root / "crates" / "css_inspector" / "data" / "css_properties" / "local_additions.json"
 
 
 def load_local_additions(root: Path) -> dict[str, list[str]]:
@@ -262,7 +262,7 @@ def validate_out_dir(out_dir: Path) -> None:
 
 def main() -> int:
     root = repo_root()
-    default_out_dir = root / "data" / "css_properties"
+    default_out_dir = root / "crates" / "css_inspector" / "data" / "css_properties"
     default_remote, default_commit = parse_gitsubtree_css_validator_defaults(root)
 
     ap = argparse.ArgumentParser(
@@ -272,7 +272,7 @@ def main() -> int:
         "--out-dir",
         type=Path,
         default=default_out_dir,
-        help="Output directory for vendored properties (default: css_inspector/data/css_properties).",
+        help="Output directory for vendored properties (default: crates/css_inspector/data/css_properties).",
     )
     ap.add_argument(
         "--source-dir",

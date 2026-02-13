@@ -6,7 +6,7 @@ Upstream URL:
   https://www.w3.org/Style/CSS/all-properties.en.json
 
 This file is not a drop-in replacement for the W3C css-validator profile
-property lists (see css_inspector/data/css_properties/*.properties),
+property lists (see crates/css_inspector/data/css_properties/*.properties),
 but it can be useful as a supplementary "what properties exist in specs" input.
 """
 
@@ -92,7 +92,7 @@ def main() -> int:
         "--out",
         type=Path,
         default=default_out,
-        help="Output path (default: css_inspector/data/w3c/all-properties.en.json).",
+        help="Output path (default: data/w3c/all-properties.en.json).",
     )
     args = ap.parse_args()
 

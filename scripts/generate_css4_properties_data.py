@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Generate data/css_properties/CSS4Properties.properties for the `css4` profile.
+Generate crates/css_inspector/data/css_properties/CSS4Properties.properties for the `css4` profile.
 
 This script is intentionally offline: it uses already-vendored reference data:
   - data/w3c/all-properties.en.json (see scripts/update_w3c_all_properties_data.py)
-  - data/css_properties/CSS3Properties.properties (see scripts/update_css_properties_data.py)
+  - crates/css_inspector/data/css_properties/CSS3Properties.properties (see scripts/update_css_properties_data.py)
 
 The generated file contains property names that appear in “Level 4” module specs
 but are not present in the css-validator CSS3 profile list.
@@ -167,7 +167,7 @@ def main() -> int:
 
     root = repo_root()
     ap = argparse.ArgumentParser(
-        description="Generate data/css_properties/CSS4Properties.properties for the css4 profile."
+        description="Generate crates/css_inspector/data/css_properties/CSS4Properties.properties for the css4 profile."
     )
     ap.add_argument(
         "--all-properties-json",
@@ -178,14 +178,28 @@ def main() -> int:
     ap.add_argument(
         "--css3-properties",
         type=Path,
-        default=(root / "data" / "css_properties" / "CSS3Properties.properties"),
-        help="Path to CSS3Properties.properties (default: data/css_properties/CSS3Properties.properties).",
+        default=(
+            root
+            / "crates"
+            / "css_inspector"
+            / "data"
+            / "css_properties"
+            / "CSS3Properties.properties"
+        ),
+        help="Path to CSS3Properties.properties (default: crates/css_inspector/data/css_properties/CSS3Properties.properties).",
     )
     ap.add_argument(
         "--out",
         type=Path,
-        default=(root / "data" / "css_properties" / "CSS4Properties.properties"),
-        help="Output file path (default: data/css_properties/CSS4Properties.properties).",
+        default=(
+            root
+            / "crates"
+            / "css_inspector"
+            / "data"
+            / "css_properties"
+            / "CSS4Properties.properties"
+        ),
+        help="Output file path (default: crates/css_inspector/data/css_properties/CSS4Properties.properties).",
     )
     ap.add_argument(
         "--min-status",

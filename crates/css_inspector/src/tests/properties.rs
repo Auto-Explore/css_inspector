@@ -54,11 +54,18 @@ fn css4_phase1_properties_file_matches_w3c_level4_diff() {
             .collect()
     }
 
-    let root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let crate_root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let workspace_root = crate_root.join("../..");
 
-    let w3c_path = root.join("data/w3c/all-properties.en.json");
-    let css3_path = root.join("data/css_properties/CSS3Properties.properties");
-    let css4_path = root.join("data/css_properties/CSS4Properties.properties");
+    let w3c_path = workspace_root.join("data/w3c/all-properties.en.json");
+    if !w3c_path.exists() {
+        // This file is only present in the repo checkout, not in published crate source.
+        eprintln!("skipping: missing {w3c_path:?}");
+        return;
+    }
+
+    let css3_path = crate_root.join("data/css_properties/CSS3Properties.properties");
+    let css4_path = crate_root.join("data/css_properties/CSS4Properties.properties");
 
     let w3c_text = std::fs::read_to_string(&w3c_path).expect("read all-properties.en.json");
     let rows: Vec<W3cPropertyRow> =
@@ -103,7 +110,7 @@ fn css4_phase1_profile_accepts_all_css4_supplement_property_names() {
     fn css4_props() -> Vec<String> {
         let s = include_str!(concat!(
             env!("CARGO_MANIFEST_DIR"),
-            "/../../data/css_properties/CSS4Properties.properties"
+            "/data/css_properties/CSS4Properties.properties"
         ));
         let mut out: Vec<String> = parse_properties_file(s)
             .into_iter()
@@ -136,7 +143,7 @@ fn css3_profile_rejects_css4_supplement_properties_as_unknown() {
     fn css4_props() -> Vec<String> {
         let s = include_str!(concat!(
             env!("CARGO_MANIFEST_DIR"),
-            "/../../data/css_properties/CSS4Properties.properties"
+            "/data/css_properties/CSS4Properties.properties"
         ));
         let mut out: Vec<String> = parse_properties_file(s)
             .into_iter()

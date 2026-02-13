@@ -39,9 +39,9 @@ High-level checks (errors unless noted):
 
 Configuration knobs:
 
-- `profile`: selects the “known properties” set from `data/css_properties/*.properties`.
+- `profile`: selects the “known properties” set from `crates/css_inspector/data/css_properties/*.properties`.
 - `profile=css4`: uses the CSS3 profile plus a small Level 4 property-name supplement
-  (`data/css_properties/CSS4Properties.properties`). Details: `css4.md`.
+  (`crates/css_inspector/data/css_properties/CSS4Properties.properties`).
 - `medium`: if set, warns if an `@media ... {` block doesn’t match the configured medium.
 - `warning`: numeric warning threshold; `0` is the default, and `-1` suppresses all warnings.
 
@@ -49,7 +49,7 @@ Configuration knobs:
 
 The validator uses "known CSS properties" lists per profile, vendored under:
 
-`data/css_properties/*.properties`
+`crates/css_inspector/data/css_properties/*.properties`
 
 Update them with:
 
