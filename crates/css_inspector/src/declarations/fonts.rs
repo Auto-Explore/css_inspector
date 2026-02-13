@@ -173,13 +173,12 @@ pub(super) fn validate_font(value: &str, css4_profile: bool, report: &mut Report
 
     for (i, raw) in tokens.iter().enumerate() {
         let tok = raw.trim();
-        if let Some((s, lh)) = tok.split_once('/') {
-            if is_font_size_token(s) && is_line_height_token(lh) {
+        if let Some((s, lh)) = tok.split_once('/')
+            && is_font_size_token(s) && is_line_height_token(lh) {
                 size_idx = Some(i);
                 family_start = i + 1;
                 break;
             }
-        }
         if is_font_size_token(tok) {
             size_idx = Some(i);
             if i + 2 < tokens.len()

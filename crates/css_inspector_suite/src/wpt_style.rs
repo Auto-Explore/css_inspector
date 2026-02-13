@@ -955,7 +955,7 @@ pub fn extract_style_blocks(document: &str) -> Vec<String> {
         bytes.get(at..at + needle.len()).is_some_and(|h| {
             h.iter()
                 .zip(needle.iter())
-                .all(|(&h, &n)| h.to_ascii_lowercase() == n.to_ascii_lowercase())
+                .all(|(&h, &n)| h.eq_ignore_ascii_case(&n))
         })
     }
 
@@ -1180,7 +1180,7 @@ fn find_ascii_ci(haystack: &[u8], needle: &[u8], from: usize) -> Option<usize> {
         if haystack[i..i + needle.len()]
             .iter()
             .zip(needle.iter())
-            .all(|(&h, &n)| h.to_ascii_lowercase() == n.to_ascii_lowercase())
+            .all(|(&h, &n)| h.eq_ignore_ascii_case(&n))
         {
             return Some(i);
         }

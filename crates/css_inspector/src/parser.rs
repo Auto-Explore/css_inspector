@@ -232,15 +232,14 @@ pub(crate) fn contains_unknown_at_rule(css: &str) -> bool {
             continue;
         }
 
-        if b == b'@' {
-            if let Some((name, next_i)) = scan_at_rule_name(css, bytes, i) {
+        if b == b'@'
+            && let Some((name, next_i)) = scan_at_rule_name(css, bytes, i) {
                 if !is_known_at_rule_name(name) {
                     return true;
                 }
                 i = next_i;
                 continue;
             }
-        }
 
         i += 1;
     }
@@ -1092,7 +1091,7 @@ fn media_prelude_matches_user_media(prelude: &str, user_media: &[String]) -> boo
             return true;
         }
 
-        let media = first.trim_end_matches(|c: char| c == '(');
+        let media = first.trim_end_matches('(');
         if media.eq_ignore_ascii_case("all") {
             return true;
         }

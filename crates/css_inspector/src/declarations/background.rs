@@ -157,11 +157,10 @@ pub(super) fn validate_background_image(tokens: &[&str], css4_profile: bool, rep
         if lower == "none" || is_css_wide_keyword(lower) {
             return;
         }
-        if lower.starts_with("url(") {
-            if is_valid_url_function_token(raw) {
+        if lower.starts_with("url(")
+            && is_valid_url_function_token(raw) {
                 return;
             }
-        }
         push_error(report, "Invalid value for property “background-image”.");
         return;
     }

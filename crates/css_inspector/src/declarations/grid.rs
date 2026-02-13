@@ -123,8 +123,8 @@ pub(super) fn validate_grid_template_tracks(
         }
 
         if subgrid_mode {
-            if let Some((name, args)) = split_function_token(tok) {
-                if name.eq_ignore_ascii_case("repeat") {
+            if let Some((name, args)) = split_function_token(tok)
+                && name.eq_ignore_ascii_case("repeat") {
                     let Some((count, tracks)) = split_on_single_top_level_comma(args) else {
                         push_error(report, format!("Invalid value for property “{prop}”."));
                         return;
@@ -145,7 +145,6 @@ pub(super) fn validate_grid_template_tracks(
                     token_count += 1;
                     continue;
                 }
-            }
 
             // In `subgrid` mode, only `[line-names]` or `repeat(<count>, [line-names])` are
             // allowed after the `subgrid` keyword.

@@ -284,17 +284,15 @@ where
             };
 
             for c in cases.iter().filter(|c| c.status == "ok") {
-                if let Some(needle) = &id_contains {
-                    if !c.id.contains(needle) {
+                if let Some(needle) = &id_contains
+                    && !c.id.contains(needle) {
                         continue;
                     }
-                }
                 let expected = c.expected.as_ref().expect("missing expected");
-                if let Some(want_valid) = expected_filter {
-                    if expected.valid != want_valid {
+                if let Some(want_valid) = expected_filter
+                    && expected.valid != want_valid {
                         continue;
                     }
-                }
                 let config = Config {
                     profile: c.config.profile.clone(),
                     medium: c.config.medium.clone(),
@@ -327,11 +325,10 @@ where
                         (expected.valid, expected.errors, expected.warnings),
                         (report.valid(), report.errors as i64, report.warnings as i64),
                     ));
-                    if let Some(limit) = max_failures {
-                        if failures.len() >= limit {
+                    if let Some(limit) = max_failures
+                        && failures.len() >= limit {
                             break;
                         }
-                    }
                 }
             }
 

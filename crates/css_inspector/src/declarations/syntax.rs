@@ -470,11 +470,10 @@ pub(super) fn is_single_top_level_curly_block_with_var_or_env(value: &str) -> bo
                 }
             }
             _ => {
-                if depth >= 1 && bytes[i..].len() >= 4 {
-                    if bytes[i..].starts_with(b"var(") || bytes[i..].starts_with(b"env(") {
+                if depth >= 1 && bytes[i..].len() >= 4
+                    && (bytes[i..].starts_with(b"var(") || bytes[i..].starts_with(b"env(")) {
                         saw_var_or_env = true;
                     }
-                }
             }
         }
         i += 1;
@@ -496,13 +495,12 @@ pub(super) fn contains_var_or_env_outside_strings(value: &str) -> bool {
             continue;
         }
 
-        if b.is_ascii_alphabetic() && bytes[i..].len() >= 4 {
-            if bytes[i..i + 4].eq_ignore_ascii_case(b"var(")
-                || bytes[i..i + 4].eq_ignore_ascii_case(b"env(")
+        if b.is_ascii_alphabetic() && bytes[i..].len() >= 4
+            && (bytes[i..i + 4].eq_ignore_ascii_case(b"var(")
+                || bytes[i..i + 4].eq_ignore_ascii_case(b"env("))
             {
                 return true;
             }
-        }
 
         i += 1;
     }
@@ -609,7 +607,7 @@ pub(super) fn strip_important(value: &str) -> &str {
 
 pub(super) fn normalize_property_name<'a>(raw: &'a str, css1_escapes: bool) -> Cow<'a, str> {
     let raw = raw.trim();
-    if !raw.as_bytes().iter().any(|&b| b == b'\\') {
+    if !raw.as_bytes().contains(&b'\\') {
         return ascii_lowercase_cow(raw);
     }
     let mut out = if css1_escapes {

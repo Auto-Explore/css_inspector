@@ -19,16 +19,14 @@ pub(super) fn validate_zoom(tokens: &[&str], report: &mut Report) {
     }
 
     if let Some(num) = t.strip_suffix('%') {
-        if let Some(v) = parse_css_number(num) {
-            if v >= 0.0 {
+        if let Some(v) = parse_css_number(num)
+            && v >= 0.0 {
                 return;
             }
-        }
-    } else if let Some(v) = parse_css_number(t) {
-        if v >= 0.0 {
+    } else if let Some(v) = parse_css_number(t)
+        && v >= 0.0 {
             return;
         }
-    }
 
     push_error(report, "Invalid value for property “zoom”.");
 }
@@ -295,7 +293,7 @@ pub(super) fn validate_quotes(tokens: &[&str], report: &mut Report) {
         [t] if t.trim().eq_ignore_ascii_case("auto") => (),
         [t0, t1] if is_string_token(t0) && is_string_token(t1) => (),
         _ if tokens.len() >= 2
-            && tokens.len() % 2 == 0
+            && tokens.len().is_multiple_of(2)
             && tokens.iter().all(|t| is_string_token(t)) => {}
         _ => push_error(report, "Invalid value for property “quotes”."),
     }
@@ -320,11 +318,10 @@ pub(super) fn validate_counter_list(
     css4_profile: bool,
     report: &mut Report,
 ) {
-    if let [t] = tokens {
-        if t.trim().eq_ignore_ascii_case("none") {
+    if let [t] = tokens
+        && t.trim().eq_ignore_ascii_case("none") {
             return;
         }
-    }
 
     let invalid_value = |report: &mut Report| {
         push_error(report, format!("Invalid value for property “{prop}”."));
@@ -731,21 +728,18 @@ pub(super) fn validate_list_style(tokens: &[&str], lenient: bool, report: &mut R
         }
         let token = tokens[idx];
 
-        if !have_position && is_position_token(token) {
-            if search(idx + 1, tokens, lenient, have_type, true, have_image) {
+        if !have_position && is_position_token(token)
+            && search(idx + 1, tokens, lenient, have_type, true, have_image) {
                 return true;
             }
-        }
-        if !have_image && is_image_token(token) {
-            if search(idx + 1, tokens, lenient, have_type, have_position, true) {
+        if !have_image && is_image_token(token)
+            && search(idx + 1, tokens, lenient, have_type, have_position, true) {
                 return true;
             }
-        }
-        if !have_type && is_type_token(token, lenient) {
-            if search(idx + 1, tokens, lenient, true, have_position, have_image) {
+        if !have_type && is_type_token(token, lenient)
+            && search(idx + 1, tokens, lenient, true, have_position, have_image) {
                 return true;
             }
-        }
 
         false
     }
