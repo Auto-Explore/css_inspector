@@ -1,6 +1,7 @@
 use std::borrow::Cow;
 
 use crate::config::Config;
+use crate::declarations::DeclAtRuleContext;
 use crate::report::{Report, push_warning_level};
 use crate::strutil::{split_top_level_commas, step_string_state};
 
@@ -16,28 +17,25 @@ pub(crate) fn at_rule_name(prelude: &str) -> Option<&str> {
 pub(crate) fn at_rule_decl_list_context_flags(
     kind: RuleBlockKind,
     prelude: &str,
-) -> (bool, bool, bool, bool, bool, bool, bool, bool, bool) {
+) -> DeclAtRuleContext {
     if kind != RuleBlockKind::AtRuleDeclList {
-        return (
-            false, false, false, false, false, false, false, false, false,
-        );
+        return DeclAtRuleContext::default();
     }
     let Some(name) = at_rule_name(prelude) else {
-        return (
-            false, false, false, false, false, false, false, false, false,
-        );
+        return DeclAtRuleContext::default();
     };
-    (
-        name.eq_ignore_ascii_case("page"),
-        name.eq_ignore_ascii_case("font-face"),
-        name.eq_ignore_ascii_case("property"),
-        name.eq_ignore_ascii_case("font-palette-values"),
-        name.eq_ignore_ascii_case("counter-style"),
-        name.eq_ignore_ascii_case("color-profile"),
-        name.eq_ignore_ascii_case("view-transition"),
-        name.eq_ignore_ascii_case("scroll-timeline"),
-        name.eq_ignore_ascii_case("view-timeline"),
-    )
+
+    DeclAtRuleContext {
+        in_page_at_rule: name.eq_ignore_ascii_case("page"),
+        in_font_face_at_rule: name.eq_ignore_ascii_case("font-face"),
+        in_property_at_rule: name.eq_ignore_ascii_case("property"),
+        in_font_palette_values_at_rule: name.eq_ignore_ascii_case("font-palette-values"),
+        in_counter_style_at_rule: name.eq_ignore_ascii_case("counter-style"),
+        in_color_profile_at_rule: name.eq_ignore_ascii_case("color-profile"),
+        in_view_transition_at_rule: name.eq_ignore_ascii_case("view-transition"),
+        in_scroll_timeline_at_rule: name.eq_ignore_ascii_case("scroll-timeline"),
+        in_view_timeline_at_rule: name.eq_ignore_ascii_case("view-timeline"),
+    }
 }
 
 #[cfg(test)]
@@ -61,15 +59,15 @@ mod at_rule_name_tests {
 
 #[cfg(test)]
 mod at_rule_decl_list_context_flags_tests {
+    use crate::declarations::DeclAtRuleContext;
+
     use super::{RuleBlockKind, at_rule_decl_list_context_flags};
 
     #[test]
     fn returns_false_outside_at_rule_decl_lists() {
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::QualifiedRule, "@page"),
-            (
-                false, false, false, false, false, false, false, false, false
-            )
+            DeclAtRuleContext::default()
         );
     }
 
@@ -77,48 +75,73 @@ mod at_rule_decl_list_context_flags_tests {
     fn detects_page_and_font_face_case_insensitively() {
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@page"),
-            (true, false, false, false, false, false, false, false, false)
+            DeclAtRuleContext {
+                in_page_at_rule: true,
+                ..DeclAtRuleContext::default()
+            }
         );
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, " @FONT-FACE "),
-            (false, true, false, false, false, false, false, false, false)
+            DeclAtRuleContext {
+                in_font_face_at_rule: true,
+                ..DeclAtRuleContext::default()
+            }
         );
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@property --x"),
-            (false, false, true, false, false, false, false, false, false)
+            DeclAtRuleContext {
+                in_property_at_rule: true,
+                ..DeclAtRuleContext::default()
+            }
         );
         assert_eq!(
             at_rule_decl_list_context_flags(
                 RuleBlockKind::AtRuleDeclList,
                 "@font-palette-values --x"
             ),
-            (false, false, false, true, false, false, false, false, false)
+            DeclAtRuleContext {
+                in_font_palette_values_at_rule: true,
+                ..DeclAtRuleContext::default()
+            }
         );
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@counter-style x"),
-            (false, false, false, false, true, false, false, false, false)
+            DeclAtRuleContext {
+                in_counter_style_at_rule: true,
+                ..DeclAtRuleContext::default()
+            }
         );
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@color-profile --x"),
-            (false, false, false, false, false, true, false, false, false)
+            DeclAtRuleContext {
+                in_color_profile_at_rule: true,
+                ..DeclAtRuleContext::default()
+            }
         );
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@view-transition"),
-            (false, false, false, false, false, false, true, false, false)
+            DeclAtRuleContext {
+                in_view_transition_at_rule: true,
+                ..DeclAtRuleContext::default()
+            }
         );
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@scroll-timeline --x"),
-            (false, false, false, false, false, false, false, true, false)
+            DeclAtRuleContext {
+                in_scroll_timeline_at_rule: true,
+                ..DeclAtRuleContext::default()
+            }
         );
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@view-timeline --x"),
-            (false, false, false, false, false, false, false, false, true)
+            DeclAtRuleContext {
+                in_view_timeline_at_rule: true,
+                ..DeclAtRuleContext::default()
+            }
         );
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@media screen"),
-            (
-                false, false, false, false, false, false, false, false, false
-            )
+            DeclAtRuleContext::default()
         );
     }
 
@@ -126,13 +149,14 @@ mod at_rule_decl_list_context_flags_tests {
     fn returns_false_when_at_rule_name_is_missing_and_accepts_paren_suffix() {
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "page"),
-            (
-                false, false, false, false, false, false, false, false, false
-            )
+            DeclAtRuleContext::default()
         );
         assert_eq!(
             at_rule_decl_list_context_flags(RuleBlockKind::AtRuleDeclList, "@page("),
-            (true, false, false, false, false, false, false, false, false)
+            DeclAtRuleContext {
+                in_page_at_rule: true,
+                ..DeclAtRuleContext::default()
+            }
         );
     }
 }
@@ -740,7 +764,7 @@ pub(crate) fn contains_invalid_top_level_chars(css: &str) -> bool {
                     }
                     return true;
                 }
-                Some(next) if matches!(next, b'!' | b'/' | b'?') => return true,
+                Some(b'!' | b'/' | b'?') => return true,
                 Some(b'\\') => {
                     // Handle escaped markup/comment openers like `<\\!--` from the autotest suite.
                     let mut j = i + 1;

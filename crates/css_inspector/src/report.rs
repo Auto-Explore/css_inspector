@@ -139,12 +139,14 @@ mod push_error_times_tests {
 
     #[test]
     fn n_is_zero_is_a_noop_on_nonempty_report() {
-        let mut report = Report::default();
-        report.errors = 5;
-        report.messages.push(super::Message {
-            severity: Severity::Error,
-            message: "x".to_string(),
-        });
+        let mut report = Report {
+            errors: 5,
+            messages: vec![super::Message {
+                severity: Severity::Error,
+                message: "x".to_string(),
+            }],
+            ..Report::default()
+        };
 
         push_error_times(&mut report, "Invalid input.", 0);
 
@@ -209,13 +211,14 @@ mod push_error_times_tests {
 
     #[test]
     fn appends_single_error_to_nonempty_report() {
-        let mut report = Report::default();
-        report.errors = 2;
-        report.warnings = 1;
-        report.messages.push(super::Message {
-            severity: Severity::Warning,
-            message: "Warn.".to_string(),
-        });
+        let mut report = Report {
+            errors: 2,
+            warnings: 1,
+            messages: vec![super::Message {
+                severity: Severity::Warning,
+                message: "Warn.".to_string(),
+            }],
+        };
 
         push_error_times(&mut report, "Invalid input.", 1);
 

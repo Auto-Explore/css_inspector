@@ -5,7 +5,7 @@ use crate::config::Config;
 use crate::errors::ValidatorError;
 use crate::imports::iter_top_level_import_urls;
 use crate::report::{Report, push_error};
-use crate::strutil::{contains_ascii_ci, starts_with_ascii_ci};
+use crate::strutil::starts_with_ascii_ci;
 use crate::validator::{
     strip_comments_or_push_error, strip_comments_or_push_error_with, validate_css_text_stripped,
 };
@@ -231,7 +231,7 @@ pub(crate) fn resolve_relative_uri(base: Option<&str>, rel: &str) -> String {
         return rel.to_owned();
     };
 
-    // Base URL parsing is intentionally strict and case-sensitive (e.g., `parse_http_url` and
+    // Base URL parsing is intentionally strict and case-sensitive (e.g., `split_http_base` and
     // `file_url_to_path` both require lowercase schemes), so avoid implying support for mixed-case
     // schemes here.
     if let Some((scheme_host, path)) = split_http_base(base) {
@@ -269,10 +269,16 @@ pub(crate) fn split_http_base(base: &str) -> Option<(&str, &str)> {
 }
 
 fn fetch_file_url(uri: &str, max_bytes: usize) -> Result<Vec<u8>, ValidatorError> {
+    use std::io::Read;
+
     let path = file_url_to_path(uri)?;
-    let mut data = std::fs::read(path)
+    let file = std::fs::File::open(&path)
         .map_err(|e| ValidatorError::InvalidInput(format!("file read failed: {e}")))?;
-    data.truncate(max_bytes);
+    let mut data = Vec::new();
+    let mut limited = file.take(max_bytes as u64);
+    limited
+        .read_to_end(&mut data)
+        .map_err(|e| ValidatorError::InvalidInput(format!("file read failed: {e}")))?;
     Ok(data)
 }
 
@@ -362,9 +368,8 @@ fn fetch_http_url_with_curl(fetcher: &StdFetcher, uri: &str) -> Result<Vec<u8>, 
         )));
     }
 
-    let mut data = body.to_vec();
-    data.truncate(fetcher.max_bytes);
-    Ok(data)
+    let end = body.len().min(fetcher.max_bytes);
+    Ok(body[..end].to_vec())
 }
 
 #[cfg(all(test, unix))]
@@ -386,7 +391,7 @@ mod fetch_http_url_with_curl_tests {
         std::env::temp_dir().join(format!("ae-css-fetcher-{name}-{nanos}"))
     }
 
-    fn with_fake_curl(script_body: &str, f: impl FnOnce() -> ()) {
+    fn with_fake_curl(script_body: &str, f: impl FnOnce()) {
         let _guard = ENV_LOCK.lock().unwrap_or_else(|e| e.into_inner());
         let dir = unique_tmp_dir("curl");
         fs::create_dir_all(&dir).expect("create temp dir");
@@ -513,414 +518,5 @@ mod fetch_http_url_with_curl_tests {
             let bytes = fetcher.fetch("http://example.com/x").unwrap();
             assert_eq!(bytes, b"abc");
         });
-    }
-}
-
-fn fetch_http_url(fetcher: &StdFetcher, uri: &str) -> Result<Vec<u8>, ValidatorError> {
-    let mut current = uri.to_owned();
-    for _ in 0..=fetcher.max_redirects {
-        let (host, port, path) = parse_http_url(&current)?;
-        let data = http_get_bytes(fetcher, host, port, path)?;
-        let (status, headers, body) = parse_http_response(&data)?;
-        if matches!(status, 301 | 302 | 303 | 307 | 308)
-            && let Some(loc) = header_value_ascii_ci(&headers, "location")
-        {
-            current = resolve_relative_uri(Some(&current), loc);
-            continue;
-        }
-        if !(200..300).contains(&status) {
-            return Err(ValidatorError::InvalidInput(format!(
-                "HTTP status {status} for {current}"
-            )));
-        }
-        return Ok(body);
-    }
-    Err(ValidatorError::InvalidInput("too many redirects".into()))
-}
-
-#[inline]
-fn header_value_ascii_ci<'a>(headers: &'a [(String, String)], name: &str) -> Option<&'a str> {
-    headers
-        .iter()
-        .find_map(|(k, v)| k.eq_ignore_ascii_case(name).then_some(v.as_str()))
-}
-
-#[cfg(test)]
-mod header_value_ascii_ci_tests {
-    use super::header_value_ascii_ci;
-
-    #[test]
-    fn finds_first_matching_header_value_case_insensitively() {
-        let headers = vec![
-            ("Location".to_string(), "a".to_string()),
-            ("location".to_string(), "b".to_string()),
-        ];
-        assert_eq!(header_value_ascii_ci(&headers, "location"), Some("a"));
-    }
-
-    #[test]
-    fn returns_some_for_empty_header_value() {
-        let headers = vec![("location".to_string(), "".to_string())];
-        assert_eq!(header_value_ascii_ci(&headers, "Location"), Some(""));
-    }
-
-    #[test]
-    fn returns_first_value_even_when_empty() {
-        let headers = vec![
-            ("Location".to_string(), "".to_string()),
-            ("location".to_string(), "b".to_string()),
-        ];
-        assert_eq!(header_value_ascii_ci(&headers, "location"), Some(""));
-    }
-
-    #[test]
-    fn returns_none_when_missing() {
-        let headers = vec![("x".to_string(), "y".to_string())];
-        assert_eq!(header_value_ascii_ci(&headers, "location"), None);
-    }
-}
-
-pub(crate) fn parse_http_url(uri: &str) -> Result<(&str, u16, &str), ValidatorError> {
-    let rest = uri
-        .strip_prefix("http://")
-        .ok_or_else(|| ValidatorError::InvalidInput("not an http:// URL".into()))?;
-
-    let (host_port, path) = rest
-        .find('/')
-        // The index always points at the ASCII `/` byte, which is a UTF-8 boundary.
-        .map_or((rest, "/"), |i| rest.split_at(i));
-
-    let (host, port) = match host_port.rsplit_once(':') {
-        Some((h, p)) => {
-            let port = p
-                .parse::<u16>()
-                .map_err(|_| ValidatorError::InvalidInput(format!("invalid port in URL: {uri}")))?;
-            (h, port)
-        }
-        None => (host_port, 80u16),
-    };
-
-    Ok((host, port, path))
-}
-
-#[cfg(test)]
-mod parse_http_url_tests {
-    use super::{ValidatorError, parse_http_url};
-
-    #[test]
-    fn parses_default_port_and_root_path() {
-        let (host, port, path) = parse_http_url("http://example.com").unwrap();
-        assert_eq!(host, "example.com");
-        assert_eq!(port, 80);
-        assert_eq!(path, "/");
-    }
-
-    #[test]
-    fn parses_explicit_port_and_path() {
-        let (host, port, path) = parse_http_url("http://example.com:8080/a/b").unwrap();
-        assert_eq!(host, "example.com");
-        assert_eq!(port, 8080);
-        assert_eq!(path, "/a/b");
-    }
-
-    #[test]
-    fn rejects_non_http_schemes_or_mixed_case() {
-        let err = parse_http_url("https://example.com/").unwrap_err();
-        assert!(matches!(
-            err,
-            ValidatorError::InvalidInput(ref s) if s == "not an http:// URL"
-        ));
-
-        let err = parse_http_url("HTTP://example.com/").unwrap_err();
-        assert!(matches!(
-            err,
-            ValidatorError::InvalidInput(ref s) if s == "not an http:// URL"
-        ));
-    }
-
-    #[test]
-    fn rejects_invalid_ports() {
-        let err = parse_http_url("http://example.com:nope/").unwrap_err();
-        assert!(matches!(
-            err,
-            ValidatorError::InvalidInput(ref s) if s == "invalid port in URL: http://example.com:nope/"
-        ));
-    }
-}
-
-fn http_get_bytes(
-    fetcher: &StdFetcher,
-    host: &str,
-    port: u16,
-    path: &str,
-) -> Result<Vec<u8>, ValidatorError> {
-    use std::io::{Read, Write};
-    use std::net::TcpStream;
-
-    let addr = format!("{host}:{port}");
-    let mut stream = TcpStream::connect(addr)
-        .map_err(|e| ValidatorError::InvalidInput(format!("connect failed: {e}")))?;
-    let _ = stream.set_read_timeout(Some(fetcher.read_timeout));
-    let _ = stream.set_write_timeout(Some(fetcher.connect_timeout));
-
-    let req = format!(
-        "GET {path} HTTP/1.1\r\nHost: {host}\r\nUser-Agent: css_inspector\r\nAccept: */*\r\nConnection: close\r\n\r\n"
-    );
-    stream
-        .write_all(req.as_bytes())
-        .map_err(|e| ValidatorError::InvalidInput(format!("write failed: {e}")))?;
-
-    let mut buf = Vec::new();
-    let mut tmp = [0u8; 8192];
-    loop {
-        let n = stream
-            .read(&mut tmp)
-            .map_err(|e| ValidatorError::InvalidInput(format!("read failed: {e}")))?;
-        if n == 0 {
-            break;
-        }
-        buf.extend_from_slice(&tmp[..n]);
-        if buf.len() > fetcher.max_bytes {
-            break;
-        }
-    }
-    Ok(buf)
-}
-
-#[inline]
-pub(crate) fn find_double_crlf(data: &[u8]) -> Option<usize> {
-    data.windows(4).position(|w| w == b"\r\n\r\n")
-}
-
-#[cfg(test)]
-mod find_double_crlf_tests {
-    use super::find_double_crlf;
-
-    #[test]
-    fn finds_first_double_crlf_sequence() {
-        assert_eq!(find_double_crlf(b"\r\n\r\n"), Some(0));
-        assert_eq!(find_double_crlf(b"a\r\n\r\nb"), Some(1));
-        assert_eq!(find_double_crlf(b"a\r\nb\r\n\r\nc"), Some(4));
-    }
-
-    #[test]
-    fn returns_none_when_missing() {
-        assert_eq!(find_double_crlf(b""), None);
-        assert_eq!(find_double_crlf(b"\r\n\r"), None);
-        assert_eq!(find_double_crlf(b"\n\n\n\n"), None);
-    }
-}
-
-pub(crate) type HttpHeaders = Vec<(String, String)>;
-pub(crate) type ParsedHttpResponse = (u16, HttpHeaders, Vec<u8>);
-
-pub(crate) fn parse_http_response(data: &[u8]) -> Result<ParsedHttpResponse, ValidatorError> {
-    let Some(split) = find_double_crlf(data) else {
-        return Err(ValidatorError::InvalidInput("invalid HTTP response".into()));
-    };
-
-    // Decode the header and body separately. This preserves the current behavior of treating the
-    // body as UTF-8 lossily (because the validator expects text), while avoiding a full-response
-    // allocation when the body contains invalid UTF-8.
-    let head = String::from_utf8_lossy(&data[..split]);
-    let body_raw = String::from_utf8_lossy(&data[split + 4..]);
-
-    let mut lines = head.lines();
-    let status_line = lines
-        .next()
-        .ok_or_else(|| ValidatorError::InvalidInput("missing status line".into()))?;
-    let code = status_line
-        .split_whitespace()
-        .nth(1)
-        .ok_or_else(|| ValidatorError::InvalidInput("missing status code".into()))?
-        .parse::<u16>()
-        .map_err(|_| ValidatorError::InvalidInput("invalid status code".into()))?;
-
-    let mut headers: HttpHeaders = Vec::new();
-    let mut is_chunked = false;
-    for line in lines {
-        let Some((k, v)) = line.split_once(':') else {
-            continue;
-        };
-        let k = k.trim().to_owned();
-        let v = v.trim().to_owned();
-        if !is_chunked
-            && k.eq_ignore_ascii_case("transfer-encoding")
-            && contains_ascii_ci(&v, "chunked")
-        {
-            is_chunked = true;
-        }
-        headers.push((k, v));
-    }
-    let body = if is_chunked {
-        decode_chunked(body_raw.as_bytes())?
-    } else {
-        body_raw.into_owned().into_bytes()
-    };
-    Ok((code, headers, body))
-}
-
-#[cfg(test)]
-mod parse_http_response_tests {
-    use super::{ValidatorError, parse_http_response};
-
-    #[test]
-    fn parses_simple_response_with_body() {
-        let data = b"HTTP/1.1 200 OK\r\nContent-Type: text/css\r\n\r\nbody";
-        let (status, headers, body) = parse_http_response(data).unwrap();
-        assert_eq!(status, 200);
-        assert_eq!(
-            headers,
-            vec![("Content-Type".to_string(), "text/css".to_string())]
-        );
-        assert_eq!(body, b"body");
-    }
-
-    #[test]
-    fn parses_chunked_response_body_when_header_indicates_chunked() {
-        let data =
-            b"HTTP/1.1 200 OK\r\nTransfer-Encoding: gzip, Chunked\r\n\r\n4\r\nWiki\r\n0\r\n\r\n";
-        let (status, headers, body) = parse_http_response(data).unwrap();
-        assert_eq!(status, 200);
-        assert_eq!(
-            headers,
-            vec![("Transfer-Encoding".to_string(), "gzip, Chunked".to_string())]
-        );
-        assert_eq!(body, b"Wiki");
-    }
-
-    #[test]
-    fn errors_on_missing_delimiter() {
-        let err = parse_http_response(b"HTTP/1.1 200 OK\r\n").unwrap_err();
-        assert!(matches!(
-            err,
-            ValidatorError::InvalidInput(ref s) if s == "invalid HTTP response"
-        ));
-    }
-
-    #[test]
-    fn errors_on_missing_or_invalid_status_code() {
-        let err = parse_http_response(b"\r\n\r\nbody").unwrap_err();
-        assert!(matches!(
-            err,
-            ValidatorError::InvalidInput(ref s) if s == "missing status line"
-        ));
-
-        let err = parse_http_response(b"HTTP/1.1\r\n\r\nbody").unwrap_err();
-        assert!(matches!(
-            err,
-            ValidatorError::InvalidInput(ref s) if s == "missing status code"
-        ));
-
-        let err = parse_http_response(b"HTTP/1.1 x\r\n\r\nbody").unwrap_err();
-        assert!(matches!(
-            err,
-            ValidatorError::InvalidInput(ref s) if s == "invalid status code"
-        ));
-    }
-}
-
-pub(crate) fn decode_chunked(data: &[u8]) -> Result<Vec<u8>, ValidatorError> {
-    let mut out = Vec::new();
-    let mut i = 0usize;
-    while let Some(pos) = memchr_crlf(data, i) {
-        let line = std::str::from_utf8(&data[i..pos])
-            .map_err(|_| ValidatorError::InvalidInput("invalid chunk header".into()))?;
-        let size_str = line
-            .split_once(';')
-            .map_or(line, |(before, _)| before)
-            .trim();
-        let size = usize::from_str_radix(size_str, 16)
-            .map_err(|_| ValidatorError::InvalidInput("invalid chunk size".into()))?;
-        i = pos + 2;
-        if size == 0 {
-            break;
-        }
-        let chunk_end = i + size;
-        if chunk_end > data.len() {
-            return Err(ValidatorError::InvalidInput("truncated chunk".into()));
-        }
-        out.extend_from_slice(&data[i..chunk_end]);
-        i = chunk_end;
-        if data[i..].starts_with(b"\r\n") {
-            i += 2;
-        }
-    }
-    Ok(out)
-}
-
-pub(crate) fn memchr_crlf(data: &[u8], start: usize) -> Option<usize> {
-    let mut i = start;
-    while i + 1 < data.len() {
-        if data[i] == b'\r' && data[i + 1] == b'\n' {
-            return Some(i);
-        }
-        i += 1;
-    }
-    None
-}
-
-#[cfg(test)]
-mod memchr_crlf_tests {
-    use super::memchr_crlf;
-
-    #[test]
-    fn finds_crlf_at_or_after_start() {
-        let data = b"a\r\nb\r\n";
-        assert_eq!(memchr_crlf(data, 0), Some(1));
-        assert_eq!(memchr_crlf(data, 1), Some(1));
-        assert_eq!(memchr_crlf(data, 2), Some(4));
-        assert_eq!(memchr_crlf(data, 4), Some(4));
-    }
-
-    #[test]
-    fn returns_none_when_missing_or_past_end() {
-        assert_eq!(memchr_crlf(b"", 0), None);
-        assert_eq!(memchr_crlf(b"abc", 0), None);
-        assert_eq!(memchr_crlf(b"\r", 0), None);
-        assert_eq!(memchr_crlf(b"\r\n", 2), None);
-    }
-}
-
-#[cfg(test)]
-mod decode_chunked_tests {
-    use super::decode_chunked;
-
-    #[test]
-    fn decodes_basic_chunked_body() {
-        let body = b"4\r\nWiki\r\n5\r\npedia\r\n0\r\n\r\n";
-        assert_eq!(decode_chunked(body).unwrap(), b"Wikipedia");
-    }
-
-    #[test]
-    fn ignores_chunk_extensions() {
-        let body = b"4;ext=1\r\nWiki\r\n0\r\n\r\n";
-        assert_eq!(decode_chunked(body).unwrap(), b"Wiki");
-    }
-
-    #[test]
-    fn accepts_missing_final_crlf_after_chunk_data() {
-        let body = b"1\r\na";
-        assert_eq!(decode_chunked(body).unwrap(), b"a");
-    }
-
-    #[test]
-    fn errors_on_truncated_chunk() {
-        let body = b"2\r\na";
-        let err = decode_chunked(body).unwrap_err();
-        assert!(matches!(
-            err,
-            super::ValidatorError::InvalidInput(ref s) if s == "truncated chunk"
-        ));
-    }
-
-    #[test]
-    fn errors_on_invalid_chunk_size() {
-        let body = b"nope\r\nx\r\n";
-        let err = decode_chunked(body).unwrap_err();
-        assert!(matches!(
-            err,
-            super::ValidatorError::InvalidInput(ref s) if s == "invalid chunk size"
-        ));
     }
 }

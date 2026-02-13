@@ -18,16 +18,6 @@ pub fn starts_with_ascii_ci(s: &str, prefix: &str) -> bool {
     sb.len() >= pb.len() && sb[..pb.len()].eq_ignore_ascii_case(pb)
 }
 
-pub(crate) fn contains_ascii_ci(s: &str, needle: &str) -> bool {
-    let nb = needle.as_bytes();
-    if nb.is_empty() {
-        return true;
-    }
-    s.as_bytes()
-        .windows(nb.len())
-        .any(|w| w.eq_ignore_ascii_case(nb))
-}
-
 pub(crate) fn ends_with_ascii_ci(s: &str, suffix: &str) -> bool {
     let sb = s.as_bytes();
     let suf = suffix.as_bytes();
@@ -86,51 +76,6 @@ mod scan_quoted_string_end_tests {
     fn returns_none_when_start_is_out_of_bounds() {
         let bytes = b"\"x\"";
         assert_eq!(scan_quoted_string_end(bytes, b'"', bytes.len() + 1), None);
-    }
-}
-
-#[cfg(test)]
-mod contains_ascii_ci_tests {
-    use super::contains_ascii_ci;
-
-    #[test]
-    fn empty_needle_matches() {
-        assert!(contains_ascii_ci("abc", ""));
-        assert!(contains_ascii_ci("", ""));
-    }
-
-    #[test]
-    fn empty_haystack_does_not_match_non_empty_needle() {
-        assert!(!contains_ascii_ci("", "a"));
-    }
-
-    #[test]
-    fn longer_needle_does_not_match() {
-        assert!(!contains_ascii_ci("ab", "abc"));
-    }
-
-    #[test]
-    fn matches_case_insensitively() {
-        assert!(contains_ascii_ci("Hello", "heL"));
-    }
-
-    #[test]
-    fn non_match_returns_false() {
-        assert!(!contains_ascii_ci("abc", "d"));
-    }
-
-    #[test]
-    fn handles_non_ascii_bytes_without_panicking() {
-        assert!(!contains_ascii_ci("❤", "h"));
-        assert!(contains_ascii_ci("❤H", "h"));
-        // Case folding is ASCII-only; non-ASCII bytes must match exactly.
-        assert!(contains_ascii_ci("❤H", "❤h"));
-        assert!(!contains_ascii_ci("Ä", "ä"));
-    }
-
-    #[test]
-    fn longer_non_ascii_needle_does_not_match() {
-        assert!(!contains_ascii_ci("❤", "❤❤"));
     }
 }
 

@@ -264,8 +264,10 @@ mod declaration_validation_tests {
 
     #[test]
     fn vendor_extension_properties_are_suppressed_when_warnings_are_disabled() {
-        let mut cfg = Config::default();
-        cfg.warning = Some("-1".to_string());
+        let cfg = Config {
+            warning: Some("-1".to_string()),
+            ..Config::default()
+        };
         let report =
             validate_css_declarations_text("-webkit-foo: 1; _bar: 2; zoom: 3", &cfg).unwrap();
         assert_eq!(report.errors, 0, "{report:?}");

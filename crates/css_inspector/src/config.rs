@@ -1,7 +1,11 @@
+/// Configuration options for validation.
 #[derive(Clone, Debug)]
 pub struct Config {
+    /// Validation profile (e.g. `"css3"`, `"css4"`).
     pub profile: Option<String>,
+    /// User medium used for `@media` warnings (e.g. `"screen"`).
     pub medium: Option<String>,
+    /// Numeric warning threshold. `-1` suppresses warnings.
     pub warning: Option<String>,
 }
 

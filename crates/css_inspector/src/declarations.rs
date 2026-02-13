@@ -79,39 +79,28 @@ use crate::report::Severity;
 pub(crate) fn validate_declarations(
     block: &str,
     known_properties: &KnownProperties,
-    warning_level: i32,
-    css1_escapes: bool,
-    in_page_at_rule: bool,
-    in_font_face_at_rule: bool,
-    in_property_at_rule: bool,
-    in_font_palette_values_at_rule: bool,
-    in_counter_style_at_rule: bool,
-    in_color_profile_at_rule: bool,
-    in_view_transition_at_rule: bool,
-    in_scroll_timeline_at_rule: bool,
-    in_view_timeline_at_rule: bool,
-    css4_profile: bool,
-    lenient: bool,
+    settings: DeclValidationSettings,
+    at_rule_context: DeclAtRuleContext,
     report: &mut Report,
 ) {
     let mut v = DeclValidator {
         known_properties,
-        warning_level,
-        css1_escapes,
-        css4_profile,
-        lenient,
+        warning_level: settings.warning_level,
+        css1_escapes: settings.css1_escapes,
+        css4_profile: settings.css4_profile,
+        lenient: settings.lenient,
         report,
         redef: BorderRedefinitionTracker::default(),
         ctx: DeclContext {
-            in_page_at_rule,
-            in_font_face_at_rule,
-            in_property_at_rule,
-            in_font_palette_values_at_rule,
-            in_counter_style_at_rule,
-            in_color_profile_at_rule,
-            in_view_transition_at_rule,
-            in_scroll_timeline_at_rule,
-            in_view_timeline_at_rule,
+            in_page_at_rule: at_rule_context.in_page_at_rule,
+            in_font_face_at_rule: at_rule_context.in_font_face_at_rule,
+            in_property_at_rule: at_rule_context.in_property_at_rule,
+            in_font_palette_values_at_rule: at_rule_context.in_font_palette_values_at_rule,
+            in_counter_style_at_rule: at_rule_context.in_counter_style_at_rule,
+            in_color_profile_at_rule: at_rule_context.in_color_profile_at_rule,
+            in_view_transition_at_rule: at_rule_context.in_view_transition_at_rule,
+            in_scroll_timeline_at_rule: at_rule_context.in_scroll_timeline_at_rule,
+            in_view_timeline_at_rule: at_rule_context.in_view_timeline_at_rule,
             warned_pagebreak_too_many_values: false,
         },
         unknown_reported: HashSet::new(),
@@ -120,6 +109,27 @@ pub(crate) fn validate_declarations(
     for raw in iter_declaration_statements_skipping_nested_blocks(block, known_properties) {
         v.validate_raw_declaration(raw);
     }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) struct DeclValidationSettings {
+    pub(crate) warning_level: i32,
+    pub(crate) css1_escapes: bool,
+    pub(crate) css4_profile: bool,
+    pub(crate) lenient: bool,
+}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub(crate) struct DeclAtRuleContext {
+    pub(crate) in_page_at_rule: bool,
+    pub(crate) in_font_face_at_rule: bool,
+    pub(crate) in_property_at_rule: bool,
+    pub(crate) in_font_palette_values_at_rule: bool,
+    pub(crate) in_counter_style_at_rule: bool,
+    pub(crate) in_color_profile_at_rule: bool,
+    pub(crate) in_view_transition_at_rule: bool,
+    pub(crate) in_scroll_timeline_at_rule: bool,
+    pub(crate) in_view_timeline_at_rule: bool,
 }
 
 struct DeclContext {

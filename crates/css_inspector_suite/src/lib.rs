@@ -194,7 +194,7 @@ mod tests {
 
     use super::{
         Case, Config, Input, Source, load_manifest, parse_validator_query, url_decode_plus,
-        validate_manifest_invariants, workspace_root,
+        validate_manifest_invariants,
     };
 
     #[test]

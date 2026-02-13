@@ -1,7 +1,7 @@
 use std::borrow::Cow;
 
 use crate::config::{Config, css1_escapes_from_config, warning_level_from_config};
-use crate::declarations::validate_declarations;
+use crate::declarations::{DeclAtRuleContext, DeclValidationSettings, validate_declarations};
 use crate::errors::ValidatorError;
 use crate::imports::has_top_level_import_url;
 use crate::known_properties::known_properties_for_config;
@@ -23,8 +23,23 @@ use crate::report::Severity;
 #[cfg(test)]
 use crate::{Fetcher, validate_css_text_with_fetcher};
 
+/// Validate a CSS stylesheet passed as text.
+///
+/// Returns a [`Report`] containing error/warning counts and human-readable messages.
 pub fn validate_css_text(css: &str, config: &Config) -> Result<Report, ValidatorError> {
     validate_css_text_internal(css, config, true)
+}
+
+fn decl_settings_from_config(config: &Config) -> DeclValidationSettings {
+    let warning_level = warning_level_from_config(config);
+    let css1_escapes = css1_escapes_from_config(config);
+    let is_css4 = matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
+    DeclValidationSettings {
+        warning_level,
+        css1_escapes,
+        css4_profile: is_css4,
+        lenient: is_css4,
+    }
 }
 
 pub(crate) fn validate_css_text_stripped(
@@ -33,9 +48,10 @@ pub(crate) fn validate_css_text_stripped(
     warn_on_top_level_imports: bool,
     report: &mut Report,
 ) {
-    let warning_level = warning_level_from_config(config);
+    let decl_settings = decl_settings_from_config(config);
+    let warning_level = decl_settings.warning_level;
     let pseudo_version = selector_pseudo_version_from_config(config);
-    let lenient = matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
+    let lenient = decl_settings.lenient;
     let css_cdata = strip_cdata_wrappers(css);
     let css_line = if lenient {
         strip_css_line_comments_lenient(css_cdata.as_ref())
@@ -56,9 +72,6 @@ pub(crate) fn validate_css_text_stripped(
     }
 
     let known_properties = known_properties_for_config(config);
-    let css1_escapes = css1_escapes_from_config(config);
-    let css4_profile =
-        matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
 
     warn_on_other_media_rules(css, config, warning_level, report);
 
@@ -95,33 +108,12 @@ pub(crate) fn validate_css_text_stripped(
             );
             warn_on_conflicting_attribute_selectors(block.prelude, warning_level, report);
         }
-        let (
-            in_page_at_rule,
-            in_font_face_at_rule,
-            in_property_at_rule,
-            in_font_palette_values_at_rule,
-            in_counter_style_at_rule,
-            in_color_profile_at_rule,
-            in_view_transition_at_rule,
-            in_scroll_timeline_at_rule,
-            in_view_timeline_at_rule,
-        ) = at_rule_decl_list_context_flags(block.kind, block.prelude);
+        let at_rule_context = at_rule_decl_list_context_flags(block.kind, block.prelude);
         validate_declarations(
             block.body,
             known_properties,
-            warning_level,
-            css1_escapes,
-            in_page_at_rule,
-            in_font_face_at_rule,
-            in_property_at_rule,
-            in_font_palette_values_at_rule,
-            in_counter_style_at_rule,
-            in_color_profile_at_rule,
-            in_view_transition_at_rule,
-            in_scroll_timeline_at_rule,
-            in_view_timeline_at_rule,
-            css4_profile,
-            lenient,
+            decl_settings,
+            at_rule_context,
             report,
         );
     }
@@ -257,28 +249,13 @@ pub fn validate_css_declarations_text(
     };
     let stripped = stripped.as_ref();
     let known_properties = known_properties_for_config(config);
-    let warning_level = warning_level_from_config(config);
-    let css1_escapes = css1_escapes_from_config(config);
-    let css4_profile =
-        matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
-    let lenient = matches!(config.profile.as_deref(), Some(p) if p.eq_ignore_ascii_case("css4"));
+    let decl_settings = decl_settings_from_config(config);
 
     validate_declarations(
         stripped,
         known_properties,
-        warning_level,
-        css1_escapes,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        css4_profile,
-        lenient,
+        decl_settings,
+        DeclAtRuleContext::default(),
         &mut report,
     );
     Ok(report)

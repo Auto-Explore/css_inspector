@@ -2,11 +2,10 @@
 use super::{
     AttrConstraint, AttrOp, Config, Fetcher, RuleBlockKind, Severity, StdFetcher,
     ascii_lowercase_cow, at_rule_name, border_side_component_flags, constraints_pair_conflict,
-    contains_ascii_ci, contains_invalid_top_level_chars, contains_unknown_at_rule,
-    count_brace_balance_errors, dash_match_prefix, ends_with_ascii_ci, find_double_crlf,
-    for_each_affected_border_longhand, is_css_wide_keyword, is_css_wide_keywordish_token,
-    is_known_at_rule_name, iter_rule_blocks, iter_top_level_import_urls, memchr_crlf,
-    parse_http_response, parse_properties_file, starts_with_ascii_ci, strip_css_comments,
+    contains_invalid_top_level_chars, contains_unknown_at_rule, count_brace_balance_errors,
+    dash_match_prefix, ends_with_ascii_ci, for_each_affected_border_longhand, is_css_wide_keyword,
+    is_css_wide_keywordish_token, is_known_at_rule_name, iter_rule_blocks,
+    iter_top_level_import_urls, parse_properties_file, starts_with_ascii_ci, strip_css_comments,
     validate_css_declarations_text, validate_css_text, validate_css_text_with_fetcher,
     validate_css_uri_with_fetcher,
 };
@@ -891,104 +890,6 @@ fn attribute_constraints_conflict_checks_all_pairs() {
 }
 
 #[test]
-fn parse_http_response_decodes_chunked_body_when_indicated() {
-    let resp = b"HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n4\r\nWiki\r\n5\r\npedia\r\n0\r\n\r\n";
-    let (code, _headers, body) = parse_http_response(resp).unwrap();
-    assert_eq!(code, 200);
-    assert_eq!(body, b"Wikipedia");
-}
-
-#[test]
-fn parse_http_response_accepts_chunk_extensions() {
-    let resp = b"HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n4;ext=1\r\nWiki\r\n0\r\n\r\n";
-    let (_code, _headers, body) = parse_http_response(resp).unwrap();
-    assert_eq!(body, b"Wiki");
-}
-
-#[test]
-fn parse_http_response_returns_raw_body_when_not_chunked() {
-    let resp = b"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nHello";
-    let (code, _headers, body) = parse_http_response(resp).unwrap();
-    assert_eq!(code, 200);
-    assert_eq!(body, b"Hello");
-}
-
-#[test]
-fn parse_http_response_applies_utf8_lossy_to_body() {
-    // Preserve existing behavior: the body is interpreted as UTF-8 and invalid sequences are
-    // replaced with U+FFFD (encoded as 0xEF 0xBF 0xBD).
-    let resp = b"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\n\xFF";
-    let (_code, _headers, body) = parse_http_response(resp).unwrap();
-    assert_eq!(body, b"\xEF\xBF\xBD");
-}
-
-#[test]
-fn parse_http_response_matches_transfer_encoding_case_insensitively() {
-    let resp = b"HTTP/1.1 200 OK\r\ntRaNsFeR-EnCoDiNg: gzip, CHUNKED\r\n\r\n4\r\nWiki\r\n0\r\n\r\n";
-    let (_code, _headers, body) = parse_http_response(resp).unwrap();
-    assert_eq!(body, b"Wiki");
-}
-
-#[test]
-fn parse_http_response_detects_chunked_in_any_transfer_encoding_header() {
-    let resp =
-            b"HTTP/1.1 200 OK\r\nTransfer-Encoding: gzip\r\nTransfer-Encoding: chunked\r\n\r\n0\r\n\r\n";
-    let (_code, _headers, body) = parse_http_response(resp).unwrap();
-    assert_eq!(body, b"");
-}
-
-#[test]
-fn parse_http_response_trims_header_whitespace() {
-    let resp = b"HTTP/1.1 200 OK\r\nTransfer-Encoding :  chunked  \r\n\r\n0\r\n\r\n";
-    let (_code, headers, body) = parse_http_response(resp).unwrap();
-    assert_eq!(body, b"");
-    assert!(
-        headers
-            .iter()
-            .any(|(k, v)| k == "Transfer-Encoding" && v == "chunked")
-    );
-}
-
-#[test]
-fn parse_http_response_ignores_malformed_header_lines() {
-    let resp = b"HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\nBadHeader\r\n\r\n0\r\n\r\n";
-    let (_code, headers, body) = parse_http_response(resp).unwrap();
-    assert!(
-        headers
-            .iter()
-            .any(|(k, v)| k == "Transfer-Encoding" && v == "chunked")
-    );
-    assert_eq!(body, b"");
-}
-
-#[test]
-fn parse_http_response_rejects_missing_double_crlf() {
-    let resp = b"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nHello";
-    let err = parse_http_response(resp).unwrap_err();
-    assert!(matches!(
-        err,
-        super::ValidatorError::InvalidInput(ref s) if s == "invalid HTTP response"
-    ));
-}
-
-#[test]
-fn find_double_crlf_finds_first_header_body_split() {
-    assert_eq!(find_double_crlf(b"abc\r\n\r\nxyz"), Some(3));
-    assert_eq!(find_double_crlf(b"\r\n\r\n"), Some(0));
-    assert_eq!(find_double_crlf(b"nope"), None);
-    assert_eq!(find_double_crlf(b"\r\n\r"), None);
-}
-
-#[test]
-fn memchr_crlf_respects_start_offset() {
-    let data = b"a\r\nb\r\n";
-    assert_eq!(memchr_crlf(data, 0), Some(1));
-    assert_eq!(memchr_crlf(data, 2), Some(4));
-    assert_eq!(memchr_crlf(data, data.len()), None);
-    assert_eq!(memchr_crlf(data, data.len().saturating_sub(1)), None);
-}
-
-#[test]
 fn border_side_component_flags_classifies_tokens_conservatively() {
     assert_eq!(border_side_component_flags(&[]), (false, false, false));
     assert_eq!(
@@ -1097,8 +998,10 @@ fn affected_border_longhands_returns_none_for_unrelated_properties() {
 
 #[test]
 fn warns_on_border_redefinition_per_affected_longhand_at_level_2() {
-    let mut cfg = Config::default();
-    cfg.warning = Some("2".to_string());
+    let cfg = Config {
+        warning: Some("2".to_string()),
+        ..Config::default()
+    };
     let report = validate_css_text(
         "a { border-top: 1px solid red; border-top: 2px solid red; }",
         &cfg,
@@ -1146,8 +1049,10 @@ fn does_not_warn_on_nested_import_in_text_mode() {
 
 #[test]
 fn warns_on_media_rules_that_do_not_match_user_medium() {
-    let mut cfg = Config::default();
-    cfg.medium = Some("screen".to_string());
+    let cfg = Config {
+        medium: Some("screen".to_string()),
+        ..Config::default()
+    };
     let report = validate_css_text("@media print { a{color:red} }", &cfg).unwrap();
     assert_eq!(report.errors, 0);
     assert_eq!(report.warnings, 1);
@@ -1161,20 +1066,26 @@ fn warns_on_media_rules_that_do_not_match_user_medium() {
 
 #[test]
 fn does_not_warn_on_media_rules_for_all_or_matching_user_medium() {
-    let mut cfg = Config::default();
-    cfg.medium = Some("all".to_string());
+    let cfg = Config {
+        medium: Some("all".to_string()),
+        ..Config::default()
+    };
     let report = validate_css_text("@media print { a{color:red} }", &cfg).unwrap();
     assert_eq!(report.errors, 0);
     assert_eq!(report.warnings, 0);
 
-    let mut cfg = Config::default();
-    cfg.medium = Some("print".to_string());
+    let cfg = Config {
+        medium: Some("print".to_string()),
+        ..Config::default()
+    };
     let report = validate_css_text("@media print { a{color:red} }", &cfg).unwrap();
     assert_eq!(report.errors, 0);
     assert_eq!(report.warnings, 0);
 
-    let mut cfg = Config::default();
-    cfg.medium = Some("print,screen".to_string());
+    let cfg = Config {
+        medium: Some("print,screen".to_string()),
+        ..Config::default()
+    };
     let report = validate_css_text("@media print { a{color:red} }", &cfg).unwrap();
     assert_eq!(report.errors, 0);
     assert_eq!(report.warnings, 0);
@@ -1659,119 +1570,6 @@ fn unquote_leaves_unmatched_quotes_but_trims() {
 }
 
 #[test]
-fn decode_chunked_decodes_basic_payload() {
-    let decoded = super::decode_chunked(b"4\r\nWiki\r\n5\r\npedia\r\n0\r\n\r\n").unwrap();
-    assert_eq!(decoded, b"Wikipedia");
-}
-
-#[test]
-fn decode_chunked_tolerates_missing_crlf_after_chunk_data() {
-    let decoded = super::decode_chunked(b"4\r\nWiki0\r\n\r\n").unwrap();
-    assert_eq!(decoded, b"Wiki");
-}
-
-#[test]
-fn decode_chunked_tolerates_input_truncated_after_chunk_data() {
-    let decoded = super::decode_chunked(b"4\r\nWiki").unwrap();
-    assert_eq!(decoded, b"Wiki");
-}
-
-#[test]
-fn decode_chunked_ignores_chunk_extensions_and_detects_truncation() {
-    let decoded = super::decode_chunked(b"4;ext=1\r\nWiki\r\n0\r\n\r\n").unwrap();
-    assert_eq!(decoded, b"Wiki");
-
-    let decoded = super::decode_chunked(b"4;ext=1;foo=bar\r\nWiki\r\n0\r\n\r\n").unwrap();
-    assert_eq!(decoded, b"Wiki");
-
-    let err = super::decode_chunked(b"4\r\nWi").unwrap_err();
-    assert!(matches!(err, super::ValidatorError::InvalidInput(ref s) if s == "truncated chunk"));
-}
-
-#[test]
-fn parse_http_url_parses_host_port_and_path() {
-    let (host, port, path) = super::parse_http_url("http://example.com/a/b").unwrap();
-    assert_eq!(host, "example.com");
-    assert_eq!(port, 80);
-    assert_eq!(path, "/a/b");
-
-    let (host, port, path) = super::parse_http_url("http://example.com:8080/a").unwrap();
-    assert_eq!(host, "example.com");
-    assert_eq!(port, 8080);
-    assert_eq!(path, "/a");
-}
-
-#[test]
-fn parse_http_url_preserves_double_slashes_in_path() {
-    let (host, port, path) = super::parse_http_url("http://example.com//a.css").unwrap();
-    assert_eq!(host, "example.com");
-    assert_eq!(port, 80);
-    assert_eq!(path, "//a.css");
-
-    let (host, port, path) = super::parse_http_url("http:////a.css").unwrap();
-    assert_eq!(host, "");
-    assert_eq!(port, 80);
-    assert_eq!(path, "//a.css");
-}
-
-#[test]
-fn parse_http_url_preserves_query_string_and_fragment_in_path() {
-    let (host, port, path) = super::parse_http_url("http://example.com/a?b=c#frag").unwrap();
-    assert_eq!(host, "example.com");
-    assert_eq!(port, 80);
-    assert_eq!(path, "/a?b=c#frag");
-}
-
-#[test]
-fn parse_http_url_defaults_path_to_slash() {
-    let (host, port, path) = super::parse_http_url("http://example.com").unwrap();
-    assert_eq!(host, "example.com");
-    assert_eq!(port, 80);
-    assert_eq!(path, "/");
-
-    let (host, port, path) = super::parse_http_url("http://example.com/").unwrap();
-    assert_eq!(host, "example.com");
-    assert_eq!(port, 80);
-    assert_eq!(path, "/");
-
-    let (host, port, path) = super::parse_http_url("http://example.com:8080").unwrap();
-    assert_eq!(host, "example.com");
-    assert_eq!(port, 8080);
-    assert_eq!(path, "/");
-
-    let (host, port, path) = super::parse_http_url("http://example.com:8080/").unwrap();
-    assert_eq!(host, "example.com");
-    assert_eq!(port, 8080);
-    assert_eq!(path, "/");
-
-    let (host, port, path) = super::parse_http_url("http://:8080").unwrap();
-    assert_eq!(host, "");
-    assert_eq!(port, 8080);
-    assert_eq!(path, "/");
-}
-
-#[test]
-fn parse_http_url_accepts_empty_host() {
-    let (host, port, path) = super::parse_http_url("http:///a").unwrap();
-    assert_eq!(host, "");
-    assert_eq!(port, 80);
-    assert_eq!(path, "/a");
-
-    let (host, port, path) = super::parse_http_url("http:///").unwrap();
-    assert_eq!(host, "");
-    assert_eq!(port, 80);
-    assert_eq!(path, "/");
-}
-
-#[test]
-fn parse_http_url_accepts_empty_host_with_port() {
-    let (host, port, path) = super::parse_http_url("http://:8080/a").unwrap();
-    assert_eq!(host, "");
-    assert_eq!(port, 8080);
-    assert_eq!(path, "/a");
-}
-
-#[test]
 fn split_http_base_splits_scheme_host_and_path() {
     let (scheme_host, path) = super::split_http_base("http://example.com/a/b.css").unwrap();
     assert_eq!(scheme_host, "http://example.com");
@@ -1812,34 +1610,18 @@ fn split_http_base_splits_scheme_host_and_path() {
 }
 
 #[test]
-fn parse_http_url_and_split_http_base_handle_utf8_hosts() {
-    let (host, port, path) = super::parse_http_url("http://❤/a").unwrap();
-    assert_eq!(host, "❤");
-    assert_eq!(port, 80);
-    assert_eq!(path, "/a");
-
-    let (host, port, path) = super::parse_http_url("http://❤:8080/a").unwrap();
-    assert_eq!(host, "❤");
-    assert_eq!(port, 8080);
-    assert_eq!(path, "/a");
-
-    let (host, port, path) = super::parse_http_url("http://❤:8080").unwrap();
-    assert_eq!(host, "❤");
-    assert_eq!(port, 8080);
-    assert_eq!(path, "/");
-
+fn split_http_base_handles_utf8_hosts() {
     let (scheme_host, path) = super::split_http_base("http://❤/a.css").unwrap();
     assert_eq!(scheme_host, "http://❤");
+    assert_eq!(path, "/a.css");
+
+    let (scheme_host, path) = super::split_http_base("http://❤:8080/a.css").unwrap();
+    assert_eq!(scheme_host, "http://❤:8080");
     assert_eq!(path, "/a.css");
 }
 
 #[test]
-fn parse_http_url_and_split_http_base_preserve_double_slashes_with_utf8_host() {
-    let (host, port, path) = super::parse_http_url("http://❤//a.css").unwrap();
-    assert_eq!(host, "❤");
-    assert_eq!(port, 80);
-    assert_eq!(path, "//a.css");
-
+fn split_http_base_preserves_double_slashes_with_utf8_host() {
     let (scheme_host, path) = super::split_http_base("http://❤//a.css").unwrap();
     assert_eq!(scheme_host, "http://❤");
     assert_eq!(path, "//a.css");
@@ -1864,27 +1646,6 @@ fn split_http_base_accepts_empty_host() {
     let (scheme_host, path) = super::split_http_base("http:///").unwrap();
     assert_eq!(scheme_host, "http://");
     assert_eq!(path, "/");
-}
-
-#[test]
-fn parse_http_url_rejects_non_http_urls_and_invalid_ports() {
-    let err = super::parse_http_url("https://example.com").unwrap_err();
-    assert!(matches!(err, super::ValidatorError::InvalidInput(ref s) if s == "not an http:// URL"));
-
-    let err = super::parse_http_url("http://example.com:nope/").unwrap_err();
-    assert!(
-        matches!(err, super::ValidatorError::InvalidInput(ref s) if s == "invalid port in URL: http://example.com:nope/")
-    );
-
-    let err = super::parse_http_url("http://example.com:/a").unwrap_err();
-    assert!(
-        matches!(err, super::ValidatorError::InvalidInput(ref s) if s == "invalid port in URL: http://example.com:/a")
-    );
-
-    let err = super::parse_http_url("http://example.com:").unwrap_err();
-    assert!(
-        matches!(err, super::ValidatorError::InvalidInput(ref s) if s == "invalid port in URL: http://example.com:")
-    );
 }
 
 #[test]

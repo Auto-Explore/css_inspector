@@ -1,3 +1,16 @@
+//! Rust-based, suite-driven CSS validator.
+//!
+//! This validator is intentionally conservative and focuses on catching issues that are likely to
+//! break real-world behavior, rather than aiming to be fully spec-complete.
+//!
+//! # Example
+//! ```
+//! use css_inspector::{Config, validate_css_text};
+//!
+//! let report = validate_css_text("a { color: red; }", &Config::default()).unwrap();
+//! assert!(report.valid());
+//! ```
+
 mod config;
 mod declarations;
 mod errors;
@@ -29,10 +42,7 @@ pub(crate) use declarations::{
     is_css_wide_keywordish_token, is_valid_url_function_token,
 };
 #[cfg(test)]
-pub(crate) use fetcher::{
-    decode_chunked, file_url_to_path, find_double_crlf, memchr_crlf, parse_http_response,
-    parse_http_url, resolve_relative_uri, split_http_base,
-};
+pub(crate) use fetcher::{file_url_to_path, resolve_relative_uri, split_http_base};
 #[cfg(test)]
 pub(crate) use imports::{iter_top_level_import_urls, unquote};
 #[cfg(test)]
@@ -49,7 +59,7 @@ pub(crate) use selectors::{
     constraints_pair_conflict, dash_match_prefix, parse_attr_selector,
 };
 #[cfg(test)]
-pub(crate) use strutil::{ascii_lowercase_cow, contains_ascii_ci, ends_with_ascii_ci};
+pub(crate) use strutil::{ascii_lowercase_cow, ends_with_ascii_ci};
 
 #[cfg(test)]
 mod tests;

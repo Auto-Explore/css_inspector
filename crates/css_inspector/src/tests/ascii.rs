@@ -13,11 +13,6 @@ fn ascii_ci_prefix_and_suffix_helpers_match_case_insensitively() {
     assert!(ends_with_ascii_ci("x", ""));
     assert!(!ends_with_ascii_ci("🦀", "a"));
     assert!(ends_with_ascii_ci("a🦀", "🦀"));
-
-    assert!(contains_ascii_ci("xCHUNKEDy", "chunked"));
-    assert!(!contains_ascii_ci("xchunky", "chunked"));
-    assert!(contains_ascii_ci("abc", ""));
-    assert!(!contains_ascii_ci("ab", "abc"));
 }
 
 #[test]
