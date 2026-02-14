@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use rustc_hash::FxHashSet;
 
 use crate::known_properties::KnownProperties;
 use crate::report::{Report, push_error, push_warning_level};
@@ -103,7 +103,7 @@ pub(crate) fn validate_declarations(
             in_view_timeline_at_rule: at_rule_context.in_view_timeline_at_rule,
             warned_pagebreak_too_many_values: false,
         },
-        unknown_reported: HashSet::new(),
+        unknown_reported: FxHashSet::default(),
     };
 
     for raw in iter_declaration_statements_skipping_nested_blocks(block, known_properties) {
@@ -154,7 +154,7 @@ struct DeclValidator<'a> {
     report: &'a mut Report,
     redef: BorderRedefinitionTracker,
     ctx: DeclContext,
-    unknown_reported: HashSet<String>,
+    unknown_reported: FxHashSet<String>,
 }
 
 impl DeclValidator<'_> {

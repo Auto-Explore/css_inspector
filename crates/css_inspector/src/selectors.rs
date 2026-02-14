@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use rustc_hash::FxHashMap;
 
 use crate::config::Config;
 use crate::parser::contains_invalid_top_level_chars;
@@ -52,7 +52,8 @@ pub(crate) fn warn_on_conflicting_attribute_selectors(
             continue;
         }
 
-        let mut by_name: HashMap<String, Vec<AttrConstraint>> = HashMap::new();
+        let mut by_name: FxHashMap<String, Vec<AttrConstraint>> =
+            FxHashMap::with_capacity_and_hasher(attrs.len(), Default::default());
         for AttrSel { name, op, value } in attrs {
             by_name
                 .entry(name)

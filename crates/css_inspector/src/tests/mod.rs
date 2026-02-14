@@ -9,6 +9,7 @@ use super::{
     validate_css_declarations_text, validate_css_text, validate_css_text_with_fetcher,
     validate_css_uri_with_fetcher,
 };
+use rustc_hash::FxHashMap;
 use std::borrow::Cow;
 use std::cell::Cell;
 
@@ -24,7 +25,7 @@ mod properties;
 mod real_world;
 mod rule_blocks;
 
-struct MapFetcher(std::collections::HashMap<String, Vec<u8>>);
+struct MapFetcher(FxHashMap<String, Vec<u8>>);
 
 impl Fetcher for MapFetcher {
     fn fetch(&self, uri: &str) -> Result<Vec<u8>, super::ValidatorError> {
@@ -36,12 +37,12 @@ impl Fetcher for MapFetcher {
 }
 
 struct CountingFetcher {
-    map: std::collections::HashMap<String, Vec<u8>>,
+    map: FxHashMap<String, Vec<u8>>,
     calls: Cell<usize>,
 }
 
 impl CountingFetcher {
-    fn new(map: std::collections::HashMap<String, Vec<u8>>) -> Self {
+    fn new(map: FxHashMap<String, Vec<u8>>) -> Self {
         Self {
             map,
             calls: Cell::new(0),
@@ -60,7 +61,7 @@ impl Fetcher for CountingFetcher {
 }
 
 fn collect_affected_border_longhands(prop: &str, tokens: &[&str]) -> Option<Vec<&'static str>> {
-    let mut out = Vec::new();
+    let mut out = Vec::with_capacity(12);
     let has_any = for_each_affected_border_longhand(prop, tokens, |p| out.push(p));
     has_any.then_some(out)
 }
@@ -1095,7 +1096,7 @@ fn does_not_warn_on_media_rules_for_all_or_matching_user_medium() {
 fn validates_imported_stylesheets_via_fetcher() {
     let base = "http://example.com/dir/main.css";
     let import_uri = "http://example.com/dir/a.css";
-    let mut map = std::collections::HashMap::new();
+    let mut map = FxHashMap::with_capacity_and_hasher(1, Default::default());
     map.insert(import_uri.to_string(), b"c { color: red;".to_vec());
     let fetcher = MapFetcher(map);
 
@@ -1119,7 +1120,7 @@ fn validates_imported_stylesheets_via_fetcher() {
 fn imported_stylesheet_messages_come_before_main_sheet_messages() {
     let base = "http://example.com/dir/main.css";
     let import_uri = "http://example.com/dir/a.css";
-    let mut map = std::collections::HashMap::new();
+    let mut map = FxHashMap::with_capacity_and_hasher(1, Default::default());
     map.insert(import_uri.to_string(), b"<".to_vec());
     let fetcher = MapFetcher(map);
 
@@ -1148,7 +1149,7 @@ fn imported_stylesheet_messages_come_before_main_sheet_messages() {
 fn reports_import_loops_as_errors() {
     let base = "http://example.com/dir/main.css";
     let import_uri = "http://example.com/dir/a.css";
-    let mut map = std::collections::HashMap::new();
+    let mut map = FxHashMap::with_capacity_and_hasher(1, Default::default());
     map.insert(
         import_uri.to_string(),
         b"@import \"main.css\"; c { color: red; }".to_vec(),
@@ -1176,7 +1177,7 @@ fn reports_import_loops_as_errors() {
 fn validate_css_uri_with_fetcher_uses_uri_as_base_for_imports_and_loop_detection() {
     let main_uri = "http://example.com/dir/main.css";
     let import_uri = "http://example.com/dir/a.css";
-    let mut map = std::collections::HashMap::new();
+    let mut map = FxHashMap::with_capacity_and_hasher(2, Default::default());
     map.insert(main_uri.to_string(), b"@import \"a.css\";".to_vec());
     map.insert(import_uri.to_string(), b"@import \"main.css\";".to_vec());
     let fetcher = MapFetcher(map);
@@ -1196,7 +1197,7 @@ fn validate_css_uri_with_fetcher_uses_uri_as_base_for_imports_and_loop_detection
 fn reports_duplicate_imports_as_errors() {
     let base = "http://example.com/dir/main.css";
     let import_uri = "http://example.com/dir/a.css";
-    let mut map = std::collections::HashMap::new();
+    let mut map = FxHashMap::with_capacity_and_hasher(1, Default::default());
     map.insert(import_uri.to_string(), b"c { color: red; }".to_vec());
     let fetcher = MapFetcher(map);
 
@@ -1220,7 +1221,7 @@ fn reports_duplicate_imports_as_errors() {
 #[test]
 fn ignores_empty_import_urls() {
     let base = "http://example.com/dir/main.css";
-    let fetcher = CountingFetcher::new(std::collections::HashMap::new());
+    let fetcher = CountingFetcher::new(FxHashMap::default());
 
     let report = validate_css_text_with_fetcher(
         "@import \"\"; b { color: red; }",
@@ -1250,7 +1251,7 @@ fn ignores_empty_import_urls() {
 fn duplicate_imports_do_not_fetch_second_time() {
     let base = "http://example.com/dir/main.css";
     let import_uri = "http://example.com/dir/a.css";
-    let mut map = std::collections::HashMap::new();
+    let mut map = FxHashMap::with_capacity_and_hasher(1, Default::default());
     map.insert(import_uri.to_string(), b"c { color: red; }".to_vec());
     let fetcher = CountingFetcher::new(map);
 
@@ -1275,7 +1276,7 @@ fn duplicate_imports_do_not_fetch_second_time() {
 #[test]
 fn reports_failed_import_fetches_as_errors() {
     let base = "http://example.com/dir/main.css";
-    let fetcher = MapFetcher(std::collections::HashMap::new());
+    let fetcher = MapFetcher(FxHashMap::default());
 
     let report = validate_css_text_with_fetcher(
         "@import \"missing.css\"; b { color: red; }",
@@ -1298,7 +1299,7 @@ fn validates_nested_imports_recursively() {
     let base = "http://example.com/dir/main.css";
     let a_uri = "http://example.com/dir/a.css";
     let b_uri = "http://example.com/dir/b.css";
-    let mut map = std::collections::HashMap::new();
+    let mut map = FxHashMap::with_capacity_and_hasher(2, Default::default());
     map.insert(a_uri.to_string(), b"@import \"b.css\"; a {".to_vec());
     map.insert(b_uri.to_string(), b"b { color: red;".to_vec());
     let fetcher = CountingFetcher::new(map);
@@ -1327,7 +1328,7 @@ fn nested_imports_use_imported_uri_as_base() {
     let base = "http://example.com/main.css";
     let a_uri = "http://example.com/dir/a.css";
     let b_uri = "http://example.com/dir/b.css";
-    let mut map = std::collections::HashMap::new();
+    let mut map = FxHashMap::with_capacity_and_hasher(2, Default::default());
     map.insert(a_uri.to_string(), b"@import \"b.css\"; a {".to_vec());
     map.insert(b_uri.to_string(), b"b {".to_vec());
     let fetcher = CountingFetcher::new(map);
@@ -1354,7 +1355,7 @@ fn nested_imports_use_imported_uri_as_base() {
 #[test]
 fn failed_import_fetch_does_not_short_circuit_main_sheet_validation() {
     let base = "http://example.com/dir/main.css";
-    let fetcher = MapFetcher(std::collections::HashMap::new());
+    let fetcher = MapFetcher(FxHashMap::default());
 
     let report = validate_css_text_with_fetcher(
         "@import \"missing.css\"; b { color: red;",
@@ -1382,7 +1383,7 @@ fn failed_import_fetch_does_not_short_circuit_main_sheet_validation() {
 fn reports_unclosed_comment_in_imported_stylesheet_as_error() {
     let base = "http://example.com/dir/main.css";
     let import_uri = "http://example.com/dir/a.css";
-    let mut map = std::collections::HashMap::new();
+    let mut map = FxHashMap::with_capacity_and_hasher(1, Default::default());
     map.insert(import_uri.to_string(), b"c { color: red; /*".to_vec());
     let fetcher = MapFetcher(map);
 
@@ -1407,7 +1408,7 @@ fn reports_unclosed_comment_in_imported_stylesheet_as_error() {
 fn unclosed_comment_in_import_does_not_short_circuit_main_sheet_validation() {
     let base = "http://example.com/dir/main.css";
     let import_uri = "http://example.com/dir/a.css";
-    let mut map = std::collections::HashMap::new();
+    let mut map = FxHashMap::with_capacity_and_hasher(1, Default::default());
     map.insert(import_uri.to_string(), b"c { color: red; /*".to_vec());
     let fetcher = MapFetcher(map);
 

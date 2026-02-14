@@ -1,11 +1,10 @@
-use std::collections::HashMap;
-
 use css_inspector::{Config, Fetcher};
 use css_inspector_suite::{load_manifest, workspace_root};
+use rustc_hash::FxHashMap;
 
 #[derive(Default)]
 struct MapFetcher {
-    map: HashMap<String, Vec<u8>>,
+    map: FxHashMap<String, Vec<u8>>,
 }
 
 impl Fetcher for MapFetcher {
@@ -32,7 +31,13 @@ fn uri_cases_can_be_validated_offline_with_fixtures() {
         .join("autotest_manifest.jsonl");
     let cases = load_manifest(&manifest).expect("load manifest");
 
-    let mut fetcher = MapFetcher::default();
+    let uri_cases = cases
+        .iter()
+        .filter(|c| c.status == "ok" && c.input.kind == "uri")
+        .count();
+    let mut fetcher = MapFetcher {
+        map: FxHashMap::with_capacity_and_hasher(uri_cases, Default::default()),
+    };
 
     for c in cases
         .iter()

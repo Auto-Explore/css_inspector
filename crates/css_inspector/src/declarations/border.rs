@@ -1,13 +1,21 @@
-use std::collections::HashSet;
+use rustc_hash::FxHashSet;
 
 use crate::report::{Report, push_warning_level};
 use crate::strutil::ascii_lowercase_cow;
 
 use super::{is_border_style_token, is_border_width_token};
 
-#[derive(Default)]
 pub(super) struct BorderRedefinitionTracker {
-    seen: HashSet<&'static str>,
+    seen: FxHashSet<&'static str>,
+}
+
+impl Default for BorderRedefinitionTracker {
+    fn default() -> Self {
+        // border-{color,width,style} expands to at most 4 sides each.
+        Self {
+            seen: FxHashSet::with_capacity_and_hasher(12, Default::default()),
+        }
+    }
 }
 
 pub(super) fn track_border_redefinitions(

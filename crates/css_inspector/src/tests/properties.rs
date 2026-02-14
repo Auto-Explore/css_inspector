@@ -23,7 +23,7 @@ fn css4_phase1_properties_file_matches_w3c_level4_diff() {
     }
 
     fn parse_properties_file_names_in_order(s: &str) -> Vec<String> {
-        let mut out = Vec::new();
+        let mut out = Vec::with_capacity(s.lines().count());
         for raw in s.lines() {
             let line = raw.trim();
             if line.is_empty() || line.starts_with('#') {
@@ -112,10 +112,9 @@ fn css4_phase1_profile_accepts_all_css4_supplement_property_names() {
             env!("CARGO_MANIFEST_DIR"),
             "/data/css_properties/CSS4Properties.properties"
         ));
-        let mut out: Vec<String> = parse_properties_file(s)
-            .into_iter()
-            .map(|p| p.into_owned())
-            .collect();
+        let set = parse_properties_file(s);
+        let mut out: Vec<String> = Vec::with_capacity(set.len());
+        out.extend(set.into_iter().map(|p| p.into_owned()));
         out.sort();
         out
     }
@@ -145,10 +144,9 @@ fn css3_profile_rejects_css4_supplement_properties_as_unknown() {
             env!("CARGO_MANIFEST_DIR"),
             "/data/css_properties/CSS4Properties.properties"
         ));
-        let mut out: Vec<String> = parse_properties_file(s)
-            .into_iter()
-            .map(|p| p.into_owned())
-            .collect();
+        let set = parse_properties_file(s);
+        let mut out: Vec<String> = Vec::with_capacity(set.len());
+        out.extend(set.into_iter().map(|p| p.into_owned()));
         out.sort();
         out
     }

@@ -5,7 +5,7 @@ mod iter_declaration_statements_skipping_nested_blocks_tests {
     use super::{KnownProperties, iter_declaration_statements_skipping_nested_blocks};
 
     fn collect_trimmed_statements(block: &str) -> Vec<&str> {
-        let known_properties = KnownProperties::new();
+        let known_properties = KnownProperties::default();
         iter_declaration_statements_skipping_nested_blocks(block, &known_properties)
             .map(str::trim)
             .filter(|s| !s.is_empty())
@@ -67,7 +67,7 @@ width: 1px;
 
     #[test]
     fn does_not_treat_value_blocks_as_nested_rules() {
-        let mut known_properties = KnownProperties::new();
+        let mut known_properties = KnownProperties::default();
         known_properties.insert("color".into());
         known_properties.insert("background-color".into());
 

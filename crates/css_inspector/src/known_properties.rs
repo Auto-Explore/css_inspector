@@ -1,6 +1,7 @@
 use std::borrow::Cow;
-use std::collections::HashSet;
 use std::sync::OnceLock;
+
+use rustc_hash::FxHashSet;
 
 use crate::config::Config;
 use crate::strutil::ascii_lowercase_cow;
@@ -8,7 +9,7 @@ use crate::strutil::ascii_lowercase_cow;
 #[cfg(test)]
 use crate::validate_css_text;
 
-pub(crate) type KnownProperties = HashSet<Cow<'static, str>>;
+pub(crate) type KnownProperties = FxHashSet<Cow<'static, str>>;
 
 pub(crate) fn known_properties_for_config(config: &Config) -> &'static KnownProperties {
     match config.profile.as_deref() {
@@ -50,15 +51,15 @@ fn parse_properties_file_into(s: &'static str, set: &mut KnownProperties) {
 }
 
 pub(crate) fn parse_properties_file(s: &'static str) -> KnownProperties {
-    let mut set = HashSet::new();
+    let mut set = FxHashSet::with_capacity_and_hasher(s.lines().count(), Default::default());
     parse_properties_file_into(s, &mut set);
     set
 }
 
 #[cfg(test)]
 mod parse_properties_file_tests {
+    use rustc_hash::FxHashSet;
     use std::borrow::Cow;
-    use std::collections::HashSet;
 
     use super::{parse_properties_file, parse_properties_file_into};
 
@@ -92,7 +93,7 @@ mod parse_properties_file_tests {
 
     #[test]
     fn parse_properties_file_into_appends_to_existing_set() {
-        let mut set = HashSet::new();
+        let mut set = FxHashSet::default();
         parse_properties_file_into("color: ok\n", &mut set);
         parse_properties_file_into("fill-opacity: ok\n", &mut set);
 
@@ -670,12 +671,14 @@ fn known_properties_css4() -> &'static KnownProperties {
 fn known_properties_css3svg() -> &'static KnownProperties {
     static ONCE: OnceLock<KnownProperties> = OnceLock::new();
     ONCE.get_or_init(|| {
-        let mut set = HashSet::new();
-        parse_properties_file_into(css_properties_file!("CSS3Properties.properties"), &mut set);
-        parse_properties_file_into(
-            css_properties_file!("CSS3SVGProperties.properties"),
-            &mut set,
+        let css3 = css_properties_file!("CSS3Properties.properties");
+        let css3svg = css_properties_file!("CSS3SVGProperties.properties");
+        let mut set = FxHashSet::with_capacity_and_hasher(
+            css3.lines().count() + css3svg.lines().count(),
+            Default::default(),
         );
+        parse_properties_file_into(css3, &mut set);
+        parse_properties_file_into(css3svg, &mut set);
         set
     })
 }

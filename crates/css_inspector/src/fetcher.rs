@@ -1,5 +1,6 @@
-use std::collections::HashSet;
 use std::time::Duration;
+
+use rustc_hash::FxHashSet;
 
 use crate::config::Config;
 use crate::errors::ValidatorError;
@@ -163,7 +164,7 @@ pub fn validate_css_text_with_fetcher(
     };
     let stripped = stripped.as_ref();
 
-    let mut seen = HashSet::new();
+    let mut seen = FxHashSet::default();
     if let Some(b) = base_uri {
         seen.insert(b.to_owned());
     }
@@ -177,7 +178,7 @@ fn validate_imports_recursive(
     base_uri: Option<&str>,
     config: &Config,
     fetcher: &dyn Fetcher,
-    seen: &mut HashSet<String>,
+    seen: &mut FxHashSet<String>,
     report: &mut Report,
 ) -> Result<(), ValidatorError> {
     for import_url in iter_top_level_import_urls(css) {
@@ -274,7 +275,13 @@ fn fetch_file_url(uri: &str, max_bytes: usize) -> Result<Vec<u8>, ValidatorError
     let path = file_url_to_path(uri)?;
     let file = std::fs::File::open(&path)
         .map_err(|e| ValidatorError::InvalidInput(format!("file read failed: {e}")))?;
-    let mut data = Vec::new();
+    let cap = file
+        .metadata()
+        .ok()
+        .and_then(|m| usize::try_from(m.len()).ok())
+        .map(|len| len.min(max_bytes))
+        .unwrap_or(0);
+    let mut data = Vec::with_capacity(cap);
     let mut limited = file.take(max_bytes as u64);
     limited
         .read_to_end(&mut data)

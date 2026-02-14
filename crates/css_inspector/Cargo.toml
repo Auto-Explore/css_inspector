@@ -12,6 +12,7 @@ keywords = ["css", "validator", "lint", "web"]
 categories = ["parser-implementations", "web-programming"]
 
 [dependencies]
+rustc-hash.workspace = true
 serde.workspace = true
 thiserror.workspace = true
 

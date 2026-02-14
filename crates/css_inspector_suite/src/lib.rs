@@ -1,7 +1,7 @@
-use std::collections::{HashMap, HashSet};
 use std::fs;
 use std::path::{Path, PathBuf};
 
+use rustc_hash::{FxHashMap, FxHashSet};
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
@@ -112,11 +112,17 @@ pub fn url_decode_plus(input: &str) -> Result<String, SuiteError> {
     css_inspector::url_decode_plus(input).map_err(|e| SuiteError::InvalidManifest(e.to_string()))
 }
 
-pub fn parse_validator_query(url: &str) -> Result<HashMap<String, String>, SuiteError> {
-    let mut out = HashMap::new();
+pub fn parse_validator_query(url: &str) -> Result<FxHashMap<String, String>, SuiteError> {
     let Some((_, qs)) = url.split_once('?') else {
-        return Ok(out);
+        return Ok(FxHashMap::default());
     };
+    if qs.is_empty() {
+        return Ok(FxHashMap::default());
+    }
+
+    // Approximate the number of `k=v` parts by counting separators.
+    let cap = qs.as_bytes().iter().filter(|&&b| b == b'&').count() + 1;
+    let mut out = FxHashMap::with_capacity_and_hasher(cap, Default::default());
     for part in qs.split('&') {
         if part.is_empty() {
             continue;
@@ -137,7 +143,8 @@ pub fn validate_manifest_invariants(cases: &[Case]) -> Result<(), SuiteError> {
         warning: Option<&'a str>,
     }
 
-    let mut seen: HashSet<CaseKey<'_>> = HashSet::with_capacity(cases.len());
+    let mut seen: FxHashSet<CaseKey<'_>> =
+        FxHashSet::with_capacity_and_hasher(cases.len(), Default::default());
     for c in cases {
         let key = CaseKey {
             id: &c.id,

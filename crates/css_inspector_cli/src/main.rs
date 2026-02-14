@@ -276,7 +276,8 @@ where
             let mut passed = 0usize;
             let mut failed = 0usize;
             let mut skipped = 0usize;
-            let mut failures: Vec<Failure> = Vec::new();
+            let failures_cap = max_failures.unwrap_or(cases.len()).min(cases.len());
+            let mut failures: Vec<Failure> = Vec::with_capacity(failures_cap);
 
             let fetcher = StdFetcher {
                 allow_network,

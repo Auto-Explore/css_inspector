@@ -1,4 +1,3 @@
-use std::collections::HashSet;
 use std::fs;
 use std::io::Write;
 use std::path::{Component, Path, PathBuf};
@@ -6,6 +5,7 @@ use std::process::Command;
 use std::{cmp, io};
 
 use css_inspector::{Config as ValidatorConfig, Message, Report, Severity, ValidatorError};
+use rustc_hash::FxHashSet;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
@@ -208,10 +208,12 @@ pub fn write_wpt_css_style_results_tree(
     }
 
     // Track existing result files so we can remove stale ones after writing.
-    let mut existing_results_files: HashSet<PathBuf> = HashSet::new();
+    let mut existing_results_files: FxHashSet<PathBuf> = FxHashSet::default();
     if results_root.is_dir() {
         let mut md_files: Vec<PathBuf> = Vec::new();
         collect_markdown_files_rec(results_root, &mut md_files)?;
+        existing_results_files =
+            FxHashSet::with_capacity_and_hasher(md_files.len(), Default::default());
         existing_results_files.extend(md_files);
     }
     let meta_path = wpt_css_style_results_meta_path(results_root);
@@ -222,7 +224,8 @@ pub fn write_wpt_css_style_results_tree(
 
     let mut totals = WptCssStyleResultsTotals::default();
 
-    let mut written_results_files: HashSet<PathBuf> = HashSet::new();
+    let mut written_results_files: FxHashSet<PathBuf> =
+        FxHashSet::with_capacity_and_hasher(files.len(), Default::default());
     let mut summary = WptCssStyleWriteSummary::default();
 
     for (rel, path) in files {
@@ -335,7 +338,11 @@ pub fn check_wpt_css_style_results_tree(
         .max_failures
         .filter(|&n| n != 0)
         .unwrap_or(usize::MAX);
-    let mut expected_results: HashSet<PathBuf> = HashSet::new();
+    let mut expected_results: FxHashSet<PathBuf> = if options.id_contains.is_none() {
+        FxHashSet::with_capacity_and_hasher(files.len(), Default::default())
+    } else {
+        FxHashSet::default()
+    };
     let mut summary = WptCssStyleCheckSummary::default();
     let mut failures: Vec<WptCssStyleFailure> = Vec::new();
 
@@ -359,7 +366,7 @@ pub fn check_wpt_css_style_results_tree(
             continue;
         }
 
-        let mut matching_indexes: Vec<usize> = Vec::new();
+        let mut matching_indexes: Vec<usize> = Vec::with_capacity(blocks.len());
         for idx in 0..blocks.len() {
             let id = wpt_style_id(&rel, idx);
             if options
@@ -816,7 +823,8 @@ fn parse_file_results_markdown(
     }
     let header: FileHeader = serde_json::from_str(&blocks[0].content)?;
 
-    let mut styles: Vec<WptCssStyleBlockResult> = Vec::new();
+    let mut styles: Vec<WptCssStyleBlockResult> =
+        Vec::with_capacity(blocks.len().saturating_sub(1) / 2);
     let mut i = 1usize;
     while i < blocks.len() {
         let css_block = blocks.get(i).ok_or_else(|| {

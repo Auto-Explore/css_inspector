@@ -7,6 +7,7 @@ publish = false
 
 [dependencies]
 css_inspector = { path = "../css_inspector" }
+rustc-hash.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 thiserror.workspace = true
