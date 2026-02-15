@@ -117,6 +117,39 @@ fn css4_profile_accepts_cursor_none_keyword() {
 }
 
 #[test]
+fn cursor_url_requires_keyword_fallback() {
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(r#"a { cursor: url(foo.png); }"#, &config).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “cursor”."
+    );
+}
+
+#[test]
+fn css3_profile_accepts_cursor_url_with_fallback_and_coordinates() {
+    let css = r#"
+a { cursor: url(foo.png), pointer; }
+b { cursor: url(foo.png) 2 2, auto; }
+c { cursor: url(foo.png) 2 2, url(bar.png) 4 4, progress; }
+"#;
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
 fn css3_profile_rejects_css4_only_cursor_values() {
     let css = r#"a { cursor: grab; }"#;
     let config = Config {
@@ -129,6 +162,68 @@ fn css3_profile_rejects_css4_only_cursor_values() {
     assert_eq!(
         report.messages[0].message,
         "Invalid value for property “cursor”."
+    );
+}
+
+#[test]
+fn css3_profile_accepts_inset_shorthand_length_percentage_and_auto() {
+    let css = r#"
+a { inset: 10px; }
+b { inset: 4px 8px; }
+c { inset: 5px 15px 10px; }
+d { inset: 2.4em 3em 3em 3em; }
+e { inset: 10% 5% 5% 5%; }
+f { inset: auto; }
+g { inset: auto auto auto auto; }
+"#;
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn css4_profile_accepts_inset_anchor_positioning_functions() {
+    let css = r#"
+a { inset: calc(anchor(50%) + 10px) anchor(self-start) auto auto; }
+b { inset: anchor-size(block) calc(anchor(50%) + 10px) auto calc(anchor-size(width) / 4); }
+"#;
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert!(report.messages.is_empty(), "{report:?}");
+}
+
+#[test]
+fn inset_rejects_invalid_tokens_and_too_many_components() {
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text("a { inset: nope; }", &config).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “inset”."
+    );
+
+    let report = validate_css_text("a { inset: 1px 2px 3px 4px 5px; }", &config).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(report.warnings, 0, "{report:?}");
+    assert_eq!(report.messages.len(), 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “inset”."
     );
 }
 

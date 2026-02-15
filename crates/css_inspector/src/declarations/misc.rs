@@ -187,7 +187,10 @@ pub(super) fn validate_float(tokens: &[&str], css4_profile: bool, report: &mut R
 }
 
 pub(super) fn validate_cursor(tokens: &[&str], css4_profile: bool, report: &mut Report) {
-    let is_url = |t: &str| starts_with_ascii_ci(t.trim(), "url(");
+    let is_url = |t: &str| {
+        let raw = t.trim();
+        starts_with_ascii_ci(raw, "url(") && is_valid_url_function_token(raw)
+    };
     let is_keyword = |t: &str| {
         let tl = ascii_lowercase_cow(t.trim());
         let base = matches!(
@@ -244,13 +247,11 @@ pub(super) fn validate_cursor(tokens: &[&str], css4_profile: bool, report: &mut 
     };
 
     match tokens {
-        [t] if is_keyword(t) || is_url(t) => {}
-        // Autotest `properties/ok/ui.css` expects a two-URL + keyword form to be valid.
-        [t0, t1, t2] if is_url(t0) && is_url(t1) && is_keyword(t2) => {}
-        _ if css4_profile && tokens.len() >= 2 && is_keyword(tokens[tokens.len() - 1]) => {
+        [t] if is_keyword(t) => {}
+        _ if tokens.len() >= 2 && is_keyword(tokens[tokens.len() - 1]) => {
             // Allow `url(...) x y, url(...) x y, keyword` style lists where the coordinates
             // (and commas) get split into tokens.
-            let mut saw_url = false;
+            let mut saw_image = false;
             for &t in &tokens[..tokens.len() - 1] {
                 let raw = t.trim();
                 if raw.is_empty() {
@@ -258,8 +259,8 @@ pub(super) fn validate_cursor(tokens: &[&str], css4_profile: bool, report: &mut 
                 }
                 let lower = ascii_lowercase_cow(raw);
                 let lower = lower.as_ref();
-                if is_url(raw) || is_background_image_like_token(lower) {
-                    saw_url = true;
+                if is_url(raw) || (css4_profile && is_background_image_like_token(lower)) {
+                    saw_image = true;
                     continue;
                 }
                 if is_integer_token(raw) {
@@ -271,11 +272,46 @@ pub(super) fn validate_cursor(tokens: &[&str], css4_profile: bool, report: &mut 
                 push_error(report, "Invalid value for property “cursor”.");
                 return;
             }
-            if !saw_url {
+            if !saw_image {
                 push_error(report, "Invalid value for property “cursor”.");
             }
         }
         _ => push_error(report, "Invalid value for property “cursor”."),
+    }
+}
+
+pub(super) fn validate_inset(tokens: &[&str], css4_profile: bool, report: &mut Report) {
+    if !(1..=4).contains(&tokens.len()) {
+        push_error(report, "Invalid value for property “inset”.");
+        return;
+    }
+
+    for &t in tokens {
+        let raw = t.trim();
+        if raw.is_empty() {
+            continue;
+        }
+        if raw.eq_ignore_ascii_case("auto") {
+            continue;
+        }
+
+        let lower = ascii_lowercase_cow(raw);
+        let lower = lower.as_ref();
+
+        if is_length_token(lower) || is_any_percentage_token(lower) {
+            continue;
+        }
+
+        if css4_profile
+            && (lower.starts_with("anchor(") && is_balanced_function_call_token(lower, "anchor")
+                || (lower.starts_with("anchor-size(")
+                    && is_balanced_function_call_token(lower, "anchor-size")))
+        {
+            continue;
+        }
+
+        push_error(report, "Invalid value for property “inset”.");
+        return;
     }
 }
 

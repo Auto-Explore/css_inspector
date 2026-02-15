@@ -751,8 +751,20 @@ mod validate_cursor_tests {
     use super::{Report, validate_cursor};
 
     #[test]
-    fn accepts_single_keyword_or_url() {
-        for tokens in [&["auto"][..], &["  url(foo)  "][..]] {
+    fn accepts_single_keyword() {
+        for tokens in [&["auto"][..], &[" POINTER "][..]] {
+            let mut report = Report::default();
+            validate_cursor(tokens, false, &mut report);
+            assert_eq!(report.errors, 0, "{tokens:?}: {report:?}");
+        }
+    }
+
+    #[test]
+    fn accepts_url_with_keyword_fallback() {
+        for tokens in [
+            &["url(foo)", "pointer"][..],
+            &["url(foo)", "2", "2", "auto"][..],
+        ] {
             let mut report = Report::default();
             validate_cursor(tokens, false, &mut report);
             assert_eq!(report.errors, 0, "{tokens:?}: {report:?}");
@@ -771,8 +783,10 @@ mod validate_cursor_tests {
         for tokens in [
             &[][..],
             &["foo"][..],
-            &["url(a)", "pointer"][..],
+            &["url(a)"][..],
+            &["url(a)", "url(b)"][..],
             &["url(a)", "url(b)", "url(c)"][..],
+            &["auto", "pointer"][..],
         ] {
             let mut report = Report::default();
             validate_cursor(tokens, false, &mut report);

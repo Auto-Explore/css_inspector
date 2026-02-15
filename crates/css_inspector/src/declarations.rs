@@ -50,9 +50,9 @@ use misc::{is_css_identifier_token, is_integer_token};
 use misc::{
     validate_aspect_ratio, validate_azimuth, validate_clip, validate_content,
     validate_counter_list, validate_cue, validate_cue_side, validate_cursor, validate_elevation,
-    validate_filter, validate_float, validate_list_style, validate_overflow_clip_margin,
-    validate_pause, validate_pause_after, validate_play_during, validate_quotes,
-    validate_text_decoration, validate_voice_family, validate_zoom,
+    validate_filter, validate_float, validate_inset, validate_list_style,
+    validate_overflow_clip_margin, validate_pause, validate_pause_after, validate_play_during,
+    validate_quotes, validate_text_decoration, validate_voice_family, validate_zoom,
 };
 use numbers::{parse_css_number, scan_css_number_end, split_number_and_unit};
 use syntax::{
@@ -534,6 +534,7 @@ impl DeclValidator<'_> {
                 self.css4_profile,
                 self.report,
             ),
+            "inset" => validate_inset(tokens.as_slice(), self.css4_profile, self.report),
             "pause" => validate_pause(tokens.as_slice(), self.report),
             "pause-after" => validate_pause_after(tokens.as_slice(), self.report),
             "cue" => validate_cue(tokens.as_slice(), self.report),

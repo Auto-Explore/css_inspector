@@ -298,6 +298,7 @@ pub(super) fn is_single_valued_property(prop: &str) -> bool {
             | "grid-template"
             | "grid-template-columns"
             | "grid-template-rows"
+            | "inset"
             | "list-style"
             | "margin"
             | "outline"
