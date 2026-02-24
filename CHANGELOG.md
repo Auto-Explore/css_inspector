@@ -2,7 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.2.1] - Unreleased
+## [0.2.2]
+
+### Added
+
+- Validate additional UI-focused properties: `resize` (incl `block`/`inline` in `css4`), `user-select`, `appearance`, `caret`/`caret-*`, `accent-color`, `pointer-events`, `outline-offset`, and `nav-*` (currently `auto` only).
+- Add error-detection unit tests.
+
+### Changed
+
+- Accept a broader set of `cursor` keywords across profiles (e.g. `grab`, `grabbing`, `zoom-in`, `zoom-out`).
+
+### Fixed
+
+- In the `css4` profile, `outline` / `outline-color` no longer accept `invert` (use `auto` or an explicit color instead).
+
+## [0.2.1] - 2026-02-15
 
 ### Added
 
