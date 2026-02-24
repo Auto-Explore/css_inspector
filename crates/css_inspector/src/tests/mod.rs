@@ -19,6 +19,7 @@ mod at_rule_detection;
 mod at_rules;
 mod clip;
 mod comments;
+mod error_detection;
 mod imports;
 mod profiles;
 mod properties;
