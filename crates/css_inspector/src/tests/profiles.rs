@@ -150,22 +150,6 @@ c { cursor: url(foo.png) 2 2, url(bar.png) 4 4, progress; }
 }
 
 #[test]
-fn css3_profile_rejects_css4_only_cursor_values() {
-    let css = r#"a { cursor: grab; }"#;
-    let config = Config {
-        profile: Some("css3".to_string()),
-        ..Config::default()
-    };
-    let report = validate_css_text(css, &config).unwrap();
-    assert_eq!(report.errors, 1, "{report:?}");
-    assert_eq!(report.messages.len(), 1, "{report:?}");
-    assert_eq!(
-        report.messages[0].message,
-        "Invalid value for property “cursor”."
-    );
-}
-
-#[test]
 fn css3_profile_accepts_inset_shorthand_length_percentage_and_auto() {
     let css = r#"
 a { inset: 10px; }

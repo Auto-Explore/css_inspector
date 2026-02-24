@@ -48,11 +48,14 @@ use grid::validate_grid_template_tracks;
 #[cfg(test)]
 use misc::{is_css_identifier_token, is_integer_token};
 use misc::{
-    validate_aspect_ratio, validate_azimuth, validate_clip, validate_content,
-    validate_counter_list, validate_cue, validate_cue_side, validate_cursor, validate_elevation,
-    validate_filter, validate_float, validate_inset, validate_list_style,
+    validate_accent_color, validate_appearance, validate_aspect_ratio, validate_azimuth,
+    validate_caret, validate_caret_animation, validate_caret_color, validate_caret_shape,
+    validate_clip, validate_content, validate_counter_list, validate_cue, validate_cue_side,
+    validate_cursor, validate_elevation, validate_filter, validate_float, validate_inset,
+    validate_list_style, validate_nav_direction, validate_outline_offset,
     validate_overflow_clip_margin, validate_pause, validate_pause_after, validate_play_during,
-    validate_quotes, validate_text_decoration, validate_voice_family, validate_zoom,
+    validate_pointer_events, validate_quotes, validate_resize, validate_text_decoration,
+    validate_user_select, validate_voice_family, validate_zoom,
 };
 use numbers::{parse_css_number, scan_css_number_end, split_number_and_unit};
 use syntax::{
@@ -545,6 +548,34 @@ impl DeclValidator<'_> {
             "elevation" => validate_elevation(tokens.as_slice(), self.report),
             "filter" => validate_filter(tokens.as_slice(), self.css4_profile, self.report),
             "overflow-clip-margin" => validate_overflow_clip_margin(tokens.as_slice(), self.report),
+            "resize" => validate_resize(tokens.as_slice(), self.css4_profile, self.report),
+            "user-select" => validate_user_select(tokens.as_slice(), self.report),
+            "appearance" => validate_appearance(tokens.as_slice(), self.report),
+            "caret-color" => validate_caret_color(
+                tokens.as_slice(),
+                self.css1_escapes,
+                self.lenient,
+                self.report,
+            ),
+            "caret-shape" => validate_caret_shape(tokens.as_slice(), self.report),
+            "caret-animation" => validate_caret_animation(tokens.as_slice(), self.report),
+            "caret" => validate_caret(
+                tokens.as_slice(),
+                self.css1_escapes,
+                self.lenient,
+                self.report,
+            ),
+            "accent-color" => validate_accent_color(
+                tokens.as_slice(),
+                self.css1_escapes,
+                self.lenient,
+                self.report,
+            ),
+            "pointer-events" => validate_pointer_events(tokens.as_slice(), self.report),
+            "nav-up" | "nav-right" | "nav-down" | "nav-left" => {
+                validate_nav_direction(tokens.as_slice(), prop, self.report)
+            }
+            "outline-offset" => validate_outline_offset(tokens.as_slice(), self.report),
             _ => {}
         }
 

@@ -40,10 +40,7 @@ fn unclosed_comment_reports_error() {
     let css = "/* This comment is never closed\nbody { color: red; }";
     let report = validate_css_text(css, &Config::default()).unwrap();
     assert_eq!(report.errors, 1, "{report:?}");
-    assert_eq!(
-        report.messages[0].message,
-        "Unclosed comment."
-    );
+    assert_eq!(report.messages[0].message, "Unclosed comment.");
 }
 
 #[test]
@@ -71,10 +68,7 @@ a {
 "#;
     let report = validate_css_text(css, &Config::default()).unwrap();
     assert_eq!(report.errors, 1, "{report:?}");
-    assert_eq!(
-        report.messages[0].message,
-        "Unclosed comment."
-    );
+    assert_eq!(report.messages[0].message, "Unclosed comment.");
 }
 
 // ---------------------------------------------------------------------------
@@ -86,10 +80,7 @@ fn unbalanced_braces_reports_error() {
     let css = "body { color: red;\na { font-size: 12px; } } }";
     let report = validate_css_text(css, &Config::default()).unwrap();
     assert_eq!(report.errors, 1, "{report:?}");
-    assert_eq!(
-        report.messages[0].message,
-        "Unbalanced braces."
-    );
+    assert_eq!(report.messages[0].message, "Unbalanced braces.");
 }
 
 // ---------------------------------------------------------------------------
@@ -235,7 +226,10 @@ fn missing_semicolons_between_declarations_reports_errors() {
 fn stray_declarations_outside_rules_report_errors() {
     let css = "color: red;\nfont-size: 14px;\nbody { margin: 0; }\nbackground: blue;";
     let report = validate_css_text(css, &Config::default()).unwrap();
-    assert!(report.errors >= 3, "expected at least 3 stray declaration errors: {report:?}");
+    assert!(
+        report.errors >= 3,
+        "expected at least 3 stray declaration errors: {report:?}"
+    );
     assert!(
         report
             .messages
@@ -260,10 +254,7 @@ fn css3_profile_rejects_bogus_pseudo_element() {
     };
     let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.errors, 1, "{report:?}");
-    assert_eq!(
-        report.messages[0].message,
-        "Invalid selector."
-    );
+    assert_eq!(report.messages[0].message, "Invalid selector.");
 }
 
 #[test]
@@ -275,10 +266,7 @@ fn css3_profile_rejects_bogus_pseudo_class() {
     };
     let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.errors, 1, "{report:?}");
-    assert_eq!(
-        report.messages[0].message,
-        "Invalid selector."
-    );
+    assert_eq!(report.messages[0].message, "Invalid selector.");
 }
 
 // ---------------------------------------------------------------------------
@@ -294,10 +282,7 @@ fn css3_profile_reports_unknown_at_rule() {
     };
     let report = validate_css_text(css, &config).unwrap();
     assert_eq!(report.errors, 1, "{report:?}");
-    assert_eq!(
-        report.messages[0].message,
-        "Unknown at-rule."
-    );
+    assert_eq!(report.messages[0].message, "Unknown at-rule.");
 }
 
 #[test]
@@ -368,4 +353,441 @@ fn import_warning_suppressed_by_negative_warning_level() {
     assert_eq!(report.errors, 0, "{report:?}");
     assert_eq!(report.warnings, 0, "{report:?}");
     assert!(report.messages.is_empty(), "{report:?}");
+}
+
+// ---------------------------------------------------------------------------
+// Cursor keyword fixes (CSS UI 3/4)
+// ---------------------------------------------------------------------------
+
+#[test]
+fn css3_profile_accepts_all_css3_cursor_keywords() {
+    let keywords = [
+        "auto",
+        "default",
+        "none",
+        "context-menu",
+        "help",
+        "pointer",
+        "progress",
+        "wait",
+        "cell",
+        "crosshair",
+        "text",
+        "vertical-text",
+        "alias",
+        "copy",
+        "move",
+        "no-drop",
+        "not-allowed",
+        "grab",
+        "grabbing",
+        "e-resize",
+        "n-resize",
+        "ne-resize",
+        "nw-resize",
+        "s-resize",
+        "se-resize",
+        "sw-resize",
+        "w-resize",
+        "ew-resize",
+        "ns-resize",
+        "nesw-resize",
+        "nwse-resize",
+        "col-resize",
+        "row-resize",
+        "all-scroll",
+        "zoom-in",
+        "zoom-out",
+    ];
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    for kw in keywords {
+        let css = format!("a {{ cursor: {kw}; }}");
+        let report = validate_css_text(&css, &config).unwrap();
+        assert_eq!(
+            report.errors, 0,
+            "cursor: {kw} should be valid in css3: {report:?}"
+        );
+    }
+}
+
+#[test]
+fn cursor_rejects_nonstandard_keywords() {
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    for kw in [
+        "n-all-scroll",
+        "s-all-scroll",
+        "e-all-scroll",
+        "w-all-scroll",
+    ] {
+        let css = format!("a {{ cursor: {kw}; }}");
+        let report = validate_css_text(&css, &config).unwrap();
+        assert_eq!(
+            report.errors, 1,
+            "cursor: {kw} should be rejected: {report:?}"
+        );
+    }
+}
+
+#[test]
+fn cursor_rejects_invalid_keyword() {
+    let css = "a { cursor: banana; }";
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “cursor”."
+    );
+}
+
+// ---------------------------------------------------------------------------
+// outline-color: invert (removed in CSS UI 4)
+// ---------------------------------------------------------------------------
+
+#[test]
+fn css4_profile_rejects_outline_color_invert() {
+    let css = "a { outline-color: invert; }";
+    let config = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “outline-color”."
+    );
+}
+
+#[test]
+fn css3_profile_accepts_outline_color_invert() {
+    let css = "a { outline-color: invert; }";
+    let config = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let report = validate_css_text(css, &config).unwrap();
+    assert_eq!(report.errors, 0, "{report:?}");
+}
+
+// ---------------------------------------------------------------------------
+// resize
+// ---------------------------------------------------------------------------
+
+#[test]
+fn resize_accepts_valid_values() {
+    let config = Config::default();
+    for kw in ["none", "both", "horizontal", "vertical"] {
+        let css = format!("a {{ resize: {kw}; }}");
+        let report = validate_css_text(&css, &config).unwrap();
+        assert_eq!(report.errors, 0, "resize: {kw} should be valid: {report:?}");
+    }
+}
+
+#[test]
+fn resize_block_inline_css4_only() {
+    let css3 = Config {
+        profile: Some("css3".to_string()),
+        ..Config::default()
+    };
+    let css4 = Config {
+        profile: Some("css4".to_string()),
+        ..Config::default()
+    };
+    for kw in ["block", "inline"] {
+        let css = format!("a {{ resize: {kw}; }}");
+        let r3 = validate_css_text(&css, &css3).unwrap();
+        assert_eq!(
+            r3.errors, 1,
+            "resize: {kw} should be invalid in css3: {r3:?}"
+        );
+        let r4 = validate_css_text(&css, &css4).unwrap();
+        assert_eq!(r4.errors, 0, "resize: {kw} should be valid in css4: {r4:?}");
+    }
+}
+
+#[test]
+fn resize_rejects_invalid_value() {
+    let css = "a { resize: diagonal; }";
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “resize”."
+    );
+}
+
+// ---------------------------------------------------------------------------
+// user-select
+// ---------------------------------------------------------------------------
+
+#[test]
+fn user_select_accepts_valid_values() {
+    for kw in ["auto", "text", "none", "contain", "all"] {
+        let css = format!("a {{ user-select: {kw}; }}");
+        let report = validate_css_text(&css, &Config::default()).unwrap();
+        assert_eq!(
+            report.errors, 0,
+            "user-select: {kw} should be valid: {report:?}"
+        );
+    }
+}
+
+#[test]
+fn user_select_rejects_invalid_value() {
+    let css = "a { user-select: maybe; }";
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “user-select”."
+    );
+}
+
+// ---------------------------------------------------------------------------
+// appearance
+// ---------------------------------------------------------------------------
+
+#[test]
+fn appearance_accepts_valid_values() {
+    for kw in ["none", "auto"] {
+        let css = format!("a {{ appearance: {kw}; }}");
+        let report = validate_css_text(&css, &Config::default()).unwrap();
+        assert_eq!(
+            report.errors, 0,
+            "appearance: {kw} should be valid: {report:?}"
+        );
+    }
+}
+
+#[test]
+fn appearance_rejects_invalid_value() {
+    let css = "a { appearance: button; }";
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “appearance”."
+    );
+}
+
+// ---------------------------------------------------------------------------
+// caret-color
+// ---------------------------------------------------------------------------
+
+#[test]
+fn caret_color_accepts_auto_and_color() {
+    for val in ["auto", "red", "#ff0000", "rgb(255,0,0)"] {
+        let css = format!("a {{ caret-color: {val}; }}");
+        let report = validate_css_text(&css, &Config::default()).unwrap();
+        assert_eq!(
+            report.errors, 0,
+            "caret-color: {val} should be valid: {report:?}"
+        );
+    }
+}
+
+#[test]
+fn caret_color_rejects_invalid_value() {
+    let css = "a { caret-color: fancy; }";
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “caret-color”."
+    );
+}
+
+// ---------------------------------------------------------------------------
+// caret-shape
+// ---------------------------------------------------------------------------
+
+#[test]
+fn caret_shape_accepts_valid_values() {
+    for kw in ["auto", "bar", "block", "underscore"] {
+        let css = format!("a {{ caret-shape: {kw}; }}");
+        let report = validate_css_text(&css, &Config::default()).unwrap();
+        assert_eq!(
+            report.errors, 0,
+            "caret-shape: {kw} should be valid: {report:?}"
+        );
+    }
+}
+
+#[test]
+fn caret_shape_rejects_invalid_value() {
+    let css = "a { caret-shape: triangle; }";
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “caret-shape”."
+    );
+}
+
+// ---------------------------------------------------------------------------
+// caret-animation
+// ---------------------------------------------------------------------------
+
+#[test]
+fn caret_animation_accepts_valid_values() {
+    for kw in ["auto", "manual"] {
+        let css = format!("a {{ caret-animation: {kw}; }}");
+        let report = validate_css_text(&css, &Config::default()).unwrap();
+        assert_eq!(
+            report.errors, 0,
+            "caret-animation: {kw} should be valid: {report:?}"
+        );
+    }
+}
+
+#[test]
+fn caret_animation_rejects_invalid_value() {
+    let css = "a { caret-animation: fast; }";
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “caret-animation”."
+    );
+}
+
+// ---------------------------------------------------------------------------
+// caret (shorthand)
+// ---------------------------------------------------------------------------
+
+#[test]
+fn caret_shorthand_accepts_combined_values() {
+    let cases = [
+        "a { caret: auto; }",
+        "a { caret: red; }",
+        "a { caret: red bar; }",
+        "a { caret: bar manual; }",
+        "a { caret: #00ff00 underscore manual; }",
+    ];
+    for css in cases {
+        let report = validate_css_text(css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{css} should be valid: {report:?}");
+    }
+}
+
+#[test]
+fn caret_shorthand_rejects_invalid() {
+    let css = "a { caret: fancy blinky; }";
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “caret”."
+    );
+}
+
+// ---------------------------------------------------------------------------
+// accent-color
+// ---------------------------------------------------------------------------
+
+#[test]
+fn accent_color_accepts_auto_and_color() {
+    for val in ["auto", "red", "#abcdef"] {
+        let css = format!("a {{ accent-color: {val}; }}");
+        let report = validate_css_text(&css, &Config::default()).unwrap();
+        assert_eq!(
+            report.errors, 0,
+            "accent-color: {val} should be valid: {report:?}"
+        );
+    }
+}
+
+#[test]
+fn accent_color_rejects_invalid_value() {
+    let css = "a { accent-color: sparkly; }";
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “accent-color”."
+    );
+}
+
+// ---------------------------------------------------------------------------
+// pointer-events
+// ---------------------------------------------------------------------------
+
+#[test]
+fn pointer_events_accepts_auto_and_none() {
+    for kw in ["auto", "none"] {
+        let css = format!("a {{ pointer-events: {kw}; }}");
+        let report = validate_css_text(&css, &Config::default()).unwrap();
+        assert_eq!(
+            report.errors, 0,
+            "pointer-events: {kw} should be valid: {report:?}"
+        );
+    }
+}
+
+#[test]
+fn pointer_events_rejects_invalid_value() {
+    let css = "a { pointer-events: maybe; }";
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “pointer-events”."
+    );
+}
+
+// ---------------------------------------------------------------------------
+// nav-up / nav-right / nav-down / nav-left
+// ---------------------------------------------------------------------------
+
+#[test]
+fn nav_direction_accepts_auto() {
+    for prop in ["nav-up", "nav-right", "nav-down", "nav-left"] {
+        let css = format!("a {{ {prop}: auto; }}");
+        let report = validate_css_text(&css, &Config::default()).unwrap();
+        assert_eq!(report.errors, 0, "{prop}: auto should be valid: {report:?}");
+    }
+}
+
+#[test]
+fn nav_direction_rejects_invalid_value() {
+    let css = "a { nav-up: nowhere; }";
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “nav-up”."
+    );
+}
+
+// ---------------------------------------------------------------------------
+// outline-offset
+// ---------------------------------------------------------------------------
+
+#[test]
+fn outline_offset_accepts_length() {
+    for val in ["0", "5px", "1em", "-2px"] {
+        let css = format!("a {{ outline-offset: {val}; }}");
+        let report = validate_css_text(&css, &Config::default()).unwrap();
+        assert_eq!(
+            report.errors, 0,
+            "outline-offset: {val} should be valid: {report:?}"
+        );
+    }
+}
+
+#[test]
+fn outline_offset_rejects_invalid() {
+    let css = "a { outline-offset: wide; }";
+    let report = validate_css_text(css, &Config::default()).unwrap();
+    assert_eq!(report.errors, 1, "{report:?}");
+    assert_eq!(
+        report.messages[0].message,
+        "Invalid value for property “outline-offset”."
+    );
 }

@@ -193,57 +193,46 @@ pub(super) fn validate_cursor(tokens: &[&str], css4_profile: bool, report: &mut 
     };
     let is_keyword = |t: &str| {
         let tl = ascii_lowercase_cow(t.trim());
-        let base = matches!(
+        matches!(
             tl.as_ref(),
+            // CSS Basic User Interface Level 3 cursor keywords
             "auto"
-                | "crosshair"
                 | "default"
+                | "none"
+                | "context-menu"
+                | "help"
                 | "pointer"
+                | "progress"
+                | "wait"
+                | "cell"
+                | "crosshair"
+                | "text"
+                | "vertical-text"
+                | "alias"
+                | "copy"
                 | "move"
+                | "no-drop"
+                | "not-allowed"
+                | "grab"
+                | "grabbing"
                 | "e-resize"
+                | "n-resize"
                 | "ne-resize"
                 | "nw-resize"
-                | "n-resize"
+                | "s-resize"
                 | "se-resize"
                 | "sw-resize"
-                | "s-resize"
                 | "w-resize"
-                | "text"
-                | "wait"
-                | "help"
-                | "progress"
-        );
-        if base {
-            return true;
-        }
-
-        css4_profile
-            && matches!(
-                tl.as_ref(),
-                "grab"
-                    | "grabbing"
-                    | "zoom-in"
-                    | "zoom-out"
-                    | "none"
-                    | "not-allowed"
-                    | "no-drop"
-                    | "context-menu"
-                    | "cell"
-                    | "vertical-text"
-                    | "alias"
-                    | "copy"
-                    | "all-scroll"
-                    | "col-resize"
-                    | "row-resize"
-                    | "n-all-scroll"
-                    | "s-all-scroll"
-                    | "e-all-scroll"
-                    | "w-all-scroll"
-                    | "nesw-resize"
-                    | "nwse-resize"
-                    | "ns-resize"
-                    | "ew-resize"
-            )
+                | "ew-resize"
+                | "ns-resize"
+                | "nesw-resize"
+                | "nwse-resize"
+                | "col-resize"
+                | "row-resize"
+                | "all-scroll"
+                | "zoom-in"
+                | "zoom-out"
+        )
     };
 
     match tokens {
@@ -1071,4 +1060,197 @@ pub(super) fn validate_filter(tokens: &[&str], css4_profile: bool, report: &mut 
         push_error(report, "Invalid value for property “filter”.");
         return;
     }
+}
+
+pub(super) fn validate_resize(tokens: &[&str], css4_profile: bool, report: &mut Report) {
+    let [token] = tokens else {
+        push_error(report, "Invalid value for property “resize”.");
+        return;
+    };
+    let ok = ["none", "both", "horizontal", "vertical"]
+        .iter()
+        .any(|v| token.eq_ignore_ascii_case(v));
+    let ok = ok
+        || (css4_profile
+            && ["block", "inline"]
+                .iter()
+                .any(|v| token.eq_ignore_ascii_case(v)));
+    if !ok {
+        push_error(report, "Invalid value for property “resize”.");
+    }
+}
+
+pub(super) fn validate_user_select(tokens: &[&str], report: &mut Report) {
+    let [token] = tokens else {
+        push_error(report, "Invalid value for property “user-select”.");
+        return;
+    };
+    if !["auto", "text", "none", "contain", "all"]
+        .iter()
+        .any(|v| token.eq_ignore_ascii_case(v))
+    {
+        push_error(report, "Invalid value for property “user-select”.");
+    }
+}
+
+pub(super) fn validate_appearance(tokens: &[&str], report: &mut Report) {
+    let [token] = tokens else {
+        push_error(report, "Invalid value for property “appearance”.");
+        return;
+    };
+    if !["none", "auto"]
+        .iter()
+        .any(|v| token.eq_ignore_ascii_case(v))
+    {
+        push_error(report, "Invalid value for property “appearance”.");
+    }
+}
+
+pub(super) fn validate_caret_color(
+    tokens: &[&str],
+    css1_escapes: bool,
+    lenient: bool,
+    report: &mut Report,
+) {
+    let [token] = tokens else {
+        push_error(report, "Invalid value for property “caret-color”.");
+        return;
+    };
+    let v = token.trim();
+    if v.eq_ignore_ascii_case("auto") || is_valid_color_token(v, css1_escapes, lenient) {
+        return;
+    }
+    push_error(report, "Invalid value for property “caret-color”.");
+}
+
+pub(super) fn validate_caret_shape(tokens: &[&str], report: &mut Report) {
+    let [token] = tokens else {
+        push_error(report, "Invalid value for property “caret-shape”.");
+        return;
+    };
+    if !["auto", "bar", "block", "underscore"]
+        .iter()
+        .any(|v| token.eq_ignore_ascii_case(v))
+    {
+        push_error(report, "Invalid value for property “caret-shape”.");
+    }
+}
+
+pub(super) fn validate_caret_animation(tokens: &[&str], report: &mut Report) {
+    let [token] = tokens else {
+        push_error(report, "Invalid value for property “caret-animation”.");
+        return;
+    };
+    if !["auto", "manual"]
+        .iter()
+        .any(|v| token.eq_ignore_ascii_case(v))
+    {
+        push_error(report, "Invalid value for property “caret-animation”.");
+    }
+}
+
+pub(super) fn validate_caret(
+    tokens: &[&str],
+    css1_escapes: bool,
+    lenient: bool,
+    report: &mut Report,
+) {
+    if tokens.is_empty() || tokens.len() > 3 {
+        push_error(report, "Invalid value for property “caret”.");
+        return;
+    }
+
+    let mut saw_color = false;
+    let mut saw_shape = false;
+    let mut saw_animation = false;
+
+    for t in tokens {
+        let raw = t.trim();
+        if raw.is_empty() {
+            continue;
+        }
+        let tl = ascii_lowercase_cow(raw);
+        let tl = tl.as_ref();
+
+        if !saw_shape && matches!(tl, "bar" | "block" | "underscore") {
+            saw_shape = true;
+            continue;
+        }
+        if !saw_animation && matches!(tl, "manual") {
+            saw_animation = true;
+            continue;
+        }
+        // "auto" is valid for all three sub-properties; accept it once for any.
+        if tl == "auto" {
+            if !saw_color {
+                saw_color = true;
+            } else if !saw_shape {
+                saw_shape = true;
+            } else if !saw_animation {
+                saw_animation = true;
+            } else {
+                push_error(report, "Invalid value for property “caret”.");
+                return;
+            }
+            continue;
+        }
+        if !saw_color && is_valid_color_token(raw, css1_escapes, lenient) {
+            saw_color = true;
+            continue;
+        }
+        push_error(report, "Invalid value for property “caret”.");
+        return;
+    }
+}
+
+pub(super) fn validate_accent_color(
+    tokens: &[&str],
+    css1_escapes: bool,
+    lenient: bool,
+    report: &mut Report,
+) {
+    let [token] = tokens else {
+        push_error(report, "Invalid value for property “accent-color”.");
+        return;
+    };
+    let v = token.trim();
+    if v.eq_ignore_ascii_case("auto") || is_valid_color_token(v, css1_escapes, lenient) {
+        return;
+    }
+    push_error(report, "Invalid value for property “accent-color”.");
+}
+
+pub(super) fn validate_pointer_events(tokens: &[&str], report: &mut Report) {
+    let [token] = tokens else {
+        push_error(report, "Invalid value for property “pointer-events”.");
+        return;
+    };
+    if !["auto", "none"]
+        .iter()
+        .any(|v| token.eq_ignore_ascii_case(v))
+    {
+        push_error(report, "Invalid value for property “pointer-events”.");
+    }
+}
+
+pub(super) fn validate_nav_direction(tokens: &[&str], prop: &str, report: &mut Report) {
+    let [token] = tokens else {
+        push_error(report, format!("Invalid value for property “{prop}”."));
+        return;
+    };
+    if !token.eq_ignore_ascii_case("auto") {
+        push_error(report, format!("Invalid value for property “{prop}”."));
+    }
+}
+
+pub(super) fn validate_outline_offset(tokens: &[&str], report: &mut Report) {
+    let [token] = tokens else {
+        push_error(report, "Invalid value for property “outline-offset”.");
+        return;
+    };
+    let v = token.trim();
+    if v == "0" || is_length_token(v) {
+        return;
+    }
+    push_error(report, "Invalid value for property “outline-offset”.");
 }

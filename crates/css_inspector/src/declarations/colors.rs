@@ -66,7 +66,7 @@ pub(super) fn validate_outline_color(
         return;
     };
     let v = token.trim();
-    if v.eq_ignore_ascii_case("invert")
+    if (!css4_profile && v.eq_ignore_ascii_case("invert"))
         || (css4_profile && v.eq_ignore_ascii_case("auto"))
         || is_valid_color_token(v, css1_escapes, lenient)
     {

@@ -53,7 +53,8 @@ pub(super) fn validate_outline(
         }
         let tl = ascii_lowercase_cow(raw);
 
-        let is_color = tl.as_ref() == "invert" || is_valid_color_token(raw, css1_escapes, lenient);
+        let is_color = (!css4_profile && tl.as_ref() == "invert")
+            || is_valid_color_token(raw, css1_escapes, lenient);
         let is_style = matches!(
             tl.as_ref(),
             "none"
